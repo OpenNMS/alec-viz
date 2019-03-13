@@ -1,0 +1,27 @@
+<div class="container-fluid min-100 d-flex flex-column">
+  <div class="row flex-fill">
+    <div class="col-md-1">
+      <app-menu></app-menu>
+    </div>
+    <div class="col-md-9">
+      <div *ngIf="controlState.showTimeControls" class="row">
+        <div class="col-md-12">
+          <app-timeslider></app-timeslider>
+        </div>
+      </div>
+      <div *ngIf="controlState.showSearch" class="row">
+        <div class="col-md-12">
+          <app-search></app-search>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="border: solid gray 1px">
+          <app-scene></app-scene>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <app-detail></app-detail>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+{
+  "vertices": [
+    {"label": "OpenNMS", "id": 1},
+    {"label": "Xplornet Modem", "id": 9990},
+    {"label": "Bell 3G Modem", "id": 304},
+    {
+      "label": "pfSense",
+      "id": 206,
+      "kpis": [
+        {
+          "label": "Memory (%)",
+          "type": "memoryUsageFromMinionJmx",
+          "resourceId": "node[Minions:1146160051].interfaceSnmp[jmx-minion]"
+        },
+        {
+          "label": "WAN (In)",
+          "type": "ifInUsage",
+          "resourceId": "node[Wagon:gateway].interfaceSnmp[igb0-0008a20afbe8]"
+        },
+        {
+          "label": "LAN (In)",
+          "type": "ifInUsage",
+          "resourceId": "node[Wagon:gateway].interfaceSnmp[igb1-0008a20afbe9]"
+        }
+      ]
+    },
+    {
+      "label": "Ubiquity Switch",
+      "id": 208
+    },
+    {
+      "label": "Synology",
+      "id": 207,
+      "kpis": [
+        {
+          "label": "LAN (In)",
+          "type": "ifInUsage",
+          "resourceId": "node[Wagon:nas].interfaceSnmp[eth0-00113285ab1d]"
+        },
+        {
+          "label": "Utilization on /",
+          "type": "storageUtilization",
+          "resourceId": "node[Wagon:nas].hrStorageIndex[_root_fs]"
+        },
+        {
+          "label": "Utilization on RAID",
+          "type": "storageUtilization",
+          "resourceId": "node[Wagon:nas].hrStorageIndex[volume1]"
+        }
+      ]
+    },
+    {"label": "UAP AC Pro", "id": 209},
+    {"label": "Flood", "id":  9991}
+  ],
+  "edges": [
+    {"id": "pfSense->Xplornet","source_id": 206, "target_id": 9990, "type":  "snmpinterfacelink"},
+    {"id": "pfSense->Bell","source_id": 206, "target_id": 304, "type":  "snmpinterfacelink"},
+    {"id": "Ubiquity->pfSense","source_id": 208, "target_id": 206},
+    {"id": "Synology->Switch","source_id": 207, "target_id": 208},
+    {"id": "UAP->Switch","source_id": 209, "target_id": 208},
+    {"id": "Flood->Switch","source_id": 9991, "target_id": 208}
+  ]
+}

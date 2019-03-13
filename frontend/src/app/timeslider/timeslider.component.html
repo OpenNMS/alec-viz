@@ -1,0 +1,37 @@
+<form style="margin-top: 1em">
+  <div class="form-row">
+    <div class="col-1">
+      <button *ngIf="!playing" type="button" class="btn btn-secondary btn-sm float-left" (click)="onPlay()">
+        <fa-icon icon="play-circle"></fa-icon>
+      </button>
+      <button *ngIf="playing" type="button" class="btn btn-danger btn-sm float-left" (click)="onStop()">
+        <fa-icon icon="stop-circle"></fa-icon>
+      </button>
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-primary btn-sm float-right"><</button>
+    </div>
+    <div class="col-9">
+      <input [(ngModel)]="pointInTimeMs" (change)="onTimeChanged()"
+             type="range" class="form-control-range" id="formControlRange" name="timeSlider"
+             min="{{minTimeMs}}" max="{{maxTimeMs}}" style="width: 100%">
+    </div>
+    <div class="col-1">
+      <button type="button" class="btn btn-primary btn-sm float-left">></button>
+    </div>
+  </div>
+</form>
+<div class="row">
+  <div class="col-md-4" style="text-align: left;">
+    <h5>Min Time</h5>
+    <p>{{minTimeMs | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
+  </div>
+  <div class="col-md-4" style="text-align: center">
+    <h5>Point in Time</h5>
+    <p>{{pointInTimeMs | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
+  </div>
+  <div class="col-md-4" style="text-align: right">
+    <h5>Max Time</h5>
+    <p>{{maxTimeMs | date:'yyyy-MM-dd HH:mm:ss Z' }}</p>
+  </div>
+</div>

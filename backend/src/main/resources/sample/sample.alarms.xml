@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alarms xmlns="http://xmlns.opennms.org/xsd/oce/model/v1.0.0">
+    <alarm id="4738854" first-event-time="1546759312000" last-event-time="1546759354000" last-severity="cleared" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:22:33 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access" inventory-object-id="swmgmt01: Ethernet102/1/22" inventory-object-type="PORT">
+        <event source="syslog" severity="minor" id="5203339994202603_1546759311977" time="1546759312000" summary="Link down syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:51 CST: %ETHPORT-5-IF_DOWN_LINK_FAILURE: Interface Ethernet102/1/22 is down (Link failure)"/>
+        <event source="syslog" severity="cleared" id="5203425893548523_1546759314561" time="1546759314000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:54 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+        <event source="syslog" severity="cleared" id="5203417303613931_1546759314521" time="1546759314000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:54 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+        <event source="syslog" severity="minor" id="5203455958319595_1546759315685" time="1546759316000" summary="Link down syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:55 CST: %ETHPORT-5-IF_DOWN_LINK_FAILURE: Interface Ethernet102/1/22 is down (Link failure)"/>
+        <event source="syslog" severity="minor" id="5203464548254187_1546759315686" time="1546759316000" summary="Link down syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:55 CST: %ETHPORT-5-IF_DOWN_LINK_FAILURE: Interface Ethernet102/1/22 is down (Link failure)"/>
+        <event source="syslog" severity="cleared" id="5203541857665515_1546759319008" time="1546759319000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:58 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+        <event source="syslog" severity="cleared" id="5203550447600107_1546759319048" time="1546759319000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:58 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+        <event source="syslog" severity="minor" id="5203881160081899_1546759350318" time="1546759350000" summary="Link down syslog" description="&lt;189&gt;: 2019 Jan  6 01:22:30 CST: %ETHPORT-5-IF_DOWN_LINK_FAILURE: Interface Ethernet102/1/22 is down (Link failure)"/>
+        <event source="syslog" severity="cleared" id="5203979944329707_1546759353956" time="1546759354000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:22:33 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+        <event source="syslog" severity="cleared" id="5203971354395115_1546759353917" time="1546759354000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:22:33 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>
+    </alarm>
+    <alarm id="4738843" first-event-time="1546759352000" last-event-time="1546759382000" last-severity="cleared" summary="Port up" description="Port Up" inventory-object-id="swmgmt01: Ethernet102/1/22" inventory-object-type="PORT">
+        <event source="service" severity="major" id="5203911224852971_1546759351995" time="1546759352000" summary="Port down due to oper" description="Port Down due to Oper Status down"/>
+        <event source="service" severity="cleared" id="5204302066876907_1546759382001" time="1546759382000" summary="Port up" description="Port Up"/>
+    </alarm>
+    <alarm id="4738853" first-event-time="1546759312000" last-event-time="1546759354000" last-severity="cleared" summary="SNMP Link up" inventory-object-id="swmgmt01: Ethernet102/1/22" inventory-object-type="PORT">
+        <event source="trap" severity="minor" id="5203352879104491_1546759312170" time="1546759312000" summary="SNMP Link down"/>
+        <event source="trap" severity="cleared" id="5203434483483115_1546759314682" time="1546759314000" summary="SNMP Link up"/>
+        <event source="trap" severity="minor" id="5203477433156075_1546759315918" time="1546759316000" summary="SNMP Link down"/>
+        <event source="trap" severity="cleared" id="5203559037534699_1546759319088" time="1546759319000" summary="SNMP Link up"/>
+        <event source="trap" severity="minor" id="5203894044983787_1546759350495" time="1546759350000" summary="SNMP Link down"/>
+        <event source="trap" severity="cleared" id="5203988534264299_1546759353996" time="1546759354000" summary="SNMP Link up"/>
+    </alarm>
+</alarms>

@@ -1,0 +1,91 @@
+<div class="row" style="margin-top: 5px">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        View
+      </div>
+      <div class="card-body">
+        <div class="btn-group-vertical">
+          <button *ngIf="!spinning" type="button" class="btn btn-primary" (click)="onClickSpin()">
+            <fa-icon icon="circle-notch"></fa-icon> Spin
+          </button>
+          <button *ngIf="spinning" type="button" class="btn btn-danger" (click)="onClickSpin()">
+            <fa-icon icon="times-circle"></fa-icon> Stop
+          </button>
+          <button type="button" class="btn btn-dark" (click)="onToggleTimeControls()">
+            <fa-icon icon="clock"></fa-icon> Time
+          </button>
+          <button type="button" class="btn btn-success" (click)="onToggleSearch()">
+            <fa-icon icon="search"></fa-icon> Search
+          </button>
+          <button *ngIf="vrAvailable" type="button" class="btn btn-secondary" (click)="onToggleVR()">
+            <fa-icon icon="vr-cardboard"></fa-icon> VR
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onResetView()">
+            <fa-icon icon="poo"></fa-icon> Reset
+          </button>
+          <button type="button" class="btn btn-primary" (click)="onToggleModelOptions()">
+            <fa-icon icon="list"></fa-icon> Model
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showModelOptions" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Model
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="alarmsPerVertexSelect">Alarms per vertex</label>
+            <select [(ngModel)]="stateModel.alarmsPerVertex" (change)="onStateModelUpdated()" class="form-control" id="alarmsPerVertexSelect" name="alarmsPerVertexSelect">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>4</option>
+              <option>8</option>
+              <option>16</option>
+              <option>32</option>
+              <option>64</option>
+            </select>
+
+            <label for="situationsSelect">Situations</label>
+            <select [(ngModel)]="stateModel.situations" (change)="onStateModelUpdated()" class="form-control" id="situationsSelect" name="situationsSelect">
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>4</option>
+              <option>8</option>
+            </select>
+
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="stateModel.showInventory" (change)="onStateModelUpdated()" class="form-check-input" type="checkbox" value="" id="showInventory" name="showInventory">
+              <label class="form-check-label" for="showInventory">Inventory</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="stateModel.showAlarms" (change)="onStateModelUpdated()" class="form-check-input" type="checkbox" value="" id="showAlarms" name="showAlarms">
+              <label class="form-check-label" for="showAlarms">Alarms</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="stateModel.showSituations" (change)="onStateModelUpdated()" class="form-check-input" type="checkbox" value="" id="showSituations" name="showSituations">
+              <label class="form-check-label" for="showSituations">Situations</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="stateModel.showLabels" (change)="onStateModelUpdated()" class="form-check-input" type="checkbox" value="" id="showLabels" name="showLabels">
+              <label class="form-check-label" for="showLabels">Labels</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input [(ngModel)]="stateModel.flowSimulation" (change)="onStateModelUpdated()" class="form-check-input" type="checkbox" value="" id="flowSimulation" name="flowSimulation">
+              <label class="form-check-label" for="flowSimulation">Flows</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row" style="margin-top: 5px">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Context
+      </div>
+      <div class="card-body">
+        <p>All</p>
+      </div>
+    </div>
+
+    <div *ngIf="activeElement" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Element
+      </div>
+      <div class="card-body">
+        <p>{{ activeElement | json }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="activeElement && activeElement.type == 'situation'" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Situation
+      </div>
+      <div class="card-body">
+        <p>{{ activeElement.label }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="activeElement && activeElement.type == 'alarm'" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Alarm
+      </div>
+      <div class="card-body">
+        <p>{{ activeElement.id }}</p>
+      </div>
+    </div>
+  </div>
+</div>
