@@ -1,40 +1,174 @@
 version: 2
+
+defaults: &defaults
+
+  working_directory: /home/circleci/oce-viz
+
+  workspace_root: &workspace_root
+    /tmp/workspace
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+references:
+  container_config: &container_config
+    docker:
+      - image: docker:18.06.0-ce-git
+
+  dockerhub_login: &dockerhub_login
+    run:
+      name: DockerHub Login
+      command: |
+        docker login -u ${DOCKERHUB_LOGIN} -p ${DOCKERHUB_PASS}
+
 jobs:
-  build:
+
+  build_backend:
+    <<: *defaults
     docker:
       - image: circleci/openjdk:8-jdk-stretch-node-browsers 
 
-    working_directory: ~/oce-viz
-    
     steps:
       # git pull
       - checkout
 
-      # setup testing env
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Login to DockerHub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: cd backend
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
+          - backend-v1-dependencies-{{ checksum "pom.xml" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - backend-v1-dependencies-
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: backend-v1-dependencies-{{ checksum "pom.xml" }}
         
       # package into a jar
-      - run: |
-          cd backend
-          mvn clean package
+      - run: mvn clean package
+
+  build_frontend:
+    <<: *defaults
+    docker:
+      - image: circleci/11-browsers-legacy
+
+    steps:
+      - checkout
+      - run: cd frontend
+      - run: npm install
+      - run: npm build
+
+  build_docker_image:
+    <<: *defaults
+    <<: *container_config
+
+    steps:
+      - setup_remote_docker
+      - *attach_workspace
+      - checkout
+      - run:
+          name: Build Docker Image
+          no_output_timeout: 20m
+          command: |
+            docker build -t oce-viz .
+      - run:
+          name: Save Docker Container Image as artifact in workspace
+          command: |
+            docker image save oce-viz -o /tmp/workspace/oce-viz
+      - store_artifacts:
+          path: /tmp/workspace/oce-viz
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - oce-viz
+            - dockertag
+
+  publish_dockerhub:
+    <<: *defaults
+    <<: *container_config
+
+    steps:
+      - setup_remote_docker
+      - *attach_workspace
+      - *dockerhub_login
+      - run:
+          name: Load Docker Container Image file
+          command: |
+            docker image load -i /tmp/workspace/horizon-docker-image
+      - run:
+          name: Set DockerHub project user and ensure lower case
+          command: |
+            if [ -z ${DOCKERHUB_PROJECT_USER+x} ]; then
+                DOCKERHUB_PROJECT_USER=$(echo "${CIRCLE_PROJECT_USERNAME}" | tr '[:upper:]' '[:lower:]')
+                echo "export DOCKERHUB_PROJECT_USER=${DOCKERHUB_PROJECT_USER}" >> ${BASH_ENV}
+                echo "Use CIRCLE_PROJECT_USERNAME instead which is set to ${DOCKERHUB_PROJECT_USER}."
+            else
+                DOCKERHUB_PROJECT_USER=$(echo "${DOCKERHUB_PROJECT_USER}" | tr '[:upper:]' '[:lower:]')
+                echo "export DOCKERHUB_PROJECT_USER=${DOCKERHUB_PROJECT_USER}" >> ${BASH_ENV}
+                echo "Overwrite DOCKERHUB_PROJECT_USER with ${DOCKERHUB_PROJECT_USER}."
+            fi
+      - run:
+          name: Set DockerHub project name and ensure lower case
+          command: |
+            if [ -z ${DOCKERHUB_PROJECT_NAME+x} ]; then
+                DOCKERHUB_PROJECT_NAME=$(echo "${CIRCLE_PROJECT_REPONAME}" | tr '[:upper:]' '[:lower:]')
+                echo "export DOCKERHUB_PROJECT_NAME=${DOCKERHUB_PROJECT_NAME}" >> ${BASH_ENV}
+                echo "Use CIRCLE_PROJECT_REPONAME instead which is set to ${DOCKERHUB_PROJECT_NAME}."
+            else
+                DOCKERHUB_PROJECT_NAME=$(echo "${DOCKERHUB_PROJECT_NAME}" | tr '[:upper:]' '[:lower:]')
+                echo "export DOCKERHUB_PROJECT_NAME=${DOCKERHUB_PROJECT_NAME}" >> ${BASH_ENV}
+                echo "Overwrite DOCKERHUB_PROJECT_NAME with ${DOCKERHUB_PROJECT_NAME}."
+            fi
+      - run:
+          name: Generate Docker Tag for releases from branch name
+          command: |
+            DOCKERHUB_TAG=${CIRCLE_BRANCH#release/}
+            DOCKERHUB_TAG=${DOCKERHUB_TAG/\//-}
+            echo "export DOCKERHUB_TAG=${DOCKERHUB_TAG}" >> ${BASH_ENV}
+      - run:
+          name: Tag Docker Container Images and push to DockerHub
+          command: |
+            source ${BASH_ENV}
+            case "${CIRCLE_BRANCH}" in
+              master)
+                docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bleeding
+                docker push ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bleeding
+                ;;
+              release*)
+                docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:latest
+                docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:${DOCKERHUB_TAG}
+                docker push ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:latest
+                docker push ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:${DOCKERHUB_TAG}
+                ;;
+              *)
+                echo "This is not a branch build which needs to be published"
+                ;;
+            esac
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_backend
+      - build_frontend
+      - build_docker_image:
+          requires:
+            - build_backend
+            - build_frontend
+              #      - publish_dockerhub:
+              #          filters:
+              #            branches:
+              #              only:
+              #                - /release\/.*/
+              #                - master
+              #          requires:
+              #            - build_docker_image
+
 #
 #      # build and push docker image to docker hub
 #      - run: mvn clean compile jib:build -Dimage=zarinlo/springboot-api:$CIRCLE_BUILD_NUM
@@ -43,4 +177,5 @@ jobs:
 #      - store_artifacts:
 #          path: target/classes
 #          destination: sample-springboot-api
+#
 #
