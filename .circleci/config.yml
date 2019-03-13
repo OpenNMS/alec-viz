@@ -61,7 +61,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - frontend-v1-dependencies-{{ checksum "frontend/package-lock.json" }}
+          - frontend-v1-dependencies-{{ checksum "frontend/package.json" }}
           # fallback to using the latest cache if no exact match is found
           - frontend-v1-dependencies-
 
@@ -73,7 +73,7 @@ jobs:
           paths:
             - ~/usr/local/lib/node_modules  # location depends on npm version
             - ~/oce-viz/frontend/node_modules
-          key: frontend-v1-dependencies-{{ checksum "frontend/package-lock.json" }}
+          key: frontend-v1-dependencies-{{ checksum "frontend/package.json" }}
 
       - run: |
           cd frontend
