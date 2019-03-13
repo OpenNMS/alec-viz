@@ -66,7 +66,7 @@ jobs:
           npm install
       - run: |
           cd frontend
-          npm build
+          npm run-script build
 
   build_docker_image:
     <<: *defaults
