@@ -33,35 +33,40 @@ jobs:
       # git pull
       - checkout
 
-      - run: cd backend
-
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - backend-v1-dependencies-{{ checksum "pom.xml" }}
+          - backend-v1-dependencies-{{ checksum "backend/pom.xml" }}
           # fallback to using the latest cache if no exact match is found
           - backend-v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: |
+          cd backend
+          mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: backend-v1-dependencies-{{ checksum "pom.xml" }}
+          key: backend-v1-dependencies-{{ checksum "backend/pom.xml" }}
         
       # package into a jar
-      - run: mvn clean package
+      - run: |
+          cd backend
+          mvn clean package
 
   build_frontend:
     <<: *defaults
     docker:
-      - image: circleci/11-browsers-legacy
+      - image: circleci/node:11
 
     steps:
       - checkout
-      - run: cd frontend
-      - run: npm install
-      - run: npm build
+      - run: |
+          cd frontend
+          npm install
+      - run: |
+          cd frontend
+          npm build
 
   build_docker_image:
     <<: *defaults
