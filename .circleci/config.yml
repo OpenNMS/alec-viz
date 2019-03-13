@@ -59,7 +59,7 @@ jobs:
     steps:
       - checkout
 
-     - restore_cache:
+      - restore_cache:
           keys:
           - frontend-v1-dependencies-{{ checksum "frontend/package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
