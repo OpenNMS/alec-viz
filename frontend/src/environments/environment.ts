@@ -10,5 +10,5 @@ export const environment = {
     username: 'admin',
     password: 'admin'
   },
-  modelUrl: 'http://localhost:8080/0'
+  modelUrl: '/0'
 };

@@ -90,9 +90,9 @@ jobs:
 
       - run: |
           cd frontend
-          npm run-script build
+          npm run-script build-for-docker
 
-     - run: |
+      - run: |
           mkdir -p /tmp/workspace/frontend/
           cp -R frontend/dist /tmp/workspace/frontend/
 
