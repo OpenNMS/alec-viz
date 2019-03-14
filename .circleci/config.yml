@@ -20,7 +20,7 @@ references:
     run:
       name: DockerHub Login
       command: |
-        docker login -u ${DOCKERHUB_LOGIN} -p ${DOCKERHUB_PASS}
+        docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
 
 jobs:
 
