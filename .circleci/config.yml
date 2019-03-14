@@ -32,6 +32,8 @@ jobs:
     steps:
       - checkout
 
+      - *attach_workspace
+
       - restore_cache:
           keys:
           - backend-v1-dependencies-{{ checksum "backend/pom.xml" }}
@@ -51,6 +53,15 @@ jobs:
           cd backend
           mvn clean package
 
+      - run: |
+          mkdir -p /tmp/workspace/backend/
+          cp backend/target/server-*.jar /tmp/workspace/backend/server.jar
+ 
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - backend
+
   build_frontend:
     <<: *defaults
     docker:
@@ -58,6 +69,8 @@ jobs:
 
     steps:
       - checkout
+
+      - *attach_workspace
 
       - restore_cache:
           keys:
@@ -79,6 +92,15 @@ jobs:
           cd frontend
           npm run-script build
 
+     - run: |
+          mkdir -p /tmp/workspace/frontend/
+          cp -R frontend/dist /tmp/workspace/frontend/
+
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - frontend
+
   build_docker_image:
     <<: *defaults
     <<: *container_config
@@ -91,18 +113,17 @@ jobs:
           name: Build Docker Image
           no_output_timeout: 20m
           command: |
-            docker build -t oce-viz .
+            cp -R /tmp/workspace workspace
+            cd workspace
+            docker build -t oce-viz -f ../Dockerfile .
       - run:
           name: Save Docker Container Image as artifact in workspace
           command: |
             docker image save oce-viz -o /tmp/workspace/oce-viz
-      - store_artifacts:
-          path: /tmp/workspace/oce-viz
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - oce-viz
-            - dockertag
 
   publish_dockerhub:
     <<: *defaults
