@@ -89,7 +89,7 @@ public class OceGraphGeneratorTest {
         }
 
         // Graph after end time should not change
-        assertThat(oceGraphGenerator.getGraph(endMs), equalTo(oceGraphGenerator.getGraph(endMs + 1)));
+        assertThat(oceGraphGenerator.getGraph(endMs + 1), equalTo(oceGraphGenerator.getGraph(endMs + 1000)));
 
         // Generate the graph at some known time
         final Graph g = oceGraphGenerator.getGraph(1546759375000L);

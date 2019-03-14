@@ -28,6 +28,8 @@
 
 package org.opennms.oce.graphserver;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -37,19 +39,26 @@ import org.opennms.oce.graphserver.data.OceDataset;
 import org.opennms.oce.graphserver.data.OceGraphGenerator;
 import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.GraphMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
 
 @Component
 public class GraphService {
+    private static final Logger LOG = LoggerFactory.getLogger(GraphService.class);
 
-    private final List<OceGraphGenerator> graphGenerators;
+    private List<OceGraphGenerator> graphGenerators;
 
     public GraphService() {
-        graphGenerators = Lists.newArrayList(
-                new OceGraphGenerator(OceDataset.oceDataset())
-        );
+        // Create a generatoe for the OCE dataset
+        try {
+            graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.oceDataset()));
+        } catch (Exception e) {
+            LOG.warn("Loading the OCE dataset failed. Defaulting to sample dataset.");
+            graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.sampleDataset()));
+        }
     }
 
     public List<GraphMetadata> getAvailableGraphs() {

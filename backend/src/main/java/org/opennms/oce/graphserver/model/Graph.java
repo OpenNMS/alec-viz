@@ -30,6 +30,7 @@ package org.opennms.oce.graphserver.model;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -49,8 +50,11 @@ public class Graph {
     public Graph(GraphMetadata graphMetadata, Collection<Vertex> vertices, Collection<Edge> edges, Collection<Layer> layers) {
         this.graphMetadata = Objects.requireNonNull(graphMetadata);
         this.vertices = Lists.newArrayList(Objects.requireNonNull(vertices));
+        this.vertices.sort(Comparator.comparing(Vertex::getId));
         this.edges = Lists.newArrayList(Objects.requireNonNull(edges));
+        this.edges.sort(Comparator.comparing(Edge::getId));
         this.layers = Lists.newArrayList(Objects.requireNonNull(layers));
+        this.layers.sort(Comparator.comparing(Layer::getId));
     }
 
     @JsonIgnore
