@@ -119,11 +119,11 @@ jobs:
       - run:
           name: Save Docker Container Image as artifact in workspace
           command: |
-            docker image save oce-viz -o /tmp/workspace/oce-viz
+            docker image save oce-viz -o /tmp/workspace/oce-viz-docker-image
       - persist_to_workspace:
           root: *workspace_root
           paths:
-            - oce-viz
+            - oce-viz-docker-image
 
   publish_dockerhub:
     <<: *defaults
@@ -136,7 +136,7 @@ jobs:
       - run:
           name: Load Docker Container Image file
           command: |
-            docker image load -i /tmp/workspace/horizon-docker-image
+            docker image load -i /tmp/workspace/oce-viz-docker-image
       - run:
           name: Tag Docker Container Images and push to DockerHub
           command: |
