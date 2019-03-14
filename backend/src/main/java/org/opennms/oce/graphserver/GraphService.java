@@ -56,7 +56,7 @@ public class GraphService {
         try {
             graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.oceDataset()));
         } catch (Exception e) {
-            LOG.warn("Loading the OCE dataset failed. Defaulting to sample dataset. Error: {}", e.getMessage()t);
+            LOG.warn("Loading the OCE dataset failed. Defaulting to sample dataset. Error: {}", e.getMessage());
             graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.sampleDataset()));
         }
     }
