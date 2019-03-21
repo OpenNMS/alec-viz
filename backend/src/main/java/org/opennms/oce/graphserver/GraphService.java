@@ -28,12 +28,13 @@
 
 package org.opennms.oce.graphserver;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
 
 import org.opennms.oce.graphserver.data.OceDataset;
 import org.opennms.oce.graphserver.data.OceGraphGenerator;
@@ -41,20 +42,24 @@ import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.GraphMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.google.common.collect.Lists;
 
 @Component
 public class GraphService {
     private static final Logger LOG = LoggerFactory.getLogger(GraphService.class);
 
+    @Value("${oce.dataset.path}")
+    private String oceDatasetPath;
+
     private List<OceGraphGenerator> graphGenerators;
 
-    public GraphService() {
-        // Create a generatoe for the OCE dataset
+    @PostConstruct
+    public void init(){
+        // Create a generator for the OCE dataset
         try {
-            graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.oceDataset()));
+            graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.oceDataset(oceDatasetPath)));
+            LOG.info("Succesfully loaded the OCE dataset from: {}", oceDatasetPath);
         } catch (Exception e) {
             LOG.warn("Loading the OCE dataset failed. Defaulting to sample dataset. Error: {}", e.getMessage());
             graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.sampleDataset()));

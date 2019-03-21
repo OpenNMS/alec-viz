@@ -61,10 +61,10 @@ public class OceDataset {
                 "sample/sample.situations.xml");
     }
 
-    public static OceDataset oceDataset() {
-        return fromXmlFiles("/dataset/oce.alarms.xml",
-                "/dataset/oce.inventory.xml",
-                "/dataset/oce.situations.xml");
+    public static OceDataset oceDataset(String base) {
+        return fromXmlFiles(Paths.get(base, "oce.alarms.xml").toString(),
+                Paths.get(base, "oce.inventory.xml").toString(),
+                Paths.get(base, "oce.situations.xml").toString());
     }
 
     public static OceDataset fromResources(String alarmsIn, String inventoryIn, String situationsIn) {
