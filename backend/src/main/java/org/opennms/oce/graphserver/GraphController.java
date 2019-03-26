@@ -52,9 +52,29 @@ public class GraphController {
     }
 
     @RequestMapping("/{id}")
-    public Graph graph(@PathVariable("id") String id, @RequestParam(value = "time", required = false) Long timestampInMillis) {
+    public Graph graph(@PathVariable("id") String id,
+                       @RequestParam(value = "time", required = false) Long timestampInMillis,
+                       @RequestParam(value = "szl", required = false) Integer szl,
+                       @RequestParam(value = "focalPoint", required = false) String focalPoint,
+                       @RequestParam(value = "removeInventoryWithNoAlarms", required = false) Boolean removeInventoryWithNoAlarms) {
         final long timestamp = timestampInMillis != null ? timestampInMillis : System.currentTimeMillis();
-        return graphService.getGraph(id, timestamp);
+        final GraphView.Builder graphViewBuilder = GraphView.builder()
+                .setTimestampInMillis(timestamp);
+        if (szl != null) {
+            graphViewBuilder.setSzl(szl);
+        }
+        if (focalPoint != null) {
+            graphViewBuilder.setFocalPoint(focalPoint);
+        }
+        if (removeInventoryWithNoAlarms != null) {
+            graphViewBuilder.setRemoveInventoryWithNoAlarms(removeInventoryWithNoAlarms);
+        }
+        return graphService.getGraph(id, graphViewBuilder.build());
+    }
+
+    @RequestMapping("/{id}/metadata")
+    public GraphMetadata graphMetadata(@PathVariable("id") String id) {
+        return graphService.getGraphMetadata(id);
     }
 
 }

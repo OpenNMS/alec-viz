@@ -28,8 +28,8 @@
 
 package org.opennms.oce.graphserver.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,6 +37,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ import org.opennms.oce.datasource.api.InventoryObjectRelativeRef;
 import org.opennms.oce.datasource.api.ResourceKey;
 import org.opennms.oce.datasource.api.Severity;
 import org.opennms.oce.datasource.api.Situation;
+import org.opennms.oce.graphserver.GraphView;
 import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.GraphMetadata;
 import org.opennms.oce.graphserver.model.TemporalAnnotation;
@@ -60,7 +62,6 @@ import com.google.common.collect.Sets;
 
 import edu.uci.ics.jung.algorithms.cluster.WeakComponentClusterer;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class OceGraphGenerator {
@@ -94,11 +95,14 @@ public class OceGraphGenerator {
         startMs = stats.getMin();
         endMs = stats.getMax();
 
-        temporalAnnotations = oceDataset.getSituations().stream().map(s -> new TemporalAnnotation(s.getCreationTime(), String.format("Situation #%s Created", s.getId())))
-                .sorted()
+        // Find the 10 largest situations, and create annotiations for these
+        Comparator<Situation> situationComparator = Comparator.comparing(s -> -s.getAlarms().size());
+        situationComparator = situationComparator.thenComparing(Situation::getCreationTime);
+        temporalAnnotations = oceDataset.getSituations().stream()
+                .sorted(situationComparator)
+                .limit(10)
+                .map(s -> new TemporalAnnotation(s.getCreationTime(), String.format("Situation #%s Created", s.getId())))
                 .collect(Collectors.toList());
-
-        // TODO: Limit annotations to some reasonable amount
     }
 
     private static List<Alarm> sortAlarmsByTime(List<Alarm> alarms) {
@@ -121,11 +125,7 @@ public class OceGraphGenerator {
         return graphMetadata;
     }
 
-    public Graph getGraph(long timestampInMillis) {
-        return getGraph(timestampInMillis, false);
-    }
-
-    public Graph getGraph(long timestampInMillis, boolean removeInventoryWithNoAlarms) {
+    public Graph getGraph(GraphView graphView) {
         final Map<ResourceKey, Graph.Vertex> verticesByKey = Maps.newLinkedHashMap();
 
         final List<Graph.Edge> edges = Lists.newLinkedList();
@@ -185,7 +185,7 @@ public class OceGraphGenerator {
 
         // Find the alarms that were active at this time
         Map<String, Severity> alarmIdToSeverityMap = new HashMap<>();
-        for (Alarm alarm : getActiveAlarmsAt(timestampInMillis)) {
+        for (Alarm alarm : getActiveAlarmsAt(graphView.getTimestampInMillis())) {
             final ResourceKey ioKey = getInventoryResourceKeyFor(alarm);
             final ResourceKey alarmKey = getAlarmResourceKeyFor(alarm);
 
@@ -205,7 +205,8 @@ public class OceGraphGenerator {
         }
 
         // Find the situations that were active at this time
-        for (Situation situation : getSituationsActiveAt(timestampInMillis)) {
+        final List<Situation> activeSituations = getSituationsActiveAt(graphView.getTimestampInMillis());
+        for (Situation situation : activeSituations) {
             final ResourceKey situationKey = getSituationResourceKeyFor(situation);
 
             // Determine the max severity of all the related alarms
@@ -249,11 +250,31 @@ public class OceGraphGenerator {
             jungGraph.addEdge(e, verticesById.get(e.getSourceId()), verticesById.get(e.getTargetId()), EdgeType.DIRECTED);
         });
 
-        if (removeInventoryWithNoAlarms) {
-            prune(jungGraph);
+        // SZL processing
+        final edu.uci.ics.jung.graph.DirectedGraph<Graph.Vertex, Graph.Edge> filteredGraph;
+        final List<Graph.Vertex> focalPoints;
+        if (graphView.getFocalPoint() != null) {
+            focalPoints = vertices.stream().filter(v -> v.getLabel().toLowerCase().contains(graphView.getFocalPoint()))
+                    .collect(Collectors.toList());
+        } else {
+            // No focal point was set, default to using the situation with the most alarms
+            final Optional<Situation> situationWithMostAlarms = activeSituations.stream().max(Comparator.comparing(s -> s.getAlarms().size()));
+            if (situationWithMostAlarms.isPresent()) {
+                Graph.Vertex situationVertex = verticesByKey.get(getSituationResourceKeyFor(situationWithMostAlarms.get()));
+                focalPoints = Arrays.asList(situationVertex);
+            } else {
+                focalPoints = Collections.emptyList();
+            }
         }
 
-        return new Graph(getGraphMetadata(), jungGraph.getVertices(), jungGraph.getEdges(), layers);
+        final Sizzler sizzler = new Sizzler();
+        filteredGraph = sizzler.sizzle(jungGraph, focalPoints, graphView.getSzl());
+
+        if (graphView.isRemoveInventoryWithNoAlarms()) {
+            prune(filteredGraph);
+        }
+
+        return new Graph(getGraphMetadata(), filteredGraph.getVertices(), filteredGraph.getEdges(), layers);
     }
 
     private static boolean prune(edu.uci.ics.jung.graph.Graph<Graph.Vertex, Graph.Edge> jungGraph) {

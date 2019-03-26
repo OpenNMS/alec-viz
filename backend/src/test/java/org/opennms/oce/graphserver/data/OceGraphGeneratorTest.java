@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 import org.opennms.oce.datasource.api.Severity;
+import org.opennms.oce.graphserver.GraphView;
 import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.TemporalAnnotation;
 
@@ -84,15 +85,28 @@ public class OceGraphGeneratorTest {
             assertThat(temporalAnnotation.getTimestamp(), greaterThanOrEqualTo(startMs));
             assertThat(temporalAnnotation.getTimestamp(), lessThanOrEqualTo(endMs));
 
-            final Graph g = oceGraphGenerator.getGraph(temporalAnnotation.getTimestamp());
+            final GraphView view = GraphView.builder()
+                    .setTimestampInMillis(temporalAnnotation.getTimestamp())
+                    .build();
+
+            final Graph g = oceGraphGenerator.getGraph(view);
             assertThat(g, notNullValue());
         }
 
         // Graph after end time should not change
-        assertThat(oceGraphGenerator.getGraph(endMs + 1), equalTo(oceGraphGenerator.getGraph(endMs + 1000)));
+        final GraphView viewAtEnd = GraphView.builder()
+                .setTimestampInMillis(endMs + 1)
+                .build();
+        final GraphView viewAfterEnd = GraphView.builder()
+                .setTimestampInMillis(endMs + 1000)
+                .build();
+        assertThat(oceGraphGenerator.getGraph(viewAtEnd), equalTo(oceGraphGenerator.getGraph(viewAfterEnd)));
 
         // Generate the graph at some known time
-        final Graph g = oceGraphGenerator.getGraph(1546759375000L);
+        final GraphView viewAtKnownTime = GraphView.builder()
+                .setTimestampInMillis(1546759375000L)
+                .build();
+        final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
         assertThat(g.getLayers(), hasSize(3));
 
         List<Graph.Vertex> vertices = g.getVertices();
@@ -112,8 +126,12 @@ public class OceGraphGeneratorTest {
         final OceDataset data = OceDataset.sampleDataset();
 
         // Generate the graph at some known time
+        final GraphView viewAtKnownTime = GraphView.builder()
+                .setTimestampInMillis(1546759375000L)
+                .setRemoveInventoryWithNoAlarms(true)
+                .build();
         final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
-        final Graph g = oceGraphGenerator.getGraph(1546759375000L, true);
+        final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
 
         List<Graph.Vertex> vertices = g.getVertices();
 
@@ -131,8 +149,12 @@ public class OceGraphGeneratorTest {
         final OceDataset data = OceDataset.sampleDataset();
 
         // Generate the graph at some known time
+        final GraphView viewAtKnownTime = GraphView.builder()
+                .setTimestampInMillis(1546759375000L)
+                .setRemoveInventoryWithNoAlarms(true)
+                .build();
         final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
-        final Graph g = oceGraphGenerator.getGraph(1546759375000L, true);
+        final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
 
         List<Graph.Vertex> vertices = g.getVertices();
         assertThat(verticesOnLayer(vertices, "inventory"), hasSize(2));
