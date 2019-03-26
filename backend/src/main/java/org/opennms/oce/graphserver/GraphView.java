@@ -36,11 +36,13 @@ import java.util.Objects;
 public class GraphView {
     public static final int DEFAULT_SZL = 3;
     public static final boolean DEFAULT_REMOVE_INVENTORY_WITH_NO_ALARMS = false;
+    public static final int DEFAULT_VERTEX_LIMIT = 100;
 
     private final long timestampInMillis;
     private final int szl;
     private final String focalPoint;
     private final boolean removeInventoryWithNoAlarms;
+    private final int vertexLimit;
 
     public static GraphView.Builder builder() {
         return new Builder();
@@ -51,6 +53,7 @@ public class GraphView {
         this.szl = builder.szl;
         this.focalPoint = builder.focalPoint;
         this.removeInventoryWithNoAlarms = builder.removeInventoryWithNoAlarms;
+        this.vertexLimit = builder.vertexLimit;
     }
 
     public static class Builder {
@@ -58,6 +61,7 @@ public class GraphView {
         private int szl = DEFAULT_SZL;
         private String focalPoint;
         private boolean removeInventoryWithNoAlarms = DEFAULT_REMOVE_INVENTORY_WITH_NO_ALARMS;
+        private int vertexLimit = DEFAULT_VERTEX_LIMIT;
 
         public Builder setTimestampInMillis(long timestampInMillis) {
             this.timestampInMillis = timestampInMillis;
@@ -82,6 +86,11 @@ public class GraphView {
             return this;
         }
 
+        public Builder sertVertexLimit(int vertexLimit) {
+            this.vertexLimit = vertexLimit;
+            return this;
+        }
+
         public GraphView build() {
             Objects.requireNonNull(timestampInMillis, "timestamp is required");
             return new GraphView(this);
@@ -102,5 +111,9 @@ public class GraphView {
 
     public boolean isRemoveInventoryWithNoAlarms() {
         return removeInventoryWithNoAlarms;
+    }
+
+    public int getVertexLimit() {
+        return vertexLimit;
     }
 }

@@ -28,8 +28,6 @@
 
 package org.opennms.oce.graphserver.data;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,7 +35,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.LongSummaryStatistics;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -95,9 +92,10 @@ public class OceGraphGenerator {
         startMs = stats.getMin();
         endMs = stats.getMax();
 
+        Comparator<Situation> situationComparator = Comparator.comparing(s -> s.getAlarms().size(), Comparator.reverseOrder());
+        situationComparator = situationComparator.thenComparing(Situation::getCreationTime, Comparator.reverseOrder());
+
         // Find the 10 largest situations, and create annotiations for these
-        Comparator<Situation> situationComparator = Comparator.comparing(s -> -s.getAlarms().size());
-        situationComparator = situationComparator.thenComparing(Situation::getCreationTime);
         temporalAnnotations = oceDataset.getSituations().stream()
                 .sorted(situationComparator)
                 .limit(10)
@@ -254,17 +252,27 @@ public class OceGraphGenerator {
         final edu.uci.ics.jung.graph.DirectedGraph<Graph.Vertex, Graph.Edge> filteredGraph;
         final List<Graph.Vertex> focalPoints;
         if (graphView.getFocalPoint() != null) {
-            focalPoints = vertices.stream().filter(v -> v.getLabel().toLowerCase().contains(graphView.getFocalPoint()))
+            focalPoints = vertices.stream().filter(v -> v.getLabel().toLowerCase().contains(graphView.getFocalPoint().toLowerCase()))
                     .collect(Collectors.toList());
         } else {
-            // No focal point was set, default to using the situation with the most alarms
-            final Optional<Situation> situationWithMostAlarms = activeSituations.stream().max(Comparator.comparing(s -> s.getAlarms().size()));
-            if (situationWithMostAlarms.isPresent()) {
-                Graph.Vertex situationVertex = verticesByKey.get(getSituationResourceKeyFor(situationWithMostAlarms.get()));
-                focalPoints = Arrays.asList(situationVertex);
-            } else {
-                focalPoints = Collections.emptyList();
-            }
+            // No focal point was set, default to using the top 10 situations with the most *active* alarms
+            Comparator<Situation> situationComparator = Comparator.comparing(s -> {
+                // Determine the number of *active* alarms
+                int numActiveAlarms = 0;
+                for (Alarm relatedAlarm : s.getAlarms()) {
+                    final ResourceKey alarmResourceKey = getAlarmResourceKeyFor(relatedAlarm);
+                    if (verticesByKey.containsKey(alarmResourceKey)) {
+                        numActiveAlarms++;
+                    }
+                }
+                return numActiveAlarms;
+            }, Comparator.reverseOrder());
+            situationComparator = situationComparator.thenComparing(Situation::getCreationTime, Comparator.reverseOrder());
+            focalPoints = activeSituations.stream()
+                    .sorted(situationComparator)
+                    .limit(10)
+                    .map(s -> verticesByKey.get(getSituationResourceKeyFor(s)))
+                    .collect(Collectors.toList());
         }
 
         final Sizzler sizzler = new Sizzler();
@@ -272,6 +280,16 @@ public class OceGraphGenerator {
 
         if (graphView.isRemoveInventoryWithNoAlarms()) {
             prune(filteredGraph);
+        }
+
+
+        if (graphView.getVertexLimit() > 0) {
+            // TODO: What to remove?
+
+            // If num situations < limit, then keep, delete oldest
+            // If num alarms + num situations < limit, keep, delete oldest
+            // If num ios < limit, keep, delete smallest ids -_-
+
         }
 
         return new Graph(getGraphMetadata(), filteredGraph.getVertices(), filteredGraph.getEdges(), layers);
@@ -348,10 +366,16 @@ public class OceGraphGenerator {
         for (Map.Entry<String, List<Alarm>> entry : alarmsById.entrySet()) {
             List<Alarm> alarmsByTime = sortAlarmsByTime(entry.getValue());
             Alarm lastAlarm = alarmsByTime.get(alarmsByTime.size() -1);
-            // Keep alarms that are not cleared and those that have been cleared in the last 5 minutes
-            if (!lastAlarm.isClear() || Math.abs(lastAlarm.getTime() - timestampInMs) < TimeUnit.MINUTES.toMillis(5)) {
-                activeAlarms.add(lastAlarm);
+            // Disregard alarms that have been cleared for more than 5 minutes
+            long timeSinceLastAlarmInMs = Math.abs(lastAlarm.getTime() - timestampInMs);
+            if (lastAlarm.isClear() && timeSinceLastAlarmInMs >= TimeUnit.MINUTES.toMillis(5)) {
+                continue;
             }
+            // Disregard alarms with no updates in the last 24 hours
+            if (timeSinceLastAlarmInMs >= TimeUnit.DAYS.toMillis(1)) {
+                continue;
+            }
+            activeAlarms.add(lastAlarm);
         }
 
         return activeAlarms;

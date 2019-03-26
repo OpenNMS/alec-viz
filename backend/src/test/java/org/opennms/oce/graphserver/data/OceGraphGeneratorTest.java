@@ -112,8 +112,8 @@ public class OceGraphGeneratorTest {
         List<Graph.Vertex> vertices = g.getVertices();
         List<Graph.Edge> edges = g.getEdges();
 
-        assertThat(verticesOnLayer(vertices, "inventory"), hasSize(4));
-        assertThat(edgesOnLayer(edges, vertices, "inventory"), hasSize(2));
+        assertThat(verticesOnLayer(vertices, "inventory"), hasSize(2));
+        assertThat(edgesOnLayer(edges, vertices, "inventory"), hasSize(1));
         assertThat(verticesOnLayer(vertices, "alarms"), hasSize(3));
         assertThat(verticesOnLayer(vertices, "situations"), hasSize(1));
 

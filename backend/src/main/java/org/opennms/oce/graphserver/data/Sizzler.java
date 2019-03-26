@@ -64,7 +64,7 @@ public class Sizzler {
         for (int i=0; i<szl; i++) {
             final List<Graph.Vertex> tmpVertices = new ArrayList<>();
             for (Graph.Vertex eachVertex : verticesToProcess) {
-                final Collection<Graph.Vertex> neighbors = g.getSuccessors(eachVertex);
+                final Collection<Graph.Vertex> neighbors = g.getNeighbors(eachVertex);
                 for (Graph.Vertex v : neighbors) {
                     filteredGraph.addVertex(v);
                 }

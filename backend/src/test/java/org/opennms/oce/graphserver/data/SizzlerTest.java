@@ -82,9 +82,9 @@ public class SizzlerTest {
         assertThat(gg.getVertices(), hasSize(2));
         assertThat(gg.getEdges(), hasSize(1));
 
-        // Edges are directed, so we should get different results with switching v1 and v2
+        // We ignore edge direction, so we should get the same results when switching v1 and v2
         gg = sizzler.sizzle(g, Arrays.asList(v2), 1);
-        assertThat(gg.getVertices(), hasSize(1));
-        assertThat(gg.getEdges(), hasSize(0));
+        assertThat(gg.getVertices(), hasSize(2));
+        assertThat(gg.getEdges(), hasSize(1));
     }
 }
