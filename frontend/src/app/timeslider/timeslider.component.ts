@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StateService} from '../state.service';
 import * as TWEEN from '@tweenjs/tween.js';
+import {ModelMetadata, ModelService} from '../model.service';
 
 @Component({
   selector: 'app-timeslider',
@@ -10,17 +11,22 @@ import * as TWEEN from '@tweenjs/tween.js';
 export class TimesliderComponent implements OnInit {
 
   pointInTimeMs = -1;
+  modelMetadata: ModelMetadata;
   minTimeMs = 1546750837000;
   maxTimeMs = 1546837195000;
 
   playing = false;
   timeTween: any;
   tweenedTime = {x: 0};
+  seekToMs: number;
 
-  constructor(private stateService: StateService) { }
+  constructor(private stateService: StateService, private modelService: ModelService) { }
 
   ngOnInit() {
     this.pointInTimeMs = this.maxTimeMs;
+    this.modelService.modelMetadata$.subscribe(modelMetadata => {
+      this.onModelMetadataChanged(modelMetadata);
+    });
   }
 
   onTimeChanged() {
@@ -52,6 +58,18 @@ export class TimesliderComponent implements OnInit {
       this.timeTween.stop();
     }
     this.playing = false;
+  }
+
+  onSeek() {
+    this.onStop();
+    this.pointInTimeMs = this.seekToMs;
+    this.onTimeChanged();
+  }
+
+  private onModelMetadataChanged(modelMetadata: ModelMetadata) {
+    this.modelMetadata = modelMetadata;
+    this.minTimeMs = modelMetadata.timeMetadata.startMs;
+    this.maxTimeMs = modelMetadata.timeMetadata.endMs;
   }
 
 }

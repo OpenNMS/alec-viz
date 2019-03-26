@@ -262,17 +262,20 @@ export class SceneComponent implements AfterViewInit {
 
           // Create a new "link" for the edge and add it to the scene
           let endpointLink;
-          let createdTwistedPairLink = false;
+          const createdTwistedPairLink = false;
+
+          /* disabled for performance
           if (e.type === 'peer' &&
             (sourceEndpoint.vertex.type === 'link' || targetEndpoint.vertex.type)) {
             createdTwistedPairLink = true;
           } else if (e.type === 'snmpinterfacelink') {
             createdTwistedPairLink = true;
           }
+          */
 
           if (createdTwistedPairLink) {
             let linkUsage$: Observable<LinkUsage>;
-            if ('snmpInterfaceResourceId' in e.attributes) {
+            if (e.attributes !== undefined && 'snmpInterfaceResourceId' in e.attributes) {
               console.log(e.id, e.attributes['snmpInterfaceResourceId']);
               linkUsage$ = this.measurementService.getLinkUsage(e.attributes['snmpInterfaceResourceId']);
             }

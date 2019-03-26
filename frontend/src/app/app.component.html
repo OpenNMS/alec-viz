@@ -4,6 +4,11 @@
       <app-menu></app-menu>
     </div>
     <div class="col-md-9">
+      <div *ngIf="controlState.showContextControls" class="row">
+        <div class="col-md-12">
+          <app-context></app-context>
+        </div>
+      </div>
       <div *ngIf="controlState.showTimeControls" class="row">
         <div class="col-md-12">
           <app-timeslider></app-timeslider>

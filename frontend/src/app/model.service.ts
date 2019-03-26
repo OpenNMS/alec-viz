@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 
 import {Observable, throwError} from 'rxjs';
 import {catchError, concatMap, map, switchMap} from 'rxjs/operators';
-import {StateModel, StateService} from './state.service';
+import {ContextModel, StateModel, StateService} from './state.service';
 import {timer} from 'rxjs/internal/observable/timer';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {environment} from '../environments/environment';
@@ -15,7 +15,9 @@ import {environment} from '../environments/environment';
 })
 export class ModelService {
 
+  private contextModel = new ContextModel();
   model$: Observable<Model>;
+  modelMetadata$: Observable<ModelMetadata>;
   polledModel$: Observable<Model>;
   load$ = new BehaviorSubject('');
   stateModel = new StateModel();
@@ -23,6 +25,12 @@ export class ModelService {
 
   constructor(private http: HttpClient, private stateService: StateService) {
     this.pointInTimeMs = new Date().getTime();
+
+    this.modelMetadata$ = this.http.get(environment.modelUrl + '/metadata').pipe(
+      map((e: Response) => {
+        return <ModelMetadata>(<unknown>e);
+      })
+    );
 
     // See https://blog.strongbrew.io/rxjs-polling/
     this.model$ = this.http.get(environment.modelUrl, {'params': {'time': '' + this.pointInTimeMs}}).pipe(
@@ -32,7 +40,17 @@ export class ModelService {
     this.polledModel$ = this.load$.pipe(
       switchMap(_ => timer(0, 10000).pipe(
         concatMap(__ => {
-          return this.http.get(environment.modelUrl, {'params': {'time': '' + this.pointInTimeMs}}).pipe(
+          const params = {'time': '' + this.pointInTimeMs};
+          if (this.contextModel.focalPoint != null) {
+            params['focalPoint'] = this.contextModel.focalPoint;
+          }
+          if (this.contextModel.szl != null) {
+            params['szl'] = this.contextModel.szl;
+          }
+          if (this.contextModel.prune != null) {
+            params['removeInventoryWithNoAlarms'] = this.contextModel.prune;
+          }
+          return this.http.get(environment.modelUrl, {'params': params}).pipe(
             map((e: Response) => this.toModel(e))
           );
         })
@@ -47,10 +65,20 @@ export class ModelService {
     stateService.pointInTime$.subscribe(pointInTimeMs => {
       this.onPointInTimeChanged(pointInTimeMs);
     });
+
+
+    stateService.contextModel$.subscribe(context => {
+      this.onContextModelChanged(context);
+    });
   }
 
   private onPointInTimeChanged(pointInTimeMs: number) {
     this.pointInTimeMs = pointInTimeMs;
+    this.refreshModel();
+  }
+
+  private onContextModelChanged(contextModel: ContextModel) {
+    this.contextModel = contextModel;
     this.refreshModel();
   }
 
@@ -69,6 +97,10 @@ export class ModelService {
 
   refreshModel() {
     this.load$.next('');
+  }
+
+  getModelMetadata(): Observable<ModelMetadata> {
+    return this.modelMetadata$;
   }
 
   getKpiType(name: string): Observable<KPIType> {
@@ -276,4 +308,22 @@ export class Model {
   vertices: Vertex[] = [];
   edges: Edge[] = [];
   layers: Layer[] = [];
+}
+
+export class TimeMetadataAnnotiation {
+  timestamp: number;
+  label: string;
+}
+
+export class TimeMetadata {
+  startMs: number;
+  endMs: number;
+  annotations: TimeMetadataAnnotiation[] = [];
+}
+
+export class ModelMetadata {
+  id: any;
+  label: string;
+  description: string;
+  timeMetadata: TimeMetadata;
 }

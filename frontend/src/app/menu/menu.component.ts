@@ -37,6 +37,11 @@ export class MenuComponent implements OnInit {
     this.stateService.spin(this.spinning);
   }
 
+  onToggleContextControls() {
+    this.controlState.showContextControls = !this.controlState.showContextControls;
+    this.onControlStateUpdated();
+  }
+
   onToggleTimeControls() {
     this.controlState.showTimeControls = !this.controlState.showTimeControls;
     this.onControlStateUpdated();

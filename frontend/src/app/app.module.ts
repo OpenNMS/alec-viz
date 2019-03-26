@@ -12,9 +12,13 @@ import { TimesliderComponent } from './timeslider/timeslider.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faCircleNotch, faClock, faCoffee, faPlayCircle, faStopCircle,
-  faTimesCircle, faPoo, faGamepad, faSearch, faList, faVrCardboard} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleNotch, faClock, faCoffee, faPlayCircle, faStopCircle,
+  faTimesCircle, faPoo, faGamepad, faSearch, faList, faVrCardboard, faCaretSquareRight
+} from '@fortawesome/free-solid-svg-icons';
 import { SearchComponent } from './search/search.component';
+import { ContextComponent } from './context/context.component';
+import {faEye} from '@fortawesome/free-solid-svg-icons/faEye';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,8 @@ import { SearchComponent } from './search/search.component';
     MenuComponent,
     DetailComponent,
     TimesliderComponent,
-    SearchComponent
+    SearchComponent,
+    ContextComponent
   ],
   imports: [
     BrowserModule,
@@ -48,5 +53,7 @@ export class AppModule {
     library.add(faSearch);
     library.add(faList);
     library.add(faVrCardboard);
+    library.add(faCaretSquareRight);
+    library.add(faEye);
   }
 }
