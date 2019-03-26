@@ -59,7 +59,7 @@ public class GraphService {
         // Create a generator for the OCE dataset
         try {
             graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.oceDataset(oceDatasetPath)));
-            LOG.info("Succesfully loaded the OCE dataset from: {}", oceDatasetPath);
+            LOG.info("Successfully loaded the OCE dataset from: {}", oceDatasetPath);
         } catch (Exception e) {
             LOG.warn("Loading the OCE dataset failed. Defaulting to sample dataset. Error: {}", e.getMessage());
             graphGenerators = Collections.singletonList(new OceGraphGenerator(OceDataset.sampleDataset()));
@@ -68,6 +68,14 @@ public class GraphService {
 
     public List<GraphMetadata> getAvailableGraphs() {
         return graphGenerators.stream().map(OceGraphGenerator::getGraphMetadata).collect(Collectors.toList());
+    }
+
+    public GraphMetadata getGraphMetadata(String id) {
+        return graphGenerators.stream()
+                .filter(gg -> Objects.equals(gg.getGraphMetadata().getId(), id))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException(id))
+                .getGraphMetadata();
     }
 
     public Graph getGraph(String id, GraphView graphView) {
