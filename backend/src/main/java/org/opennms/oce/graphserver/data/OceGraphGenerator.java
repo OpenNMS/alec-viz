@@ -28,8 +28,6 @@
 
 package org.opennms.oce.graphserver.data;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,6 +46,7 @@ import org.opennms.oce.datasource.api.InventoryObjectRelativeRef;
 import org.opennms.oce.datasource.api.ResourceKey;
 import org.opennms.oce.datasource.api.Severity;
 import org.opennms.oce.datasource.api.Situation;
+import org.opennms.oce.graphserver.GraphView;
 import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.GraphMetadata;
 import org.opennms.oce.graphserver.model.TemporalAnnotation;
@@ -60,7 +59,6 @@ import com.google.common.collect.Sets;
 
 import edu.uci.ics.jung.algorithms.cluster.WeakComponentClusterer;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class OceGraphGenerator {
@@ -121,11 +119,7 @@ public class OceGraphGenerator {
         return graphMetadata;
     }
 
-    public Graph getGraph(long timestampInMillis) {
-        return getGraph(timestampInMillis, false);
-    }
-
-    public Graph getGraph(long timestampInMillis, boolean removeInventoryWithNoAlarms) {
+    public Graph getGraph(GraphView graphView) {
         final Map<ResourceKey, Graph.Vertex> verticesByKey = Maps.newLinkedHashMap();
 
         final List<Graph.Edge> edges = Lists.newLinkedList();
@@ -185,7 +179,7 @@ public class OceGraphGenerator {
 
         // Find the alarms that were active at this time
         Map<String, Severity> alarmIdToSeverityMap = new HashMap<>();
-        for (Alarm alarm : getActiveAlarmsAt(timestampInMillis)) {
+        for (Alarm alarm : getActiveAlarmsAt(graphView.getTimestampInMillis())) {
             final ResourceKey ioKey = getInventoryResourceKeyFor(alarm);
             final ResourceKey alarmKey = getAlarmResourceKeyFor(alarm);
 
@@ -205,7 +199,7 @@ public class OceGraphGenerator {
         }
 
         // Find the situations that were active at this time
-        for (Situation situation : getSituationsActiveAt(timestampInMillis)) {
+        for (Situation situation : getSituationsActiveAt(graphView.getTimestampInMillis())) {
             final ResourceKey situationKey = getSituationResourceKeyFor(situation);
 
             // Determine the max severity of all the related alarms
@@ -249,7 +243,11 @@ public class OceGraphGenerator {
             jungGraph.addEdge(e, verticesById.get(e.getSourceId()), verticesById.get(e.getTargetId()), EdgeType.DIRECTED);
         });
 
-        if (removeInventoryWithNoAlarms) {
+
+
+
+
+        if (graphView.isRemoveInventoryWithNoAlarms()) {
             prune(jungGraph);
         }
 

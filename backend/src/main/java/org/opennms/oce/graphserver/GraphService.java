@@ -70,12 +70,12 @@ public class GraphService {
         return graphGenerators.stream().map(OceGraphGenerator::getGraphMetadata).collect(Collectors.toList());
     }
 
-    public Graph getGraph(String id, long timestampInMillis) {
+    public Graph getGraph(String id, GraphView graphView) {
         return graphGenerators.stream()
                 .filter(gg -> Objects.equals(gg.getGraphMetadata().getId(), id))
                 .findFirst()
                 .orElseThrow(() -> new NoSuchElementException(id))
-                .getGraph(timestampInMillis, true);
+                .getGraph(graphView);
     }
 
 }

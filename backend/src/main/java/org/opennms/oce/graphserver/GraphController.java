@@ -54,7 +54,10 @@ public class GraphController {
     @RequestMapping("/{id}")
     public Graph graph(@PathVariable("id") String id, @RequestParam(value = "time", required = false) Long timestampInMillis) {
         final long timestamp = timestampInMillis != null ? timestampInMillis : System.currentTimeMillis();
-        return graphService.getGraph(id, timestamp);
+        final GraphView graphView = GraphView.builder()
+                .setTimestampInMillis(timestamp)
+                .build();
+        return graphService.getGraph(id, graphView);
     }
 
 }
