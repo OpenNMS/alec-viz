@@ -7,6 +7,10 @@
       <button *ngIf="playing" type="button" class="btn btn-danger btn-sm float-left" (click)="onStop()">
         <fa-icon icon="stop-circle"></fa-icon>
       </button>
+      <button type="button" class="btn btn-info btn-sm float-left" (click)="onSeek()">
+        <fa-icon icon="eye"></fa-icon>
+      </button>
+      <input id="seekTo" name="seekTo" type="text" class="float-left" [(ngModel)]="seekToMs"/>
     </div>
     <div class="col-1">
       <button type="button" class="btn btn-primary btn-sm float-right"><</button>

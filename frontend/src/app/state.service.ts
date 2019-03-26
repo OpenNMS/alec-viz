@@ -11,6 +11,7 @@ export class FocusState {
 }
 
 export class ControlState {
+  showContextControls = false;
   showSearch = false;
   showTimeControls = false;
   vrMode = false;
@@ -26,6 +27,12 @@ export class StateModel {
   showLabels = true;
 }
 
+export class ContextModel {
+  focalPoint: string;
+  szl = 2;
+  prune = true;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +45,7 @@ export class StateService {
   private pointInTime = new Subject<number>();
   private controlState = new Subject<ControlState>();
   private focusState = new Subject<FocusState>();
+  private contextModel = new Subject<ContextModel>();
 
   private activeElementSubject = new Subject<Vertex | Edge>();
 
@@ -49,6 +57,7 @@ export class StateService {
   pointInTime$ = this.pointInTime.asObservable();
   controlState$ = this.controlState.asObservable();
   focusState$ = this.focusState.asObservable();
+  contextModel$ = this.contextModel.asObservable();
 
   constructor() { }
 
@@ -79,5 +88,9 @@ export class StateService {
 
   updateFocusState(state: FocusState) {
     this.focusState.next(state);
+  }
+
+  updateContextModel(contextModel: ContextModel) {
+    this.contextModel.next(contextModel);
   }
 }

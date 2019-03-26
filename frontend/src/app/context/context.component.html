@@ -1,0 +1,36 @@
+<form style="margin-top: 1em">
+  <div class="row">
+    <div class="col">
+      <div class="form-group row">
+        <label for="focalPoint" class="col-sm-2 col-form-label">Focal</label>
+        <div class="col-sm-10">
+          <input id="focalPoint" name="focalPoint" type="text" class="form-control" [(ngModel)]="contextModel.focalPoint" (ngModelChange)="onContextChanged()"/>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group row">
+        <label for="szl" class="col-sm-2 col-form-label">SZL</label>
+        <div class="col-sm-10">
+          <input id="szl" name="szl" type="text" class="form-control" [(ngModel)]="contextModel.szl" (ngModelChange)="onContextChanged()"/>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group row">
+        <label for="prune" class="col-sm-2 col-form-label">Prune</label>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="prune" name="prune" [(ngModel)]="contextModel.prune" (ngModelChange)="onContextChanged()">
+            <label class="form-check-label" for="prune">
+              Prune
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</form>

@@ -5,5 +5,5 @@ export const environment = {
     username: 'admin',
     password: 'admin'
   },
-  modelUrl: './assets/model.json'
+  modelUrl: '/0'
 };
