@@ -27,6 +27,9 @@ export class TimesliderComponent implements OnInit {
     this.modelService.modelMetadata$.subscribe(modelMetadata => {
       this.onModelMetadataChanged(modelMetadata);
     });
+    this.stateService.pointInTime$.subscribe(pointInTimeMs => {
+      this.pointInTimeMs = pointInTimeMs;
+    });
   }
 
   onTimeChanged() {

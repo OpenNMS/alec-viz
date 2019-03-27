@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ContextModel, StateService} from '../state.service';
 
 @Component({
@@ -9,7 +9,12 @@ import {ContextModel, StateService} from '../state.service';
 export class ContextComponent implements OnInit {
   private contextModel = new ContextModel();
 
-  constructor(private stateService: StateService) { }
+  constructor(private stateService: StateService) {
+    this.stateService.addToFocus$.subscribe(el => {
+      this.contextModel.focalPoint = el.label;
+      this.onContextChanged();
+    });
+  }
 
   ngOnInit() {
   }

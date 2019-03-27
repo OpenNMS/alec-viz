@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StateService} from '../state.service';
-import {Edge, Vertex} from '../model.service';
+import {Edge, Model, ModelService, Vertex} from '../model.service';
 
 @Component({
   selector: 'app-detail',
@@ -9,10 +9,15 @@ import {Edge, Vertex} from '../model.service';
 })
 export class DetailComponent implements OnInit {
 
+  model: Model;
   activeElement: Vertex | Edge;
   pointInTimeMs: number;
 
-  constructor(private stateService: StateService) {
+  constructor(private modelService: ModelService, private stateService: StateService) {
+    this.modelService.getModel().subscribe((model: Model) => {
+      this.onModelUpdated(model);
+    });
+
     stateService.activeElement$.subscribe(activeElement => {
       this.activeElement = activeElement;
     });
@@ -21,6 +26,23 @@ export class DetailComponent implements OnInit {
     stateService.pointInTime$.subscribe(pointInTimeMs => {
       this.pointInTimeMs = pointInTimeMs;
     });
+  }
+
+  private onModelUpdated(model: Model) {
+    this.model = model;
+
+  }
+
+  setTime(timestamp: number|string) {
+    if (typeof timestamp === 'string') {
+      this.stateService.setPointInTimeMs(Number(timestamp));
+    } else {
+      this.stateService.setPointInTimeMs(<number>timestamp);
+    }
+  }
+
+  addToFocus(el: Vertex | Edge) {
+    this.stateService.addToFocus(el);
   }
 
   ngOnInit() {

@@ -7,6 +7,101 @@
       <div class="card-body">
         <p>Time: {{ pointInTimeMs | date:'MM/dd/yyyy @ h:mma' }}</p>
         <p>Timestamp: {{ pointInTimeMs }}</p>
+        <p>Vertices: {{ model.vertices.length }}</p>
+        <p>Edges: {{ model.edges.length }}</p>
+        <p>Layers: {{ model.layers.length }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="activeElement && activeElement.type == 'situation'" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Situation
+        <button type="button" class="btn btn-default" aria-label="Left Align" (click)="addToFocus(activeElement)">
+          <fa-icon icon="hand-pointer"></fa-icon>
+        </button>
+      </div>
+      <div class="card-body">
+        <h3>{{ activeElement.label }}</h3>
+
+        <table class="table table-sm">
+          <tbody>
+          <tr>
+            <td>Severity</td>
+            <td>{{ activeElement.attributes['severity'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td>{{ activeElement.attributes['id'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td>{{ activeElement.attributes['createdms'] | date:'MM/dd/yyyy @ h:mma' }}</td>
+            <td>
+              <button type="button" class="btn btn-default" aria-label="Left Align" (click)="setTime(activeElement.attributes['createdms'])">
+                <fa-icon icon="clock"></fa-icon>
+             </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Alarms</td>
+            <td>{{ activeElement.attributes['numalarms'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Source</td>
+            <td>{{ activeElement.attributes['source'] }}</td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="activeElement && activeElement.type == 'alarm'" class="card" style="margin-top: 5px">
+      <div class="card-header">
+        Alarm
+        <button type="button" class="btn btn-default" aria-label="Left Align" (click)="addToFocus(activeElement)">
+          <fa-icon icon="hand-pointer"></fa-icon>
+        </button>
+      </div>
+      <div class="card-body">
+        <h3>{{ activeElement.label }}</h3>
+
+        <table class="table table-sm">
+          <tbody>
+          <tr>
+            <td>Severity</td>
+            <td>{{ activeElement.attributes['severity'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td>{{ activeElement.attributes['id'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Updated</td>
+            <td>{{ activeElement.attributes['updatedms'] | date:'MM/dd/yyyy @ h:mma' }}</td>
+            <td>
+              <button type="button" class="btn btn-default" aria-label="Left Align" (click)="setTime(activeElement.attributes['updatedms'])">
+                <fa-icon icon="clock"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>IO Type</td>
+            <td>{{ activeElement.attributes['iotype'] }}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>IO ID</td>
+            <td>{{ activeElement.attributes['ioid'] }}</td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -15,26 +110,9 @@
         Element
       </div>
       <div class="card-body">
-        <p>{{ activeElement | json }}</p>
+        <pre>{{ activeElement | json }}</pre>
       </div>
     </div>
 
-    <div *ngIf="activeElement && activeElement.type == 'situation'" class="card" style="margin-top: 5px">
-      <div class="card-header">
-        Situation
-      </div>
-      <div class="card-body">
-        <p>{{ activeElement.label }}</p>
-      </div>
-    </div>
-
-    <div *ngIf="activeElement && activeElement.type == 'alarm'" class="card" style="margin-top: 5px">
-      <div class="card-header">
-        Alarm
-      </div>
-      <div class="card-body">
-        <p>{{ activeElement.id }}</p>
-      </div>
-    </div>
   </div>
 </div>
