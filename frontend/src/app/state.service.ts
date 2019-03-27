@@ -29,7 +29,7 @@ export class StateModel {
 
 export class ContextModel {
   focalPoint: string;
-  szl = 2;
+  szl = 3;
   prune = true;
 }
 

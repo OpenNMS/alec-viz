@@ -10,10 +10,16 @@ import {Edge, Vertex} from '../model.service';
 export class DetailComponent implements OnInit {
 
   activeElement: Vertex | Edge;
+  pointInTimeMs: number;
 
   constructor(private stateService: StateService) {
     stateService.activeElement$.subscribe(activeElement => {
       this.activeElement = activeElement;
+    });
+
+    this.pointInTimeMs = new Date().getTime();
+    stateService.pointInTime$.subscribe(pointInTimeMs => {
+      this.pointInTimeMs = pointInTimeMs;
     });
   }
 
