@@ -205,6 +205,9 @@ export class Endpoint {
     bitmap.height = bh;
 
     g.fillStyle = this.getColorForVertex(vertex);
+    if (vertex.type === 'situation' && vertex.attributes['source'] !== 'primary' && vertex.attributes['matchesprimary'] === 'true') {
+      g.fillStyle = 'white';
+    }
     g.fillRect(0, 0, bitmap.width, bitmap.height);
 
     if (vertex.type === 'situation' && vertex.attributes['source'] !== 'primary') {
