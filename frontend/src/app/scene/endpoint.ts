@@ -198,11 +198,30 @@ export class Endpoint {
   private getMaterial(vertex: Vertex): THREE.MeshBasicMaterial {
     const bitmap = document.createElement('canvas');
     const g = bitmap.getContext('2d');
-    bitmap.width = 128;
-    bitmap.height = 128;
+    const bw = 128;
+    const bh = 128;
+
+    bitmap.width = bw;
+    bitmap.height = bh;
 
     g.fillStyle = this.getColorForVertex(vertex);
     g.fillRect(0, 0, bitmap.width, bitmap.height);
+
+    if (vertex.type === 'situation' && vertex.attributes['source'] !== 'primary') {
+      const p = 10;
+      for (let x = 0; x <= bw; x += 20) {
+        g.moveTo(0.5 + x + p, p);
+        g.lineTo(0.5 + x + p, bh + p);
+      }
+      for (let x = 0; x <= bh; x += 20) {
+        g.moveTo(p, 0.5 + x + p);
+        g.lineTo(bw + p, 0.5 + x + p);
+      }
+      g.strokeStyle = 'white';
+      g.lineWidth = 2;
+      g.stroke();
+    }
+
     g.font = '20pt Calibri';
     g.fillStyle = '#333';
     g.fillText(vertex.label, 20, 24);
