@@ -44,6 +44,7 @@ import static org.opennms.oce.graphserver.data.OceGraphGenerator.ID_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_LAYER_ID;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_OBJECT_ID_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_OBJECT_TYPE_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.MATCHES_PRIMARY_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_ALARMS_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_EVENTS_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.PRIMARY_SOURCE_NAME;
@@ -192,6 +193,8 @@ public class OceGraphGeneratorTest {
         assertThat(situationVersions.get(0).getAttributes().get(DESCRIPTION_ATTRIBUTE), equalTo(null));
         assertThat(situationVersions.get(0).getAttributes().get(CREATED_MS), equalTo("1546759375000"));
         assertThat(situationVersions.get(0).getAttributes().get(NUMBER_OF_ALARMS_ATTRIBUTE), equalTo("3"));
+        // Situation from auxiliary dataset
+        assertThat(situationVersions.get(1).getAttributes().get(MATCHES_PRIMARY_ATTRIBUTE), equalTo("false"));
     }
 
     @Test

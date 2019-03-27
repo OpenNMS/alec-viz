@@ -28,9 +28,11 @@
 
 package org.opennms.oce.graphserver.data;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.LongSummaryStatistics;
@@ -73,6 +75,7 @@ public class OceGraphGenerator {
     public static final String INVENTORY_OBJECT_ID_ATTRIBUTE = "ioid";
     public static final String INVENTORY_OBJECT_TYPE_ATTRIBUTE = "iotype";
     public static final String ID_ATTRIBUTE = "id";
+    public static final String MATCHES_PRIMARY_ATTRIBUTE = "matchesprimary";
 
     public static final String INVENTORY_LAYER_ID = "inventory";
     public static final String ALARMS_LAYER_ID = "alarms";
@@ -227,6 +230,7 @@ public class OceGraphGenerator {
         }
 
         // Find the situations that were active at this time
+        final Map<String, String> alarmVertexIdToSituationVertexIdMap = new HashMap<>();
         final List<Situation> activeSituations = getSituationsActiveAt(graphView.getTimestampInMillis());
         for (Situation situation : activeSituations) {
             final ResourceKey situationKey = getSituationResourceKeyFor(situation, PRIMARY_SOURCE_NAME);
@@ -240,6 +244,7 @@ public class OceGraphGenerator {
                 if (alarmVertex != null) {
                     final Graph.Edge edge = new Graph.Edge("", situationVertex.getId(), alarmVertex.getId(), "situation-to-alarm");
                     edges.add(edge);
+                    alarmVertexIdToSituationVertexIdMap.put(alarmVertex.getId(), situationVertex.getId());
                 }
             }
         }
@@ -285,7 +290,7 @@ public class OceGraphGenerator {
         }
 
         // Add situations from the other result sets to the graph
-        addOtherSituations(jungGraph, alarmIdToSeverityMap);
+        addOtherSituations(jungGraph, alarmIdToSeverityMap, alarmVertexIdToSituationVertexIdMap);
 
         final Sizzler sizzler = new Sizzler();
         filteredGraph = sizzler.sizzle(jungGraph, focalPoints, graphView.getSzl());
@@ -307,6 +312,10 @@ public class OceGraphGenerator {
     }
 
     private Graph.Vertex createVertexForSituation(Situation situation, String source, Map<String, Severity> alarmIdToSeverityMap) {
+        return createVertexForSituation(situation, source, Collections.emptyMap(), alarmIdToSeverityMap);
+    }
+
+    private Graph.Vertex createVertexForSituation(Situation situation, String source, Map<String,String> defaultAttributes, Map<String, Severity> alarmIdToSeverityMap) {
         final ResourceKey situationKey = getSituationResourceKeyFor(situation, source);
 
         // Determine the max severity of all the related alarms
@@ -321,6 +330,7 @@ public class OceGraphGenerator {
 
         // Create a vertex for the situation
         final ImmutableMap.Builder<String,String> attributeBuilder = ImmutableMap.<String,String>builder()
+                .putAll(defaultAttributes)
                 .put(ID_ATTRIBUTE, situation.getId())
                 .put(SEVERITY_ATTRIBUTE, maxSeverityPlusOne.name().toLowerCase())
                 .put(CREATED_MS, Long.toString(situation.getCreationTime()))
@@ -333,10 +343,14 @@ public class OceGraphGenerator {
         return new Graph.Vertex(situationKey.toString(), "situation", "situation #" + situation.getId(), SITUATIONS_LAYER_ID, attributes);
     }
 
-    private void addOtherSituations(edu.uci.ics.jung.graph.Graph<Graph.Vertex, Graph.Edge> jungGraph, Map<String, Severity> alarmIdToSeverityMap) {
+    private void addOtherSituations(edu.uci.ics.jung.graph.Graph<Graph.Vertex, Graph.Edge> jungGraph, Map<String, Severity> alarmIdToSeverityMap, Map<String, String> alarmVertexIdToSituationVertexIdMap) {
         // Find the alarms on the graph
         final Map<String, Graph.Vertex> alarmVerticesById = jungGraph.getVertices().stream()
                 .filter(v -> v.getLayerId().equals(ALARMS_LAYER_ID))
+                .collect(Collectors.toMap(Graph.Vertex::getId, v -> v));
+        // Find the situations on the graph
+        final Map<String, Graph.Vertex> situationVerticesById = jungGraph.getVertices().stream()
+                .filter(v -> v.getLayerId().equals(SITUATIONS_LAYER_ID))
                 .collect(Collectors.toMap(Graph.Vertex::getId, v -> v));
 
         // Retrieve the non-primary situation result sets
@@ -361,7 +375,30 @@ public class OceGraphGenerator {
                     continue;
                 }
 
-                final Graph.Vertex situationVertex = createVertexForSituation(situation, situationResults.getSource(), alarmIdToSeverityMap);
+                // Are all of the alarms associated with the same situation in the primary dataset?
+                boolean foundSituationForAllAlarms = true;
+                Set<String> situationIds = new HashSet<>();
+                for (Graph.Vertex alarmVertex : alarmVertices) {
+                    final String situationId = alarmVertexIdToSituationVertexIdMap.get(alarmVertex.getId());
+                    if (situationId == null) {
+                        foundSituationForAllAlarms = false;
+                        break;
+                    }
+                    situationIds.add(situationId);
+                }
+                // The situation matches the one from the primary dataset?
+                boolean matchesPrimarySituation = false;
+                if (foundSituationForAllAlarms && situationIds.size() == 1) {
+                    // Only match if the primary situation has the same number of alarms (it may have more)
+                    final Graph.Vertex primarySituationVertex = situationVerticesById.get(situationIds.iterator().next());
+                    if (primarySituationVertex != null) {
+                        matchesPrimarySituation = jungGraph.getNeighbors(primarySituationVertex).size() == alarmVertices.size();
+                    }
+                }
+
+                final Graph.Vertex situationVertex = createVertexForSituation(situation, situationResults.getSource(), ImmutableMap.<String,String>builder()
+                        .put(MATCHES_PRIMARY_ATTRIBUTE, Boolean.toString(matchesPrimarySituation))
+                        .build(), alarmIdToSeverityMap);
                 jungGraph.addVertex(situationVertex);
 
                 // Add edges to the alarms
