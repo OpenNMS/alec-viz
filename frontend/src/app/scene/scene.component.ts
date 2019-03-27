@@ -70,6 +70,8 @@ export class SceneComponent implements AfterViewInit {
     private gridHelper: THREE.GridHelper;
     private controlState = new ControlState();
     private vrModeActive = false;
+    private lastVertexHovered: Vertex;
+    private lastVertexClicked: Vertex;
 
     constructor(private modelService: ModelService,
                 private stateService: StateService,
@@ -549,8 +551,19 @@ export class SceneComponent implements AfterViewInit {
         console.log('onMouseUp');
         const intersects = this.findIntersectionsExcludingGrid(event);
         if (intersects.length > 0) {
+          // Grab a reference to the first vertex from the list of intersections
+          const userData = <MyUserData> intersects[0].object.userData;
+          const endpoint = this.endpointsById.get(userData.endpointId);
+          if (endpoint !== undefined) {
+            this.lastVertexClicked = endpoint.vertex;
+          }
           this.tweenTolookAt(intersects[0].point);
         }
+    }
+
+    public onDoubleClick(event: MouseEvent) {
+      console.log('onDoubleClick');
+      // const intersects = this.findIntersectionsExcludingGrid(event);
     }
 
     private tweenTolookAt(target: Vector3) {
@@ -610,7 +623,13 @@ export class SceneComponent implements AfterViewInit {
       if (this.endpointsWithActiveMouseOver.size >= 1) {
         vertex = this.endpointsWithActiveMouseOver.values().next().value.vertex;
       }
-      this.stateService.setActiveElement(vertex);
+
+      if (vertex != null) {
+        this.lastVertexHovered = vertex;
+        this.stateService.setActiveElement(vertex);
+      } else if (this.lastVertexHovered != null) {
+        this.stateService.setActiveElement(this.lastVertexHovered);
+      }
     }
 
     private findAllObjects(pred: THREE.Object3D[], parent: THREE.Object3D) {

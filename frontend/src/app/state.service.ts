@@ -46,6 +46,7 @@ export class StateService {
   private controlState = new Subject<ControlState>();
   private focusState = new Subject<FocusState>();
   private contextModel = new Subject<ContextModel>();
+  private addToFocusSubject = new Subject<Vertex|Edge>();
 
   private activeElementSubject = new Subject<Vertex | Edge>();
 
@@ -58,6 +59,7 @@ export class StateService {
   controlState$ = this.controlState.asObservable();
   focusState$ = this.focusState.asObservable();
   contextModel$ = this.contextModel.asObservable();
+  addToFocus$ = this.addToFocusSubject.asObservable();
 
   constructor() { }
 
@@ -92,5 +94,10 @@ export class StateService {
 
   updateContextModel(contextModel: ContextModel) {
     this.contextModel.next(contextModel);
+  }
+
+  addToFocus(el: Vertex | Edge) {
+    console.log('add to focus:', el);
+    this.addToFocusSubject.next(el);
   }
 }

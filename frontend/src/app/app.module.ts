@@ -14,7 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faCircleNotch, faClock, faCoffee, faPlayCircle, faStopCircle,
-  faTimesCircle, faPoo, faGamepad, faSearch, faList, faVrCardboard, faCaretSquareRight
+  faTimesCircle, faPoo, faGamepad, faSearch, faList, faVrCardboard, faCaretSquareRight, faHandPointer
 } from '@fortawesome/free-solid-svg-icons';
 import { SearchComponent } from './search/search.component';
 import { ContextComponent } from './context/context.component';
@@ -55,5 +55,6 @@ export class AppModule {
     library.add(faVrCardboard);
     library.add(faCaretSquareRight);
     library.add(faEye);
+    library.add(faHandPointer);
   }
 }
