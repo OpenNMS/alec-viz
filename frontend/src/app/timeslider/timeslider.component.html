@@ -13,7 +13,7 @@
       <input id="seekTo" name="seekTo" type="text" class="float-left" [(ngModel)]="seekToMs"/>
     </div>
     <div class="col-1">
-      <button type="button" class="btn btn-primary btn-sm float-right"><</button>
+      <button type="button" class="btn btn-primary btn-sm float-right" (click)="onSeekLeft()"><</button>
     </div>
     <div class="col-9">
       <input [(ngModel)]="pointInTimeMs" (change)="onTimeChanged()"
@@ -21,7 +21,7 @@
              min="{{minTimeMs}}" max="{{maxTimeMs}}" style="width: 100%">
     </div>
     <div class="col-1">
-      <button type="button" class="btn btn-primary btn-sm float-left">></button>
+      <button type="button" class="btn btn-primary btn-sm float-left" (click)="onSeekRight()">></button>
     </div>
   </div>
 </form>

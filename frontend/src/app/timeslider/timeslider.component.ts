@@ -69,6 +69,16 @@ export class TimesliderComponent implements OnInit {
     this.onTimeChanged();
   }
 
+  onSeekLeft() {
+    this.pointInTimeMs = Math.max(this.pointInTimeMs - 60 * 1000, this.minTimeMs);
+    this.onTimeChanged();
+  }
+
+  onSeekRight() {
+    this.pointInTimeMs = Math.min(this.pointInTimeMs + 60 * 1000, this.maxTimeMs);
+    this.onTimeChanged();
+  }
+
   private onModelMetadataChanged(modelMetadata: ModelMetadata) {
     this.modelMetadata = modelMetadata;
     this.minTimeMs = modelMetadata.timeMetadata.startMs;
