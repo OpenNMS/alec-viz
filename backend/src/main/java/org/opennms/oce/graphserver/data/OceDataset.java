@@ -30,9 +30,15 @@ package org.opennms.oce.graphserver.data;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
@@ -47,48 +53,114 @@ public class OceDataset {
 
     private final List<Alarm> alarms;
     private final List<InventoryObject> inventory;
-    private final Set<Situation> situations;
+    private final List<SituationResults> situations;
+    private final SituationResults primarySituationResults;
 
     public OceDataset(List<Alarm> alarms, List<InventoryObject> inventory, Set<Situation> situations) {
         this.alarms = alarms;
         this.inventory = inventory;
-        this.situations = situations;
+        // Wrap the given set of situation, and mark it as the primary set
+        this.primarySituationResults = SituationResults.builder()
+                .withIsPrimary(true)
+                .withSituations(situations)
+                .build();
+        this.situations = Collections.singletonList(primarySituationResults);
+    }
+
+    public OceDataset(List<Alarm> alarms, List<InventoryObject> inventory, List<SituationResults> situations) {
+        this.alarms = alarms;
+        this.inventory = inventory;
+
+        long numPrimaryResults = situations.stream().filter(SituationResults::isPrimary).count();
+        if (numPrimaryResults != 1) {
+            throw new IllegalArgumentException("A single primary situation result set is required, got: " + numPrimaryResults);
+        }
+        this.primarySituationResults = situations.stream().filter(SituationResults::isPrimary).findFirst()
+                .orElseThrow(() -> new IllegalStateException("Should not happen."));
+        this.situations = new ArrayList<>(situations);
     }
 
     public static OceDataset sampleDataset() {
         return fromResources("sample/sample.alarms.xml",
                 "sample/sample.inventory.xml",
-                "sample/sample.situations.xml");
+                "sample/sample.situations.xml",
+                "sample/sample.other.situations.xml");
     }
 
     public static OceDataset oceDataset(String base) {
-        return fromXmlFiles(Paths.get(base, "oce.alarms.xml").toString(),
-                Paths.get(base, "oce.inventory.xml").toString(),
-                Paths.get(base, "oce.situations.xml").toString());
+        // Enumerate the situation results
+        final List<Path> situationResults = new LinkedList<>();
+        situationResults.add(Paths.get(base, "oce.situations.xml"));
+        try {
+            situationResults.addAll(Files.list(Paths.get(base))
+                    .filter(Files::isRegularFile)
+                    .filter(p -> p.getFileName().toString().endsWith(".situations.xml"))
+                    .filter(p -> !p.getFileName().toString().equals("oce.situations.xml"))
+                    .collect(Collectors.toList()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return fromXmlFiles(Paths.get(base, "oce.alarms.xml"),
+                Paths.get(base, "oce.inventory.xml"),
+                situationResults.toArray(new Path[0]));
     }
 
-    public static OceDataset fromResources(String alarmsIn, String inventoryIn, String situationsIn) {
+    public static OceDataset fromResources(String alarmsIn, String inventoryIn, String... situationsIn) {
+        final List<Alarm> alarms;
+        final List<InventoryObject> inventory;
         try (InputStream alarmIs = Resources.getResource(alarmsIn).openStream();
-             InputStream inventoryIs = Resources.getResource(inventoryIn).openStream();
-             InputStream situationsIs = Resources.getResource(situationsIn).openStream()) {
-            final List<Alarm> alarms = JaxbUtils.getAlarms(alarmIs);
-            final List<InventoryObject> inventory = JaxbUtils.getInventory(inventoryIs);
-            final Set<Situation> situations = JaxbUtils.getSituations(situationsIs);
-            return new OceDataset(alarms, inventory, situations);
+             InputStream inventoryIs = Resources.getResource(inventoryIn).openStream()) {
+            alarms = JaxbUtils.getAlarms(alarmIs);
+            inventory = JaxbUtils.getInventory(inventoryIs);
         }  catch (IOException|JAXBException e) {
             throw new RuntimeException(e);
         }
+
+        final List<SituationResults> situationResults = new ArrayList<>(situationsIn.length);
+        boolean isPrimary = true;
+        for (String situationsResource : situationsIn) {
+            try (InputStream situationsIs = Resources.getResource(situationsResource).openStream()) {
+                final Set<Situation> situations = JaxbUtils.getSituations(situationsIs);
+                situationResults.add(SituationResults.builder()
+                        .withSource(situationsResource)
+                        .withIsPrimary(isPrimary)
+                        .withSituations(situations)
+                        .build());
+            }  catch (IOException|JAXBException e) {
+                throw new RuntimeException(e);
+            }
+            isPrimary = false;
+        }
+
+        return new OceDataset(alarms, inventory, situationResults);
     }
 
-    public static OceDataset fromXmlFiles(String alarmsIn, String inventoryIn, String situationsIn) {
+    public static OceDataset fromXmlFiles(Path alarmsIn, Path inventoryIn, Path... situationsIn) {
+        final List<Alarm> alarms;
+        final List<InventoryObject> inventory;
         try {
-            final List<Alarm> alarms = JaxbUtils.getAlarms(Paths.get(alarmsIn));
-            final List<InventoryObject> inventory = JaxbUtils.getInventory(Paths.get(inventoryIn));
-            final Set<Situation> situations = JaxbUtils.getSituations(Paths.get(situationsIn));
-            return new OceDataset(alarms, inventory, situations);
+            alarms = JaxbUtils.getAlarms(alarmsIn);
+            inventory = JaxbUtils.getInventory(inventoryIn);
         } catch (IOException|JAXBException e) {
             throw new RuntimeException(e);
         }
+
+        final List<SituationResults> situationResults = new ArrayList<>(situationsIn.length);
+        boolean isPrimary = true;
+        for (Path situationsResource : situationsIn) {
+            try {
+                final Set<Situation> situations = JaxbUtils.getSituations(situationsResource);
+                situationResults.add(SituationResults.builder()
+                        .withSource(situationsResource.getFileName().toString())
+                        .withIsPrimary(isPrimary)
+                        .withSituations(situations)
+                        .build());
+            } catch (JAXBException|IOException e) {
+                throw new RuntimeException(e);
+            }
+            isPrimary = false;
+        }
+        return new OceDataset(alarms, inventory, situationResults);
     }
 
     public List<Alarm> getAlarms() {
@@ -99,7 +171,11 @@ public class OceDataset {
         return inventory;
     }
 
-    public Set<Situation> getSituations() {
+    public List<SituationResults> getSituationResults() {
         return situations;
+    }
+
+    public Set<Situation> getSituationsFromPrimaryResultSet() {
+        return primarySituationResults.getSituations();
     }
 }

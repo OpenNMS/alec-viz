@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<situations xmlns="http://xmlns.opennms.org/xsd/oce/model/v1.0.0">
+    <situation severity="cleared" id="4738843" creation-time="1546759375000" summary="Port up" description="Port up">
+        <alarm-ref id="4738854"/>
+        <alarm-ref id="4738843"/>
+        <!--
+        <alarm-ref id="4738853"/>
+        -->
+    </situation>
+</situations>

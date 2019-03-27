@@ -63,6 +63,23 @@ import edu.uci.ics.jung.graph.util.EdgeType;
 
 public class OceGraphGenerator {
 
+    public static final String SEVERITY_ATTRIBUTE = "severity";
+    public static final String NUMBER_OF_EVENTS_ATTRIBUTE = "numevents";
+    public static final String DESCRIPTION_ATTRIBUTE = "descr";
+    public static final String CREATED_MS = "createdms";
+    public static final String UPDATED_MS = "updatedms";
+    public static final String NUMBER_OF_ALARMS_ATTRIBUTE = "numalarms";
+    public static final String SOURCE_ATTRIBUTE = "source";
+    public static final String INVENTORY_OBJECT_ID_ATTRIBUTE = "ioid";
+    public static final String INVENTORY_OBJECT_TYPE_ATTRIBUTE = "iotype";
+    public static final String ID_ATTRIBUTE = "id";
+
+    public static final String INVENTORY_LAYER_ID = "inventory";
+    public static final String ALARMS_LAYER_ID = "alarms";
+    public static final String SITUATIONS_LAYER_ID = "situations";
+
+    public static final String PRIMARY_SOURCE_NAME = "primary";
+
     private final OceDataset oceDataset;
     private final GraphMetadata graphMetadata;
 
@@ -86,7 +103,7 @@ public class OceGraphGenerator {
     private void processGraph() {
         final Set<Long> allTimestamps = new HashSet<>();
         oceDataset.getAlarms().forEach(a -> allTimestamps.add(a.getTime()));
-        oceDataset.getSituations().forEach(s -> allTimestamps.add(s.getCreationTime()));
+        oceDataset.getSituationsFromPrimaryResultSet().forEach(s -> allTimestamps.add(s.getCreationTime()));
 
         final LongSummaryStatistics stats = allTimestamps.stream().mapToLong(l -> l).summaryStatistics();
         startMs = stats.getMin();
@@ -95,8 +112,8 @@ public class OceGraphGenerator {
         Comparator<Situation> situationComparator = Comparator.comparing(s -> s.getAlarms().size(), Comparator.reverseOrder());
         situationComparator = situationComparator.thenComparing(Situation::getCreationTime, Comparator.reverseOrder());
 
-        // Find the 10 largest situations, and create annotiations for these
-        temporalAnnotations = oceDataset.getSituations().stream()
+        // Find the 10 largest situations, and create annotations for these
+        temporalAnnotations = oceDataset.getSituationsFromPrimaryResultSet().stream()
                 .sorted(situationComparator)
                 .limit(10)
                 .map(s -> new TemporalAnnotation(s.getCreationTime(), String.format("Situation #%s Created", s.getId())))
@@ -129,11 +146,11 @@ public class OceGraphGenerator {
         final List<Graph.Edge> edges = Lists.newLinkedList();
         final List<Graph.Layer> layers = Lists.newLinkedList();
 
-        final Graph.Layer inventoryLayer = new Graph.Layer("inventory", "Inventory", "OCE Inventory", 0);
+        final Graph.Layer inventoryLayer = new Graph.Layer(INVENTORY_LAYER_ID, "Inventory", "OCE Inventory", 0);
         layers.add(inventoryLayer);
-        final Graph.Layer alarmLayer = new Graph.Layer("alarms", "Alarms", "OCE Alarms", 1);
+        final Graph.Layer alarmLayer = new Graph.Layer(ALARMS_LAYER_ID, "Alarms", "OCE Alarms", 1);
         layers.add(alarmLayer);
-        final Graph.Layer situationLayer = new Graph.Layer("situations", "Situations", "OCE Situations", 2);
+        final Graph.Layer situationLayer = new Graph.Layer(SITUATIONS_LAYER_ID, "Situations", "OCE Situations", 2);
         layers.add(situationLayer);
 
         // Create vertices for the inventory
@@ -188,9 +205,16 @@ public class OceGraphGenerator {
             final ResourceKey alarmKey = getAlarmResourceKeyFor(alarm);
 
             // Create a vertex for the alarm
-            final Map<String,String> attributes = ImmutableMap.<String,String>builder()
-                    .put("severity", alarm.getSeverity().name().toLowerCase())
-                    .build();
+            final ImmutableMap.Builder<String,String> attributeBuilder = ImmutableMap.<String,String>builder()
+                    .put(ID_ATTRIBUTE, alarm.getId())
+                    .put(SEVERITY_ATTRIBUTE, alarm.getSeverity().name().toLowerCase())
+                    .put(UPDATED_MS, Long.toString(alarm.getTime()))
+                    .put(INVENTORY_OBJECT_TYPE_ATTRIBUTE, alarm.getInventoryObjectType())
+                    .put(INVENTORY_OBJECT_ID_ATTRIBUTE, alarm.getInventoryObjectId());
+            if (alarm.getDescription() != null) {
+                attributeBuilder.put(DESCRIPTION_ATTRIBUTE, alarm.getDescription());
+            }
+            final Map<String,String> attributes = attributeBuilder.build();
             final Graph.Vertex alarmVertex = new Graph.Vertex(alarmKey.toString(), "alarm", alarm.getSummary(), alarmLayer.getId(), attributes);
             verticesByKey.put(alarmKey, alarmVertex);
 
@@ -205,23 +229,8 @@ public class OceGraphGenerator {
         // Find the situations that were active at this time
         final List<Situation> activeSituations = getSituationsActiveAt(graphView.getTimestampInMillis());
         for (Situation situation : activeSituations) {
-            final ResourceKey situationKey = getSituationResourceKeyFor(situation);
-
-            // Determine the max severity of all the related alarms
-            Severity maxSeverity = Severity.INDETERMINATE;
-            for (Alarm relatedAlarm : situation.getAlarms()) {
-                final Severity severity = alarmIdToSeverityMap.getOrDefault(relatedAlarm.getId(), Severity.INDETERMINATE);
-                if (severity.getValue() >= maxSeverity.getValue()) {
-                    maxSeverity = severity;
-                }
-            }
-            Severity maxSeverityPlusOne = Severity.fromValue(Math.min(Severity.CRITICAL.getValue(), maxSeverity.getValue() + 1));
-
-            // Create a vertex for the situation
-            final Map<String,String> attributes = ImmutableMap.<String,String>builder()
-                    .put("severity", maxSeverityPlusOne.name().toLowerCase())
-                    .build();
-            final Graph.Vertex situationVertex = new Graph.Vertex(situationKey.toString(), "situation", "situation #" + situation.getId(), situationLayer.getId(), attributes);
+            final ResourceKey situationKey = getSituationResourceKeyFor(situation, PRIMARY_SOURCE_NAME);
+            final Graph.Vertex situationVertex = createVertexForSituation(situation, PRIMARY_SOURCE_NAME, alarmIdToSeverityMap);
             verticesByKey.put(situationKey, situationVertex);
 
             // Add edges to the alarms
@@ -271,9 +280,12 @@ public class OceGraphGenerator {
             focalPoints = activeSituations.stream()
                     .sorted(situationComparator)
                     .limit(10)
-                    .map(s -> verticesByKey.get(getSituationResourceKeyFor(s)))
+                    .map(s -> verticesByKey.get(getSituationResourceKeyFor(s, PRIMARY_SOURCE_NAME)))
                     .collect(Collectors.toList());
         }
+
+        // Add situations from the other result sets to the graph
+        addOtherSituations(jungGraph, alarmIdToSeverityMap);
 
         final Sizzler sizzler = new Sizzler();
         filteredGraph = sizzler.sizzle(jungGraph, focalPoints, graphView.getSzl());
@@ -289,10 +301,76 @@ public class OceGraphGenerator {
             // If num situations < limit, then keep, delete oldest
             // If num alarms + num situations < limit, keep, delete oldest
             // If num ios < limit, keep, delete smallest ids -_-
-
         }
 
         return new Graph(getGraphMetadata(), filteredGraph.getVertices(), filteredGraph.getEdges(), layers);
+    }
+
+    private Graph.Vertex createVertexForSituation(Situation situation, String source, Map<String, Severity> alarmIdToSeverityMap) {
+        final ResourceKey situationKey = getSituationResourceKeyFor(situation, source);
+
+        // Determine the max severity of all the related alarms
+        Severity maxSeverity = Severity.INDETERMINATE;
+        for (Alarm relatedAlarm : situation.getAlarms()) {
+            final Severity severity = alarmIdToSeverityMap.getOrDefault(relatedAlarm.getId(), Severity.INDETERMINATE);
+            if (severity.getValue() >= maxSeverity.getValue()) {
+                maxSeverity = severity;
+            }
+        }
+        Severity maxSeverityPlusOne = Severity.fromValue(Math.min(Severity.CRITICAL.getValue(), maxSeverity.getValue() + 1));
+
+        // Create a vertex for the situation
+        final ImmutableMap.Builder<String,String> attributeBuilder = ImmutableMap.<String,String>builder()
+                .put(ID_ATTRIBUTE, situation.getId())
+                .put(SEVERITY_ATTRIBUTE, maxSeverityPlusOne.name().toLowerCase())
+                .put(CREATED_MS, Long.toString(situation.getCreationTime()))
+                .put(NUMBER_OF_ALARMS_ATTRIBUTE, Integer.toString(situation.getAlarms().size()))
+                .put(SOURCE_ATTRIBUTE, source);
+        if (situation.getDiagnosticText() != null) {
+            attributeBuilder.put(DESCRIPTION_ATTRIBUTE, situation.getDiagnosticText());
+        }
+        final Map<String,String> attributes = attributeBuilder.build();
+        return new Graph.Vertex(situationKey.toString(), "situation", "situation #" + situation.getId(), SITUATIONS_LAYER_ID, attributes);
+    }
+
+    private void addOtherSituations(edu.uci.ics.jung.graph.Graph<Graph.Vertex, Graph.Edge> jungGraph, Map<String, Severity> alarmIdToSeverityMap) {
+        // Find the alarms on the graph
+        final Map<String, Graph.Vertex> alarmVerticesById = jungGraph.getVertices().stream()
+                .filter(v -> v.getLayerId().equals(ALARMS_LAYER_ID))
+                .collect(Collectors.toMap(Graph.Vertex::getId, v -> v));
+
+        // Retrieve the non-primary situation result sets
+        final List<SituationResults> otherSituationResults = oceDataset.getSituationResults().stream()
+                .filter(s -> !s.isPrimary())
+                .collect(Collectors.toList());
+
+        for (SituationResults situationResults : otherSituationResults) {
+            for (Situation situation : situationResults.getSituations()) {
+                // Find all of the referenced alarms that are on the graph
+                final List<Graph.Vertex> alarmVertices = new LinkedList<>();
+                for (Alarm relatedAlarm : situation.getAlarms()) {
+                    final ResourceKey alarmKey = getAlarmResourceKeyFor(relatedAlarm);
+                    final Graph.Vertex alarmVertex = alarmVerticesById.get(alarmKey.toString());
+                    if (alarmVertex != null) {
+                        alarmVertices.add(alarmVertex);
+                    }
+                }
+
+                // Skip situations that don't have alarms in the current graph
+                if (alarmVertices.isEmpty()) {
+                    continue;
+                }
+
+                final Graph.Vertex situationVertex = createVertexForSituation(situation, situationResults.getSource(), alarmIdToSeverityMap);
+                jungGraph.addVertex(situationVertex);
+
+                // Add edges to the alarms
+                for (Graph.Vertex alarmVertex : alarmVertices) {
+                    final Graph.Edge edge = new Graph.Edge("", situationVertex.getId(), alarmVertex.getId(), "situation-to-alarm");
+                    jungGraph.addEdge(edge, situationVertex, alarmVertex);
+                }
+            }
+        }
     }
 
     private static boolean prune(edu.uci.ics.jung.graph.Graph<Graph.Vertex, Graph.Edge> jungGraph) {
@@ -303,7 +381,7 @@ public class OceGraphGenerator {
         for (Set<Graph.Vertex> cluster : clusters) {
             // Find the inventory objects in the cluster
             final Set<Graph.Vertex> iosInCluster = cluster.stream()
-                    .filter(v -> v.getLayerId().equals("inventory"))
+                    .filter(v -> v.getLayerId().equals(INVENTORY_LAYER_ID))
                     .collect(Collectors.toSet());
 
             // Which of these are attached to alarms?
@@ -386,7 +464,7 @@ public class OceGraphGenerator {
                 .map(Alarm::getId)
                 .collect(Collectors.toSet());
 
-        return oceDataset.getSituations().stream()
+        return oceDataset.getSituationsFromPrimaryResultSet().stream()
                 // Situation must have been created before the given time
                 .filter(s -> s.getCreationTime() <= timestampInMs)
                 // At least one of the alarms in the situations must be active
@@ -413,8 +491,8 @@ public class OceGraphGenerator {
         return ResourceKey.key("alarm", alarm.getId());
     }
 
-    private static ResourceKey getSituationResourceKeyFor(Situation situation) {
-        return ResourceKey.key("situation", situation.getId());
+    private static ResourceKey getSituationResourceKeyFor(Situation situation, String source) {
+        return ResourceKey.key("situation", source, situation.getId());
     }
 
     private static ResourceKey getResourceKeyForParent(InventoryObject child) {
