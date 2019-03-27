@@ -30,15 +30,26 @@ package org.opennms.oce.graphserver.data;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.collection.IsIn.isIn;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.ALARMS_LAYER_ID;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.CREATED_MS;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.DESCRIPTION_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.ID_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_LAYER_ID;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_OBJECT_ID_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.INVENTORY_OBJECT_TYPE_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_ALARMS_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_EVENTS_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.PRIMARY_SOURCE_NAME;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.SEVERITY_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.SITUATIONS_LAYER_ID;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.SOURCE_ATTRIBUTE;
 import static org.opennms.oce.graphserver.data.OceGraphGenerator.UPDATED_MS;
 
 import java.util.List;
@@ -46,6 +57,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.opennms.oce.datasource.api.Severity;
 import org.opennms.oce.graphserver.GraphView;
@@ -118,10 +130,10 @@ public class OceGraphGeneratorTest {
         List<Graph.Vertex> vertices = g.getVertices();
         List<Graph.Edge> edges = g.getEdges();
 
-        assertThat(verticesOnLayer(vertices, "inventory"), hasSize(2));
-        assertThat(edgesOnLayer(edges, vertices, "inventory"), hasSize(1));
-        assertThat(verticesOnLayer(vertices, "alarms"), hasSize(3));
-        assertThat(verticesOnLayer(vertices, "situations"), hasSize(1));
+        assertThat(verticesOnLayer(vertices, INVENTORY_LAYER_ID), hasSize(2));
+        assertThat(edgesOnLayer(edges, vertices, INVENTORY_LAYER_ID), hasSize(1));
+        assertThat(verticesOnLayer(vertices, ALARMS_LAYER_ID), hasSize(3));
+        assertThat(verticesOnLayer(vertices, SITUATIONS_LAYER_ID), hasSize(2));
 
         // Perform generic validation
         validateGraph(g);
@@ -141,13 +153,13 @@ public class OceGraphGeneratorTest {
 
         List<Graph.Vertex> vertices = g.getVertices();
 
-        List<Graph.Vertex> alarmsVertices = verticesOnLayer(vertices, "alarms");
+        List<Graph.Vertex> alarmsVertices = verticesOnLayer(vertices, ALARMS_LAYER_ID);
         assertThat(alarmsVertices, hasSize(3));
-        assertThat(alarmsVertices.get(0).getAttributes().get("severity"), equalTo(Severity.MAJOR.name().toLowerCase()));
+        assertThat(alarmsVertices.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.MAJOR.name().toLowerCase()));
 
-        List<Graph.Vertex> situationVersions = verticesOnLayer(vertices, "situations");
-        assertThat(situationVersions, hasSize(1));
-        assertThat(situationVersions.get(0).getAttributes().get("severity"), equalTo(Severity.CRITICAL.name().toLowerCase()));
+        List<Graph.Vertex> situationVersions = verticesOnLayer(vertices, SITUATIONS_LAYER_ID);
+        assertThat(situationVersions, hasSize(2));
+        assertThat(situationVersions.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.CRITICAL.name().toLowerCase()));
     }
 
     @Test
@@ -164,14 +176,18 @@ public class OceGraphGeneratorTest {
 
         List<Graph.Vertex> vertices = g.getVertices();
 
-        List<Graph.Vertex> alarmsVertices = verticesOnLayer(vertices, "alarms");
+        List<Graph.Vertex> alarmsVertices = verticesOnLayer(vertices, ALARMS_LAYER_ID);
         assertThat(alarmsVertices, hasSize(3));
+        assertThat(alarmsVertices.get(0).getAttributes().get(ID_ATTRIBUTE), equalTo("4738843"));
         assertThat(alarmsVertices.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.MAJOR.name().toLowerCase()));
         assertThat(alarmsVertices.get(0).getAttributes().get(DESCRIPTION_ATTRIBUTE), equalTo("Port Down due to Oper Status down"));
         assertThat(alarmsVertices.get(0).getAttributes().get(UPDATED_MS), equalTo("1546759352000"));
+        assertThat(alarmsVertices.get(0).getAttributes().get(INVENTORY_OBJECT_ID_ATTRIBUTE), equalTo("swmgmt01: Ethernet102/1/22"));
+        assertThat(alarmsVertices.get(0).getAttributes().get(INVENTORY_OBJECT_TYPE_ATTRIBUTE), equalTo("PORT"));
 
-        List<Graph.Vertex> situationVersions = verticesOnLayer(vertices, "situations");
-        assertThat(situationVersions, hasSize(1));
+        List<Graph.Vertex> situationVersions = verticesOnLayer(vertices, SITUATIONS_LAYER_ID);
+        assertThat(situationVersions, hasSize(2));
+        assertThat(situationVersions.get(0).getAttributes().get(ID_ATTRIBUTE), equalTo("4738843"));
         assertThat(situationVersions.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.CRITICAL.name().toLowerCase()));
         assertThat(situationVersions.get(0).getAttributes().get(DESCRIPTION_ATTRIBUTE), equalTo(null));
         assertThat(situationVersions.get(0).getAttributes().get(CREATED_MS), equalTo("1546759375000"));
@@ -191,7 +207,7 @@ public class OceGraphGeneratorTest {
         final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
 
         List<Graph.Vertex> vertices = g.getVertices();
-        assertThat(verticesOnLayer(vertices, "inventory"), hasSize(2));
+        assertThat(verticesOnLayer(vertices, INVENTORY_LAYER_ID), hasSize(2));
     }
 
     @Test
@@ -204,15 +220,24 @@ public class OceGraphGeneratorTest {
         assertThat(data.getSituationsFromPrimaryResultSet(), hasSize(greaterThanOrEqualTo(1)));
         assertThat(data.getSituationResults(), hasSize(2));
 
+        // Generate the graph at some known time
+        final GraphView viewAtKnownTime = GraphView.builder()
+                .setTimestampInMillis(1546759375000L)
+                .setRemoveInventoryWithNoAlarms(true)
+                .build();
         final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
+        final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
 
-        // Validate the time
-        final long startMs = oceGraphGenerator.getStartMs();
-        final long endMs =  oceGraphGenerator.getEndMs();
-        final List<TemporalAnnotation> temporalAnnotations = oceGraphGenerator.getTemporalAnnotation();
+        List<Graph.Vertex> vertices = g.getVertices();
+        assertThat(verticesOnLayer(vertices, INVENTORY_LAYER_ID), hasSize(2));
+        assertThat(verticesOnLayer(vertices, ALARMS_LAYER_ID), hasSize(3));
+        assertThat(verticesOnLayer(vertices, SITUATIONS_LAYER_ID), hasSize(2));
 
-        assertThat(startMs, equalTo(1546759312000L));
-        assertThat(endMs, equalTo(1546759382000L));
+        Set<String> uniqueSourceAttributes = verticesOnLayer(vertices, SITUATIONS_LAYER_ID).stream()
+                .map(v -> v.getAttributes().get(SOURCE_ATTRIBUTE))
+                .collect(Collectors.toSet());
+        assertThat(uniqueSourceAttributes, hasSize(2));
+        assertThat(PRIMARY_SOURCE_NAME, isIn(uniqueSourceAttributes));
     }
 
     /** Generic validation
