@@ -34,6 +34,12 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.CREATED_MS;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.DESCRIPTION_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_ALARMS_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.NUMBER_OF_EVENTS_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.SEVERITY_ATTRIBUTE;
+import static org.opennms.oce.graphserver.data.OceGraphGenerator.UPDATED_MS;
 
 import java.util.List;
 import java.util.Objects;
@@ -68,7 +74,7 @@ public class OceGraphGeneratorTest {
         // Make sure we've loaded some data
         assertThat(data.getAlarms(), hasSize(greaterThanOrEqualTo(1)));
         assertThat(data.getInventory(), hasSize(greaterThanOrEqualTo(1)));
-        assertThat(data.getSituations(), hasSize(greaterThanOrEqualTo(1)));
+        assertThat(data.getSituationsFromPrimaryResultSet(), hasSize(greaterThanOrEqualTo(1)));
 
         final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
 
@@ -145,6 +151,34 @@ public class OceGraphGeneratorTest {
     }
 
     @Test
+    public void canAddAttributesToAlarmAndSituationVertices() {
+        final OceDataset data = OceDataset.sampleDataset();
+
+        // Generate the graph at some known time
+        final GraphView viewAtKnownTime = GraphView.builder()
+                .setTimestampInMillis(1546759375000L)
+                .setRemoveInventoryWithNoAlarms(true)
+                .build();
+        final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
+        final Graph g = oceGraphGenerator.getGraph(viewAtKnownTime);
+
+        List<Graph.Vertex> vertices = g.getVertices();
+
+        List<Graph.Vertex> alarmsVertices = verticesOnLayer(vertices, "alarms");
+        assertThat(alarmsVertices, hasSize(3));
+        assertThat(alarmsVertices.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.MAJOR.name().toLowerCase()));
+        assertThat(alarmsVertices.get(0).getAttributes().get(DESCRIPTION_ATTRIBUTE), equalTo("Port Down due to Oper Status down"));
+        assertThat(alarmsVertices.get(0).getAttributes().get(UPDATED_MS), equalTo("1546759352000"));
+
+        List<Graph.Vertex> situationVersions = verticesOnLayer(vertices, "situations");
+        assertThat(situationVersions, hasSize(1));
+        assertThat(situationVersions.get(0).getAttributes().get(SEVERITY_ATTRIBUTE), equalTo(Severity.CRITICAL.name().toLowerCase()));
+        assertThat(situationVersions.get(0).getAttributes().get(DESCRIPTION_ATTRIBUTE), equalTo(null));
+        assertThat(situationVersions.get(0).getAttributes().get(CREATED_MS), equalTo("1546759375000"));
+        assertThat(situationVersions.get(0).getAttributes().get(NUMBER_OF_ALARMS_ATTRIBUTE), equalTo("3"));
+    }
+
+    @Test
     public void canRemoveExtraInventoryFromGraph() {
         final OceDataset data = OceDataset.sampleDataset();
 
@@ -158,6 +192,27 @@ public class OceGraphGeneratorTest {
 
         List<Graph.Vertex> vertices = g.getVertices();
         assertThat(verticesOnLayer(vertices, "inventory"), hasSize(2));
+    }
+
+    @Test
+    public void canGenerateGraphWithMultipleSituationResults() {
+        final OceDataset data = OceDataset.sampleDataset();
+
+        // Make sure we've loaded some data
+        assertThat(data.getAlarms(), hasSize(greaterThanOrEqualTo(1)));
+        assertThat(data.getInventory(), hasSize(greaterThanOrEqualTo(1)));
+        assertThat(data.getSituationsFromPrimaryResultSet(), hasSize(greaterThanOrEqualTo(1)));
+        assertThat(data.getSituationResults(), hasSize(2));
+
+        final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
+
+        // Validate the time
+        final long startMs = oceGraphGenerator.getStartMs();
+        final long endMs =  oceGraphGenerator.getEndMs();
+        final List<TemporalAnnotation> temporalAnnotations = oceGraphGenerator.getTemporalAnnotation();
+
+        assertThat(startMs, equalTo(1546759312000L));
+        assertThat(endMs, equalTo(1546759382000L));
     }
 
     /** Generic validation
