@@ -7,7 +7,7 @@ import {ContextModel, StateService} from '../state.service';
   styleUrls: ['./context.component.css']
 })
 export class ContextComponent implements OnInit {
-  private contextModel = new ContextModel();
+  contextModel = new ContextModel();
 
   constructor(private stateService: StateService) {
     this.stateService.addToFocus$.subscribe(el => {

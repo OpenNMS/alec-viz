@@ -6,11 +6,10 @@
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
-    "build-for-docker": "ng build --env=prod --base-href ./",
+    "build-for-docker": "ng build --configuration=production --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "publish": "ng build --configuration=prod --base-href ./ && angular-cli-ghpages"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

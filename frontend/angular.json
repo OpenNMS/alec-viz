@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-three-examples": {
+    "oce-viz": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -48,18 +48,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-three-examples:build"
+            "browserTarget": "oce-viz:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-three-examples:build:production"
+              "browserTarget": "oce-viz:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-three-examples:build"
+            "browserTarget": "oce-viz:build"
           }
         },
         "test": {
@@ -91,7 +91,7 @@
         }
       }
     },
-    "angular-three-examples-e2e": {
+    "oce-viz-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -100,7 +100,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular-three-examples:serve"
+            "devServerTarget": "oce-viz:serve"
           }
         },
         "lint": {
@@ -115,7 +115,7 @@
       }
     }
   },
-  "defaultProject": "angular-three-examples",
+  "defaultProject": "oce-viz",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
