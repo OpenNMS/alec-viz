@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "publish": "ng build --env=prod --base-href ./ && angular-cli-ghpages"
+    "publish": "ng build --configuration=prod --base-href ./ && angular-cli-ghpages"
   },
   "private": true,
   "dependencies": {
