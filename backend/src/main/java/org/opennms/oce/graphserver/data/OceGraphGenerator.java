@@ -211,9 +211,13 @@ public class OceGraphGenerator {
             final ImmutableMap.Builder<String,String> attributeBuilder = ImmutableMap.<String,String>builder()
                     .put(ID_ATTRIBUTE, alarm.getId())
                     .put(SEVERITY_ATTRIBUTE, alarm.getSeverity().name().toLowerCase())
-                    .put(UPDATED_MS, Long.toString(alarm.getTime()))
-                    .put(INVENTORY_OBJECT_TYPE_ATTRIBUTE, alarm.getInventoryObjectType())
-                    .put(INVENTORY_OBJECT_ID_ATTRIBUTE, alarm.getInventoryObjectId());
+                    .put(UPDATED_MS, Long.toString(alarm.getTime()));
+            if (alarm.getInventoryObjectType() != null) {
+                attributeBuilder.put(INVENTORY_OBJECT_TYPE_ATTRIBUTE, alarm.getInventoryObjectType());
+            }
+            if (alarm.getInventoryObjectId() != null) {
+                attributeBuilder.put(INVENTORY_OBJECT_ID_ATTRIBUTE, alarm.getInventoryObjectId());
+            }
             if (alarm.getDescription() != null) {
                 attributeBuilder.put(DESCRIPTION_ATTRIBUTE, alarm.getDescription());
             }
