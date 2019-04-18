@@ -41,9 +41,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.opennms.oce.datasource</groupId>
-            <artifactId>org.opennms.oce.datasource.jaxb</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.opennms.alec.datasource</groupId>
+            <artifactId>org.opennms.alec.datasource.jaxb</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>net.sf.jung</groupId>

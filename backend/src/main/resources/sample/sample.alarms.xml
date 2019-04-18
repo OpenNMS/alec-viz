@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<alarms xmlns="http://xmlns.opennms.org/xsd/oce/model/v1.0.0">
+<alarms xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
     <alarm id="4738854" first-event-time="1546759312000" last-event-time="1546759354000" last-severity="cleared" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:22:33 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access" inventory-object-id="swmgmt01: Ethernet102/1/22" inventory-object-type="PORT">
         <event source="syslog" severity="minor" id="5203339994202603_1546759311977" time="1546759312000" summary="Link down syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:51 CST: %ETHPORT-5-IF_DOWN_LINK_FAILURE: Interface Ethernet102/1/22 is down (Link failure)"/>
         <event source="syslog" severity="cleared" id="5203425893548523_1546759314561" time="1546759314000" summary="Interface is up syslog" description="&lt;189&gt;: 2019 Jan  6 01:21:54 CST: %ETHPORT-5-IF_UP: Interface Ethernet102/1/22 is up in mode access"/>

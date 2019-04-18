@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<inventory xmlns="http://xmlns.opennms.org/xsd/oce/model/v1.0.0">
+<inventory xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
     <model-object-entry id="model" type="Model" parent-type="Model" parent-id="model"/>
     <model-object-entry id="swmgmt01: Ethernet102/1/22" type="PORT" parent-type="DEVICE" parent-id="swmgmt01"/>
     <model-object-entry id="swmgmt01: Ethernet102/1/23" type="PORT" parent-type="DEVICE" parent-id="swmgmt01"/>

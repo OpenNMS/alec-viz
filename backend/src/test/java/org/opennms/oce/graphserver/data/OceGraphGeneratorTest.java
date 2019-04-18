@@ -60,7 +60,7 @@ import java.util.stream.Collectors;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.opennms.oce.datasource.api.Severity;
+import org.opennms.alec.datasource.api.Severity;
 import org.opennms.oce.graphserver.GraphView;
 import org.opennms.oce.graphserver.model.Graph;
 import org.opennms.oce.graphserver.model.TemporalAnnotation;

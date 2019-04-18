@@ -32,7 +32,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.opennms.oce.datasource.api.Situation;
+import org.opennms.alec.datasource.api.Situation;
 
 public class SituationResults {
     private static final String DEFAULT_SOURCE_NAME = "default";

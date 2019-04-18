@@ -42,10 +42,10 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXBException;
 
-import org.opennms.oce.datasource.api.Alarm;
-import org.opennms.oce.datasource.api.InventoryObject;
-import org.opennms.oce.datasource.api.Situation;
-import org.opennms.oce.datasource.jaxb.JaxbUtils;
+import org.opennms.alec.datasource.api.Alarm;
+import org.opennms.alec.datasource.api.InventoryObject;
+import org.opennms.alec.datasource.api.Situation;
+import org.opennms.alec.datasource.jaxb.JaxbUtils;
 
 import com.google.common.io.Resources;
 
