@@ -36,7 +36,7 @@ import java.util.Objects;
 public class GraphView {
     public static final int DEFAULT_SZL = 3;
     public static final boolean DEFAULT_REMOVE_INVENTORY_WITH_NO_ALARMS = false;
-    public static final int DEFAULT_VERTEX_LIMIT = 100;
+    public static final int DEFAULT_VERTEX_LIMIT = 30;
 
     private final long timestampInMillis;
     private final int szl;

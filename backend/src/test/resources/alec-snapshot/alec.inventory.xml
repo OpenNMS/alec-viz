@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inventory xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
+    <model-object-entry id="alec:localhost" type="node" friendly-name="localhost" weight-to-parent="100"/>
+    <model-object-entry id="USERDEFINED:ODL:openflow_2:ODL:host_0a_a7_5d_42_74_e8" type="node-link" friendly-name="Link Between ODL:openflow_2 and ODL:host_0a_a7_5d_42_74_e8 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:host_0a_a7_5d_42_74_e8" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:host_0a_a7_5d_42_74_e8:ODL:openflow_2" type="node-link" friendly-name="Link Between ODL:host_0a_a7_5d_42_74_e8 and ODL:openflow_2 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:host_0a_a7_5d_42_74_e8" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="ODL:host_ae_36_b2_1b_b4_02" type="node" friendly-name="host:ae:36:b2:1b:b4:02" weight-to-parent="100"/>
+    <model-object-entry id="ODL:host_0a_a7_5d_42_74_e8" type="node" friendly-name="host:0a:a7:5d:42:74:e8" weight-to-parent="100"/>
+    <model-object-entry id="ODL:host_d6_35_f3_8a_a8_26" type="node" friendly-name="host:d6:35:f3:8a:a8:26" weight-to-parent="100"/>
+    <model-object-entry id="USERDEFINED:ODL:openflow_2:ODL:openflow_1" type="node-link" friendly-name="Link Between ODL:openflow_2 and ODL:openflow_1 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_1" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:openflow_3:ODL:host_ae_36_b2_1b_b4_02" type="node-link" friendly-name="Link Between ODL:openflow_3 and ODL:host_ae_36_b2_1b_b4_02 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:host_ae_36_b2_1b_b4_02" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="ODL:openflow_1" type="node" friendly-name="openflow:1" weight-to-parent="100"/>
+    <model-object-entry id="USERDEFINED:ODL:openflow_3:ODL:host_d6_35_f3_8a_a8_26" type="node-link" friendly-name="Link Between ODL:openflow_3 and ODL:host_d6_35_f3_8a_a8_26 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:host_d6_35_f3_8a_a8_26" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:host_d6_35_f3_8a_a8_26:ODL:openflow_3" type="node-link" friendly-name="Link Between ODL:host_d6_35_f3_8a_a8_26 and ODL:openflow_3 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:host_d6_35_f3_8a_a8_26" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:openflow_1:ODL:openflow_2" type="node-link" friendly-name="Link Between ODL:openflow_1 and ODL:openflow_2 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_1" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="ODL:openflow_3" type="node" friendly-name="openflow:3" weight-to-parent="100"/>
+    <model-object-entry id="USERDEFINED:ODL:openflow_2:ODL:host_0e_7c_af_47_5e_94" type="node-link" friendly-name="Link Between ODL:openflow_2 and ODL:host_0e_7c_af_47_5e_94 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:host_0e_7c_af_47_5e_94" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:host_ae_36_b2_1b_b4_02:ODL:openflow_3" type="node-link" friendly-name="Link Between ODL:host_ae_36_b2_1b_b4_02 and ODL:openflow_3 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:host_ae_36_b2_1b_b4_02" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="ODL:host_0e_7c_af_47_5e_94" type="node" friendly-name="host:0e:7c:af:47:5e:94" weight-to-parent="100"/>
+    <model-object-entry id="USERDEFINED:ODL:openflow_3:ODL:openflow_1" type="node-link" friendly-name="Link Between ODL:openflow_3 and ODL:openflow_1 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_1" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:host_0e_7c_af_47_5e_94:ODL:openflow_2" type="node-link" friendly-name="Link Between ODL:host_0e_7c_af_47_5e_94 and ODL:openflow_2 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:host_0e_7c_af_47_5e_94" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_2" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="USERDEFINED:ODL:openflow_1:ODL:openflow_3" type="node-link" friendly-name="Link Between ODL:openflow_1 and ODL:openflow_3 discovered with protocol USERDEFINED" weight-to-parent="100">
+        <peer-ref type="node" id="ODL:openflow_1" endpoint="A" weight="75"/>
+        <peer-ref type="node" id="ODL:openflow_3" endpoint="Z" weight="75"/>
+    </model-object-entry>
+    <model-object-entry id="ODL:openflow_2" type="node" friendly-name="openflow:2" weight-to-parent="100"/>
+</inventory>

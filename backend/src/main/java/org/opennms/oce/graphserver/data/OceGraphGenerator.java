@@ -305,11 +305,26 @@ public class OceGraphGenerator {
 
 
         if (graphView.getVertexLimit() > 0) {
-            // TODO: What to remove?
-
+            // TODO: Improve logic as to what we remove
             // If num situations < limit, then keep, delete oldest
             // If num alarms + num situations < limit, keep, delete oldest
             // If num ios < limit, keep, delete smallest ids -_-
+
+
+            final List<Graph.Vertex> verticesToDelete = new LinkedList<>();
+            int numVerticesKept = 0;
+            for (Graph.Vertex vertex : filteredGraph.getVertices()) {
+                if (numVerticesKept >= graphView.getVertexLimit()) {
+                    // We're at capacity, let's delete this one
+                    verticesToDelete.add(vertex);
+                } else {
+                    numVerticesKept++;
+                }
+            }
+
+            for (Graph.Vertex vertexToDelete : verticesToDelete) {
+                jungGraph.removeVertex(vertexToDelete);
+            }
         }
 
         return new Graph(getGraphMetadata(), filteredGraph.getVertices(), filteredGraph.getEdges(), layers);

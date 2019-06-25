@@ -59,6 +59,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.opennms.alec.datasource.api.Severity;
 import org.opennms.oce.graphserver.GraphView;
@@ -241,6 +242,26 @@ public class OceGraphGeneratorTest {
                 .collect(Collectors.toSet());
         assertThat(uniqueSourceAttributes, hasSize(2));
         assertThat(PRIMARY_SOURCE_NAME, isIn(uniqueSourceAttributes));
+    }
+
+    @Test
+    @Ignore
+    public void canLoadSnapshot() {
+        final OceDataset data = OceDataset.fromResources("alec-snapshot/alec.alarms.xml",
+                "alec-snapshot/alec.inventory.xml",
+                "alec-snapshot/alec.situations.xml");
+        final OceGraphGenerator oceGraphGenerator = new OceGraphGenerator(data);
+
+        // Generate the graph at the current time
+        final GraphView view = GraphView.builder()
+                .setTimestampInMillis(System.currentTimeMillis())
+                .setRemoveInventoryWithNoAlarms(true)
+                .setFocalPoint("opendaylight")
+                .build();
+        final Graph g = oceGraphGenerator.getGraph(view);
+
+        List<Graph.Vertex> vertices = g.getVertices();
+        assertThat(verticesOnLayer(vertices, INVENTORY_LAYER_ID), hasSize(2));
     }
 
     /** Generic validation
