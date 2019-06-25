@@ -310,7 +310,6 @@ public class OceGraphGenerator {
             // If num alarms + num situations < limit, keep, delete oldest
             // If num ios < limit, keep, delete smallest ids -_-
 
-
             final List<Graph.Vertex> verticesToDelete = new LinkedList<>();
             int numVerticesKept = 0;
             for (Graph.Vertex vertex : filteredGraph.getVertices()) {
@@ -323,7 +322,7 @@ public class OceGraphGenerator {
             }
 
             for (Graph.Vertex vertexToDelete : verticesToDelete) {
-                jungGraph.removeVertex(vertexToDelete);
+                filteredGraph.removeVertex(vertexToDelete);
             }
         }
 
