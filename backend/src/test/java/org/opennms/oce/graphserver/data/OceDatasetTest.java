@@ -33,7 +33,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -53,10 +52,10 @@ public class OceDatasetTest {
     @Test
     public void canLoadDatasetFromFilesystem() {
         // Copy the sample dataset from the classpath to the filesystem
-        copy("sample/sample.alarms.xml", "oce.alarms.xml");
-        copy("sample/sample.inventory.xml", "oce.inventory.xml");
-        copy("sample/sample.situations.xml", "oce.situations.xml");
-        copy("sample/sample.other.situations.xml", "oce.other.situations.xml");
+        copy("sample/sample.alarms.xml", "alec.alarms.xml");
+        copy("sample/sample.inventory.xml", "alec.inventory.xml");
+        copy("sample/sample.situations.xml", "alec.situations.xml");
+        copy("sample/sample.other.situations.xml", "alec.other.situations.xml");
 
         OceDataset data = OceDataset.oceDataset(temporaryFolder.getRoot().toString());
 
