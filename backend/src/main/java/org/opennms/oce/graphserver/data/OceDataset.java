@@ -90,18 +90,18 @@ public class OceDataset {
     public static OceDataset oceDataset(String base) {
         // Enumerate the situation results
         final List<Path> situationResults = new LinkedList<>();
-        situationResults.add(Paths.get(base, "oce.situations.xml"));
+        situationResults.add(Paths.get(base, "alec.situations.xml"));
         try {
             situationResults.addAll(Files.list(Paths.get(base))
                     .filter(Files::isRegularFile)
                     .filter(p -> p.getFileName().toString().endsWith(".situations.xml"))
-                    .filter(p -> !p.getFileName().toString().equals("oce.situations.xml"))
+                    .filter(p -> !p.getFileName().toString().equals("alec.situations.xml"))
                     .collect(Collectors.toList()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return fromXmlFiles(Paths.get(base, "oce.alarms.xml"),
-                Paths.get(base, "oce.inventory.xml"),
+        return fromXmlFiles(Paths.get(base, "alec.alarms.xml"),
+                Paths.get(base, "alec.inventory.xml"),
                 situationResults.toArray(new Path[0]));
     }
 
