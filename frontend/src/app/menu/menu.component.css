@@ -1,0 +1,15 @@
+.verticalBtnGroup {
+    display: inline;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.card-header {
+    text-align: center
+}
+
+.menuBtn {
+    padding: 0.7rem .75rem;
+}

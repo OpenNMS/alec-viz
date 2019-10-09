@@ -5,29 +5,29 @@
         View
       </div>
       <div class="card-body">
-        <div class="btn-group-vertical">
-          <button *ngIf="!spinning" type="button" class="btn btn-primary" (click)="onClickSpin()">
+        <div class="btn-group-vertical verticalBtnGroup">
+          <button *ngIf="!spinning" type="button" class="btn menuBtn btn-primary" (click)="onClickSpin()">
             <fa-icon icon="circle-notch"></fa-icon> Spin
           </button>
-          <button *ngIf="spinning" type="button" class="btn btn-danger" (click)="onClickSpin()">
+          <button *ngIf="spinning" type="button" class="btn menuBtn btn-danger" (click)="onClickSpin()">
             <fa-icon icon="times-circle"></fa-icon> Stop
           </button>
-          <button type="button" class="btn btn-success" (click)="onToggleContextControls()">
+          <button type="button" class="btn menuBtn btn-success" (click)="onToggleContextControls()">
             <fa-icon icon="caret-square-right"></fa-icon> Context
           </button>
-          <button type="button" class="btn btn-dark" (click)="onToggleTimeControls()">
+          <button type="button" class="btn menuBtn btn-dark" (click)="onToggleTimeControls()">
             <fa-icon icon="clock"></fa-icon> Time
           </button>
-          <button type="button" class="btn btn-success" (click)="onToggleSearch()">
+          <button type="button" class="btn menuBtn btn-success" (click)="onToggleSearch()">
             <fa-icon icon="search"></fa-icon> Search
           </button>
-          <button *ngIf="vrAvailable" type="button" class="btn btn-secondary" (click)="onToggleVR()">
+          <button *ngIf="vrAvailable" type="button" class="btn menuBtn btn-secondary" (click)="onToggleVR()">
             <fa-icon icon="vr-cardboard"></fa-icon> VR
           </button>
-          <button type="button" class="btn btn-danger" (click)="onResetView()">
+          <button type="button" class="btn menuBtn btn-danger" (click)="onResetView()">
             <fa-icon icon="poo"></fa-icon> Reset
           </button>
-          <button type="button" class="btn btn-primary" (click)="onToggleModelOptions()">
+          <button type="button" class="btn menuBtn btn-primary" (click)="onToggleModelOptions()">
             <fa-icon icon="list"></fa-icon> Model
           </button>
         </div>
