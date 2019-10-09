@@ -10,9 +10,9 @@ import {ModelMetadata, ModelService} from '../model.service';
 })
 export class TimesliderComponent implements OnInit {
 
-  pointInTimeMs = -1;
+  pointInTimeMs: number = -1;
   modelMetadata: ModelMetadata;
-  minTimeMs = 1546750837000;
+  minTimeMs = 1557504036500;
   maxTimeMs = 1546837195000;
 
   playing = false;
@@ -20,10 +20,10 @@ export class TimesliderComponent implements OnInit {
   tweenedTime = {x: 0};
   seekToMs: number;
 
-  constructor(private stateService: StateService, private modelService: ModelService) { }
+  constructor(private stateService: StateService, private modelService: ModelService) {}
 
   ngOnInit() {
-    this.pointInTimeMs = this.maxTimeMs;
+    this.updateSlider()
     this.modelService.modelMetadata$.subscribe(modelMetadata => {
       this.onModelMetadataChanged(modelMetadata);
     });
@@ -34,6 +34,11 @@ export class TimesliderComponent implements OnInit {
 
   onTimeChanged() {
     this.stateService.setPointInTimeMs(this.pointInTimeMs);
+  }
+
+  updateSlider(){
+    let dt = this.stateService.getPointInTimeMs();
+    this.pointInTimeMs = Math.min(dt + 60 * 1000 ,this.maxTimeMs) ;
   }
 
   onPlay() {

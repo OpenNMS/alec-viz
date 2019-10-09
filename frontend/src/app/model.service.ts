@@ -70,6 +70,16 @@ export class ModelService {
     stateService.contextModel$.subscribe(context => {
       this.onContextModelChanged(context);
     });
+
+    this.modelMetadata$.subscribe(modelMetadata => {
+      console.log('meta 1: ', modelMetadata.timeMetadata.startMs)
+      let minTimeMs = modelMetadata.timeMetadata.startMs;
+      let maxTimeMs = modelMetadata.timeMetadata.endMs;
+      let midpoint = (minTimeMs + maxTimeMs)/2;
+      console.log('mid: ', midpoint)
+      this.stateService.setPointInTimeMs(midpoint);
+    });
+
   }
 
   private onPointInTimeChanged(pointInTimeMs: number) {

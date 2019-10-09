@@ -61,6 +61,8 @@ export class StateService {
   contextModel$ = this.contextModel.asObservable();
   addToFocus$ = this.addToFocusSubject.asObservable();
 
+  private pointInTimeValue: number;
+
   constructor() { }
 
   // Service message commands
@@ -82,6 +84,11 @@ export class StateService {
 
   setPointInTimeMs(pointInTimeMs: number) {
     this.pointInTime.next(pointInTimeMs);
+    this.pointInTimeValue = pointInTimeMs;
+  }
+
+  getPointInTimeMs() {
+    return this.pointInTimeValue;
   }
 
   updateControlState(state: ControlState) {
