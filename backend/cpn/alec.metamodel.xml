@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<meta-model xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
+    <model-object-def type="Model">
+        <parent-def-ref type="Model"/>
+    </model-object-def>
+    <model-object-def type="SnmpInterface">
+        <parent-def-ref type="Node"/>
+    </model-object-def>
+    <model-object-def type="Node">
+        <parent-def-ref type="Model"/>
+    </model-object-def>
+    <model-object-def type="BgpPeer">
+        <parent-def-ref type="Node"/>
+    </model-object-def>
+    <model-object-def type="SnmpInterfaceLink">
+        <parent-def-ref type="Model"/>
+        <peer-def-ref type="SnmpInterface"/>
+        <relative-def-ref type="Node"/>
+    </model-object-def>
+</meta-model>

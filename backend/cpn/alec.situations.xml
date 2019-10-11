@@ -1,0 +1,2356 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<situations xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
+    <situation severity="major" id="5154807" creation-time="1557461017000" summary="BGP neighbor loss VRF due to oper" description="BGP neighbor loss VRF due to oper">
+        <alarm-ref id="5154816"/>
+        <alarm-ref id="5154815"/>
+        <alarm-ref id="5154807"/>
+    </situation>
+    <situation severity="major" id="5154809" creation-time="1557461021000" summary="BGP neighbor loss VRF due to oper" description="BGP neighbor loss VRF due to oper">
+        <alarm-ref id="5154813"/>
+        <alarm-ref id="5154812"/>
+        <alarm-ref id="5154809"/>
+    </situation>
+    <situation severity="cleared" id="5154825" creation-time="1557461430000" summary="Port up" description="Port up">
+        <alarm-ref id="5154825"/>
+    </situation>
+    <situation severity="cleared" id="5154828" creation-time="1557461792000" summary="Port up" description="Port up">
+        <alarm-ref id="5154828"/>
+    </situation>
+    <situation severity="cleared" id="5154830" creation-time="1557461798000" summary="Port up" description="Port up">
+        <alarm-ref id="5154830"/>
+    </situation>
+    <situation severity="cleared" id="5154832" creation-time="1557461800000" summary="Port up" description="Port up">
+        <alarm-ref id="5154832"/>
+    </situation>
+    <situation severity="cleared" id="5154834" creation-time="1557461880000" summary="Port up" description="Port up">
+        <alarm-ref id="5154834"/>
+    </situation>
+    <situation severity="cleared" id="5154838" creation-time="1557462130000" summary="Port up" description="Port up">
+        <alarm-ref id="5154838"/>
+    </situation>
+    <situation severity="cleared" id="5154840" creation-time="1557462190000" summary="Port up" description="Port up">
+        <alarm-ref id="5154840"/>
+    </situation>
+    <situation severity="cleared" id="5154854" creation-time="1557463713000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5154857"/>
+        <alarm-ref id="5154855"/>
+        <alarm-ref id="5154854"/>
+    </situation>
+    <situation severity="cleared" id="5154859" creation-time="1557463720000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5154861"/>
+        <alarm-ref id="5154859"/>
+        <alarm-ref id="5154860"/>
+    </situation>
+    <situation severity="cleared" id="5154864" creation-time="1557463722000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5154864"/>
+        <alarm-ref id="5154867"/>
+        <alarm-ref id="5154866"/>
+    </situation>
+    <situation severity="cleared" id="5154871" creation-time="1557463929000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5154871"/>
+    </situation>
+    <situation severity="cleared" id="5154876" creation-time="1557464035000" summary="Port up" description="Port up">
+        <alarm-ref id="5154876"/>
+    </situation>
+    <situation severity="cleared" id="5154882" creation-time="1557464330000" summary="Port up" description="Port up">
+        <alarm-ref id="5154882"/>
+    </situation>
+    <situation severity="cleared" id="5154885" creation-time="1557464480000" summary="Port up" description="Port up">
+        <alarm-ref id="5154885"/>
+    </situation>
+    <situation severity="cleared" id="5154889" creation-time="1557464630000" summary="Port up" description="Port up">
+        <alarm-ref id="5154889"/>
+    </situation>
+    <situation severity="cleared" id="5154892" creation-time="1557464750000" summary="Port up" description="Port up">
+        <alarm-ref id="5154892"/>
+    </situation>
+    <situation severity="cleared" id="5154910" creation-time="1557465119000" summary="Port up" description="Port up">
+        <alarm-ref id="5154930"/>
+        <alarm-ref id="5154910"/>
+    </situation>
+    <situation severity="cleared" id="5154909" creation-time="1557465119000" summary="Port up" description="Port up">
+        <alarm-ref id="5154927"/>
+        <alarm-ref id="5154909"/>
+    </situation>
+    <situation severity="cleared" id="5154923" creation-time="1557465178000" summary="Port up" description="Port up">
+        <alarm-ref id="5154923"/>
+        <alarm-ref id="5154925"/>
+    </situation>
+    <situation severity="cleared" id="5154922" creation-time="1557465178000" summary="Port up" description="Port up">
+        <alarm-ref id="5154922"/>
+        <alarm-ref id="5154929"/>
+    </situation>
+    <situation severity="cleared" id="5155013" creation-time="1557465550000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155016"/>
+        <alarm-ref id="5155015"/>
+        <alarm-ref id="5155013"/>
+    </situation>
+    <situation severity="cleared" id="5155031" creation-time="1557465787000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155032"/>
+        <alarm-ref id="5155031"/>
+        <alarm-ref id="5155034"/>
+    </situation>
+    <situation severity="cleared" id="5155041" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155060"/>
+        <alarm-ref id="5155064"/>
+        <alarm-ref id="5155041"/>
+    </situation>
+    <situation severity="cleared" id="5155040" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155074"/>
+        <alarm-ref id="5155073"/>
+        <alarm-ref id="5155040"/>
+    </situation>
+    <situation severity="cleared" id="5155039" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155039"/>
+        <alarm-ref id="5155053"/>
+        <alarm-ref id="5155047"/>
+    </situation>
+    <situation severity="cleared" id="5155037" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155037"/>
+        <alarm-ref id="5155054"/>
+        <alarm-ref id="5155056"/>
+    </situation>
+    <situation severity="cleared" id="5155036" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155071"/>
+        <alarm-ref id="5155036"/>
+        <alarm-ref id="5155044"/>
+    </situation>
+    <situation severity="cleared" id="5155038" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155038"/>
+        <alarm-ref id="5155065"/>
+        <alarm-ref id="5155063"/>
+    </situation>
+    <situation severity="cleared" id="5155067" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155141"/>
+        <alarm-ref id="5155069"/>
+        <alarm-ref id="5155067"/>
+    </situation>
+    <situation severity="cleared" id="5155042" creation-time="1557465791000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155042"/>
+        <alarm-ref id="5155046"/>
+        <alarm-ref id="5155055"/>
+    </situation>
+    <situation severity="cleared" id="5155077" creation-time="1557465798000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155083"/>
+        <alarm-ref id="5155084"/>
+        <alarm-ref id="5155077"/>
+    </situation>
+    <situation severity="cleared" id="5155076" creation-time="1557465798000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155076"/>
+        <alarm-ref id="5155086"/>
+        <alarm-ref id="5155089"/>
+    </situation>
+    <situation severity="cleared" id="5155075" creation-time="1557465798000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155080"/>
+        <alarm-ref id="5155075"/>
+        <alarm-ref id="5155078"/>
+    </situation>
+    <situation severity="cleared" id="5155090" creation-time="1557465799000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155090"/>
+        <alarm-ref id="5155098"/>
+        <alarm-ref id="5155095"/>
+    </situation>
+    <situation severity="cleared" id="5155091" creation-time="1557465800000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155092"/>
+        <alarm-ref id="5155091"/>
+        <alarm-ref id="5155096"/>
+    </situation>
+    <situation severity="cleared" id="5155102" creation-time="1557465802000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155108"/>
+        <alarm-ref id="5155107"/>
+        <alarm-ref id="5155102"/>
+    </situation>
+    <situation severity="cleared" id="5155101" creation-time="1557465802000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155106"/>
+        <alarm-ref id="5155104"/>
+        <alarm-ref id="5155101"/>
+    </situation>
+    <situation severity="cleared" id="5155100" creation-time="1557465802000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155113"/>
+        <alarm-ref id="5155112"/>
+        <alarm-ref id="5155100"/>
+    </situation>
+    <situation severity="cleared" id="5155117" creation-time="1557465811000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155117"/>
+        <alarm-ref id="5155127"/>
+        <alarm-ref id="5155129"/>
+    </situation>
+    <situation severity="cleared" id="5155116" creation-time="1557465811000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155116"/>
+        <alarm-ref id="5155120"/>
+        <alarm-ref id="5155121"/>
+    </situation>
+    <situation severity="cleared" id="5155115" creation-time="1557465811000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155115"/>
+        <alarm-ref id="5155123"/>
+        <alarm-ref id="5155122"/>
+    </situation>
+    <situation severity="cleared" id="5155130" creation-time="1557465818000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155131"/>
+        <alarm-ref id="5155130"/>
+        <alarm-ref id="5155133"/>
+    </situation>
+    <situation severity="cleared" id="5155135" creation-time="1557465822000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155139"/>
+        <alarm-ref id="5155137"/>
+        <alarm-ref id="5155135"/>
+    </situation>
+    <situation severity="cleared" id="5155140" creation-time="1557465829000" summary="Port up" description="Port up">
+        <alarm-ref id="5155140"/>
+        <alarm-ref id="5155144"/>
+    </situation>
+    <situation severity="cleared" id="5155142" creation-time="1557465839000" summary="Port up" description="Port up">
+        <alarm-ref id="5155142"/>
+        <alarm-ref id="5155143"/>
+    </situation>
+    <situation severity="cleared" id="5155146" creation-time="1557465922000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155148"/>
+        <alarm-ref id="5155147"/>
+        <alarm-ref id="5155146"/>
+    </situation>
+    <situation severity="cleared" id="5155155" creation-time="1557466051000" summary="Port up" description="Port up">
+        <alarm-ref id="5155157"/>
+        <alarm-ref id="5155155"/>
+    </situation>
+    <situation severity="cleared" id="5155159" creation-time="1557466311000" summary="Port up" description="Port up">
+        <alarm-ref id="5155159"/>
+        <alarm-ref id="5155184"/>
+    </situation>
+    <situation severity="cleared" id="5155166" creation-time="1557466341000" summary="LAG Link up" description="LAG Link up">
+        <alarm-ref id="5155182"/>
+        <alarm-ref id="5155175"/>
+        <alarm-ref id="5155172"/>
+        <alarm-ref id="5155168"/>
+        <alarm-ref id="5155179"/>
+        <alarm-ref id="5155200"/>
+        <alarm-ref id="5155166"/>
+    </situation>
+    <situation severity="cleared" id="5155186" creation-time="1557466430000" summary="Port up" description="Port up">
+        <alarm-ref id="5155186"/>
+    </situation>
+    <situation severity="cleared" id="5155189" creation-time="1557466458000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5155189"/>
+        <alarm-ref id="5155199"/>
+    </situation>
+    <situation severity="cleared" id="5155193" creation-time="1557466650000" summary="Port up" description="Port up">
+        <alarm-ref id="5155193"/>
+    </situation>
+    <situation severity="cleared" id="5155196" creation-time="1557466791000" summary="Port up" description="Port up">
+        <alarm-ref id="5155196"/>
+    </situation>
+    <situation severity="cleared" id="5155206" creation-time="1557466990000" summary="Port up" description="Port up">
+        <alarm-ref id="5155207"/>
+        <alarm-ref id="5155206"/>
+    </situation>
+    <situation severity="cleared" id="5155205" creation-time="1557466990000" summary="Port up" description="Port up">
+        <alarm-ref id="5155205"/>
+        <alarm-ref id="5155210"/>
+    </situation>
+    <situation severity="cleared" id="5155215" creation-time="1557467196000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155215"/>
+        <alarm-ref id="5155219"/>
+        <alarm-ref id="5155217"/>
+    </situation>
+    <situation severity="cleared" id="5155221" creation-time="1557467350000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5155221"/>
+    </situation>
+    <situation severity="cleared" id="5155223" creation-time="1557467426000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155227"/>
+        <alarm-ref id="5155224"/>
+        <alarm-ref id="5155223"/>
+    </situation>
+    <situation severity="cleared" id="5155229" creation-time="1557467531000" summary="Port up" description="Port up">
+        <alarm-ref id="5155229"/>
+        <alarm-ref id="5155233"/>
+    </situation>
+    <situation severity="cleared" id="5155230" creation-time="1557467611000" summary="Port up" description="Port up">
+        <alarm-ref id="5155230"/>
+    </situation>
+    <situation severity="cleared" id="5155237" creation-time="1557467971000" summary="Port up" description="Port up">
+        <alarm-ref id="5155237"/>
+        <alarm-ref id="5155240"/>
+    </situation>
+    <situation severity="cleared" id="5155238" creation-time="1557467971000" summary="Port up" description="Port up">
+        <alarm-ref id="5155238"/>
+        <alarm-ref id="5155241"/>
+    </situation>
+    <situation severity="cleared" id="5155242" creation-time="1557468079000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5155242"/>
+    </situation>
+    <situation severity="cleared" id="5155244" creation-time="1557468179000" summary="Port up" description="Port up">
+        <alarm-ref id="5155244"/>
+    </situation>
+    <situation severity="cleared" id="5155246" creation-time="1557468241000" summary="Port up" description="Port up">
+        <alarm-ref id="5155248"/>
+        <alarm-ref id="5155246"/>
+    </situation>
+    <situation severity="cleared" id="5155261" creation-time="1557469659000" summary="Port up" description="Port up">
+        <alarm-ref id="5155268"/>
+        <alarm-ref id="5155261"/>
+    </situation>
+    <situation severity="cleared" id="5155262" creation-time="1557469669000" summary="Port up" description="Port up">
+        <alarm-ref id="5155262"/>
+        <alarm-ref id="5155267"/>
+    </situation>
+    <situation severity="cleared" id="5155263" creation-time="1557469709000" summary="Port up" description="Port up">
+        <alarm-ref id="5155269"/>
+        <alarm-ref id="5155263"/>
+    </situation>
+    <situation severity="cleared" id="5155264" creation-time="1557469718000" summary="Port up" description="Port up">
+        <alarm-ref id="5155265"/>
+        <alarm-ref id="5155264"/>
+    </situation>
+    <situation severity="cleared" id="5155270" creation-time="1557469891000" summary="Port up" description="Port up">
+        <alarm-ref id="5155270"/>
+    </situation>
+    <situation severity="cleared" id="5155275" creation-time="1557469942000" summary="Port up" description="Port up">
+        <alarm-ref id="5155277"/>
+        <alarm-ref id="5155275"/>
+    </situation>
+    <situation severity="cleared" id="5155278" creation-time="1557470261000" summary="Port up" description="Port up">
+        <alarm-ref id="5155278"/>
+    </situation>
+    <situation severity="cleared" id="5155280" creation-time="1557470391000" summary="Port up" description="Port up">
+        <alarm-ref id="5155280"/>
+        <alarm-ref id="5155283"/>
+    </situation>
+    <situation severity="cleared" id="5155281" creation-time="1557470402000" summary="Port up" description="Port up">
+        <alarm-ref id="5155281"/>
+        <alarm-ref id="5155284"/>
+    </situation>
+    <situation severity="cleared" id="5155286" creation-time="1557470476000" summary="Port up" description="Port up">
+        <alarm-ref id="5155287"/>
+        <alarm-ref id="5155286"/>
+    </situation>
+    <situation severity="cleared" id="5155289" creation-time="1557470592000" summary="Port up" description="Port up">
+        <alarm-ref id="5155293"/>
+        <alarm-ref id="5155289"/>
+    </situation>
+    <situation severity="cleared" id="5155290" creation-time="1557470602000" summary="Port up" description="Port up">
+        <alarm-ref id="5155290"/>
+        <alarm-ref id="5155294"/>
+    </situation>
+    <situation severity="cleared" id="5155291" creation-time="1557470642000" summary="Port up" description="Port up">
+        <alarm-ref id="5155291"/>
+        <alarm-ref id="5155296"/>
+    </situation>
+    <situation severity="cleared" id="5155300" creation-time="1557470719000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155304"/>
+        <alarm-ref id="5155302"/>
+        <alarm-ref id="5155300"/>
+    </situation>
+    <situation severity="cleared" id="5155299" creation-time="1557470719000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155314"/>
+        <alarm-ref id="5155316"/>
+        <alarm-ref id="5155299"/>
+    </situation>
+    <situation severity="cleared" id="5155298" creation-time="1557470719000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155303"/>
+        <alarm-ref id="5155305"/>
+        <alarm-ref id="5155298"/>
+    </situation>
+    <situation severity="cleared" id="5155301" creation-time="1557470720000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155312"/>
+        <alarm-ref id="5155301"/>
+        <alarm-ref id="5155310"/>
+    </situation>
+    <situation severity="cleared" id="5155320" creation-time="1557470731000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155329"/>
+        <alarm-ref id="5155320"/>
+        <alarm-ref id="5155330"/>
+    </situation>
+    <situation severity="cleared" id="5155319" creation-time="1557470731000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155324"/>
+        <alarm-ref id="5155323"/>
+        <alarm-ref id="5155319"/>
+    </situation>
+    <situation severity="cleared" id="5155318" creation-time="1557470731000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155325"/>
+        <alarm-ref id="5155318"/>
+        <alarm-ref id="5155327"/>
+    </situation>
+    <situation severity="cleared" id="5155340" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155345"/>
+        <alarm-ref id="5155340"/>
+        <alarm-ref id="5155343"/>
+    </situation>
+    <situation severity="cleared" id="5155339" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155348"/>
+        <alarm-ref id="5155339"/>
+        <alarm-ref id="5155408"/>
+    </situation>
+    <situation severity="cleared" id="5155338" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155338"/>
+        <alarm-ref id="5155362"/>
+        <alarm-ref id="5155363"/>
+    </situation>
+    <situation severity="cleared" id="5155341" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155369"/>
+        <alarm-ref id="5155370"/>
+        <alarm-ref id="5155341"/>
+    </situation>
+    <situation severity="cleared" id="5155337" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155337"/>
+        <alarm-ref id="5155406"/>
+        <alarm-ref id="5155342"/>
+    </situation>
+    <situation severity="cleared" id="5155336" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155359"/>
+        <alarm-ref id="5155336"/>
+        <alarm-ref id="5155405"/>
+    </situation>
+    <situation severity="cleared" id="5155335" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155335"/>
+        <alarm-ref id="5155367"/>
+        <alarm-ref id="5155365"/>
+    </situation>
+    <situation severity="cleared" id="5155333" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155407"/>
+        <alarm-ref id="5155350"/>
+        <alarm-ref id="5155333"/>
+    </situation>
+    <situation severity="cleared" id="5155334" creation-time="1557470732000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155334"/>
+        <alarm-ref id="5155351"/>
+        <alarm-ref id="5155344"/>
+    </situation>
+    <situation severity="cleared" id="5155385" creation-time="1557470740000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155391"/>
+        <alarm-ref id="5155393"/>
+        <alarm-ref id="5155385"/>
+    </situation>
+    <situation severity="cleared" id="5155376" creation-time="1557470740000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155383"/>
+        <alarm-ref id="5155381"/>
+        <alarm-ref id="5155376"/>
+    </situation>
+    <situation severity="cleared" id="5155375" creation-time="1557470740000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155380"/>
+        <alarm-ref id="5155377"/>
+        <alarm-ref id="5155375"/>
+    </situation>
+    <situation severity="cleared" id="5155374" creation-time="1557470740000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155389"/>
+        <alarm-ref id="5155386"/>
+        <alarm-ref id="5155374"/>
+    </situation>
+    <situation severity="cleared" id="5155399" creation-time="1557470743000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155403"/>
+        <alarm-ref id="5155402"/>
+        <alarm-ref id="5155399"/>
+    </situation>
+    <situation severity="cleared" id="5155394" creation-time="1557470743000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155394"/>
+        <alarm-ref id="5155397"/>
+        <alarm-ref id="5155396"/>
+    </situation>
+    <situation severity="cleared" id="5155404" creation-time="1557470746000" summary="Port up" description="Port up">
+        <alarm-ref id="5155404"/>
+        <alarm-ref id="5155410"/>
+    </situation>
+    <situation severity="cleared" id="5155412" creation-time="1557470832000" summary="Port up" description="Port up">
+        <alarm-ref id="5155412"/>
+        <alarm-ref id="5155426"/>
+    </situation>
+    <situation severity="cleared" id="5155417" creation-time="1557470841000" summary="Port up" description="Port up">
+        <alarm-ref id="5155417"/>
+    </situation>
+    <situation severity="cleared" id="5155420" creation-time="1557470861000" summary="Port up" description="Port up">
+        <alarm-ref id="5155424"/>
+        <alarm-ref id="5155420"/>
+    </situation>
+    <situation severity="cleared" id="5155421" creation-time="1557470867000" summary="LAG Link up" description="LAG Link up">
+        <alarm-ref id="5155435"/>
+        <alarm-ref id="5155427"/>
+        <alarm-ref id="5155438"/>
+        <alarm-ref id="5155437"/>
+        <alarm-ref id="5155465"/>
+        <alarm-ref id="5155421"/>
+        <alarm-ref id="5155440"/>
+    </situation>
+    <situation severity="cleared" id="5155442" creation-time="1557470942000" summary="Port up" description="Port up">
+        <alarm-ref id="5155449"/>
+        <alarm-ref id="5155442"/>
+    </situation>
+    <situation severity="cleared" id="5155443" creation-time="1557470949000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5155443"/>
+        <alarm-ref id="5155464"/>
+    </situation>
+    <situation severity="cleared" id="5155445" creation-time="1557470976000" summary="Port up" description="Port up">
+        <alarm-ref id="5155445"/>
+        <alarm-ref id="5155454"/>
+    </situation>
+    <situation severity="cleared" id="5155444" creation-time="1557470976000" summary="Port up" description="Port up">
+        <alarm-ref id="5155455"/>
+        <alarm-ref id="5155444"/>
+    </situation>
+    <situation severity="cleared" id="5155447" creation-time="1557470981000" summary="Port up" description="Port up">
+        <alarm-ref id="5155447"/>
+        <alarm-ref id="5155453"/>
+    </situation>
+    <situation severity="cleared" id="5155446" creation-time="1557470981000" summary="Port up" description="Port up">
+        <alarm-ref id="5155446"/>
+        <alarm-ref id="5155452"/>
+    </situation>
+    <situation severity="cleared" id="5155451" creation-time="1557471032000" summary="Port up" description="Port up">
+        <alarm-ref id="5155460"/>
+        <alarm-ref id="5155451"/>
+    </situation>
+    <situation severity="cleared" id="5155466" creation-time="1557471272000" summary="Port up" description="Port up">
+        <alarm-ref id="5155466"/>
+        <alarm-ref id="5155470"/>
+    </situation>
+    <situation severity="cleared" id="5155468" creation-time="1557471311000" summary="Port up" description="Port up">
+        <alarm-ref id="5155468"/>
+        <alarm-ref id="5155473"/>
+    </situation>
+    <situation severity="cleared" id="5155471" creation-time="1557471336000" summary="Port up" description="Port up">
+        <alarm-ref id="5155477"/>
+        <alarm-ref id="5155471"/>
+    </situation>
+    <situation severity="cleared" id="5155476" creation-time="1557471382000" summary="Port up" description="Port up">
+        <alarm-ref id="5155483"/>
+        <alarm-ref id="5155476"/>
+    </situation>
+    <situation severity="cleared" id="5155479" creation-time="1557471402000" summary="Port up" description="Port up">
+        <alarm-ref id="5155479"/>
+        <alarm-ref id="5155486"/>
+    </situation>
+    <situation severity="cleared" id="5155481" creation-time="1557471421000" summary="Port up" description="Port up">
+        <alarm-ref id="5155488"/>
+        <alarm-ref id="5155481"/>
+    </situation>
+    <situation severity="cleared" id="5155482" creation-time="1557471441000" summary="Port up" description="Port up">
+        <alarm-ref id="5155482"/>
+        <alarm-ref id="5155492"/>
+    </situation>
+    <situation severity="cleared" id="5155490" creation-time="1557471492000" summary="Port up" description="Port up">
+        <alarm-ref id="5155490"/>
+        <alarm-ref id="5155494"/>
+    </situation>
+    <situation severity="cleared" id="5155496" creation-time="1557471572000" summary="Port up" description="Port up">
+        <alarm-ref id="5155500"/>
+        <alarm-ref id="5155496"/>
+    </situation>
+    <situation severity="cleared" id="5155499" creation-time="1557471632000" summary="Port up" description="Port up">
+        <alarm-ref id="5155499"/>
+        <alarm-ref id="5155503"/>
+    </situation>
+    <situation severity="cleared" id="5155502" creation-time="1557471682000" summary="Port up" description="Port up">
+        <alarm-ref id="5155502"/>
+        <alarm-ref id="5155514"/>
+    </situation>
+    <situation severity="cleared" id="5155506" creation-time="1557471712000" summary="Port up" description="Port up">
+        <alarm-ref id="5155506"/>
+        <alarm-ref id="5155520"/>
+    </situation>
+    <situation severity="cleared" id="5155505" creation-time="1557471712000" summary="Port up" description="Port up">
+        <alarm-ref id="5155505"/>
+        <alarm-ref id="5155518"/>
+    </situation>
+    <situation severity="cleared" id="5155507" creation-time="1557471716000" summary="Port up" description="Port up">
+        <alarm-ref id="5155522"/>
+        <alarm-ref id="5155507"/>
+    </situation>
+    <situation severity="cleared" id="5155508" creation-time="1557471731000" summary="Port up" description="Port up">
+        <alarm-ref id="5155526"/>
+        <alarm-ref id="5155508"/>
+    </situation>
+    <situation severity="cleared" id="5155509" creation-time="1557471732000" summary="Port up" description="Port up">
+        <alarm-ref id="5155527"/>
+        <alarm-ref id="5155509"/>
+    </situation>
+    <situation severity="cleared" id="5155510" creation-time="1557471736000" summary="Port up" description="Port up">
+        <alarm-ref id="5155510"/>
+        <alarm-ref id="5155531"/>
+    </situation>
+    <situation severity="cleared" id="5155511" creation-time="1557471741000" summary="Port up" description="Port up">
+        <alarm-ref id="5155511"/>
+        <alarm-ref id="5155525"/>
+    </situation>
+    <situation severity="cleared" id="5155512" creation-time="1557471742000" summary="Port up" description="Port up">
+        <alarm-ref id="5155512"/>
+        <alarm-ref id="5155533"/>
+    </situation>
+    <situation severity="cleared" id="5155515" creation-time="1557471752000" summary="Port up" description="Port up">
+        <alarm-ref id="5155515"/>
+        <alarm-ref id="5155536"/>
+    </situation>
+    <situation severity="cleared" id="5155516" creation-time="1557471766000" summary="Port up" description="Port up">
+        <alarm-ref id="5155516"/>
+        <alarm-ref id="5155537"/>
+    </situation>
+    <situation severity="cleared" id="5155523" creation-time="1557471782000" summary="Port up" description="Port up">
+        <alarm-ref id="5155523"/>
+        <alarm-ref id="5155541"/>
+    </situation>
+    <situation severity="cleared" id="5155529" creation-time="1557471796000" summary="Port up" description="Port up">
+        <alarm-ref id="5155544"/>
+        <alarm-ref id="5155529"/>
+    </situation>
+    <situation severity="cleared" id="5155539" creation-time="1557471831000" summary="Port up" description="Port up">
+        <alarm-ref id="5155539"/>
+        <alarm-ref id="5155547"/>
+    </situation>
+    <situation severity="cleared" id="5155540" creation-time="1557471836000" summary="Port up" description="Port up">
+        <alarm-ref id="5155549"/>
+        <alarm-ref id="5155540"/>
+    </situation>
+    <situation severity="cleared" id="5155545" creation-time="1557471866000" summary="Port up" description="Port up">
+        <alarm-ref id="5155545"/>
+        <alarm-ref id="5155551"/>
+    </situation>
+    <situation severity="cleared" id="5155552" creation-time="1557471971000" summary="Port up" description="Port up">
+        <alarm-ref id="5155554"/>
+        <alarm-ref id="5155552"/>
+    </situation>
+    <situation severity="cleared" id="5155565" creation-time="1557472221000" summary="Port up" description="Port up">
+        <alarm-ref id="5155565"/>
+    </situation>
+    <situation severity="cleared" id="5155568" creation-time="1557472311000" summary="Port up" description="Port up">
+        <alarm-ref id="5155568"/>
+        <alarm-ref id="5155573"/>
+    </situation>
+    <situation severity="cleared" id="5155569" creation-time="1557472318000" summary="Port up" description="Port up">
+        <alarm-ref id="5155569"/>
+    </situation>
+    <situation severity="cleared" id="5155571" creation-time="1557472341000" summary="Port up" description="Port up">
+        <alarm-ref id="5155571"/>
+    </situation>
+    <situation severity="cleared" id="5155575" creation-time="1557472387000" summary="Port up" description="Port up">
+        <alarm-ref id="5155576"/>
+        <alarm-ref id="5155575"/>
+    </situation>
+    <situation severity="cleared" id="5155579" creation-time="1557472732000" summary="Port up" description="Port up">
+        <alarm-ref id="5155579"/>
+        <alarm-ref id="5155581"/>
+    </situation>
+    <situation severity="cleared" id="5155583" creation-time="1557472811000" summary="Port up" description="Port up">
+        <alarm-ref id="5155588"/>
+        <alarm-ref id="5155583"/>
+    </situation>
+    <situation severity="cleared" id="5155584" creation-time="1557472821000" summary="Port up" description="Port up">
+        <alarm-ref id="5155584"/>
+    </situation>
+    <situation severity="cleared" id="5155590" creation-time="1557472912000" summary="Port up" description="Port up">
+        <alarm-ref id="5155590"/>
+        <alarm-ref id="5155595"/>
+    </situation>
+    <situation severity="cleared" id="5155592" creation-time="1557472922000" summary="Port up" description="Port up">
+        <alarm-ref id="5155601"/>
+        <alarm-ref id="5155592"/>
+    </situation>
+    <situation severity="cleared" id="5155591" creation-time="1557472922000" summary="Port up" description="Port up">
+        <alarm-ref id="5155600"/>
+        <alarm-ref id="5155591"/>
+    </situation>
+    <situation severity="cleared" id="5155593" creation-time="1557472962000" summary="Port up" description="Port up">
+        <alarm-ref id="5155602"/>
+        <alarm-ref id="5155593"/>
+    </situation>
+    <situation severity="cleared" id="5155596" creation-time="1557472981000" summary="Port up" description="Port up">
+        <alarm-ref id="5155605"/>
+        <alarm-ref id="5155596"/>
+    </situation>
+    <situation severity="cleared" id="5155606" creation-time="1557473101000" summary="Port up" description="Port up">
+        <alarm-ref id="5155606"/>
+    </situation>
+    <situation severity="cleared" id="5155608" creation-time="1557473112000" summary="Port up" description="Port up">
+        <alarm-ref id="5155616"/>
+        <alarm-ref id="5155608"/>
+    </situation>
+    <situation severity="cleared" id="5155609" creation-time="1557473121000" summary="Port up" description="Port up">
+        <alarm-ref id="5155609"/>
+        <alarm-ref id="5155618"/>
+    </situation>
+    <situation severity="cleared" id="5155614" creation-time="1557473161000" summary="Port up" description="Port up">
+        <alarm-ref id="5155622"/>
+        <alarm-ref id="5155614"/>
+    </situation>
+    <situation severity="cleared" id="5155615" creation-time="1557473162000" summary="Port up" description="Port up">
+        <alarm-ref id="5155623"/>
+        <alarm-ref id="5155615"/>
+    </situation>
+    <situation severity="cleared" id="5155620" creation-time="1557473202000" summary="Port up" description="Port up">
+        <alarm-ref id="5155620"/>
+        <alarm-ref id="5155626"/>
+    </situation>
+    <situation severity="cleared" id="5155625" creation-time="1557473241000" summary="Port up" description="Port up">
+        <alarm-ref id="5155625"/>
+        <alarm-ref id="5155629"/>
+    </situation>
+    <situation severity="cleared" id="5155631" creation-time="1557473321000" summary="Port up" description="Port up">
+        <alarm-ref id="5155631"/>
+        <alarm-ref id="5155636"/>
+    </situation>
+    <situation severity="cleared" id="5155638" creation-time="1557473431000" summary="Port up" description="Port up">
+        <alarm-ref id="5155638"/>
+    </situation>
+    <situation severity="cleared" id="5155640" creation-time="1557473481000" summary="Port up" description="Port up">
+        <alarm-ref id="5155641"/>
+        <alarm-ref id="5155640"/>
+    </situation>
+    <situation severity="cleared" id="5155643" creation-time="1557473560000" summary="Port up" description="Port up">
+        <alarm-ref id="5155643"/>
+    </situation>
+    <situation severity="cleared" id="5155645" creation-time="1557473572000" summary="Port up" description="Port up">
+        <alarm-ref id="5155645"/>
+        <alarm-ref id="5155647"/>
+    </situation>
+    <situation severity="cleared" id="5155650" creation-time="1557473662000" summary="Port up" description="Port up">
+        <alarm-ref id="5155653"/>
+        <alarm-ref id="5155650"/>
+    </situation>
+    <situation severity="cleared" id="5155651" creation-time="1557473690000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5155651"/>
+    </situation>
+    <situation severity="cleared" id="5155665" creation-time="1557474171000" summary="Port up" description="Port up">
+        <alarm-ref id="5155667"/>
+        <alarm-ref id="5155665"/>
+    </situation>
+    <situation severity="cleared" id="5155670" creation-time="1557474261000" summary="Port up" description="Port up">
+        <alarm-ref id="5155670"/>
+        <alarm-ref id="5155673"/>
+    </situation>
+    <situation severity="cleared" id="5155676" creation-time="1557474402000" summary="Port up" description="Port up">
+        <alarm-ref id="5155676"/>
+        <alarm-ref id="5155697"/>
+    </situation>
+    <situation severity="cleared" id="5155679" creation-time="1557474403000" summary="Link up" description="Link up">
+        <alarm-ref id="5155679"/>
+        <alarm-ref id="5155781"/>
+    </situation>
+    <situation severity="cleared" id="5155678" creation-time="1557474403000" summary="Link up" description="Link up">
+        <alarm-ref id="5155678"/>
+        <alarm-ref id="5155783"/>
+    </situation>
+    <situation severity="cleared" id="5155677" creation-time="1557474403000" summary="Link up" description="Link up">
+        <alarm-ref id="5155677"/>
+        <alarm-ref id="5155773"/>
+    </situation>
+    <situation severity="cleared" id="5155680" creation-time="1557474404000" summary="Link up" description="Link up">
+        <alarm-ref id="5155774"/>
+        <alarm-ref id="5155680"/>
+    </situation>
+    <situation severity="cleared" id="5155681" creation-time="1557474431000" summary="LAG Link up" description="LAG Link up">
+        <alarm-ref id="5155689"/>
+        <alarm-ref id="5155686"/>
+        <alarm-ref id="5155681"/>
+        <alarm-ref id="5155717"/>
+        <alarm-ref id="5155690"/>
+        <alarm-ref id="5155695"/>
+        <alarm-ref id="5155693"/>
+    </situation>
+    <situation severity="cleared" id="5155699" creation-time="1557474501000" summary="Port up" description="Port up">
+        <alarm-ref id="5155699"/>
+    </situation>
+    <situation severity="cleared" id="5155701" creation-time="1557474511000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5155701"/>
+        <alarm-ref id="5155716"/>
+    </situation>
+    <situation severity="cleared" id="5155702" creation-time="1557474672000" summary="Port up" description="Port up">
+        <alarm-ref id="5155702"/>
+        <alarm-ref id="5155706"/>
+    </situation>
+    <situation severity="cleared" id="5155704" creation-time="1557474708000" summary="Port up" description="Port up">
+        <alarm-ref id="5155711"/>
+        <alarm-ref id="5155704"/>
+    </situation>
+    <situation severity="cleared" id="5155705" creation-time="1557474732000" summary="Port up" description="Port up">
+        <alarm-ref id="5155705"/>
+        <alarm-ref id="5155709"/>
+    </situation>
+    <situation severity="cleared" id="5155708" creation-time="1557474751000" summary="Port up" description="Port up">
+        <alarm-ref id="5155712"/>
+        <alarm-ref id="5155708"/>
+    </situation>
+    <situation severity="cleared" id="5155715" creation-time="1557474862000" summary="Port up" description="Port up">
+        <alarm-ref id="5155715"/>
+        <alarm-ref id="5155719"/>
+    </situation>
+    <situation severity="cleared" id="5155720" creation-time="1557474962000" summary="Port up" description="Port up">
+        <alarm-ref id="5155720"/>
+        <alarm-ref id="5155726"/>
+    </situation>
+    <situation severity="cleared" id="5155721" creation-time="1557474972000" summary="Port up" description="Port up">
+        <alarm-ref id="5155721"/>
+        <alarm-ref id="5155731"/>
+    </situation>
+    <situation severity="cleared" id="5155722" creation-time="1557474982000" summary="Port up" description="Port up">
+        <alarm-ref id="5155722"/>
+        <alarm-ref id="5155727"/>
+    </situation>
+    <situation severity="cleared" id="5155723" creation-time="1557474992000" summary="Port up" description="Port up">
+        <alarm-ref id="5155723"/>
+        <alarm-ref id="5155729"/>
+    </situation>
+    <situation severity="cleared" id="5155732" creation-time="1557475132000" summary="Port up" description="Port up">
+        <alarm-ref id="5155732"/>
+        <alarm-ref id="5155736"/>
+    </situation>
+    <situation severity="cleared" id="5155734" creation-time="1557475192000" summary="Port up" description="Port up">
+        <alarm-ref id="5155734"/>
+        <alarm-ref id="5155738"/>
+    </situation>
+    <situation severity="cleared" id="5155739" creation-time="1557475272000" summary="Port up" description="Port up">
+        <alarm-ref id="5155744"/>
+        <alarm-ref id="5155739"/>
+    </situation>
+    <situation severity="cleared" id="5155740" creation-time="1557475321000" summary="Port up" description="Port up">
+        <alarm-ref id="5155756"/>
+        <alarm-ref id="5155740"/>
+    </situation>
+    <situation severity="cleared" id="5155741" creation-time="1557475331000" summary="Port up" description="Port up">
+        <alarm-ref id="5155741"/>
+    </situation>
+    <situation severity="cleared" id="5155743" creation-time="1557475332000" summary="Port up" description="Port up">
+        <alarm-ref id="5155743"/>
+        <alarm-ref id="5155758"/>
+    </situation>
+    <situation severity="cleared" id="5155760" creation-time="1557475456000" summary="Port up" description="Port up">
+        <alarm-ref id="5155764"/>
+        <alarm-ref id="5155760"/>
+    </situation>
+    <situation severity="cleared" id="5155761" creation-time="1557475472000" summary="Port up" description="Port up">
+        <alarm-ref id="5155763"/>
+        <alarm-ref id="5155761"/>
+    </situation>
+    <situation severity="cleared" id="5155766" creation-time="1557475572000" summary="Port up" description="Port up">
+        <alarm-ref id="5155766"/>
+        <alarm-ref id="5155768"/>
+    </situation>
+    <situation severity="cleared" id="5155769" creation-time="1557475662000" summary="Port up" description="Port up">
+        <alarm-ref id="5155769"/>
+    </situation>
+    <situation severity="cleared" id="5155772" creation-time="1557475731000" summary="Port up" description="Port up">
+        <alarm-ref id="5155785"/>
+        <alarm-ref id="5155772"/>
+    </situation>
+    <situation severity="cleared" id="5155771" creation-time="1557475731000" summary="Port up" description="Port up">
+        <alarm-ref id="5155788"/>
+        <alarm-ref id="5155771"/>
+    </situation>
+    <situation severity="cleared" id="5155794" creation-time="1557475962000" summary="Port up" description="Port up">
+        <alarm-ref id="5155794"/>
+    </situation>
+    <situation severity="cleared" id="5155797" creation-time="1557476272000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5155797"/>
+    </situation>
+    <situation severity="cleared" id="5155799" creation-time="1557476391000" summary="Port up" description="Port up">
+        <alarm-ref id="5155799"/>
+        <alarm-ref id="5155801"/>
+    </situation>
+    <situation severity="cleared" id="5155802" creation-time="1557476621000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5155802"/>
+        <alarm-ref id="5155804"/>
+    </situation>
+    <situation severity="cleared" id="5155812" creation-time="1557477351000" summary="Port up" description="Port up">
+        <alarm-ref id="5155812"/>
+    </situation>
+    <situation severity="cleared" id="5155817" creation-time="1557477552000" summary="Port up" description="Port up">
+        <alarm-ref id="5155821"/>
+        <alarm-ref id="5155817"/>
+    </situation>
+    <situation severity="cleared" id="5155822" creation-time="1557477662000" summary="Port up" description="Port up">
+        <alarm-ref id="5155822"/>
+    </situation>
+    <situation severity="cleared" id="5155824" creation-time="1557477710000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5155824"/>
+    </situation>
+    <situation severity="cleared" id="5155829" creation-time="1557478052000" summary="Port up" description="Port up">
+        <alarm-ref id="5155829"/>
+    </situation>
+    <situation severity="cleared" id="5155837" creation-time="1557478543000" summary="Port up" description="Port up">
+        <alarm-ref id="5155840"/>
+        <alarm-ref id="5155837"/>
+    </situation>
+    <situation severity="cleared" id="5155842" creation-time="1557478832000" summary="Port up" description="Port up">
+        <alarm-ref id="5155842"/>
+    </situation>
+    <situation severity="cleared" id="5155857" creation-time="1557479472000" summary="Port up" description="Port up">
+        <alarm-ref id="5155857"/>
+    </situation>
+    <situation severity="cleared" id="5155859" creation-time="1557479555000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5155863"/>
+        <alarm-ref id="5155859"/>
+        <alarm-ref id="5155860"/>
+    </situation>
+    <situation severity="cleared" id="5155874" creation-time="1557480022000" summary="Port up" description="Port up">
+        <alarm-ref id="5155874"/>
+        <alarm-ref id="5155877"/>
+    </situation>
+    <situation severity="cleared" id="5155873" creation-time="1557480022000" summary="Port up" description="Port up">
+        <alarm-ref id="5155875"/>
+        <alarm-ref id="5155873"/>
+    </situation>
+    <situation severity="cleared" id="5155872" creation-time="1557480022000" summary="Port up" description="Port up">
+        <alarm-ref id="5155879"/>
+        <alarm-ref id="5155872"/>
+    </situation>
+    <situation severity="cleared" id="5155883" creation-time="1557480152000" summary="Port up" description="Port up">
+        <alarm-ref id="5155889"/>
+        <alarm-ref id="5155883"/>
+    </situation>
+    <situation severity="cleared" id="5155884" creation-time="1557480182000" summary="Port up" description="Port up">
+        <alarm-ref id="5155884"/>
+    </situation>
+    <situation severity="cleared" id="5155890" creation-time="1557480445000" summary="Port up" description="Port up">
+        <alarm-ref id="5155890"/>
+        <alarm-ref id="5155892"/>
+    </situation>
+    <situation severity="cleared" id="5155893" creation-time="1557480598000" summary="Port up" description="Port up">
+        <alarm-ref id="5155893"/>
+    </situation>
+    <situation severity="cleared" id="5155895" creation-time="1557480683000" summary="Port up" description="Port up">
+        <alarm-ref id="5155896"/>
+        <alarm-ref id="5155895"/>
+    </situation>
+    <situation severity="cleared" id="5155898" creation-time="1557480960000" summary="Port up" description="Port up">
+        <alarm-ref id="5155898"/>
+    </situation>
+    <situation severity="cleared" id="5155900" creation-time="1557480972000" summary="Port up" description="Port up">
+        <alarm-ref id="5155900"/>
+    </situation>
+    <situation severity="cleared" id="5155903" creation-time="1557481015000" summary="Port up" description="Port up">
+        <alarm-ref id="5155904"/>
+        <alarm-ref id="5155903"/>
+    </situation>
+    <situation severity="cleared" id="5155902" creation-time="1557481015000" summary="Port up" description="Port up">
+        <alarm-ref id="5155902"/>
+        <alarm-ref id="5155906"/>
+    </situation>
+    <situation severity="cleared" id="5155933" creation-time="1557481562000" summary="Port up" description="Port up">
+        <alarm-ref id="5155933"/>
+    </situation>
+    <situation severity="cleared" id="5155938" creation-time="1557481922000" summary="Port up" description="Port up">
+        <alarm-ref id="5155938"/>
+    </situation>
+    <situation severity="cleared" id="5155942" creation-time="1557482732000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5155942"/>
+    </situation>
+    <situation severity="cleared" id="5155945" creation-time="1557482912000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5155945"/>
+        <alarm-ref id="5155947"/>
+    </situation>
+    <situation severity="cleared" id="5155952" creation-time="1557483102000" summary="Port up" description="Port up">
+        <alarm-ref id="5155952"/>
+        <alarm-ref id="5155955"/>
+    </situation>
+    <situation severity="cleared" id="5155958" creation-time="1557483392000" summary="Port up" description="Port up">
+        <alarm-ref id="5155958"/>
+    </situation>
+    <situation severity="cleared" id="5155961" creation-time="1557483512000" summary="Port up" description="Port up">
+        <alarm-ref id="5155961"/>
+    </situation>
+    <situation severity="cleared" id="5155964" creation-time="1557483661000" summary="Port up" description="Port up">
+        <alarm-ref id="5155964"/>
+    </situation>
+    <situation severity="cleared" id="5155968" creation-time="1557483782000" summary="Port up" description="Port up">
+        <alarm-ref id="5155968"/>
+    </situation>
+    <situation severity="cleared" id="5155970" creation-time="1557483911000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5155970"/>
+    </situation>
+    <situation severity="cleared" id="5155979" creation-time="1557484554000" summary="Port up" description="Port up">
+        <alarm-ref id="5155979"/>
+        <alarm-ref id="5155982"/>
+    </situation>
+    <situation severity="major" id="5155993" creation-time="1557485263000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5155994"/>
+        <alarm-ref id="5155993"/>
+    </situation>
+    <situation severity="cleared" id="5156002" creation-time="1557485925000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156002"/>
+    </situation>
+    <situation severity="cleared" id="5156005" creation-time="1557485950000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156007"/>
+        <alarm-ref id="5156006"/>
+        <alarm-ref id="5156005"/>
+    </situation>
+    <situation severity="major" id="5156010" creation-time="1557486142000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5156010"/>
+    </situation>
+    <situation severity="cleared" id="5156012" creation-time="1557486288000" summary="Port up" description="Port up">
+        <alarm-ref id="5156014"/>
+        <alarm-ref id="5156012"/>
+    </situation>
+    <situation severity="cleared" id="5156013" creation-time="1557486298000" summary="Port up" description="Port up">
+        <alarm-ref id="5156015"/>
+        <alarm-ref id="5156013"/>
+    </situation>
+    <situation severity="cleared" id="5156017" creation-time="1557486353000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5156017"/>
+    </situation>
+    <situation severity="cleared" id="5156019" creation-time="1557486362000" summary="Port up" description="Port up">
+        <alarm-ref id="5156019"/>
+    </situation>
+    <situation severity="cleared" id="5156029" creation-time="1557486573000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5156029"/>
+    </situation>
+    <situation severity="cleared" id="5156031" creation-time="1557486722000" summary="Port up" description="Port up">
+        <alarm-ref id="5156031"/>
+    </situation>
+    <situation severity="cleared" id="5156033" creation-time="1557486898000" summary="Port up" description="Port up">
+        <alarm-ref id="5156033"/>
+    </situation>
+    <situation severity="cleared" id="5156052" creation-time="1557488681000" summary="Port up" description="Port up">
+        <alarm-ref id="5156052"/>
+    </situation>
+    <situation severity="cleared" id="5156066" creation-time="1557489223000" summary="Port up" description="Port up">
+        <alarm-ref id="5156066"/>
+    </situation>
+    <situation severity="cleared" id="5156070" creation-time="1557489523000" summary="Port up" description="Port up">
+        <alarm-ref id="5156070"/>
+    </situation>
+    <situation severity="cleared" id="5156090" creation-time="1557490423000" summary="Port up" description="Port up">
+        <alarm-ref id="5156090"/>
+        <alarm-ref id="5156092"/>
+    </situation>
+    <situation severity="cleared" id="5156093" creation-time="1557490541000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5156093"/>
+    </situation>
+    <situation severity="cleared" id="5156104" creation-time="1557491024000" summary="Port up" description="Port up">
+        <alarm-ref id="5156104"/>
+        <alarm-ref id="5156114"/>
+    </situation>
+    <situation severity="cleared" id="5156107" creation-time="1557491030000" summary="Link up" description="Link up">
+        <alarm-ref id="5156107"/>
+        <alarm-ref id="5156154"/>
+    </situation>
+    <situation severity="cleared" id="5156106" creation-time="1557491030000" summary="Link up" description="Link up">
+        <alarm-ref id="5156106"/>
+        <alarm-ref id="5156156"/>
+    </situation>
+    <situation severity="cleared" id="5156105" creation-time="1557491030000" summary="Link up" description="Link up">
+        <alarm-ref id="5156105"/>
+        <alarm-ref id="5156159"/>
+    </situation>
+    <situation severity="cleared" id="5156108" creation-time="1557491031000" summary="Link up" description="Link up">
+        <alarm-ref id="5156108"/>
+        <alarm-ref id="5156158"/>
+    </situation>
+    <situation severity="cleared" id="5156109" creation-time="1557491033000" summary="Port up" description="Port up">
+        <alarm-ref id="5156109"/>
+    </situation>
+    <situation severity="cleared" id="5156112" creation-time="1557491058000" summary="LAG Link up" description="LAG Link up">
+        <alarm-ref id="5156129"/>
+        <alarm-ref id="5156128"/>
+        <alarm-ref id="5156149"/>
+        <alarm-ref id="5156119"/>
+        <alarm-ref id="5156120"/>
+        <alarm-ref id="5156124"/>
+        <alarm-ref id="5156112"/>
+    </situation>
+    <situation severity="cleared" id="5156142" creation-time="1557491483000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5156142"/>
+    </situation>
+    <situation severity="cleared" id="5156144" creation-time="1557491509000" summary="Port up" description="Port up">
+        <alarm-ref id="5156147"/>
+        <alarm-ref id="5156144"/>
+    </situation>
+    <situation severity="cleared" id="5156148" creation-time="1557491563000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5156148"/>
+        <alarm-ref id="5156164"/>
+    </situation>
+    <situation severity="cleared" id="5156165" creation-time="1557491813000" summary="Port up" description="Port up">
+        <alarm-ref id="5156165"/>
+    </situation>
+    <situation severity="cleared" id="5156169" creation-time="1557492063000" summary="Port up" description="Port up">
+        <alarm-ref id="5156169"/>
+    </situation>
+    <situation severity="cleared" id="5156180" creation-time="1557492462000" summary="Port up" description="Port up">
+        <alarm-ref id="5156180"/>
+    </situation>
+    <situation severity="cleared" id="5156188" creation-time="1557492832000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5156188"/>
+    </situation>
+    <situation severity="cleared" id="5156203" creation-time="1557493402000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5156203"/>
+    </situation>
+    <situation severity="cleared" id="5156209" creation-time="1557493821000" summary="Port up" description="Port up">
+        <alarm-ref id="5156209"/>
+        <alarm-ref id="5156218"/>
+    </situation>
+    <situation severity="cleared" id="5156208" creation-time="1557493821000" summary="Port up" description="Port up">
+        <alarm-ref id="5156208"/>
+        <alarm-ref id="5156220"/>
+    </situation>
+    <situation severity="cleared" id="5156210" creation-time="1557493834000" summary="Port up" description="Port up">
+        <alarm-ref id="5156210"/>
+    </situation>
+    <situation severity="cleared" id="5156213" creation-time="1557493880000" summary="Port up" description="Port up">
+        <alarm-ref id="5156213"/>
+        <alarm-ref id="5156221"/>
+    </situation>
+    <situation severity="cleared" id="5156216" creation-time="1557493901000" summary="Port up" description="Port up">
+        <alarm-ref id="5156216"/>
+        <alarm-ref id="5156226"/>
+    </situation>
+    <situation severity="cleared" id="5156223" creation-time="1557493983000" summary="Port up" description="Port up">
+        <alarm-ref id="5156223"/>
+    </situation>
+    <situation severity="cleared" id="5156227" creation-time="1557494134000" summary="Port up" description="Port up">
+        <alarm-ref id="5156227"/>
+    </situation>
+    <situation severity="cleared" id="5156230" creation-time="1557494343000" summary="Port up" description="Port up">
+        <alarm-ref id="5156230"/>
+    </situation>
+    <situation severity="cleared" id="5156245" creation-time="1557494853000" summary="Port up" description="Port up">
+        <alarm-ref id="5156245"/>
+    </situation>
+    <situation severity="cleared" id="5156247" creation-time="1557494935000" summary="Port up" description="Port up">
+        <alarm-ref id="5156258"/>
+        <alarm-ref id="5156247"/>
+    </situation>
+    <situation severity="cleared" id="5156248" creation-time="1557494936000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156249"/>
+        <alarm-ref id="5156248"/>
+        <alarm-ref id="5156250"/>
+    </situation>
+    <situation severity="cleared" id="5156256" creation-time="1557494942000" summary="Link up" description="Link up">
+        <alarm-ref id="5156256"/>
+        <alarm-ref id="5156277"/>
+    </situation>
+    <situation severity="cleared" id="5156254" creation-time="1557494942000" summary="Link up" description="Link up">
+        <alarm-ref id="5156274"/>
+        <alarm-ref id="5156254"/>
+    </situation>
+    <situation severity="cleared" id="5156253" creation-time="1557494942000" summary="Link up" description="Link up">
+        <alarm-ref id="5156281"/>
+        <alarm-ref id="5156253"/>
+    </situation>
+    <situation severity="cleared" id="5156255" creation-time="1557494942000" summary="Link up" description="Link up">
+        <alarm-ref id="5156272"/>
+        <alarm-ref id="5156255"/>
+    </situation>
+    <situation severity="cleared" id="5156260" creation-time="1557495074000" summary="Port up" description="Port up">
+        <alarm-ref id="5156260"/>
+        <alarm-ref id="5156263"/>
+    </situation>
+    <situation severity="cleared" id="5156261" creation-time="1557495084000" summary="Device Reachable" description="Device Reachable">
+        <alarm-ref id="5156270"/>
+        <alarm-ref id="5156261"/>
+    </situation>
+    <situation severity="cleared" id="5156262" creation-time="1557495134000" summary="Port up" description="Port up">
+        <alarm-ref id="5156262"/>
+        <alarm-ref id="5156266"/>
+    </situation>
+    <situation severity="cleared" id="5156283" creation-time="1557495661000" summary="Link up" description="Link up">
+        <alarm-ref id="5156319"/>
+        <alarm-ref id="5156307"/>
+        <alarm-ref id="5156318"/>
+        <alarm-ref id="5156283"/>
+        <alarm-ref id="5156310"/>
+    </situation>
+    <situation severity="cleared" id="5156284" creation-time="1557495665000" summary="LAG Link down due to oper down - Cleared due to ForceClear" description="LAG Link down due to oper down - Cleared due to ForceClear">
+        <alarm-ref id="5156305"/>
+        <alarm-ref id="5156306"/>
+        <alarm-ref id="5156284"/>
+    </situation>
+    <situation severity="cleared" id="5156285" creation-time="1557495666000" summary="Link up" description="Link up">
+        <alarm-ref id="5156314"/>
+        <alarm-ref id="5156317"/>
+        <alarm-ref id="5156285"/>
+        <alarm-ref id="5156295"/>
+        <alarm-ref id="5156294"/>
+        <alarm-ref id="5156312"/>
+    </situation>
+    <situation severity="cleared" id="5156286" creation-time="1557495666000" summary="Link down due to oper down - Cleared due to ForceClear" description="Link down due to oper down - Cleared due to ForceClear">
+        <alarm-ref id="5156303"/>
+        <alarm-ref id="5156330"/>
+        <alarm-ref id="5156286"/>
+        <alarm-ref id="5156322"/>
+        <alarm-ref id="5156332"/>
+        <alarm-ref id="5156320"/>
+    </situation>
+    <situation severity="cleared" id="5156337" creation-time="1557496174000" summary="Port up" description="Port up">
+        <alarm-ref id="5156337"/>
+    </situation>
+    <situation severity="cleared" id="5156340" creation-time="1557496474000" summary="Port up" description="Port up">
+        <alarm-ref id="5156340"/>
+    </situation>
+    <situation severity="cleared" id="5156343" creation-time="1557496784000" summary="Port up" description="Port up">
+        <alarm-ref id="5156343"/>
+    </situation>
+    <situation severity="cleared" id="5156345" creation-time="1557496802000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5156345"/>
+    </situation>
+    <situation severity="cleared" id="5156347" creation-time="1557496912000" summary="Port up" description="Port up">
+        <alarm-ref id="5156347"/>
+        <alarm-ref id="5156354"/>
+    </situation>
+    <situation severity="cleared" id="5156348" creation-time="1557496914000" summary="Port up" description="Port up">
+        <alarm-ref id="5156348"/>
+        <alarm-ref id="5156353"/>
+    </situation>
+    <situation severity="major" id="5156350" creation-time="1557496953000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5156350"/>
+    </situation>
+    <situation severity="cleared" id="5156358" creation-time="1557497174000" summary="Port up" description="Port up">
+        <alarm-ref id="5156358"/>
+    </situation>
+    <situation severity="cleared" id="5156375" creation-time="1557497454000" summary="Port up" description="Port up">
+        <alarm-ref id="5156375"/>
+    </situation>
+    <situation severity="major" id="5156380" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156380"/>
+    </situation>
+    <situation severity="major" id="5156377" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156377"/>
+    </situation>
+    <situation severity="major" id="5156382" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156382"/>
+    </situation>
+    <situation severity="major" id="5156379" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156379"/>
+    </situation>
+    <situation severity="major" id="5156378" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156378"/>
+    </situation>
+    <situation severity="major" id="5156381" creation-time="1557497476000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156381"/>
+    </situation>
+    <situation severity="cleared" id="5156391" creation-time="1557497514000" summary="Port up" description="Port up">
+        <alarm-ref id="5156391"/>
+        <alarm-ref id="5156393"/>
+    </situation>
+    <situation severity="cleared" id="5156390" creation-time="1557497514000" summary="Port up" description="Port up">
+        <alarm-ref id="5156392"/>
+        <alarm-ref id="5156390"/>
+    </situation>
+    <situation severity="cleared" id="5156394" creation-time="1557497772000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156394"/>
+    </situation>
+    <situation severity="cleared" id="5156395" creation-time="1557497772000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156395"/>
+    </situation>
+    <situation severity="cleared" id="5156401" creation-time="1557497840000" summary="Port up" description="Port up">
+        <alarm-ref id="5156401"/>
+        <alarm-ref id="5156405"/>
+    </situation>
+    <situation severity="cleared" id="5156400" creation-time="1557497840000" summary="Port up" description="Port up">
+        <alarm-ref id="5156408"/>
+        <alarm-ref id="5156400"/>
+    </situation>
+    <situation severity="cleared" id="5156398" creation-time="1557497840000" summary="Port up" description="Port up">
+        <alarm-ref id="5156402"/>
+        <alarm-ref id="5156398"/>
+    </situation>
+    <situation severity="cleared" id="5156399" creation-time="1557497840000" summary="Port up" description="Port up">
+        <alarm-ref id="5156406"/>
+        <alarm-ref id="5156399"/>
+    </situation>
+    <situation severity="major" id="5156412" creation-time="1557498148000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156412"/>
+    </situation>
+    <situation severity="major" id="5156415" creation-time="1557498148000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156415"/>
+    </situation>
+    <situation severity="major" id="5156414" creation-time="1557498148000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156414"/>
+    </situation>
+    <situation severity="major" id="5156413" creation-time="1557498148000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156413"/>
+    </situation>
+    <situation severity="major" id="5156424" creation-time="1557498316000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156424"/>
+    </situation>
+    <situation severity="major" id="5156421" creation-time="1557498316000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156421"/>
+    </situation>
+    <situation severity="major" id="5156423" creation-time="1557498316000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156423"/>
+    </situation>
+    <situation severity="major" id="5156422" creation-time="1557498316000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156422"/>
+    </situation>
+    <situation severity="major" id="5156425" creation-time="1557498316000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156425"/>
+    </situation>
+    <situation severity="cleared" id="5156435" creation-time="1557498848000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156436"/>
+        <alarm-ref id="5156435"/>
+    </situation>
+    <situation severity="major" id="5156437" creation-time="1557498865000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156437"/>
+    </situation>
+    <situation severity="major" id="5156440" creation-time="1557498865000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156440"/>
+    </situation>
+    <situation severity="major" id="5156438" creation-time="1557498865000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156438"/>
+    </situation>
+    <situation severity="major" id="5156439" creation-time="1557498865000" summary="Pluggable Transceiver out" description="Pluggable Transceiver out">
+        <alarm-ref id="5156439"/>
+    </situation>
+    <situation severity="cleared" id="5156446" creation-time="1557498870000" summary="Port up" description="Port up">
+        <alarm-ref id="5156446"/>
+        <alarm-ref id="5156461"/>
+    </situation>
+    <situation severity="cleared" id="5156445" creation-time="1557498870000" summary="Port up" description="Port up">
+        <alarm-ref id="5156459"/>
+        <alarm-ref id="5156445"/>
+    </situation>
+    <situation severity="cleared" id="5156451" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156456"/>
+        <alarm-ref id="5156451"/>
+    </situation>
+    <situation severity="cleared" id="5156450" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156450"/>
+        <alarm-ref id="5156454"/>
+    </situation>
+    <situation severity="cleared" id="5156452" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156458"/>
+        <alarm-ref id="5156452"/>
+    </situation>
+    <situation severity="cleared" id="5156447" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156447"/>
+        <alarm-ref id="5156453"/>
+    </situation>
+    <situation severity="cleared" id="5156449" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156457"/>
+        <alarm-ref id="5156449"/>
+    </situation>
+    <situation severity="cleared" id="5156448" creation-time="1557498878000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156448"/>
+        <alarm-ref id="5156455"/>
+    </situation>
+    <situation severity="cleared" id="5156464" creation-time="1557499023000" summary="Port up" description="Port up">
+        <alarm-ref id="5156469"/>
+        <alarm-ref id="5156464"/>
+    </situation>
+    <situation severity="cleared" id="5156463" creation-time="1557499023000" summary="Port up" description="Port up">
+        <alarm-ref id="5156467"/>
+        <alarm-ref id="5156463"/>
+    </situation>
+    <situation severity="cleared" id="5156471" creation-time="1557499143000" summary="Port up" description="Port up">
+        <alarm-ref id="5156471"/>
+    </situation>
+    <situation severity="cleared" id="5156473" creation-time="1557499265000" summary="Port up" description="Port up">
+        <alarm-ref id="5156473"/>
+    </situation>
+    <situation severity="cleared" id="5156475" creation-time="1557499405000" summary="Port up" description="Port up">
+        <alarm-ref id="5156480"/>
+        <alarm-ref id="5156475"/>
+    </situation>
+    <situation severity="cleared" id="5156477" creation-time="1557499409000" summary="Port up" description="Port up">
+        <alarm-ref id="5156478"/>
+        <alarm-ref id="5156477"/>
+    </situation>
+    <situation severity="cleared" id="5156483" creation-time="1557499565000" summary="Port up" description="Port up">
+        <alarm-ref id="5156483"/>
+    </situation>
+    <situation severity="cleared" id="5156486" creation-time="1557499875000" summary="Port up" description="Port up">
+        <alarm-ref id="5156486"/>
+    </situation>
+    <situation severity="cleared" id="5156488" creation-time="1557499944000" summary="Port up" description="Port up">
+        <alarm-ref id="5156490"/>
+        <alarm-ref id="5156492"/>
+        <alarm-ref id="5156488"/>
+    </situation>
+    <situation severity="cleared" id="5156493" creation-time="1557500104000" summary="Port up" description="Port up">
+        <alarm-ref id="5156493"/>
+    </situation>
+    <situation severity="cleared" id="5156495" creation-time="1557500165000" summary="Port up" description="Port up">
+        <alarm-ref id="5156495"/>
+    </situation>
+    <situation severity="cleared" id="5156499" creation-time="1557500285000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156499"/>
+    </situation>
+    <situation severity="cleared" id="5156513" creation-time="1557501195000" summary="Port up" description="Port up">
+        <alarm-ref id="5156513"/>
+        <alarm-ref id="5156516"/>
+    </situation>
+    <situation severity="cleared" id="5156512" creation-time="1557501195000" summary="Port up" description="Port up">
+        <alarm-ref id="5156512"/>
+        <alarm-ref id="5156517"/>
+    </situation>
+    <situation severity="cleared" id="5156527" creation-time="1557501810000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156528"/>
+        <alarm-ref id="5156527"/>
+    </situation>
+    <situation severity="cleared" id="5156529" creation-time="1557501844000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156529"/>
+    </situation>
+    <situation severity="cleared" id="5156531" creation-time="1557501861000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156531"/>
+    </situation>
+    <situation severity="cleared" id="5156530" creation-time="1557501861000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156530"/>
+    </situation>
+    <situation severity="cleared" id="5156538" creation-time="1557502085000" summary="Port up" description="Port up">
+        <alarm-ref id="5156538"/>
+        <alarm-ref id="5156541"/>
+    </situation>
+    <situation severity="cleared" id="5156537" creation-time="1557502085000" summary="Port up" description="Port up">
+        <alarm-ref id="5156537"/>
+        <alarm-ref id="5156540"/>
+    </situation>
+    <situation severity="cleared" id="5156545" creation-time="1557502292000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156557"/>
+        <alarm-ref id="5156545"/>
+    </situation>
+    <situation severity="cleared" id="5156546" creation-time="1557502302000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156546"/>
+        <alarm-ref id="5156562"/>
+    </situation>
+    <situation severity="cleared" id="5156549" creation-time="1557502310000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156549"/>
+        <alarm-ref id="5156560"/>
+    </situation>
+    <situation severity="cleared" id="5156550" creation-time="1557502314000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156550"/>
+        <alarm-ref id="5156563"/>
+    </situation>
+    <situation severity="cleared" id="5156551" creation-time="1557502320000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156561"/>
+        <alarm-ref id="5156551"/>
+    </situation>
+    <situation severity="cleared" id="5156552" creation-time="1557502324000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156564"/>
+        <alarm-ref id="5156552"/>
+    </situation>
+    <situation severity="cleared" id="5156554" creation-time="1557502325000" summary="Port up" description="Port up">
+        <alarm-ref id="5156566"/>
+        <alarm-ref id="5156554"/>
+    </situation>
+    <situation severity="cleared" id="5156553" creation-time="1557502325000" summary="Port up" description="Port up">
+        <alarm-ref id="5156565"/>
+        <alarm-ref id="5156553"/>
+    </situation>
+    <situation severity="cleared" id="5156555" creation-time="1557502350000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156567"/>
+        <alarm-ref id="5156555"/>
+    </situation>
+    <situation severity="cleared" id="5156571" creation-time="1557502676000" summary="BGP neighbor loss VRF due to oper - Cleared due to ForceClear" description="BGP neighbor loss VRF due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156571"/>
+    </situation>
+    <situation severity="cleared" id="5156573" creation-time="1557502687000" summary="BGP neighbor loss VRF due to oper - Cleared due to ForceClear" description="BGP neighbor loss VRF due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156576"/>
+        <alarm-ref id="5156574"/>
+        <alarm-ref id="5156573"/>
+    </situation>
+    <situation severity="cleared" id="5156582" creation-time="1557502856000" summary="Port up" description="Port up">
+        <alarm-ref id="5156582"/>
+    </situation>
+    <situation severity="cleared" id="5156585" creation-time="1557503004000" summary="Port up" description="Port up">
+        <alarm-ref id="5156585"/>
+    </situation>
+    <situation severity="cleared" id="5156588" creation-time="1557503156000" summary="Port up" description="Port up">
+        <alarm-ref id="5156588"/>
+        <alarm-ref id="5156592"/>
+    </situation>
+    <situation severity="cleared" id="5156587" creation-time="1557503156000" summary="Port up" description="Port up">
+        <alarm-ref id="5156593"/>
+        <alarm-ref id="5156587"/>
+    </situation>
+    <situation severity="cleared" id="5156591" creation-time="1557503193000" summary="Port up" description="Port up">
+        <alarm-ref id="5156591"/>
+        <alarm-ref id="5156596"/>
+    </situation>
+    <situation severity="cleared" id="5156594" creation-time="1557503281000" summary="Port up" description="Port up">
+        <alarm-ref id="5156594"/>
+    </situation>
+    <situation severity="cleared" id="5156607" creation-time="1557503525000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5156607"/>
+    </situation>
+    <situation severity="cleared" id="5156613" creation-time="1557503662000" summary="Port up" description="Port up">
+        <alarm-ref id="5156613"/>
+        <alarm-ref id="5156615"/>
+    </situation>
+    <situation severity="cleared" id="5156612" creation-time="1557503662000" summary="Port up" description="Port up">
+        <alarm-ref id="5156612"/>
+        <alarm-ref id="5156616"/>
+    </situation>
+    <situation severity="cleared" id="5156621" creation-time="1557504077000" summary="Port up" description="Port up">
+        <alarm-ref id="5156621"/>
+        <alarm-ref id="5156630"/>
+    </situation>
+    <situation severity="cleared" id="5156620" creation-time="1557504077000" summary="Port up" description="Port up">
+        <alarm-ref id="5156629"/>
+        <alarm-ref id="5156620"/>
+    </situation>
+    <situation severity="cleared" id="5156619" creation-time="1557504077000" summary="Port up" description="Port up">
+        <alarm-ref id="5156627"/>
+        <alarm-ref id="5156619"/>
+    </situation>
+    <situation severity="cleared" id="5156622" creation-time="1557504087000" summary="Port up" description="Port up">
+        <alarm-ref id="5156633"/>
+        <alarm-ref id="5156622"/>
+    </situation>
+    <situation severity="cleared" id="5156635" creation-time="1557504207000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5156635"/>
+    </situation>
+    <situation severity="cleared" id="5156652" creation-time="1557505104000" summary="Port up" description="Port up">
+        <alarm-ref id="5156652"/>
+    </situation>
+    <situation severity="cleared" id="5156654" creation-time="1557505110000" summary="Port up" description="Port up">
+        <alarm-ref id="5156657"/>
+        <alarm-ref id="5156654"/>
+    </situation>
+    <situation severity="cleared" id="5156655" creation-time="1557505118000" summary="Port up" description="Port up">
+        <alarm-ref id="5156656"/>
+        <alarm-ref id="5156655"/>
+    </situation>
+    <situation severity="cleared" id="5156658" creation-time="1557505206000" summary="Port up" description="Port up">
+        <alarm-ref id="5156658"/>
+    </situation>
+    <situation severity="cleared" id="5156662" creation-time="1557505486000" summary="Port up" description="Port up">
+        <alarm-ref id="5156662"/>
+    </situation>
+    <situation severity="cleared" id="5156666" creation-time="1557505624000" summary="Port up" description="Port up">
+        <alarm-ref id="5156666"/>
+    </situation>
+    <situation severity="cleared" id="5156677" creation-time="1557506465000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156677"/>
+        <alarm-ref id="5156681"/>
+    </situation>
+    <situation severity="cleared" id="5156678" creation-time="1557506475000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156678"/>
+        <alarm-ref id="5156682"/>
+    </situation>
+    <situation severity="cleared" id="5156679" creation-time="1557506486000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156679"/>
+        <alarm-ref id="5156683"/>
+    </situation>
+    <situation severity="cleared" id="5156680" creation-time="1557506503000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156680"/>
+        <alarm-ref id="5156684"/>
+    </situation>
+    <situation severity="cleared" id="5156685" creation-time="1557506670000" summary="Port up" description="Port up">
+        <alarm-ref id="5156688"/>
+        <alarm-ref id="5156685"/>
+    </situation>
+    <situation severity="cleared" id="5156687" creation-time="1557506706000" summary="Port up" description="Port up">
+        <alarm-ref id="5156687"/>
+        <alarm-ref id="5156690"/>
+    </situation>
+    <situation severity="cleared" id="5156698" creation-time="1557506996000" summary="Pluggable Transceiver in" description="Pluggable Transceiver in">
+        <alarm-ref id="5156698"/>
+    </situation>
+    <situation severity="cleared" id="5156699" creation-time="1557506996000" summary="Pluggable Transceiver in" description="Pluggable Transceiver in">
+        <alarm-ref id="5156699"/>
+    </situation>
+    <situation severity="cleared" id="5156705" creation-time="1557507048000" summary="Port up" description="Port up">
+        <alarm-ref id="5156705"/>
+    </situation>
+    <situation severity="cleared" id="5156712" creation-time="1557507116000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156712"/>
+    </situation>
+    <situation severity="cleared" id="5156714" creation-time="1557507116000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156714"/>
+    </situation>
+    <situation severity="cleared" id="5156715" creation-time="1557507116000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156715"/>
+    </situation>
+    <situation severity="cleared" id="5156713" creation-time="1557507116000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5156713"/>
+    </situation>
+    <situation severity="cleared" id="5156725" creation-time="1557507230000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5156725"/>
+    </situation>
+    <situation severity="cleared" id="5156728" creation-time="1557507426000" summary="Port up" description="Port up">
+        <alarm-ref id="5156728"/>
+    </situation>
+    <situation severity="cleared" id="5156733" creation-time="1557507735000" summary="Port up" description="Port up">
+        <alarm-ref id="5156733"/>
+    </situation>
+    <situation severity="cleared" id="5156741" creation-time="1557507806000" summary="Port up" description="Port up">
+        <alarm-ref id="5156745"/>
+        <alarm-ref id="5156741"/>
+    </situation>
+    <situation severity="cleared" id="5156742" creation-time="1557507826000" summary="Port up" description="Port up">
+        <alarm-ref id="5156742"/>
+    </situation>
+    <situation severity="cleared" id="5156758" creation-time="1557508316000" summary="Port up" description="Port up">
+        <alarm-ref id="5156758"/>
+    </situation>
+    <situation severity="cleared" id="5156765" creation-time="1557508775000" summary="Port up" description="Port up">
+        <alarm-ref id="5156765"/>
+        <alarm-ref id="5156775"/>
+        <alarm-ref id="5156768"/>
+        <alarm-ref id="5156774"/>
+        <alarm-ref id="5156773"/>
+    </situation>
+    <situation severity="cleared" id="5156767" creation-time="1557508808000" summary="Port up" description="Port up">
+        <alarm-ref id="5156767"/>
+        <alarm-ref id="5156772"/>
+    </situation>
+    <situation severity="cleared" id="5156777" creation-time="1557508905000" summary="Port up" description="Port up">
+        <alarm-ref id="5156777"/>
+    </situation>
+    <situation severity="cleared" id="5156780" creation-time="1557508925000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156781"/>
+        <alarm-ref id="5156780"/>
+        <alarm-ref id="5156784"/>
+    </situation>
+    <situation severity="cleared" id="5156785" creation-time="1557508929000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156785"/>
+    </situation>
+    <situation severity="cleared" id="5156788" creation-time="1557508974000" summary="Port up" description="Port up">
+        <alarm-ref id="5156788"/>
+        <alarm-ref id="5156790"/>
+    </situation>
+    <situation severity="cleared" id="5156799" creation-time="1557509446000" summary="Port up" description="Port up">
+        <alarm-ref id="5156799"/>
+        <alarm-ref id="5156803"/>
+    </situation>
+    <situation severity="cleared" id="5156800" creation-time="1557509449000" summary="Port up" description="Port up">
+        <alarm-ref id="5156800"/>
+        <alarm-ref id="5156804"/>
+    </situation>
+    <situation severity="cleared" id="5156805" creation-time="1557509553000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156808"/>
+        <alarm-ref id="5156805"/>
+        <alarm-ref id="5156809"/>
+    </situation>
+    <situation severity="cleared" id="5156810" creation-time="1557509564000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5156810"/>
+    </situation>
+    <situation severity="cleared" id="5156832" creation-time="1557510357000" summary="Port up" description="Port up">
+        <alarm-ref id="5156832"/>
+    </situation>
+    <situation severity="cleared" id="5156869" creation-time="1557510975000" summary="Port up" description="Port up">
+        <alarm-ref id="5156869"/>
+    </situation>
+    <situation severity="cleared" id="5156874" creation-time="1557511285000" summary="Port up" description="Port up">
+        <alarm-ref id="5156874"/>
+    </situation>
+    <situation severity="cleared" id="5156880" creation-time="1557511505000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5156880"/>
+    </situation>
+    <situation severity="cleared" id="5156884" creation-time="1557511577000" summary="Port up" description="Port up">
+        <alarm-ref id="5156884"/>
+    </situation>
+    <situation severity="cleared" id="5156892" creation-time="1557511946000" summary="Port up" description="Port up">
+        <alarm-ref id="5156897"/>
+        <alarm-ref id="5156892"/>
+    </situation>
+    <situation severity="cleared" id="5156893" creation-time="1557511950000" summary="Port up" description="Port up">
+        <alarm-ref id="5156899"/>
+        <alarm-ref id="5156893"/>
+    </situation>
+    <situation severity="cleared" id="5156900" creation-time="1557512100000" summary="Port up" description="Port up">
+        <alarm-ref id="5156900"/>
+        <alarm-ref id="5156904"/>
+    </situation>
+    <situation severity="cleared" id="5156902" creation-time="1557512153000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156902"/>
+        <alarm-ref id="5156908"/>
+    </situation>
+    <situation severity="cleared" id="5156903" creation-time="1557512153000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156903"/>
+        <alarm-ref id="5156909"/>
+    </situation>
+    <situation severity="cleared" id="5156913" creation-time="1557512513000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156913"/>
+        <alarm-ref id="5156915"/>
+    </situation>
+    <situation severity="cleared" id="5156912" creation-time="1557512513000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156912"/>
+        <alarm-ref id="5156914"/>
+    </situation>
+    <situation severity="cleared" id="5156921" creation-time="1557512677000" summary="Port up" description="Port up">
+        <alarm-ref id="5156921"/>
+        <alarm-ref id="5156928"/>
+    </situation>
+    <situation severity="cleared" id="5156931" creation-time="1557512808000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156936"/>
+        <alarm-ref id="5156931"/>
+    </situation>
+    <situation severity="cleared" id="5156942" creation-time="1557513073000" summary="Port up" description="Port up">
+        <alarm-ref id="5156942"/>
+        <alarm-ref id="5156959"/>
+    </situation>
+    <situation severity="cleared" id="5156943" creation-time="1557513073000" summary="Port up" description="Port up">
+        <alarm-ref id="5156957"/>
+        <alarm-ref id="5156943"/>
+    </situation>
+    <situation severity="cleared" id="5156951" creation-time="1557513144000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156951"/>
+        <alarm-ref id="5156952"/>
+    </situation>
+    <situation severity="cleared" id="5156965" creation-time="1557513377000" summary="Port up" description="Port up">
+        <alarm-ref id="5156965"/>
+    </situation>
+    <situation severity="cleared" id="5156969" creation-time="1557513444000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156969"/>
+        <alarm-ref id="5156971"/>
+    </situation>
+    <situation severity="cleared" id="5156970" creation-time="1557513454000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156970"/>
+        <alarm-ref id="5156972"/>
+    </situation>
+    <situation severity="cleared" id="5156973" creation-time="1557513606000" summary="Port up" description="Port up">
+        <alarm-ref id="5156973"/>
+    </situation>
+    <situation severity="cleared" id="5156975" creation-time="1557513617000" summary="Port up" description="Port up">
+        <alarm-ref id="5156975"/>
+    </situation>
+    <situation severity="cleared" id="5156978" creation-time="1557513724000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156978"/>
+        <alarm-ref id="5156983"/>
+    </situation>
+    <situation severity="cleared" id="5156988" creation-time="1557513921000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5156988"/>
+        <alarm-ref id="5156991"/>
+    </situation>
+    <situation severity="cleared" id="5156989" creation-time="1557513958000" summary="Port up" description="Port up">
+        <alarm-ref id="5156989"/>
+    </situation>
+    <situation severity="cleared" id="5156994" creation-time="1557514103000" summary="Port up" description="Port up">
+        <alarm-ref id="5156998"/>
+        <alarm-ref id="5156994"/>
+    </situation>
+    <situation severity="cleared" id="5156993" creation-time="1557514103000" summary="Port up" description="Port up">
+        <alarm-ref id="5156996"/>
+        <alarm-ref id="5156993"/>
+    </situation>
+    <situation severity="cleared" id="5157001" creation-time="1557514272000" summary="Port up" description="Port up">
+        <alarm-ref id="5157001"/>
+    </situation>
+    <situation severity="cleared" id="5157008" creation-time="1557514327000" summary="Port up" description="Port up">
+        <alarm-ref id="5157008"/>
+        <alarm-ref id="5157013"/>
+    </situation>
+    <situation severity="cleared" id="5157009" creation-time="1557514348000" summary="Port up" description="Port up">
+        <alarm-ref id="5157009"/>
+    </situation>
+    <situation severity="cleared" id="5157012" creation-time="1557514392000" summary="Port up" description="Port up">
+        <alarm-ref id="5157012"/>
+    </situation>
+    <situation severity="cleared" id="5157018" creation-time="1557514626000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5157018"/>
+    </situation>
+    <situation severity="cleared" id="5157025" creation-time="1557514897000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157025"/>
+    </situation>
+    <situation severity="cleared" id="5157030" creation-time="1557515007000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157030"/>
+    </situation>
+    <situation severity="cleared" id="5157034" creation-time="1557515107000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157034"/>
+    </situation>
+    <situation severity="cleared" id="5157051" creation-time="1557515565000" summary="Port up" description="Port up">
+        <alarm-ref id="5157051"/>
+        <alarm-ref id="5157054"/>
+    </situation>
+    <situation severity="cleared" id="5157052" creation-time="1557515565000" summary="Port up" description="Port up">
+        <alarm-ref id="5157052"/>
+        <alarm-ref id="5157056"/>
+    </situation>
+    <situation severity="cleared" id="5157059" creation-time="1557515765000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157062"/>
+        <alarm-ref id="5157059"/>
+    </situation>
+    <situation severity="cleared" id="5157061" creation-time="1557515785000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157061"/>
+        <alarm-ref id="5157066"/>
+    </situation>
+    <situation severity="cleared" id="5157063" creation-time="1557515869000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157063"/>
+    </situation>
+    <situation severity="cleared" id="5157068" creation-time="1557515999000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157068"/>
+    </situation>
+    <situation severity="cleared" id="5157072" creation-time="1557516048000" summary="Port up" description="Port up">
+        <alarm-ref id="5157072"/>
+        <alarm-ref id="5157075"/>
+    </situation>
+    <situation severity="cleared" id="5157080" creation-time="1557516388000" summary="Port up" description="Port up">
+        <alarm-ref id="5157080"/>
+    </situation>
+    <situation severity="cleared" id="5157084" creation-time="1557516578000" summary="Port up" description="Port up">
+        <alarm-ref id="5157084"/>
+    </situation>
+    <situation severity="cleared" id="5157086" creation-time="1557516878000" summary="Port up" description="Port up">
+        <alarm-ref id="5157086"/>
+    </situation>
+    <situation severity="cleared" id="5157090" creation-time="1557517312000" summary="Port up" description="Port up">
+        <alarm-ref id="5157090"/>
+    </situation>
+    <situation severity="cleared" id="5157092" creation-time="1557517432000" summary="Port up" description="Port up">
+        <alarm-ref id="5157092"/>
+    </situation>
+    <situation severity="cleared" id="5157094" creation-time="1557517497000" summary="Port up" description="Port up">
+        <alarm-ref id="5157094"/>
+        <alarm-ref id="5157097"/>
+    </situation>
+    <situation severity="cleared" id="5157095" creation-time="1557517520000" summary="Port up" description="Port up">
+        <alarm-ref id="5157095"/>
+    </situation>
+    <situation severity="cleared" id="5157102" creation-time="1557517915000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157107"/>
+        <alarm-ref id="5157102"/>
+    </situation>
+    <situation severity="cleared" id="5157104" creation-time="1557517945000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157109"/>
+        <alarm-ref id="5157104"/>
+    </situation>
+    <situation severity="cleared" id="5157106" creation-time="1557517995000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157106"/>
+        <alarm-ref id="5157119"/>
+    </situation>
+    <situation severity="cleared" id="5157111" creation-time="1557518055000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157122"/>
+        <alarm-ref id="5157111"/>
+    </situation>
+    <situation severity="cleared" id="5157113" creation-time="1557518085000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157116"/>
+        <alarm-ref id="5157113"/>
+    </situation>
+    <situation severity="cleared" id="5157114" creation-time="1557518085000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157124"/>
+        <alarm-ref id="5157114"/>
+    </situation>
+    <situation severity="cleared" id="5157120" creation-time="1557518095000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157129"/>
+        <alarm-ref id="5157120"/>
+    </situation>
+    <situation severity="cleared" id="5157121" creation-time="1557518095000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157127"/>
+        <alarm-ref id="5157121"/>
+    </situation>
+    <situation severity="cleared" id="5157131" creation-time="1557518206000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5157131"/>
+    </situation>
+    <situation severity="cleared" id="5157133" creation-time="1557518215000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157140"/>
+        <alarm-ref id="5157133"/>
+    </situation>
+    <situation severity="cleared" id="5157134" creation-time="1557518215000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157134"/>
+        <alarm-ref id="5157142"/>
+    </situation>
+    <situation severity="cleared" id="5157136" creation-time="1557518245000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157146"/>
+        <alarm-ref id="5157136"/>
+    </situation>
+    <situation severity="cleared" id="5157137" creation-time="1557518245000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157149"/>
+        <alarm-ref id="5157137"/>
+    </situation>
+    <situation severity="cleared" id="5157138" creation-time="1557518288000" summary="Port up" description="Port up">
+        <alarm-ref id="5157138"/>
+        <alarm-ref id="5157153"/>
+    </situation>
+    <situation severity="cleared" id="5157139" creation-time="1557518288000" summary="Port up" description="Port up">
+        <alarm-ref id="5157139"/>
+        <alarm-ref id="5157152"/>
+    </situation>
+    <situation severity="cleared" id="5157145" creation-time="1557518325000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157145"/>
+        <alarm-ref id="5157154"/>
+    </situation>
+    <situation severity="cleared" id="5157157" creation-time="1557518435000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157157"/>
+        <alarm-ref id="5157163"/>
+    </situation>
+    <situation severity="cleared" id="5157156" creation-time="1557518435000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157156"/>
+        <alarm-ref id="5157164"/>
+    </situation>
+    <situation severity="cleared" id="5157159" creation-time="1557518455000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157172"/>
+        <alarm-ref id="5157159"/>
+    </situation>
+    <situation severity="cleared" id="5157160" creation-time="1557518455000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157170"/>
+        <alarm-ref id="5157160"/>
+    </situation>
+    <situation severity="cleared" id="5157161" creation-time="1557518485000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157161"/>
+        <alarm-ref id="5157176"/>
+    </situation>
+    <situation severity="cleared" id="5157162" creation-time="1557518485000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157173"/>
+        <alarm-ref id="5157162"/>
+    </situation>
+    <situation severity="cleared" id="5157167" creation-time="1557518545000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157167"/>
+        <alarm-ref id="5157186"/>
+    </situation>
+    <situation severity="cleared" id="5157168" creation-time="1557518545000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157183"/>
+        <alarm-ref id="5157168"/>
+    </situation>
+    <situation severity="cleared" id="5157179" creation-time="1557518605000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157179"/>
+        <alarm-ref id="5157188"/>
+    </situation>
+    <situation severity="cleared" id="5157181" creation-time="1557518625000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157181"/>
+        <alarm-ref id="5157189"/>
+    </situation>
+    <situation severity="cleared" id="5157191" creation-time="1557518708000" summary="Port up" description="Port up">
+        <alarm-ref id="5157191"/>
+    </situation>
+    <situation severity="cleared" id="5157196" creation-time="1557519008000" summary="Port up" description="Port up">
+        <alarm-ref id="5157196"/>
+    </situation>
+    <situation severity="cleared" id="5157198" creation-time="1557519012000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5157198"/>
+    </situation>
+    <situation severity="cleared" id="5157202" creation-time="1557519088000" summary="Port up" description="Port up">
+        <alarm-ref id="5157202"/>
+        <alarm-ref id="5157210"/>
+    </situation>
+    <situation severity="cleared" id="5157203" creation-time="1557519088000" summary="Port up" description="Port up">
+        <alarm-ref id="5157209"/>
+        <alarm-ref id="5157203"/>
+    </situation>
+    <situation severity="major" id="5157204" creation-time="1557519128000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5157215"/>
+        <alarm-ref id="5157204"/>
+    </situation>
+    <situation severity="major" id="5157205" creation-time="1557519128000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5157205"/>
+        <alarm-ref id="5157213"/>
+    </situation>
+    <situation severity="major" id="5157207" creation-time="1557519138000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5157219"/>
+        <alarm-ref id="5157207"/>
+    </situation>
+    <situation severity="major" id="5157206" creation-time="1557519138000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5157217"/>
+        <alarm-ref id="5157206"/>
+    </situation>
+    <situation severity="cleared" id="5157222" creation-time="1557519499000" summary="Port up" description="Port up">
+        <alarm-ref id="5157222"/>
+    </situation>
+    <situation severity="cleared" id="5157224" creation-time="1557519618000" summary="Port up" description="Port up">
+        <alarm-ref id="5157224"/>
+    </situation>
+    <situation severity="cleared" id="5157229" creation-time="1557519802000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157229"/>
+        <alarm-ref id="5157230"/>
+    </situation>
+    <situation severity="cleared" id="5157228" creation-time="1557519802000" summary="Pluggable Transceiver out - Cleared due to ForceClear" description="Pluggable Transceiver out - Cleared due to ForceClear">
+        <alarm-ref id="5157228"/>
+        <alarm-ref id="5157233"/>
+    </situation>
+    <situation severity="cleared" id="5157235" creation-time="1557520094000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157235"/>
+        <alarm-ref id="5157241"/>
+    </situation>
+    <situation severity="cleared" id="5157236" creation-time="1557520094000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157247"/>
+        <alarm-ref id="5157236"/>
+    </situation>
+    <situation severity="cleared" id="5157234" creation-time="1557520094000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157234"/>
+        <alarm-ref id="5157243"/>
+    </situation>
+    <situation severity="cleared" id="5157237" creation-time="1557520094000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157237"/>
+        <alarm-ref id="5157244"/>
+    </situation>
+    <situation severity="cleared" id="5157238" creation-time="1557520154000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157238"/>
+        <alarm-ref id="5157265"/>
+    </situation>
+    <situation severity="cleared" id="5157239" creation-time="1557520154000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157239"/>
+        <alarm-ref id="5157264"/>
+    </situation>
+    <situation severity="cleared" id="5157249" creation-time="1557520164000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157249"/>
+        <alarm-ref id="5157256"/>
+    </situation>
+    <situation severity="cleared" id="5157248" creation-time="1557520164000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157259"/>
+        <alarm-ref id="5157248"/>
+    </situation>
+    <situation severity="cleared" id="5157251" creation-time="1557520174000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157260"/>
+        <alarm-ref id="5157251"/>
+    </situation>
+    <situation severity="cleared" id="5157250" creation-time="1557520174000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157261"/>
+        <alarm-ref id="5157250"/>
+    </situation>
+    <situation severity="cleared" id="5157268" creation-time="1557520255000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157272"/>
+        <alarm-ref id="5157268"/>
+    </situation>
+    <situation severity="cleared" id="5157267" creation-time="1557520255000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157267"/>
+        <alarm-ref id="5157273"/>
+    </situation>
+    <situation severity="cleared" id="5157275" creation-time="1557520405000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157280"/>
+        <alarm-ref id="5157275"/>
+    </situation>
+    <situation severity="cleared" id="5157276" creation-time="1557520405000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157277"/>
+        <alarm-ref id="5157276"/>
+    </situation>
+    <situation severity="cleared" id="5157281" creation-time="1557520505000" summary="Port up" description="Port up">
+        <alarm-ref id="5157292"/>
+        <alarm-ref id="5157281"/>
+    </situation>
+    <situation severity="cleared" id="5157282" creation-time="1557520505000" summary="Port up" description="Port up">
+        <alarm-ref id="5157282"/>
+        <alarm-ref id="5157289"/>
+    </situation>
+    <situation severity="cleared" id="5157284" creation-time="1557520537000" summary="Port up" description="Port up">
+        <alarm-ref id="5157284"/>
+    </situation>
+    <situation severity="cleared" id="5157287" creation-time="1557520595000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157300"/>
+        <alarm-ref id="5157287"/>
+    </situation>
+    <situation severity="cleared" id="5157288" creation-time="1557520595000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157288"/>
+        <alarm-ref id="5157298"/>
+    </situation>
+    <situation severity="cleared" id="5157294" creation-time="1557520665000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157308"/>
+        <alarm-ref id="5157294"/>
+    </situation>
+    <situation severity="cleared" id="5157293" creation-time="1557520665000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157293"/>
+        <alarm-ref id="5157310"/>
+    </situation>
+    <situation severity="cleared" id="5157296" creation-time="1557520675000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157312"/>
+        <alarm-ref id="5157296"/>
+    </situation>
+    <situation severity="cleared" id="5157302" creation-time="1557520695000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157317"/>
+        <alarm-ref id="5157302"/>
+    </situation>
+    <situation severity="cleared" id="5157301" creation-time="1557520695000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157315"/>
+        <alarm-ref id="5157301"/>
+    </situation>
+    <situation severity="cleared" id="5157304" creation-time="1557520715000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157318"/>
+        <alarm-ref id="5157304"/>
+    </situation>
+    <situation severity="cleared" id="5157303" creation-time="1557520715000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157303"/>
+        <alarm-ref id="5157320"/>
+    </situation>
+    <situation severity="cleared" id="5157305" creation-time="1557520725000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157305"/>
+        <alarm-ref id="5157323"/>
+    </situation>
+    <situation severity="cleared" id="5157307" creation-time="1557520745000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157307"/>
+        <alarm-ref id="5157326"/>
+    </situation>
+    <situation severity="cleared" id="5157306" creation-time="1557520745000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157328"/>
+        <alarm-ref id="5157306"/>
+    </situation>
+    <situation severity="cleared" id="5157324" creation-time="1557520831000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5157324"/>
+    </situation>
+    <situation severity="cleared" id="5157330" creation-time="1557520859000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5157334"/>
+        <alarm-ref id="5157330"/>
+        <alarm-ref id="5157331"/>
+    </situation>
+    <situation severity="cleared" id="5157335" creation-time="1557520894000" summary="Port up" description="Port up">
+        <alarm-ref id="5157335"/>
+        <alarm-ref id="5157342"/>
+    </situation>
+    <situation severity="cleared" id="5157344" creation-time="1557521197000" summary="Port up" description="Port up">
+        <alarm-ref id="5157344"/>
+    </situation>
+    <situation severity="cleared" id="5157347" creation-time="1557521290000" summary="Port up" description="Port up">
+        <alarm-ref id="5157347"/>
+        <alarm-ref id="5157349"/>
+    </situation>
+    <situation severity="cleared" id="5157350" creation-time="1557521355000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157357"/>
+        <alarm-ref id="5157350"/>
+    </situation>
+    <situation severity="major" id="5157351" creation-time="1557521358000" summary="Port down flapping" description="Port down flapping">
+        <alarm-ref id="5157351"/>
+    </situation>
+    <situation severity="cleared" id="5157353" creation-time="1557521375000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157359"/>
+        <alarm-ref id="5157353"/>
+    </situation>
+    <situation severity="cleared" id="5157354" creation-time="1557521385000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157354"/>
+        <alarm-ref id="5157362"/>
+    </situation>
+    <situation severity="cleared" id="5157356" creation-time="1557521405000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157356"/>
+        <alarm-ref id="5157364"/>
+    </situation>
+    <situation severity="cleared" id="5157360" creation-time="1557521473000" summary="Port up" description="Port up">
+        <alarm-ref id="5157360"/>
+    </situation>
+    <situation severity="cleared" id="5157371" creation-time="1557521723000" summary="Port up" description="Port up">
+        <alarm-ref id="5157371"/>
+    </situation>
+    <situation severity="cleared" id="5157377" creation-time="1557521909000" summary="Port up" description="Port up">
+        <alarm-ref id="5157377"/>
+        <alarm-ref id="5157378"/>
+    </situation>
+    <situation severity="cleared" id="5157376" creation-time="1557521909000" summary="Port up" description="Port up">
+        <alarm-ref id="5157381"/>
+        <alarm-ref id="5157376"/>
+    </situation>
+    <situation severity="cleared" id="5157391" creation-time="1557522472000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157391"/>
+        <alarm-ref id="5157399"/>
+    </situation>
+    <situation severity="cleared" id="5157392" creation-time="1557522477000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157392"/>
+        <alarm-ref id="5157397"/>
+    </situation>
+    <situation severity="cleared" id="5157406" creation-time="1557522935000" summary="Port up" description="Port up">
+        <alarm-ref id="5157406"/>
+    </situation>
+    <situation severity="cleared" id="5157409" creation-time="1557523065000" summary="Port up" description="Port up">
+        <alarm-ref id="5157409"/>
+    </situation>
+    <situation severity="cleared" id="5157413" creation-time="1557523319000" summary="Port up" description="Port up">
+        <alarm-ref id="5157413"/>
+    </situation>
+    <situation severity="cleared" id="5157416" creation-time="1557523417000" summary="Port up" description="Port up">
+        <alarm-ref id="5157416"/>
+    </situation>
+    <situation severity="cleared" id="5157417" creation-time="1557523487000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157417"/>
+        <alarm-ref id="5157422"/>
+    </situation>
+    <situation severity="cleared" id="5157426" creation-time="1557523638000" summary="Port up" description="Port up">
+        <alarm-ref id="5157426"/>
+    </situation>
+    <situation severity="cleared" id="5157429" creation-time="1557523678000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157429"/>
+        <alarm-ref id="5157433"/>
+    </situation>
+    <situation severity="cleared" id="5157431" creation-time="1557523757000" summary="Port up" description="Port up">
+        <alarm-ref id="5157431"/>
+    </situation>
+    <situation severity="cleared" id="5157436" creation-time="1557523807000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5157439"/>
+        <alarm-ref id="5157436"/>
+        <alarm-ref id="5157437"/>
+    </situation>
+    <situation severity="cleared" id="5157446" creation-time="1557524199000" summary="Port up" description="Port up">
+        <alarm-ref id="5157446"/>
+        <alarm-ref id="5157450"/>
+    </situation>
+    <situation severity="cleared" id="5157447" creation-time="1557524200000" summary="Port up" description="Port up">
+        <alarm-ref id="5157447"/>
+        <alarm-ref id="5157451"/>
+    </situation>
+    <situation severity="cleared" id="5157458" creation-time="1557524515000" summary="Port up" description="Port up">
+        <alarm-ref id="5157458"/>
+    </situation>
+    <situation severity="cleared" id="5157476" creation-time="1557525079000" summary="Port up" description="Port up">
+        <alarm-ref id="5157480"/>
+        <alarm-ref id="5157476"/>
+    </situation>
+    <situation severity="cleared" id="5157487" creation-time="1557525669000" summary="Port up" description="Port up">
+        <alarm-ref id="5157487"/>
+    </situation>
+    <situation severity="cleared" id="5157492" creation-time="1557525969000" summary="Port up" description="Port up">
+        <alarm-ref id="5157492"/>
+    </situation>
+    <situation severity="cleared" id="5157494" creation-time="1557526078000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157498"/>
+        <alarm-ref id="5157494"/>
+    </situation>
+    <situation severity="cleared" id="5157495" creation-time="1557526167000" summary="Port up" description="Port up">
+        <alarm-ref id="5157495"/>
+    </situation>
+    <situation severity="cleared" id="5157503" creation-time="1557526345000" summary="Port down flapping update - Cleared due to ForceClear" description="Port down flapping update - Cleared due to ForceClear">
+        <alarm-ref id="5157503"/>
+    </situation>
+    <situation severity="cleared" id="5157521" creation-time="1557527780000" summary="Port up" description="Port up">
+        <alarm-ref id="5157521"/>
+    </situation>
+    <situation severity="cleared" id="5157528" creation-time="1557528259000" summary="Port up" description="Port up">
+        <alarm-ref id="5157528"/>
+    </situation>
+    <situation severity="cleared" id="5157540" creation-time="1557528869000" summary="Port up" description="Port up">
+        <alarm-ref id="5157540"/>
+    </situation>
+    <situation severity="cleared" id="5157543" creation-time="1557528978000" summary="Port up" description="Port up">
+        <alarm-ref id="5157543"/>
+    </situation>
+    <situation severity="cleared" id="5157559" creation-time="1557529692000" summary="Port up" description="Port up">
+        <alarm-ref id="5157559"/>
+        <alarm-ref id="5157560"/>
+    </situation>
+    <situation severity="cleared" id="5157572" creation-time="1557530909000" summary="Port up" description="Port up">
+        <alarm-ref id="5157572"/>
+    </situation>
+    <situation severity="cleared" id="5157574" creation-time="1557531076000" summary="Port up" description="Port up">
+        <alarm-ref id="5157574"/>
+    </situation>
+    <situation severity="cleared" id="5157577" creation-time="1557531138000" summary="Port up" description="Port up">
+        <alarm-ref id="5157577"/>
+    </situation>
+    <situation severity="cleared" id="5157579" creation-time="1557531400000" summary="Port up" description="Port up">
+        <alarm-ref id="5157579"/>
+    </situation>
+    <situation severity="major" id="5157581" creation-time="1557531448000" summary="Port down flapping" description="Port down flapping">
+        <alarm-ref id="5157581"/>
+    </situation>
+    <situation severity="cleared" id="5157584" creation-time="1557532668000" summary="Port down due to oper - Cleared due to ForceClear" description="Port down due to oper - Cleared due to ForceClear">
+        <alarm-ref id="5157584"/>
+    </situation>
+    <situation severity="cleared" id="5157597" creation-time="1557533230000" summary="Port up" description="Port up">
+        <alarm-ref id="5157597"/>
+    </situation>
+    <situation severity="cleared" id="5157609" creation-time="1557533376000" summary="Port up" description="Port up">
+        <alarm-ref id="5157609"/>
+    </situation>
+    <situation severity="cleared" id="5157612" creation-time="1557533650000" summary="Port up" description="Port up">
+        <alarm-ref id="5157612"/>
+    </situation>
+    <situation severity="cleared" id="5157614" creation-time="1557533746000" summary="Port up" description="Port up">
+        <alarm-ref id="5157614"/>
+    </situation>
+    <situation severity="cleared" id="5157621" creation-time="1557534818000" summary="Port up" description="Port up">
+        <alarm-ref id="5157621"/>
+    </situation>
+    <situation severity="cleared" id="5157623" creation-time="1557534950000" summary="Port up" description="Port up">
+        <alarm-ref id="5157623"/>
+        <alarm-ref id="5157624"/>
+    </situation>
+    <situation severity="cleared" id="5157626" creation-time="1557535208000" summary="Port up" description="Port up">
+        <alarm-ref id="5157626"/>
+    </situation>
+    <situation severity="cleared" id="5157631" creation-time="1557535636000" summary="Port up" description="Port up">
+        <alarm-ref id="5157631"/>
+    </situation>
+    <situation severity="cleared" id="5157635" creation-time="1557535909000" summary="Port up" description="Port up">
+        <alarm-ref id="5157637"/>
+        <alarm-ref id="5157635"/>
+    </situation>
+    <situation severity="cleared" id="5157639" creation-time="1557536065000" summary="Port up" description="Port up">
+        <alarm-ref id="5157639"/>
+    </situation>
+    <situation severity="cleared" id="5157644" creation-time="1557536388000" summary="Port up" description="Port up">
+        <alarm-ref id="5157644"/>
+    </situation>
+    <situation severity="cleared" id="5157646" creation-time="1557536620000" summary="Port up" description="Port up">
+        <alarm-ref id="5157646"/>
+    </situation>
+    <situation severity="major" id="5157651" creation-time="1557536949000" summary="Port down due to oper" description="Port down due to oper">
+        <alarm-ref id="5157651"/>
+    </situation>
+    <situation severity="cleared" id="5157655" creation-time="1557537340000" summary="Port up" description="Port up">
+        <alarm-ref id="5157655"/>
+    </situation>
+    <situation severity="cleared" id="5157660" creation-time="1557537619000" summary="Port up" description="Port up">
+        <alarm-ref id="5157660"/>
+    </situation>
+    <situation severity="cleared" id="5157667" creation-time="1557538411000" summary="DS0 bundle up" description="DS0 bundle up">
+        <alarm-ref id="5157667"/>
+    </situation>
+    <situation severity="cleared" id="5157668" creation-time="1557538412000" summary="DS0 bundle up" description="DS0 bundle up">
+        <alarm-ref id="5157668"/>
+    </situation>
+    <situation severity="cleared" id="5157669" creation-time="1557538417000" summary="DS0 bundle up" description="DS0 bundle up">
+        <alarm-ref id="5157669"/>
+    </situation>
+    <situation severity="cleared" id="5157670" creation-time="1557538417000" summary="DS0 bundle up" description="DS0 bundle up">
+        <alarm-ref id="5157670"/>
+    </situation>
+    <situation severity="cleared" id="5157672" creation-time="1557538527000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5157678"/>
+        <alarm-ref id="5157676"/>
+        <alarm-ref id="5157672"/>
+    </situation>
+    <situation severity="cleared" id="5157673" creation-time="1557538527000" summary="BGP neighbor found" description="BGP neighbor found">
+        <alarm-ref id="5157673"/>
+        <alarm-ref id="5157680"/>
+        <alarm-ref id="5157682"/>
+    </situation>
+    <situation severity="cleared" id="5157686" creation-time="1557538627000" summary="Port up" description="Port up">
+        <alarm-ref id="5157686"/>
+    </situation>
+    <situation severity="cleared" id="5157689" creation-time="1557538750000" summary="Port up" description="Port up">
+        <alarm-ref id="5157689"/>
+        <alarm-ref id="5157692"/>
+    </situation>
+    <situation severity="cleared" id="5157688" creation-time="1557538750000" summary="Port up" description="Port up">
+        <alarm-ref id="5157688"/>
+        <alarm-ref id="5157693"/>
+    </situation>
+    <situation severity="cleared" id="5157690" creation-time="1557538757000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5157690"/>
+    </situation>
+    <situation severity="cleared" id="5157691" creation-time="1557538839000" summary="Port up" description="Port up">
+        <alarm-ref id="5157695"/>
+        <alarm-ref id="5157691"/>
+    </situation>
+    <situation severity="cleared" id="5157697" creation-time="1557539170000" summary="Port up" description="Port up">
+        <alarm-ref id="5157697"/>
+    </situation>
+    <situation severity="cleared" id="5157699" creation-time="1557539470000" summary="Port up" description="Port up">
+        <alarm-ref id="5157699"/>
+    </situation>
+    <situation severity="cleared" id="5157705" creation-time="1557539847000" summary="Port up" description="Port up">
+        <alarm-ref id="5157705"/>
+    </situation>
+    <situation severity="cleared" id="5157709" creation-time="1557539969000" summary="Port up" description="Port up">
+        <alarm-ref id="5157709"/>
+    </situation>
+    <situation severity="cleared" id="5157711" creation-time="1557540110000" summary="Port up" description="Port up">
+        <alarm-ref id="5157714"/>
+        <alarm-ref id="5157711"/>
+    </situation>
+    <situation severity="cleared" id="5157715" creation-time="1557540271000" summary="Port up" description="Port up">
+        <alarm-ref id="5157715"/>
+    </situation>
+    <situation severity="cleared" id="5157718" creation-time="1557540347000" summary="Port up" description="Port up">
+        <alarm-ref id="5157724"/>
+        <alarm-ref id="5157718"/>
+    </situation>
+    <situation severity="cleared" id="5157727" creation-time="1557540487000" summary="Port up" description="Port up">
+        <alarm-ref id="5157736"/>
+        <alarm-ref id="5157727"/>
+    </situation>
+    <situation severity="cleared" id="5157745" creation-time="1557541689000" summary="Port down stopped flapping cleared" description="Port down stopped flapping cleared">
+        <alarm-ref id="5157745"/>
+    </situation>
+    <situation severity="cleared" id="5157747" creation-time="1557542099000" summary="Port up" description="Port up">
+        <alarm-ref id="5157747"/>
+    </situation>
+    <situation severity="cleared" id="5157754" creation-time="1557542611000" summary="Port up" description="Port up">
+        <alarm-ref id="5157754"/>
+    </situation>
+    <situation severity="cleared" id="5157756" creation-time="1557542769000" summary="Port up" description="Port up">
+        <alarm-ref id="5157756"/>
+    </situation>
+    <situation severity="cleared" id="5157758" creation-time="1557542921000" summary="Port down flapping - Cleared due to ForceClear" description="Port down flapping - Cleared due to ForceClear">
+        <alarm-ref id="5157758"/>
+    </situation>
+    <situation severity="cleared" id="5157762" creation-time="1557543700000" summary="Port up" description="Port up">
+        <alarm-ref id="5157762"/>
+        <alarm-ref id="5157764"/>
+    </situation>
+    <situation severity="cleared" id="5157783" creation-time="1557545089000" summary="Port up" description="Port up">
+        <alarm-ref id="5157783"/>
+    </situation>
+    <situation severity="cleared" id="5157787" creation-time="1557545569000" summary="Port up" description="Port up">
+        <alarm-ref id="5157787"/>
+    </situation>
+    <situation severity="cleared" id="5157790" creation-time="1557545800000" summary="Port up" description="Port up">
+        <alarm-ref id="5157790"/>
+    </situation>
+    <situation severity="cleared" id="5157796" creation-time="1557546232000" summary="Port up" description="Port up">
+        <alarm-ref id="5157800"/>
+        <alarm-ref id="5157796"/>
+    </situation>
+    <situation severity="cleared" id="5157795" creation-time="1557546232000" summary="Port up" description="Port up">
+        <alarm-ref id="5157799"/>
+        <alarm-ref id="5157795"/>
+    </situation>
+    <situation severity="cleared" id="5157810" creation-time="1557546661000" summary="Port up" description="Port up">
+        <alarm-ref id="5157810"/>
+    </situation>
+</situations>

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inventory xmlns="http://xmlns.opennms.org/xsd/alec/model/v1.0.0">
+    <model-object-entry id="model" type="Model" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7o24-red2: ethernet105/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red2"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet101/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc3p26-red2: ethernet113/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc3p26-red2"/>
+    <model-object-entry id="kc2ll26-red2: ethernet101/1/27" type="SnmpInterface" parent-type="Node" parent-id="kc2ll26-red2"/>
+    <model-object-entry id="kc3tt10-blue2: ethernet119/1/36" type="SnmpInterface" parent-type="Node" parent-id="kc3tt10-blue2"/>
+    <model-object-entry id="kc3tt10-red2: ethernet119/1/36" type="SnmpInterface" parent-type="Node" parent-id="kc3tt10-red2"/>
+    <model-object-entry id="kc3ww6-red: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc3ww6-red"/>
+    <model-object-entry id="kc3ww6-blue: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc3ww6-blue"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet102/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2y28-blue: ethernet1/39" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kc2y28-blue: ethernet1/40" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kc2y28-blue: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kc2y28-blue: ethernet1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet106/1/15" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet106/1/16" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet3/9/3" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet107/1/13" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet107/1/13" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="ls226s-red: ethernet119/1/17" type="SnmpInterface" parent-type="Node" parent-id="ls226s-red"/>
+    <model-object-entry id="kc3tt10-blue2: ethernet119/1/35" type="SnmpInterface" parent-type="Node" parent-id="kc3tt10-blue2"/>
+    <model-object-entry id="kc3tt10-red2: ethernet119/1/35" type="SnmpInterface" parent-type="Node" parent-id="kc3tt10-red2"/>
+    <model-object-entry id="kc3ww5-red: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc3ww5-red"/>
+    <model-object-entry id="kc3ww5-blue: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc3ww5-blue"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet106/1/21" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet104/1/25" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/17" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/11" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/18" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet102/1/33" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet105/1/15" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/40" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/10" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet101/1/32" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls5w35-blue5: ethernet104/1/15" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-blue5"/>
+    <model-object-entry id="ls5w35-blue5: ethernet104/1/7" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-blue5"/>
+    <model-object-entry id="ls5w35-red5: ethernet104/1/15" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-red5"/>
+    <model-object-entry id="ls5w35-red5: ethernet104/1/7" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-red5"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet108/1/22" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet101/1/4" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet105/1/19" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/10" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/34" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet103/1/32" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet104/1/21" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/24" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet107/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet108/1/17" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet107/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/39" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet106/1/13" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/42" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet102/1/32" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet105/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/13" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet104/1/14" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/32" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/23" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/47" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet101/1/43" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls5mgmt01: ethernet104/1/14" type="SnmpInterface" parent-type="Node" parent-id="ls5mgmt01"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/7" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls29z-blue: ethernet119/1/19" type="SnmpInterface" parent-type="Node" parent-id="ls29z-blue"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet108/1/14" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet108/1/8" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet102/1/31" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/6" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet104/1/13" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet103/1/9" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet102/1/35" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet102/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet108/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet107/1/32" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/30" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet104/1/27" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet106/1/31" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc1swmgmt01: gigabitethernet2/33" type="SnmpInterface" parent-type="Node" parent-id="kc1swmgmt01"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet102/1/32" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/31" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet106/1/32" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet103/1/46" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet106/1/30" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet107/1/30" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/36" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet106/1/38" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/29" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet101/1/33" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet105/1/30" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/35" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="kc2tt10-red2: ethernet118/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc2tt10-red2"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet104/1/25" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet104/1/26" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet106/1/37" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet106/1/38" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet101/1/9" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet102/1/28" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet104/1/40" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls2swmgmt01_5k: ethernet106/1/35" type="SnmpInterface" parent-type="Node" parent-id="ls2swmgmt01_5k"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet3/9/4" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="ls4x30-red: ethernet119/1/31" type="SnmpInterface" parent-type="Node" parent-id="ls4x30-red"/>
+    <model-object-entry id="ls4ff30-red: ethernet119/1/17" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-red"/>
+    <model-object-entry id="ls4ff30-blue: ethernet119/1/17" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-blue"/>
+    <model-object-entry id="ls231d-red: ethernet112/1/14" type="SnmpInterface" parent-type="Node" parent-id="ls231d-red"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet3/9/2" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="ls29z-red: ethernet109/1/9" type="SnmpInterface" parent-type="Node" parent-id="ls29z-red"/>
+    <model-object-entry id="ls29z-blue: ethernet109/1/9" type="SnmpInterface" parent-type="Node" parent-id="ls29z-blue"/>
+    <model-object-entry id="ls3l10-red: ethernet119/1/36" type="SnmpInterface" parent-type="Node" parent-id="ls3l10-red"/>
+    <model-object-entry id="kc7o24-blue3: ethernet105/1/28" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue3"/>
+    <model-object-entry id="kc7o24-red3: ethernet105/1/28" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red3"/>
+    <model-object-entry id="ls4cc12-red: ethernet120/1/21" type="SnmpInterface" parent-type="Node" parent-id="ls4cc12-red"/>
+    <model-object-entry id="kc7o24-red3: ethernet113/1/30" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red3"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet102/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kcmopopswmgmt01: ip gigabitethernet2/1/1" type="SnmpInterface" parent-type="Node" parent-id="kcmopopswmgmt01"/>
+    <model-object-entry id="phpapopswmgmt01: ip gigabitethernet2/1/1" type="SnmpInterface" parent-type="Node" parent-id="phpapopswmgmt01"/>
+    <model-object-entry id="kcmopopswmgmt01: gigabitethernet2/1/1" type="SnmpInterface" parent-type="Node" parent-id="kcmopopswmgmt01"/>
+    <model-object-entry id="phpapopswmgmt01: gigabitethernet2/1/1" type="SnmpInterface" parent-type="Node" parent-id="phpapopswmgmt01"/>
+    <model-object-entry id="phpapoprt01: ip bundle-ether1" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="phpapoprt01: gigabitethernet0/2/0/0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kcmopoprt01: ip bundle-ether1" type="SnmpInterface" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="phpapoprt01: gigabitethernet0/3/0/0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="ls5w35-red5: ethernet105/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-red5"/>
+    <model-object-entry id="ls5w35-blue5: ethernet105/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls5w35-blue5"/>
+    <model-object-entry id="kc7uu23-phnp-red: ethernet1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7uu23-phnp-red"/>
+    <model-object-entry id="kc7phnpspine3: ethernet1/42" type="SnmpInterface" parent-type="Node" parent-id="kc7phnpspine3"/>
+    <model-object-entry id="kc7uu23-phnp-red: ethernet1/48" type="SnmpInterface" parent-type="Node" parent-id="kc7uu23-phnp-red"/>
+    <model-object-entry id="kc7phnpspine3: ethernet1/41" type="SnmpInterface" parent-type="Node" parent-id="kc7phnpspine3"/>
+    <model-object-entry id="kc7uu23-phnp-red: ethernet1/47" type="SnmpInterface" parent-type="Node" parent-id="kc7uu23-phnp-red"/>
+    <model-object-entry id="kc7uu23-phnp-red: ethernet1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu23-phnp-red"/>
+    <model-object-entry id="kc7swmgmt01_5k: ethernet1/27" type="SnmpInterface" parent-type="Node" parent-id="kc7swmgmt01_5k"/>
+    <model-object-entry id="kc7swmgmt01_5k: ethernet1/28" type="SnmpInterface" parent-type="Node" parent-id="kc7swmgmt01_5k"/>
+    <model-object-entry id="ls4ff30-blue: ethernet120/1/13" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-blue"/>
+    <model-object-entry id="ls4ff30-red: ethernet120/1/13" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-red"/>
+    <model-object-entry id="ls4ff30-red: ethernet119/1/32" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-red"/>
+    <model-object-entry id="ls4ff30-blue: ethernet119/1/32" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-blue"/>
+    <model-object-entry id="kc7phnp-bl-red: ethernet1/4/4" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-red"/>
+    <model-object-entry id="kc7phnp-bl-red: ethernet1/4/2" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-red"/>
+    <model-object-entry id="kc7phnp-bl-red: ethernet1/4/3" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-red"/>
+    <model-object-entry id="kc7phnp-bl-red: ethernet1/4/1" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-red"/>
+    <model-object-entry id="kc7phnpspine4: ethernet1/8" type="SnmpInterface" parent-type="Node" parent-id="kc7phnpspine4"/>
+    <model-object-entry id="kc7phnpspine4: ethernet1/7" type="SnmpInterface" parent-type="Node" parent-id="kc7phnpspine4"/>
+    <model-object-entry id="kc7uu24-phnp-blue: ethernet1/48" type="SnmpInterface" parent-type="Node" parent-id="kc7uu24-phnp-blue"/>
+    <model-object-entry id="kc7uu24-phnp-blue: ethernet1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7uu24-phnp-blue"/>
+    <model-object-entry id="kc7uu24-phnp-blue: ethernet1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu24-phnp-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet8/8" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kc7phnp-bl-blue: ethernet2/4/1" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-blue"/>
+    <model-object-entry id="kc7phnp-bl-blue: ethernet2/4/3" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-blue"/>
+    <model-object-entry id="kc7phnp-bl-blue: ethernet2/4/4" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-blue"/>
+    <model-object-entry id="kc7phnp-bl-blue: ethernet2/4/2" type="SnmpInterface" parent-type="Node" parent-id="kc7phnp-bl-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet8/11" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet9/8" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet9/13" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet9/10" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet9/11" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="kcwan-blue: gigabitethernet9/9" type="SnmpInterface" parent-type="Node" parent-id="kcwan-blue"/>
+    <model-object-entry id="ls3q10-red3: ethernet117/1/28" type="SnmpInterface" parent-type="Node" parent-id="ls3q10-red3"/>
+    <model-object-entry id="ls3q10-blue3: ethernet117/1/28" type="SnmpInterface" parent-type="Node" parent-id="ls3q10-blue3"/>
+    <model-object-entry id="kc2y21-red: ethernet104/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y28-blue: ethernet104/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kcmopopcert01: gigabitethernet0/4/0" type="SnmpInterface" parent-type="Node" parent-id="kcmopopcert01"/>
+    <model-object-entry id="kc2oo01-red5: ethernet108/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2oo01-red5"/>
+    <model-object-entry id="kc2oo01-red5: ethernet107/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2oo01-red5"/>
+    <model-object-entry id="kc2oo01-blue5: ethernet107/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2oo01-blue5"/>
+    <model-object-entry id="kc2oo01-blue5: ethernet108/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2oo01-blue5"/>
+    <model-object-entry id="ls4u32-red3: ethernet105/1/12" type="SnmpInterface" parent-type="Node" parent-id="ls4u32-red3"/>
+    <model-object-entry id="ls4u36-blue3: ethernet105/1/12" type="SnmpInterface" parent-type="Node" parent-id="ls4u36-blue3"/>
+    <model-object-entry id="kc2u14-red2: ethernet109/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red2"/>
+    <model-object-entry id="kc2u14-red2: ethernet109/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red2"/>
+    <model-object-entry id="kc2u14-blue2: ethernet109/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-blue2"/>
+    <model-object-entry id="kc2u14-blue5: ethernet103/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-blue5"/>
+    <model-object-entry id="kc2u14-blue2: ethernet109/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-blue2"/>
+    <model-object-entry id="kc2u14-red5: ethernet103/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red5"/>
+    <model-object-entry id="ls4u32-red3: ethernet106/1/12" type="SnmpInterface" parent-type="Node" parent-id="ls4u32-red3"/>
+    <model-object-entry id="ls4u36-blue3: ethernet106/1/12" type="SnmpInterface" parent-type="Node" parent-id="ls4u36-blue3"/>
+    <model-object-entry id="kc2ll26-blue4: ethernet112/1/15" type="SnmpInterface" parent-type="Node" parent-id="kc2ll26-blue4"/>
+    <model-object-entry id="kc7o24-red3: ethernet107/1/44" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red3"/>
+    <model-object-entry id="kc7o24-blue3: ethernet107/1/44" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue3"/>
+    <model-object-entry id="ls4ff30-blue: ethernet103/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-blue"/>
+    <model-object-entry id="ls4ff30-red: ethernet103/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls4ff30-red"/>
+    <model-object-entry id="ls4ff12-red: ethernet107/1/2" type="SnmpInterface" parent-type="Node" parent-id="ls4ff12-red"/>
+    <model-object-entry id="ls4ff12-blue: ethernet107/1/2" type="SnmpInterface" parent-type="Node" parent-id="ls4ff12-blue"/>
+    <model-object-entry id="kc2u14-red2: ethernet111/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red2"/>
+    <model-object-entry id="kc2u14-red2: ethernet111/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red2"/>
+    <model-object-entry id="kc2u14-red2: ethernet111/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2u14-red2"/>
+    <model-object-entry id="kc2ll26-blue4: ethernet108/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2ll26-blue4"/>
+    <model-object-entry id="kc7g8-red2: ethernet116/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7g8-red2"/>
+    <model-object-entry id="kc2spine7: ethernet3/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine7"/>
+    <model-object-entry id="kc2spine7: ethernet4/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine7"/>
+    <model-object-entry id="kc2spine6: ethernet4/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine6"/>
+    <model-object-entry id="kc2spine6: ethernet3/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine6"/>
+    <model-object-entry id="kc2spine8: ethernet3/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine8"/>
+    <model-object-entry id="kc2spine8: ethernet4/6" type="SnmpInterface" parent-type="Node" parent-id="kc2spine8"/>
+    <model-object-entry id="ls3swmgmt01_5k: ethernet103/1/47" type="SnmpInterface" parent-type="Node" parent-id="ls3swmgmt01_5k"/>
+    <model-object-entry id="kcmopopcert01: gigabitethernet0/0/2" type="SnmpInterface" parent-type="Node" parent-id="kcmopopcert01"/>
+    <model-object-entry id="ls5d35-phnp-red: ethernet105/1/48" type="SnmpInterface" parent-type="Node" parent-id="ls5d35-phnp-red"/>
+    <model-object-entry id="ls5d35-phnp-blue: ethernet105/1/48" type="SnmpInterface" parent-type="Node" parent-id="ls5d35-phnp-blue"/>
+    <model-object-entry id="kc2p35-red5: ethernet104/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc2p35-red5"/>
+    <model-object-entry id="kc2gg26-red: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc2gg26-red"/>
+    <model-object-entry id="kc2gg26-blue: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc2gg26-blue"/>
+    <model-object-entry id="kc2gg26-red: ethernet103/1/14" type="SnmpInterface" parent-type="Node" parent-id="kc2gg26-red"/>
+    <model-object-entry id="kc2gg26-blue: ethernet103/1/14" type="SnmpInterface" parent-type="Node" parent-id="kc2gg26-blue"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet106/1/30" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc7g24-red: ethernet104/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7g24-red"/>
+    <model-object-entry id="kc7o24-blue3: ethernet113/1/20" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue3"/>
+    <model-object-entry id="kc7o24-red3: ethernet113/1/20" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red3"/>
+    <model-object-entry id="kc7g24-blue: ethernet104/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7g24-blue"/>
+    <model-object-entry id="kc7o24-blue2: ethernet105/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet105/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet101/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet101/1/17" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-red3: ethernet113/1/19" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-red3"/>
+    <model-object-entry id="kc7o24-blue3: ethernet113/1/19" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue3"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet111/1/21" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls3mgmt-sw-02: ethernet1/5" type="SnmpInterface" parent-type="Node" parent-id="ls3mgmt-sw-02"/>
+    <model-object-entry id="ls3mgmt-sw-02: ethernet1/7" type="SnmpInterface" parent-type="Node" parent-id="ls3mgmt-sw-02"/>
+    <model-object-entry id="ls3mgmt-sw-02: ethernet1/9" type="SnmpInterface" parent-type="Node" parent-id="ls3mgmt-sw-02"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="ls3mgmt-sw-02: ethernet1/11" type="SnmpInterface" parent-type="Node" parent-id="ls3mgmt-sw-02"/>
+    <model-object-entry id="ls3mgmt-sw-02: ethernet1/13" type="SnmpInterface" parent-type="Node" parent-id="ls3mgmt-sw-02"/>
+    <model-object-entry id="kc7w8-red: ethernet101/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-red: ethernet101/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-red: ethernet102/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-red: ethernet103/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet102/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-blue: ethernet103/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet103/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet103/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet104/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet104/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet108/1/29" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet108/1/29" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet105/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-blue: ethernet107/1/14" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet107/1/14" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-red: ethernet107/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet107/1/10" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet107/1/7" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet107/1/7" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet108/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet108/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet109/1/8" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet109/1/8" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet105/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet105/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet104/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet104/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc7uu22-phnp-red: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-red"/>
+    <model-object-entry id="kc7uu22-phnp-blue: ethernet104/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7uu22-phnp-blue"/>
+    <model-object-entry id="kcsbxwan3: gigabitethernet0/0/5" type="SnmpInterface" parent-type="Node" parent-id="kcsbxwan3"/>
+    <model-object-entry id="kcsbxwan4: gigabitethernet0/0/5" type="SnmpInterface" parent-type="Node" parent-id="kcsbxwan4"/>
+    <model-object-entry id="ls4p17-blue: ethernet120/1/3" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue"/>
+    <model-object-entry id="ls4p17-blue: ethernet120/1/4" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue"/>
+    <model-object-entry id="ls4p17-red: ethernet120/1/3" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red"/>
+    <model-object-entry id="ls4p17-red: ethernet120/1/4" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red"/>
+    <model-object-entry id="ls4p17-blue: ethernet119/1/37" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue"/>
+    <model-object-entry id="ls4p17-red: ethernet119/1/37" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red"/>
+    <model-object-entry id="ls4p17-blue: ethernet120/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue"/>
+    <model-object-entry id="ls4p17-red: ethernet120/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red"/>
+    <model-object-entry id="ls4p17-blue: ethernet120/1/2" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue"/>
+    <model-object-entry id="ls4p17-red: ethernet120/1/2" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet110/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet110/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-red: ethernet113/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet113/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet114/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet114/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet115/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet115/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet116/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet116/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet116/1/6" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/7" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-blue: ethernet116/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-blue"/>
+    <model-object-entry id="kc7w8-red: ethernet116/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7w8-red"/>
+    <model-object-entry id="kc7g8-red: ethernet107/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7g8-red"/>
+    <model-object-entry id="kc7g8-blue: ethernet107/1/1" type="SnmpInterface" parent-type="Node" parent-id="kc7g8-blue"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/2" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/3" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="kc7o24-blue2: ethernet102/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc7o24-blue2"/>
+    <model-object-entry id="ls3h12-red: ethernet119/1/14" type="SnmpInterface" parent-type="Node" parent-id="ls3h12-red"/>
+    <model-object-entry id="ls3h12-blue: ethernet119/1/14" type="SnmpInterface" parent-type="Node" parent-id="ls3h12-blue"/>
+    <model-object-entry id="ls4p17-red2: ethernet111/1/7" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-red2"/>
+    <model-object-entry id="ls4p17-blue2: ethernet111/1/7" type="SnmpInterface" parent-type="Node" parent-id="ls4p17-blue2"/>
+    <model-object-entry id="kc1x35-blue2: ethernet1/18" type="SnmpInterface" parent-type="Node" parent-id="kc1x35-blue2"/>
+    <model-object-entry id="kc2gg01-red: ethernet112/1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2gg01-red"/>
+    <model-object-entry id="kc2p35-red: ethernet103/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc2p35-red"/>
+    <model-object-entry id="kc2p35-blue: ethernet103/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc2p35-blue"/>
+    <model-object-entry id="kc7g8-red2: ethernet113/1/11" type="SnmpInterface" parent-type="Node" parent-id="kc7g8-red2"/>
+    <model-object-entry id="kc2gg01-red: ethernet119/1/17" type="SnmpInterface" parent-type="Node" parent-id="kc2gg01-red"/>
+    <model-object-entry id="kc2p35-red4: ethernet107/1/5" type="SnmpInterface" parent-type="Node" parent-id="kc2p35-red4"/>
+    <model-object-entry id="phpapoprt01: bundle: serial0/0/0/0/12/1/1:0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="phpapoprt01: bundle: serial0/1/0/0/12/1/1:0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="phpapoprt01: bundle: serial0/0/0/0/12/2/1:0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="phpapoprt01: bundle: serial0/1/0/0/12/2/1:0" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kc3p26-blue2: ethernet110/1/31" type="SnmpInterface" parent-type="Node" parent-id="kc3p26-blue2"/>
+    <model-object-entry id="kc3p26-blue2: ethernet111/1/16" type="SnmpInterface" parent-type="Node" parent-id="kc3p26-blue2"/>
+    <model-object-entry id="kc2swmgmt01_5k: ethernet107/1/12" type="SnmpInterface" parent-type="Node" parent-id="kc2swmgmt01_5k"/>
+    <model-object-entry id="ls226s-blue: ethernet110/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls226s-blue"/>
+    <model-object-entry id="ls226s-red: ethernet110/1/1" type="SnmpInterface" parent-type="Node" parent-id="ls226s-red"/>
+    <model-object-entry id="kc2y28-blue: aggregation group" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kc2y28-blue: 1" type="SnmpInterface" parent-type="Node" parent-id="kc2y28-blue"/>
+    <model-object-entry id="kc2y21-red: aggregation group" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y21-red: 1" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y21-red: ethernet1/3" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y21-red: ethernet1/40" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y21-red: ethernet1/39" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="kc2y21-red: ethernet1/4" type="SnmpInterface" parent-type="Node" parent-id="kc2y21-red"/>
+    <model-object-entry id="phpapoprt01: aggregation group" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="phpapoprt01: 1" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kcmopoprt01: gigabitethernet0/2/0/0" type="SnmpInterface" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="kcmopoprt01: gigabitethernet0/3/0/0" type="SnmpInterface" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="phpapoprt01: bundleethernet1" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kcmopoprt01: bundleethernet1" type="SnmpInterface" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="phpapoprt01: bundle-ether1" type="SnmpInterface" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kcmopoprt01: bundle-ether1" type="SnmpInterface" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="kc2y28-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2y21-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="phpapoprt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="phpapoprt01: ip bundle-ether1&lt;-&gt;kcmopoprt01: ip bundle-ether1" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcwan-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcmopopcert01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2spine7" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan4" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lsmopoprt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7o24-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7uu22-phnp-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3p26-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan6" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan7" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2ll26-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3tt10-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3tt10-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3ww6-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3ww6-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan7" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan6" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lssbxwan4" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="masbxwan2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7uu22-phnp-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2swmgmt01_5k" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls2swmgmt01_5k" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls226s-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3ww5-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3ww5-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3swmgmt01_5k" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls5mgmt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls5w35-blue5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls5w35-red5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls29z-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc1swmgmt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2tt10-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcsbxwan2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4x30-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4ff30-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4ff30-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls231d-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcmopoprt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls29z-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3l10-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7o24-blue3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7o24-red3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4cc12-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="phpapopswmgmt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kcmopopswmgmt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7uu23-phnp-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7phnpspine3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7swmgmt01_5k" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7phnp-bl-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7phnpspine4" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7uu24-phnp-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7phnp-bl-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3q10-red3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3q10-blue3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2oo01-red5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2oo01-blue5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4u32-red3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4u36-blue3" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2u14-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2u14-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2u14-blue5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2u14-red5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2ll26-blue4" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="vivapoprt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4ff12-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4ff12-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7g8-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2spine6" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2spine8" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="jaflpoprt01" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls5d35-phnp-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls5d35-phnp-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2p35-red5" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2gg26-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2gg26-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7g24-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7g24-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7o24-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3mgmt-sw-02" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7w8-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7w8-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4p17-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4p17-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7g8-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc7g8-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3h12-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls3h12-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4p17-red2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls4p17-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc1x35-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2gg01-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2p35-red" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2p35-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc2p35-red4" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="kc3p26-blue2" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="ls226s-blue" type="Node" parent-type="Model" parent-id="model"/>
+    <model-object-entry id="lsmopoprt01: mpbgp: 39.253.3.17" type="BgpPeer" parent-type="Node" parent-id="lsmopoprt01"/>
+    <model-object-entry id="lssbxwan3: mpbgp: 39.253.3.17" type="BgpPeer" parent-type="Node" parent-id="lssbxwan3"/>
+    <model-object-entry id="kcsbxwan6: mpbgp: 39.253.23.213" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan6"/>
+    <model-object-entry id="kcsbxwan5: mpbgp: 39.253.23.217" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan5"/>
+    <model-object-entry id="kcsbxwan7: mpbgp: 39.253.26.201" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan7"/>
+    <model-object-entry id="lssbxwan2: mpbgp: 39.253.6.89" type="BgpPeer" parent-type="Node" parent-id="lssbxwan2"/>
+    <model-object-entry id="lssbxwan5: mpbgp: 39.253.3.45" type="BgpPeer" parent-type="Node" parent-id="lssbxwan5"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.9.97" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.10.241" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.5.85" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.11.97" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.8.169" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.25.229" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.10.145" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.11.29" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan2: mpbgp: 39.253.5.5" type="BgpPeer" parent-type="Node" parent-id="lssbxwan2"/>
+    <model-object-entry id="lssbxwan2: mpbgp: 39.253.3.205" type="BgpPeer" parent-type="Node" parent-id="lssbxwan2"/>
+    <model-object-entry id="lssbxwan2: mpbgp: 39.253.5.253" type="BgpPeer" parent-type="Node" parent-id="lssbxwan2"/>
+    <model-object-entry id="lssbxwan3: mpbgp: 39.253.5.21" type="BgpPeer" parent-type="Node" parent-id="lssbxwan3"/>
+    <model-object-entry id="lssbxwan3: mpbgp: 39.253.11.213" type="BgpPeer" parent-type="Node" parent-id="lssbxwan3"/>
+    <model-object-entry id="lssbxwan6: mpbgp: 39.253.6.1" type="BgpPeer" parent-type="Node" parent-id="lssbxwan6"/>
+    <model-object-entry id="lssbxwan6: mpbgp: 39.253.8.21" type="BgpPeer" parent-type="Node" parent-id="lssbxwan6"/>
+    <model-object-entry id="lssbxwan6: mpbgp: 39.253.7.253" type="BgpPeer" parent-type="Node" parent-id="lssbxwan6"/>
+    <model-object-entry id="lssbxwan4: mpbgp: 39.253.8.129" type="BgpPeer" parent-type="Node" parent-id="lssbxwan4"/>
+    <model-object-entry id="lssbxwan4: mpbgp: 39.253.5.1" type="BgpPeer" parent-type="Node" parent-id="lssbxwan4"/>
+    <model-object-entry id="lssbxwan4: mpbgp: 39.253.5.181" type="BgpPeer" parent-type="Node" parent-id="lssbxwan4"/>
+    <model-object-entry id="masbxwan2: mpbgp: 39.243.10.153" type="BgpPeer" parent-type="Node" parent-id="masbxwan2"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.10.153" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan6: mpbgp: 39.253.9.85" type="BgpPeer" parent-type="Node" parent-id="lssbxwan6"/>
+    <model-object-entry id="lssbxwan4: mpbgp: 39.253.8.237" type="BgpPeer" parent-type="Node" parent-id="lssbxwan4"/>
+    <model-object-entry id="kcsbxwan2: mpbgp: 39.253.21.49" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan2"/>
+    <model-object-entry id="kcmopoprt01: mpbgp: 39.253.23.57" type="BgpPeer" parent-type="Node" parent-id="kcmopoprt01"/>
+    <model-object-entry id="kcsbxwan5: mpbgp: 39.253.23.57" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan5"/>
+    <model-object-entry id="vivapoprt01: mpbgp: 39.253.9.149" type="BgpPeer" parent-type="Node" parent-id="vivapoprt01"/>
+    <model-object-entry id="lssbxwan7: mpbgp: 39.253.9.149" type="BgpPeer" parent-type="Node" parent-id="lssbxwan7"/>
+    <model-object-entry id="lssbxwan5: mpbgp: 39.253.4.253" type="BgpPeer" parent-type="Node" parent-id="lssbxwan5"/>
+    <model-object-entry id="jaflpoprt01: mpbgp: 39.253.4.253" type="BgpPeer" parent-type="Node" parent-id="jaflpoprt01"/>
+    <model-object-entry id="vivapoprt01: mpbgp: 39.253.5.137" type="BgpPeer" parent-type="Node" parent-id="vivapoprt01"/>
+    <model-object-entry id="lssbxwan6: mpbgp: 39.253.5.137" type="BgpPeer" parent-type="Node" parent-id="lssbxwan6"/>
+    <model-object-entry id="lsmopoprt01: mpbgp: 39.253.10.241" type="BgpPeer" parent-type="Node" parent-id="lsmopoprt01"/>
+    <model-object-entry id="kcsbxwan2: mpbgp: 39.253.21.65" type="BgpPeer" parent-type="Node" parent-id="kcsbxwan2"/>
+    <model-object-entry id="phpapoprt01: mpbgp: 39.253.21.65" type="BgpPeer" parent-type="Node" parent-id="phpapoprt01"/>
+    <model-object-entry id="kc2y28-blue: aggregation group 1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: aggregation group" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: 1" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="kc2y21-red: aggregation group 1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y21-red: aggregation group" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y21-red: 1" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="kc2y28-blue: ethernet1/3&lt;-&gt;kc2y21-red: ethernet1/3" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: ethernet1/3" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y21-red: ethernet1/3" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="kc2y28-blue: ethernet1/40&lt;-&gt;kc2y21-red: ethernet1/40" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: ethernet1/40" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y21-red: ethernet1/40" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="kc2y28-blue: ethernet1/39&lt;-&gt;kc2y21-red: ethernet1/39" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: ethernet1/39" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y21-red: ethernet1/39" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="kc2y28-blue: ethernet1/4&lt;-&gt;kc2y21-red: ethernet1/4" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="kc2y28-blue: ethernet1/4" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kc2y21-red: ethernet1/4" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapopswmgmt01: gigabitethernet2/1/1&lt;-&gt;kcmopopswmgmt01: gigabitethernet2/1/1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapopswmgmt01: gigabitethernet2/1/1" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kcmopopswmgmt01: gigabitethernet2/1/1" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapoprt01: aggregation group 1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapoprt01: aggregation group" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="phpapoprt01: 1" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapoprt01: gigabitethernet0/2/0/0&lt;-&gt;kcmopoprt01: gigabitethernet0/2/0/0" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapoprt01: gigabitethernet0/2/0/0" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kcmopoprt01: gigabitethernet0/2/0/0" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapoprt01: gigabitethernet0/3/0/0&lt;-&gt;kcmopoprt01: gigabitethernet0/3/0/0" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapoprt01: gigabitethernet0/3/0/0" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kcmopoprt01: gigabitethernet0/3/0/0" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapoprt01: bundleethernet1&lt;-&gt;kcmopoprt01: bundleethernet1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapoprt01: bundleethernet1" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kcmopoprt01: bundleethernet1" endpoint="Z"/>
+    </model-object-entry>
+    <model-object-entry id="phpapoprt01: ip bundle-ether1&lt;-&gt;kcmopoprt01: ip bundle-ether1" type="SnmpInterfaceLink" parent-type="Model" parent-id="model">
+        <peer-ref type="SnmpInterface" id="phpapoprt01: bundle-ether1" endpoint="A"/>
+        <peer-ref type="SnmpInterface" id="kcmopoprt01: bundle-ether1" endpoint="Z"/>
+        <relative-ref type="Node" id="phpapoprt01: ip bundle-ether1&lt;-&gt;kcmopoprt01: ip bundle-ether1"/>
+    </model-object-entry>
+</inventory>
