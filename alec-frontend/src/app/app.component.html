@@ -1,6 +1,14 @@
-<body [ngClass]="{'app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done brand-minimized sidebar-minimized' : isSideBarMinimized,
-            'app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done' : !isSideBarMinimized}">
+<body class='app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done' [ngClass]="{'brand-minimized sidebar-minimized' : isSideBarMinimized}">
 <!-- <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done brand-minimized sidebar-minimized"> -->
     <app-header (sideBarStatus)="displaySideBar($event)"></app-header>
-    <app-side-navbar *ngIf="isSideBarVisible" (sideBarMinimzed)="minimizeSideBar($event)"></app-side-navbar>
+    <div class="app-body">
+        <app-side-navbar *ngIf="isSideBarVisible" (sideBarMinimzed)="minimizeSideBar($event)"></app-side-navbar>
+        <main class="main">
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <app-content-view></app-content-view>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>

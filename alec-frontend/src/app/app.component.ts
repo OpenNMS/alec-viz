@@ -16,6 +16,5 @@ export class AppComponent {
 
   displaySideBar(sideBarStatus){
     this.isSideBarVisible = sideBarStatus;
-    alert(this.isSideBarVisible)
   }
 }

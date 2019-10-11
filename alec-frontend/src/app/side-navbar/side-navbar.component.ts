@@ -15,7 +15,6 @@ export class SideNavbarComponent implements OnInit {
   minimizeSideBar(){
     this.minimized = !this.minimized;
     this.sideBarMinimzed.emit(this.minimized)
-    alert(this.minimized)
   }
 
   ngOnInit() {
