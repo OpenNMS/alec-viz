@@ -1,4 +1,5 @@
 <body class='app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done' [ngClass]="{'brand-minimized sidebar-minimized' : isSideBarMinimized}">
+<!-- <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show pace-done brand-minimized sidebar-minimized"> -->
     <app-header (sideBarStatus)="displaySideBar($event)"></app-header>
     <div class="app-body">
         <app-side-navbar *ngIf="isSideBarVisible" (sideBarMinimzed)="minimizeSideBar($event)"></app-side-navbar>
@@ -9,20 +10,31 @@
                 </li>
                 <li class="breadcrumb-menu d-md-down-none">
                   <div class="btn-group" role="group" aria-label="Button group">
-                    <form class="form-inline">
-	                    <div class="form-group">
-	                        <div class="input-group">
-	                        <input class="form-control" placeholder="yyyy-mm-dd"
-	                                name="d2" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
-		                        <div class="input-group-append">
-		                            <button class="btn btn-primary" (click)="d2.toggle()" type="button">
-		                              <i class="cui-calendar"></i>
-		                            </button>
-		                        </div>
-	                        </div>
-	                    </div>
-                    </form>
-                    <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+                        <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd"
+                                    name="d2" #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+                            <div class="input-group-append">
+                            
+                                <button class="btn btn-primary" (click)="d2.toggle()" type="button">
+                                  <i class="cui-calendar"></i>
+                                </button>
+                            </div>
+
+                            </div>
+                        </div>
+                        </form>
+
+                            <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+
+                    <!-- <a class="btn" href="#">
+                      <i class="icon-speech"></i>
+                    </a>
+                    <a class="btn" href="./">
+                      <i class="icon-graph"></i>  Dashboard</a>
+                    <a class="btn" href="#">
+                      <i class="icon-settings"></i>  Settings</a> -->
                   </div>
                 </li>
               </ol>

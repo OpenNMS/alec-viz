@@ -1,18 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-@charset "UTF-8";
-/*!
- * CoreUI - Open Source Dashboard UI Kit
- * @version v2.1.12
- * @link https://coreui.io
- * Copyright (c) 2018 creativeLabs Łukasz Holeczek
- * Licensed under MIT (https://coreui.io/license)
- */
-/*!
- * Bootstrap v4.3.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 The Bootstrap Authors
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+ 
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 :root {
   --blue: #20a8d8;
   --indigo: #6610f2;
@@ -16395,3 +16383,5 @@ body {
   background-position: right calc(0.375em + 0.1875rem) center;
 }
 /*# sourceMappingURL=style.css.map */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
