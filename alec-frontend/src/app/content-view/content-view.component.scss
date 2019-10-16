@@ -1,0 +1,52 @@
+.card .modelOptions {
+    margin-bottom: 0;
+}
+
+.example-h2 {
+    margin: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 10px;
+  }
+  
+  .mat-slider-horizontal {
+    width: 80%;
+  }
+
+  #rangeSlider {
+    text-align: center;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    padding-bottom: 20px;
+  }
+
+  #graphContainer {
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #graphArea {
+    height: 70%;
+    width: 90%;
+    position: absolute;
+    border: black 2px solid;
+  }
+
+  #playIcon {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+  }

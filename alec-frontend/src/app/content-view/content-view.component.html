@@ -1,0 +1,29 @@
+
+<div>
+    <div id="graphArea">
+        <div id="graphContainer">
+            <h5>5092387</h5>
+        </div>
+    </div>
+    <div id='rangeSlider'>
+        <div id="playIcon">
+            <i class="icon-control-play icons font-2xl"></i>
+        </div>
+        
+        <span class="text-small">1</span>
+        <mat-slider
+        class="example-margin"
+        [invert]="invert"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [thumbLabel]="thumbLabel"
+        [tickInterval]="tickInterval"
+        [(ngModel)]="value"
+        [vertical]="vertical"
+        color="primary">
+        </mat-slider>
+        <span class="text-small">1</span>
+        
+    </div>
+</div>
