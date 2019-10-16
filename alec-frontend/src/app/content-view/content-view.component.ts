@@ -1,14 +1,188 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener  } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
+import { trigger, transition, state, animate, style, AnimationEvent } from '@angular/animations';
+
 
 @Component({
   selector: 'app-content-view',
   templateUrl: './content-view.component.html',
-  styleUrls: ['./content-view.component.scss']
+  styleUrls: ['./content-view.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        opacity: 1,
+        textAlign: 'center',
+        bottom: 0,
+        position: 'fixed',
+        width: '100%',
+        left: '1%',
+        height: 'auto',
+        paddingBottom: '20px',
+      })),
+      state('closed', style({
+        height : '0px',
+        opacity: 0.5,
+      })),
+
+      state('enlarged', style({
+        height: '80%',
+        width: '92%',
+        left: '6.5%'
+      })),
+
+      state('ensized', style({
+        height: '70%',
+        width: '90%',
+      })),
+
+      transition('open => closed', [
+        animate('2s')
+      ]),
+      transition('closed => open', [
+        animate('2s')
+      ]),
+      transition('* => closed', [
+        animate('2s')
+      ]),
+      transition('* => open', [
+        animate('0.5s')
+      ]),
+      transition('open <=> closed', [
+        animate('2s')
+      ]),
+      transition ('* => open', [
+        animate ('2s',
+          style ({ opacity: '*' }),
+        ),
+      ]),
+      transition('* => *', [
+        animate('2s')
+      ]),
+
+      // FOR GRAPH CONTAINER:
+
+      transition('ensized => enlarged', [
+        animate('200s ease-in')
+      ]),
+      transition('enlarged => ensized', [
+        animate('200s ease-in')
+      ]),
+      transition('* => enlarged', [
+        animate('2s ease-in')
+      ]),
+      transition('* => ensized', [
+        animate('2s ease-in')
+      ]),
+      transition('ensized <=> enlarged', [
+        animate('2s ease-in')
+      ]),
+      transition ('* => ensized', [
+        animate ('2s ease-in',
+          style ({ opacity: '*' }),
+        ),
+      ]),
+      transition('* => *', [
+        animate('2s ease-in')
+      ]),
+    ]),
+  ],
 })
 export class ContentViewComponent implements OnInit {
+  /* Detect Inactivity  */
+  userActivity;
+  userInactive: Subject<any> = new Subject();
+  
+  constructor() {
+    this.setTimeout();
+    this.userInactive.subscribe(() => {
+      console.log('user has been inactive for 3s');
+      this.isOpen = false;
+    });
+  }
+
+  setTimeout() {
+    this.userActivity = setTimeout(() => {
+      this.userInactive.next(undefined);
+    }, 3000);
+  }
+
+  @HostListener('window:click', ['$event'])
+  @HostListener('window:focus', ['$event'])
+  @HostListener('window:blur') refreshInactivity() {
+    console.log('Refreshed')
+    clearTimeout(this.userActivity);
+    this.isOpen = true;
+  }
+
+  @HostListener('window:mousemove') refreshUserState() {
+    clearTimeout(this.userActivity);
+    this.isOpen = true;
+    this.setTimeout();
+  }
+  /* Detect Inactivity - End */
+
+
+  /* Slider Animation */
+  isOpen = true;
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+
+  onAnimationEvent ( event: AnimationEvent ) {
+    // openClose is trigger name in this example
+    console.warn(`Animation Trigger: ${event.triggerName}`);
+
+    // phaseName is start or done
+    console.warn(`Phase: ${event.phaseName}`);
+
+    // in our example, totalTime is 1000 or 1 second
+    console.warn(`Total time: ${event.totalTime}`);
+
+    // in our example, fromState is either open or closed
+    console.warn(`From: ${event.fromState}`);
+
+    // in our example, toState either open or closed
+    console.warn(`To: ${event.toState}`);
+
+    // the HTML element itself, the button in this case
+    console.warn(`Element: ${event.element}`);
+  }
+  /* Slider Animation- END */
+
+
+  /* Slider */
+  autoTicks = false;
+  disabled = false;
+  invert = false;
+  max = 1571256143359;
+  min = 1569959949010;
+  showTicks = true;
+  step = 1;
+  thumbLabel = false;
+  value = 0;
+  vertical = false;
+  private _tickInterval = 1000000000;
+
+  get tickInterval(): number | 'auto' | any {
+    return this.showTicks ? (this.autoTicks ? 'auto' : new Date(this._tickInterval)) : 0;
+  }
+  set tickInterval(value) {
+    this._tickInterval = new Date(value);
+  }
+
+  displayWith(value){
+    return `${new Date(value).toLocaleDateString()} ${new Date(value).toLocaleTimeString()} `;
+  }
+  /* Slider - End */
+
+
+
+
 
   // time: NgbTimeStruct = {hour: 13, minute: 30, second: 0};
 
@@ -396,27 +570,5 @@ export class ContentViewComponent implements OnInit {
       this.mainChartData3.push(65);
     }
   }
-
-  /* Slider */
-  autoTicks = false;
-  disabled = false;
-  invert = false;
-  max = 100;
-  min = 0;
-  showTicks = true;
-  step = 1;
-  thumbLabel = true;
-  value = 0;
-  vertical = false;
-  
-
-  get tickInterval(): number | 'auto' {
-    return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
-  }
-  set tickInterval(value) {
-    this._tickInterval = coerceNumberProperty(value);
-  }
-  private _tickInterval = 10;
-  /* Slider - End */
 }
 

@@ -1,24 +1,7 @@
-.card .modelOptions {
-    margin-bottom: 0;
-}
 
-.example-h2 {
-    margin: 10px;
-  }
-  
-  .example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-  }
-  
-  .example-margin {
-    margin: 10px;
-  }
-  
   .mat-slider-horizontal {
     width: 80%;
+    margin: 10px;
   }
 
   #rangeSlider {
@@ -49,4 +32,29 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px;
+  }
+  
+  ::ng-deep .mat-slider-horizontal .mat-slider-ticks-container {
+    height: 7px !important;
+  }
+  ::ng-deep .mat-slider-horizontal .mat-slider-ticks {
+    height: 7px !important;
+  }
+
+  ::ng-deep .mat-slider-ticks-container {
+    top: -2px  !important;
+  }
+
+  ::ng-deep .mat-slider:not(.mat-slider-disabled).cdk-focused .mat-slider-thumb-label {
+    border-radius: 95% 40% 95% 40% !important;
+  }
+
+  ::ng-deep .mat-slider-thumb-label {
+    width: 75px !important;
+    height: 75px !important;
+  }
+
+  ::ng-deep .mat-slider-horizontal .mat-slider-thumb-label {
+    right: -28px !important;
+    top: -70px !important;
   }

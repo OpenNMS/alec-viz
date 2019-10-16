@@ -1,6 +1,6 @@
 
 <div>
-    <div id="graphArea">
+    <div id="graphArea" (click)="toggle()">
         <div id="graphContainer">
             <h5>5092387</h5>
         </div>
@@ -12,12 +12,13 @@
         
         <span class="text-small">1</span>
         <mat-slider
-        class="example-margin"
+        class="mat-slider-horizontal"
         [invert]="invert"
         [max]="max"
         [min]="min"
         [step]="step"
         [thumbLabel]="thumbLabel"
+        [displayWith]="displayWith"
         [tickInterval]="tickInterval"
         [(ngModel)]="value"
         [vertical]="vertical"
