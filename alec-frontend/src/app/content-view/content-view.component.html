@@ -1,6 +1,9 @@
 
 <div>
     <div id="graphArea" (click)="toggle()"
+    [@openClose]="isOpen ? 'ensized' : 'enlarged'"
+    (@openClose.start)="onAnimationEvent($event)"
+    (@openClose.done)="onAnimationEvent($event)"
     >
         <div id="graphContainer">
             <h5>{{displayWith(currentTime, true) || 5092387}}</h5>
@@ -10,7 +13,9 @@
         </div>
     </div>
     <div id='rangeSlider' 
-   
+    [@openClose]="isOpen ? 'open' : 'closed'"
+    (@openClose.start)="onAnimationEvent($event)"
+    (@openClose.done)="onAnimationEvent($event)"
     >
         <div id="playIcon">
             <i class="icon-control-play icons font-2xl"></i>

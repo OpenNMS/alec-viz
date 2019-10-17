@@ -6,6 +6,8 @@ import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
 import { trigger, transition, state, animate, style, AnimationEvent } from '@angular/animations';
 
+import {StateService} from '../services/state.service';
+import {Edge, Model, ModelService, Vertex} from '../services/model.service';
 
 @Component({
   selector: 'app-content-view',
@@ -29,27 +31,40 @@ import { trigger, transition, state, animate, style, AnimationEvent } from '@ang
       })),
 
       state('enlarged', style({
-        height: '80%',
-        width: '92%',
-        left: '6.5%'
+        height: '82%',
+        width: '93%',
+        left: '5%',
+        top: '70px'
       })),
 
       state('ensized', style({
-        height: '70%',
+        height: '75%',
         width: '90%',
       })),
-
+      // transition(':enter', [
+      //   style({transform: 'translateY(-100%)'}),
+      //   animate('200ms ease-in', style({transform: 'translateY(0%)'}))
+      // ]),
+      // transition(':leave', [
+      //   animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+      // ]),
       transition('open => closed', [
         animate('2s')
+        // style({transform: 'translateY(-100%)'}),
+        // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('closed => open', [
         animate('2s')
+        // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       ]),
       transition('* => closed', [
         animate('2s')
+        // style({transform: 'translateY(-100%)'}),
+        // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('* => open', [
         animate('0.5s')
+        // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       ]),
       transition('open <=> closed', [
         animate('2s')
@@ -66,16 +81,22 @@ import { trigger, transition, state, animate, style, AnimationEvent } from '@ang
       // FOR GRAPH CONTAINER:
 
       transition('ensized => enlarged', [
+        // animate('7s')
+        // style({transform: 'translateY(-100%)'}),
         animate('200s ease-in')
       ]),
       transition('enlarged => ensized', [
         animate('200s ease-in')
+        // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       ]),
       transition('* => enlarged', [
         animate('2s ease-in')
+        // style({transform: 'translateY(-100%)'}),
+        // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('* => ensized', [
         animate('2s ease-in')
+        // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       ]),
       transition('ensized <=> enlarged', [
         animate('2s ease-in')
@@ -95,14 +116,6 @@ export class ContentViewComponent implements OnInit {
   /* Detect Inactivity  */
   userActivity;
   userInactive: Subject<any> = new Subject();
-  
-  constructor() {
-    this.setTimeout();
-    this.userInactive.subscribe(() => {
-      console.log('user has been inactive for 3s');
-      this.isOpen = false;
-    });
-  }
 
   setTimeout() {
     this.userActivity = setTimeout(() => {
@@ -161,6 +174,8 @@ export class ContentViewComponent implements OnInit {
   invert = false;
   max = 1571256143359;
   min = 1569959949010;
+  meanTime = (this.max + this.min)/2;
+  currentTime;
   showTicks = true;
   step = 1;
   thumbLabel = false;
@@ -182,6 +197,80 @@ export class ContentViewComponent implements OnInit {
     return `${new Date(value).toLocaleDateString()} ${new Date(value).toLocaleTimeString()} `;
   }
   /* Slider - End */
+
+
+/* DETAIL COMPONENT */
+  model: Model;
+  activeElement: Vertex | Edge;
+  pointInTimeMs: number;
+  minTimeMs : number;
+  maxTimeMs: number;
+
+  constructor(private modelService: ModelService, private stateService: StateService) {
+    this.modelService.getModel().subscribe((model: Model) => {
+      this.onModelUpdated(model);
+      this.min = this.modelService.getMinTime();
+      this.max = this.modelService.getMaxTime();
+      this.meanTime = (this.max + this.min)/2;
+      console.log('this.min: ', this.min)
+      console.log('this.max: ', this.max)
+      console.log('this.meanTime: ', this.meanTime)
+      this.updateMeanTime();
+      this.currentTime = this.meanTime;
+
+    });
+
+    stateService.activeElement$.subscribe(activeElement => {
+      this.activeElement = activeElement;
+    });
+
+    this.pointInTimeMs = new Date().getTime();
+    stateService.pointInTime$.subscribe(pointInTimeMs => {
+      this.pointInTimeMs = pointInTimeMs;
+      console.log('Point in TIme: ', this.pointInTimeMs )
+
+    });
+
+    /* Detect Inactivity */
+    this.setTimeout();
+    this.userInactive.subscribe(() => {
+      console.log('user has been inactive for 3s');
+      this.isOpen = false;
+    });
+    console.log('currentTIme : ', this.currentTime)
+    /* Detect Inactivity - ENd */
+  }
+
+  private onModelUpdated(model: Model) {
+    this.model = model;
+    console.log('Updated Model JSON: ', this.model)
+  }
+
+  setTime(timestamp: number|string) {
+    if (typeof timestamp === 'string') {
+      this.stateService.setPointInTimeMs(Number(timestamp));
+    } else {
+      this.stateService.setPointInTimeMs(<number>timestamp);
+    }
+  }
+
+  // addToFocus(el: Vertex | Edge) {
+  //   this.stateService.addToFocus(el);
+  // }
+
+  // ngOnInit() {
+  //   // TODO: Unsub
+  // }
+
+/* DETAIL COMPONENT - END */
+
+/* Detail Component Extended Functions */
+updateMeanTime(){
+  this.meanTime = (this.max + this.min)/2;
+}
+/* Detail Component Extended Functions - End */
+
+
 
 
 
