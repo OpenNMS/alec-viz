@@ -166,16 +166,19 @@ export class ContentViewComponent implements OnInit {
   thumbLabel = false;
   value = 0;
   vertical = false;
-  private _tickInterval = 1000000000;
 
-  get tickInterval(): number | 'auto' | any {
-    return this.showTicks ? (this.autoTicks ? 'auto' : new Date(this._tickInterval)) : 0;
+  get tickInterval(): number | 'auto' {
+    return this._tickInterval;
   }
   set tickInterval(value) {
-    this._tickInterval = new Date(value);
+    this._tickInterval = coerceNumberProperty(value);
   }
+  private _tickInterval = 3;
 
-  displayWith(value){
+  displayWith(value, localFormat){
+    if(localFormat){
+      return `${new Date(value).toDateString()} ${new Date(value).toLocaleTimeString()} `
+    }
     return `${new Date(value).toLocaleDateString()} ${new Date(value).toLocaleTimeString()} `;
   }
   /* Slider - End */

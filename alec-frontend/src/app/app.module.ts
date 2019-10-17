@@ -8,6 +8,7 @@ import { MatSliderModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { HeaderComponent } from './header/header.component';
+import { MetaDataService } from './services/meta-data.service';
 import { ContentViewComponent } from './content-view/content-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     ContentViewComponent
   ],
-  imports: [
+  imports: [ 
     NgbModule,
     FormsModule,  
     BrowserModule,
@@ -26,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatSliderModule
   ],
-  providers: [],
+  providers: [
+    MetaDataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

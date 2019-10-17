@@ -1,16 +1,22 @@
 
 <div>
-    <div id="graphArea" (click)="toggle()">
+    <div id="graphArea" (click)="toggle()"
+    >
         <div id="graphContainer">
-            <h5>5092387</h5>
+            <h5>{{displayWith(currentTime, true) || 5092387}}</h5>
+        </div>
+        <div id='tickLabelText'>
+            <span>{{ displayWith(currentTime, true) }} </span>
         </div>
     </div>
-    <div id='rangeSlider'>
+    <div id='rangeSlider' 
+   
+    >
         <div id="playIcon">
             <i class="icon-control-play icons font-2xl"></i>
         </div>
         
-        <span class="text-small">1</span>
+        <span class="text-small">00:00</span>
         <mat-slider
         class="mat-slider-horizontal"
         [invert]="invert"
@@ -20,11 +26,24 @@
         [thumbLabel]="thumbLabel"
         [displayWith]="displayWith"
         [tickInterval]="tickInterval"
-        [(ngModel)]="value"
+        [(ngModel)]="currentTime"
         [vertical]="vertical"
         color="primary">
         </mat-slider>
-        <span class="text-small">1</span>
+        <span class="text-small">23:59</span>
         
     </div>
 </div>
+
+
+
+<!-- 
+        (@openClose.start)="onAnimationEvent($event)"
+    (@openClose.done)="onAnimationEvent($event)"
+    (@openClose.start)="onAnimationEvent($event)"
+    (@openClose.done)="onAnimationEvent($event)"
+ -->
+
+
+ <!-- [@openClose]="isOpen ? 'ensized' : 'enlarged'" -->
+ <!--  [@openClose]="isOpen ? 'open' : 'closed'" -->

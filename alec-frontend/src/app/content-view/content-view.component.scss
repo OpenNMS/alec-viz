@@ -58,3 +58,24 @@
     right: -28px !important;
     top: -70px !important;
   }
+
+  ::ng-deep #rangeSlider .mat-primary .mat-slider-thumb, 
+  ::ng-deep .mat-primary .mat-slider-thumb-label, 
+  ::ng-deep .mat-primary .mat-slider-track-fill {
+    background-color: black !important;
+  }
+
+  #tickLabelText {
+    border: grey 1px solid;
+    border-radius: 10px;
+    width: 11rem;
+    margin: 10px 0px;
+    text-align: center;
+    background-color: black;;
+  }
+
+  #tickLabelText span {
+    padding: 5px;
+    font-size: 12px;
+    color: white;
+  }
