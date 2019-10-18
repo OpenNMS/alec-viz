@@ -7,7 +7,7 @@ import {coerceNumberProperty} from '@angular/cdk/coercion';
 import { trigger, transition, state, animate, style, AnimationEvent } from '@angular/animations';
 
 import {StateService} from '../services/state.service';
-import {Edge, Model, ModelService, Vertex} from '../services/model.service';
+import {Edge, Model, ModelService, Vertex, ModelMetadata} from '../services/model.service';
 
 @Component({
   selector: 'app-content-view',
@@ -120,13 +120,14 @@ export class ContentViewComponent implements OnInit {
   setTimeout() {
     this.userActivity = setTimeout(() => {
       this.userInactive.next(undefined);
-    }, 3000);
+    }, 10000);
   }
 
   @HostListener('window:click', ['$event'])
   @HostListener('window:focus', ['$event'])
   @HostListener('window:blur') refreshInactivity() {
     console.log('Refreshed')
+    // this.userInactive.next(undefined);
     clearTimeout(this.userActivity);
     this.isOpen = true;
   }
@@ -147,23 +148,23 @@ export class ContentViewComponent implements OnInit {
   }
 
   onAnimationEvent ( event: AnimationEvent ) {
-    // openClose is trigger name in this example
-    console.warn(`Animation Trigger: ${event.triggerName}`);
+    // // openClose is trigger name in this example
+    // console.warn(`Animation Trigger: ${event.triggerName}`);
 
-    // phaseName is start or done
-    console.warn(`Phase: ${event.phaseName}`);
+    // // phaseName is start or done
+    // console.warn(`Phase: ${event.phaseName}`);
 
-    // in our example, totalTime is 1000 or 1 second
-    console.warn(`Total time: ${event.totalTime}`);
+    // // in our example, totalTime is 1000 or 1 second
+    // console.warn(`Total time: ${event.totalTime}`);
 
-    // in our example, fromState is either open or closed
-    console.warn(`From: ${event.fromState}`);
+    // // in our example, fromState is either open or closed
+    // console.warn(`From: ${event.fromState}`);
 
-    // in our example, toState either open or closed
-    console.warn(`To: ${event.toState}`);
+    // // in our example, toState either open or closed
+    // console.warn(`To: ${event.toState}`);
 
-    // the HTML element itself, the button in this case
-    console.warn(`Element: ${event.element}`);
+    // // the HTML element itself, the button in this case
+    // console.warn(`Element: ${event.element}`);
   }
   /* Slider Animation- END */
 
@@ -200,24 +201,31 @@ export class ContentViewComponent implements OnInit {
 
 
 /* DETAIL COMPONENT */
+  /* timeslider component */
+  modelMetadata: ModelMetadata;
+  /* timeslider component - end */
+
   model: Model;
   activeElement: Vertex | Edge;
   pointInTimeMs: number;
   minTimeMs : number;
   maxTimeMs: number;
+  timeSet = false;
 
   constructor(private modelService: ModelService, private stateService: StateService) {
     this.modelService.getModel().subscribe((model: Model) => {
       this.onModelUpdated(model);
-      this.min = this.modelService.getMinTime();
-      this.max = this.modelService.getMaxTime();
-      this.meanTime = (this.max + this.min)/2;
-      console.log('this.min: ', this.min)
-      console.log('this.max: ', this.max)
-      console.log('this.meanTime: ', this.meanTime)
-      this.updateMeanTime();
-      this.currentTime = this.meanTime;
-
+      if(!this.timeSet){
+        this.min = this.modelService.getMinTime();
+        this.max = this.modelService.getMaxTime();
+        this.meanTime = (this.max + this.min)/2;
+        console.log('this.min: ', this.min)
+        console.log('this.max: ', this.max)
+        console.log('this.meanTime: ', this.meanTime)
+        this.updateMeanTime();
+        this.pointInTimeMs = this.meanTime;
+        this.timeSet = true;
+      }
     });
 
     stateService.activeElement$.subscribe(activeElement => {
@@ -228,7 +236,6 @@ export class ContentViewComponent implements OnInit {
     stateService.pointInTime$.subscribe(pointInTimeMs => {
       this.pointInTimeMs = pointInTimeMs;
       console.log('Point in TIme: ', this.pointInTimeMs )
-
     });
 
     /* Detect Inactivity */
@@ -237,7 +244,7 @@ export class ContentViewComponent implements OnInit {
       console.log('user has been inactive for 3s');
       this.isOpen = false;
     });
-    console.log('currentTIme : ', this.currentTime)
+    console.log('currentTIme/pointInTimeMs : ', this.pointInTimeMs)
     /* Detect Inactivity - ENd */
   }
 
@@ -254,6 +261,27 @@ export class ContentViewComponent implements OnInit {
     }
   }
 
+  onTimeChanged() {
+    this.stateService.setPointInTimeMs(this.pointInTimeMs);
+  }
+
+  /* timeslider component */
+  private onModelMetadataChanged(modelMetadata: ModelMetadata) {
+    this.modelMetadata = modelMetadata;
+    // this.minTimeMs = modelMetadata.timeMetadata.startMs;
+    // this.maxTimeMs = modelMetadata.timeMetadata.endMs;
+  }
+
+  ngOnInit(): void {
+    this.modelService.modelMetadata$.subscribe(modelMetadata => {
+      this.onModelMetadataChanged(modelMetadata);
+    });
+    this.stateService.pointInTime$.subscribe(pointInTimeMs => {
+      this.pointInTimeMs = pointInTimeMs;
+    });
+  }
+  /* timeslider component - End */
+
   // addToFocus(el: Vertex | Edge) {
   //   this.stateService.addToFocus(el);
   // }
@@ -267,6 +295,11 @@ export class ContentViewComponent implements OnInit {
 /* Detail Component Extended Functions */
 updateMeanTime(){
   this.meanTime = (this.max + this.min)/2;
+}
+
+onSliderChange(event){
+  console.log('Slider Change event: ', event);
+  this.onTimeChanged();
 }
 /* Detail Component Extended Functions - End */
 
@@ -654,13 +687,19 @@ updateMeanTime(){
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  ngOnInit(): void {
-    // generate random values for mainChart
-    for (let i = 0; i <= this.mainChartElements; i++) {
-      this.mainChartData1.push(this.random(50, 200));
-      this.mainChartData2.push(this.random(80, 100));
-      this.mainChartData3.push(65);
-    }
-  }
+  // ngOnInit(): void {
+  //   this.modelService.modelMetadata$.subscribe(modelMetadata => {
+  //     this.onModelMetadataChanged(modelMetadata);
+  //   });
+  //   this.stateService.pointInTime$.subscribe(pointInTimeMs => {
+  //     this.pointInTimeMs = pointInTimeMs;
+  //   });
+    // // generate random values for mainChart
+    // for (let i = 0; i <= this.mainChartElements; i++) {
+    //   this.mainChartData1.push(this.random(50, 200));
+    //   this.mainChartData2.push(this.random(80, 100));
+    //   this.mainChartData3.push(65);
+    // }
+  // }
 }
 

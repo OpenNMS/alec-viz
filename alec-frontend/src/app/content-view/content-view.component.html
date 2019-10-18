@@ -6,10 +6,10 @@
     (@openClose.done)="onAnimationEvent($event)"
     >
         <div id="graphContainer">
-            <h5>{{displayWith(currentTime, true) || 5092387}}</h5>
+            <h5>{{displayWith(pointInTimeMs, true) || 5092387}}</h5>
         </div>
         <div id='tickLabelText'>
-            <span>{{ displayWith(currentTime, true) }} </span>
+            <span>{{ displayWith(pointInTimeMs, true) }} </span>
         </div>
     </div>
     <div id='rangeSlider' 
@@ -18,7 +18,8 @@
     (@openClose.done)="onAnimationEvent($event)"
     >
         <div id="playIcon">
-            <i class="icon-control-play icons font-2xl"></i>
+            <!-- <i class="icon-control-play icons font-2xl"></i> -->
+            <i class="fa fa-play fa-2x"></i>
         </div>
         
         <span class="text-small">00:00</span>
@@ -31,8 +32,9 @@
         [thumbLabel]="thumbLabel"
         [displayWith]="displayWith"
         [tickInterval]="tickInterval"
-        [(ngModel)]="currentTime"
+        [(ngModel)]="pointInTimeMs"
         [vertical]="vertical"
+        (change)="onSliderChange($event)"
         color="primary">
         </mat-slider>
         <span class="text-small">23:59</span>
