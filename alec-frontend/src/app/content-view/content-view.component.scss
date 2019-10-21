@@ -32,6 +32,15 @@
     display: inline-block;
     vertical-align: middle;
     padding: 10px;
+    cursor: pointer;
+  }
+
+
+  ::ng-deep #select-situation{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
   }
   
   ::ng-deep .mat-slider-horizontal .mat-slider-ticks-container {

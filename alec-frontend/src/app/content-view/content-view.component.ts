@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding, HostListener  } from '@angular/core';
-import { Subject } from 'rxjs';
-
+import { Subject, Subscription, timer, pipe, } from 'rxjs';
+import { takeWhile, filter } from 'rxjs/operators';
+import {Observable} from 'rxjs/Rx';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import {coerceNumberProperty} from '@angular/cdk/coercion';
@@ -27,11 +28,11 @@ import {Edge, Model, ModelService, Vertex, ModelMetadata} from '../services/mode
       })),
       state('closed', style({
         height : '0px',
-        opacity: 0.5,
+        opacity: 0
       })),
 
       state('enlarged', style({
-        height: '82%',
+        height: '85%',
         width: '93%',
         left: '5%',
         top: '70px'
@@ -49,16 +50,15 @@ import {Edge, Model, ModelService, Vertex, ModelMetadata} from '../services/mode
       //   animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       // ]),
       transition('open => closed', [
-        animate('2s')
-        // style({transform: 'translateY(-100%)'}),
+        animate('1s', style({opacity: '0'}))
         // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('closed => open', [
-        animate('2s')
-        // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+        // animate('2s', style({opacity: '0'}))
+        animate('1s ease-in', style({opacity: '0'}))
       ]),
       transition('* => closed', [
-        animate('2s')
+        animate('200ms')
         // style({transform: 'translateY(-100%)'}),
         // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
@@ -120,7 +120,7 @@ export class ContentViewComponent implements OnInit {
   setTimeout() {
     this.userActivity = setTimeout(() => {
       this.userInactive.next(undefined);
-    }, 10000);
+    }, 3000);
   }
 
   @HostListener('window:click', ['$event'])
@@ -148,23 +148,6 @@ export class ContentViewComponent implements OnInit {
   }
 
   onAnimationEvent ( event: AnimationEvent ) {
-    // // openClose is trigger name in this example
-    // console.warn(`Animation Trigger: ${event.triggerName}`);
-
-    // // phaseName is start or done
-    // console.warn(`Phase: ${event.phaseName}`);
-
-    // // in our example, totalTime is 1000 or 1 second
-    // console.warn(`Total time: ${event.totalTime}`);
-
-    // // in our example, fromState is either open or closed
-    // console.warn(`From: ${event.fromState}`);
-
-    // // in our example, toState either open or closed
-    // console.warn(`To: ${event.toState}`);
-
-    // // the HTML element itself, the button in this case
-    // console.warn(`Element: ${event.element}`);
   }
   /* Slider Animation- END */
 
@@ -173,8 +156,8 @@ export class ContentViewComponent implements OnInit {
   autoTicks = false;
   disabled = false;
   invert = false;
-  max = 1571256143359;
-  min = 1569959949010;
+  max;
+  min;
   meanTime = (this.max + this.min)/2;
   currentTime;
   showTicks = true;
@@ -211,6 +194,7 @@ export class ContentViewComponent implements OnInit {
   minTimeMs : number;
   maxTimeMs: number;
   timeSet = false;
+  timeLapsePlaying = false;
 
   constructor(private modelService: ModelService, private stateService: StateService) {
     this.modelService.getModel().subscribe((model: Model) => {
@@ -226,6 +210,11 @@ export class ContentViewComponent implements OnInit {
         this.pointInTimeMs = this.meanTime;
         this.timeSet = true;
       }
+      this.stateService.resetView$.subscribe(() => {
+        this.timeLapsePlaying = false;
+        this.updateMeanTime(); //optional
+        this.pointInTimeMs = this.meanTime;
+      })
     });
 
     stateService.activeElement$.subscribe(activeElement => {
@@ -293,14 +282,40 @@ export class ContentViewComponent implements OnInit {
 /* DETAIL COMPONENT - END */
 
 /* Detail Component Extended Functions */
+subscription: Subscription;
+ts;
+
 updateMeanTime(){
   this.meanTime = (this.max + this.min)/2;
+}
+
+forward(){
+  this.pointInTimeMs = Math.min(this.pointInTimeMs + 60 * 1000, this.max);
+  this.onTimeChanged();
+}
+
+playTimeLapse(){
+  this.pointInTimeMs = this.min;
+  this.timeLapsePlaying = !this.timeLapsePlaying
+  if(this.timeLapsePlaying){
+    this.ts = Observable.interval(1000).take(60).subscribe(()=> {
+      this.forward();
+      if(this.pointInTimeMs >= this.max){
+        this.ts.unsubscribe();
+        this.timeLapsePlaying = false;
+      }
+    })
+  }
+  else{
+    this.ts.unsubscribe();
+  }
 }
 
 onSliderChange(event){
   console.log('Slider Change event: ', event);
   this.onTimeChanged();
 }
+
 /* Detail Component Extended Functions - End */
 
 

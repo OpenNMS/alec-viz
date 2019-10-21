@@ -17,9 +17,9 @@
     (@openClose.start)="onAnimationEvent($event)"
     (@openClose.done)="onAnimationEvent($event)"
     >
-        <div id="playIcon">
-            <!-- <i class="icon-control-play icons font-2xl"></i> -->
-            <i class="fa fa-play fa-2x"></i>
+        <div id="playIcon" (click)="playTimeLapse()">
+            <i *ngIf="!timeLapsePlaying" class="fa fa-play-circle fa-3x"></i>
+            <i *ngIf="timeLapsePlaying" class="fa fa-stop-circle fa-3x"></i>
         </div>
         
         <span class="text-small">00:00</span>

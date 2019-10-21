@@ -11,13 +11,15 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentViewComponent } from './content-view/content-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SceneComponent } from './scene/scene.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SideNavbarComponent,
     HeaderComponent,
-    ContentViewComponent
+    ContentViewComponent,
+    SceneComponent
   ],
   imports: [ 
     NgbModule,
