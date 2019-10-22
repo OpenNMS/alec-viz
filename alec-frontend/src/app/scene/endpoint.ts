@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import {ColladaModel, Font} from 'three';
-import {Vertex} from '../model.service';
-import * as TWEEN from '@tweenjs/tween.js';
-
-import {MeasurementService} from '../measurement.service';
+// import {ColladaModel, Font} from 'three';
+import {Vertex} from '../services/model.service';
+import TWEEN from '@tweenjs/tween.js';
+import Easing from '@tweenjs/tween.js';
+import {MeasurementService} from '../services/measurement.service';
 
 export interface MyUserData {
   endpointId: any;
@@ -257,7 +257,7 @@ export class Endpoint {
         x: Math.PI * 2,
         y: Math.PI * 2}, 5000 )
         .repeat( Infinity )
-        .easing(TWEEN.Easing.Quadratic.In)
+        .easing(Easing.Quadratic.In)
         .start();
     }
   }

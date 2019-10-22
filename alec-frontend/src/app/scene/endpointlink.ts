@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import * as TWEEN from '@tweenjs/tween.js';
-import {Edge} from '../model.service';
+import TWEEN from '@tweenjs/tween.js';
+import Easing from '@tweenjs/tween.js';
+import {Edge} from '../services/model.service';
 import {Endpoint} from './endpoint';
 import {Observable} from 'rxjs/internal/Observable';
 
@@ -328,7 +329,7 @@ export class TwisterPairEndpointLink implements EndpointLink {
 
     const position = {x: t0};
     new TWEEN.Tween( position ).to( {x: t1}, time)
-      .easing(TWEEN.Easing.Quadratic.In)
+      .easing(Easing.Quadratic.In)
       .onUpdate(() => {
         let pos = getCurve().getPoint(position.x);
         pos = this.curveGroup.localToWorld(pos);

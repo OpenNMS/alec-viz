@@ -4,11 +4,9 @@ import {Intersection, Vector3} from 'three';
 import * as d3 from 'd3';
 import {Simulation} from 'd3';
 import * as _ from 'lodash';
-import * as TWEEN from '@tweenjs/tween.js';
+import TWEEN from '@tweenjs/tween.js';
+import Easing from '@tweenjs/tween.js';
 import './js/EnableThreeExamples';
-import 'three/examples/js/controls/OrbitControls';
-import 'three/examples/js/controls/PointerLockControls';
-import 'three/examples/js/loaders/ColladaLoader';
 import {ControlState, FocusState, StateModel, StateService} from '../services/state.service';
 import {Endpoint, MyUserData} from './endpoint';
 import {Flow} from './flow';
@@ -16,7 +14,6 @@ import {Model, ModelService, Vertex} from '../services/model.service';
 import {MeasurementService} from '../services/measurement.service';
 import {EndpointLink, HybridEndpointLink, LinkUsage, SimpleLineEndpointLink, TwisterPairEndpointLink} from './endpointlink';
 import {Observable} from 'rxjs/internal/Observable';
-import {ColladaModel} from 'three';
 import {Font} from 'three';
 import {WebVRService} from '../services/webvr.service';
 import {VRControllerService} from '../services/vrcontroller.service';
@@ -25,7 +22,7 @@ import {of} from 'rxjs/internal/observable/of';
 @Component({
     selector: 'app-scene',
     templateUrl: './scene.component.html',
-    styleUrls: ['./scene.component.css']
+    styleUrls: ['./scene.component.scss']
 })
 export class SceneComponent implements AfterViewInit {
 
@@ -573,7 +570,7 @@ export class SceneComponent implements AfterViewInit {
         x: target.x,
         y: target.y - 50,
         z: target.z + 40} )
-        .easing(TWEEN.Easing.Quadratic.In)
+        .easing(Easing.Quadratic.In)
         .onUpdate(function() {
           self.controls.update();
         })

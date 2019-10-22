@@ -5,13 +5,16 @@
     (@openClose.start)="onAnimationEvent($event)"
     (@openClose.done)="onAnimationEvent($event)"
     >
-        <div id="graphContainer">
+        <!-- <div id="graphContainer">
             <h5>{{displayWith(pointInTimeMs, true) || 5092387}}</h5>
         </div>
         <div id='tickLabelText'>
             <span>{{ displayWith(pointInTimeMs, true) }} </span>
-        </div>
+        </div> -->
+
+        <app-scene></app-scene>
     </div>
+
     <div id='rangeSlider' 
     [@openClose]="isOpen ? 'open' : 'closed'"
     (@openClose.start)="onAnimationEvent($event)"
