@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Edge, Vertex} from './model.service';
-import {SearchResult} from './services/search.service';
+import {SearchResult} from '../services/search.service';
 
 export class FocusState {
   focusOn: SearchResult;

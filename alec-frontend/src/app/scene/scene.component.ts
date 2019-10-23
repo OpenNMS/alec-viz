@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, HostListener, ViewChild} from '@angular/core';
-import * as THREE from 'three-full';
+import * as THREE from 'three';
+import { OrbitControls } from 'three-orbitcontrols-ts';
 import {Intersection, Vector3} from 'three';
 import * as d3 from 'd3';
 import {Simulation} from 'd3';
@@ -56,10 +57,9 @@ export class SceneComponent implements AfterViewInit {
     public nearClippingPane = 1;
     public farClippingPane = 10000;
 
-    public controls = THREE.OrbitControls;
-   // public pointerLockControls: THREE.PointerLockControls;
+    public controls: OrbitControls;
 
-    @ViewChild('canvas')
+    @ViewChild('canvas', {static: false})
     private canvasRef: ElementRef;
 
     private font: Font;
@@ -531,7 +531,7 @@ export class SceneComponent implements AfterViewInit {
     }
 
     public addControls() {
-        this.controls = new THREE.OrbitControls(this.camera, this.canvasRef.nativeElement);
+        this.controls = new OrbitControls(this.camera, this.canvasRef.nativeElement);
         this.controls.rotateSpeed = 1.0;
         this.controls.zoomSpeed = 1.2;
         this.controls.enableKeys = true;

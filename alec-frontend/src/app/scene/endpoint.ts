@@ -18,7 +18,7 @@ export class Endpoint {
 
   // Focus handling
   private focusObject: THREE.Object3D;
-  private focusTween: TWEEN.Tween;
+  private focusTween: TWEEN;
 
   group: THREE.Group;
   id: any;
@@ -253,7 +253,7 @@ export class Endpoint {
       this.focusObject = line;
       this.group.add(line);
 
-      this.focusTween = new TWEEN.Tween( this.focusObject.rotation ).to( {
+      this.focusTween = new TWEEN.tween( this.focusObject.rotation ).to( {
         x: Math.PI * 2,
         y: Math.PI * 2}, 5000 )
         .repeat( Infinity )
