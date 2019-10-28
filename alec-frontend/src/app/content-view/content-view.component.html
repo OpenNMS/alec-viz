@@ -1,48 +1,46 @@
 
 <div>
-    <div id="graphArea" (click)="toggle()"
-    [@openClose]="isOpen ? 'ensized' : 'enlarged'"
-    (@openClose.start)="onAnimationEvent($event)"
-    (@openClose.done)="onAnimationEvent($event)"
-    >
-        <div id="graphContainer">
-            <!-- <h5>{{displayWith(pointInTimeMs, true) || 5092387}}</h5> -->
-            <app-scene></app-scene>
-
+        <div class="row">
+            <div class="col-md-12 color"> 
+                <app-scene></app-scene>
+            </div>
         </div>
+
         <div id='tickLabelText'>
             <span>{{ displayWith(pointInTimeMs, true) }} </span>
         </div>
 
-    </div>
-
-    <div id='rangeSlider' 
-    [@openClose]="isOpen ? 'open' : 'closed'"
-    (@openClose.start)="onAnimationEvent($event)"
-    (@openClose.done)="onAnimationEvent($event)"
-    >
-        <div id="playIcon" (click)="playTimeLapse()">
-            <i *ngIf="!timeLapsePlaying" class="fa fa-play-circle fa-3x"></i>
-            <i *ngIf="timeLapsePlaying" class="fa fa-stop-circle fa-3x"></i>
-        </div>
-        
-        <span class="text-small">00:00</span>
-        <mat-slider
-        class="mat-slider-horizontal"
-        [invert]="invert"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumbLabel]="thumbLabel"
-        [displayWith]="displayWith"
-        [tickInterval]="tickInterval"
-        [(ngModel)]="pointInTimeMs"
-        [vertical]="vertical"
-        (change)="onSliderChange($event)"
-        color="primary">
-        </mat-slider>
-        <span class="text-small">23:59</span>
-        
+        <div class="row" >
+                <div class="col-md-12 color2"> 
+                    <h1>Hello</h1>
+                    <div id='rangeSlider' 
+                    [@openClose]="isOpen ? 'open' : 'closed'"
+                    (@openClose.start)="onAnimationEvent($event)"
+                    (@openClose.done)="onAnimationEvent($event)"
+                    >
+                        <div id="playIcon" (click)="playTimeLapse()">
+                            <i *ngIf="!timeLapsePlaying" class="fa fa-play-circle fa-3x"></i>
+                            <i *ngIf="timeLapsePlaying" class="fa fa-stop-circle fa-3x"></i>
+                        </div>
+                        
+                        <span class="text-small">00:00</span>
+                        <mat-slider
+                        class="mat-slider-horizontal"
+                        [invert]="invert"
+                        [max]="max"
+                        [min]="min"
+                        [step]="step"
+                        [thumbLabel]="thumbLabel"
+                        [displayWith]="displayWith"
+                        [tickInterval]="tickInterval"
+                        [(ngModel)]="pointInTimeMs"
+                        [vertical]="vertical"
+                        (change)="onSliderChange($event)"
+                        color="primary">
+                        </mat-slider>
+                        <span class="text-small">23:59</span>
+                    </div>
+            </div>
     </div>
 </div>
 

@@ -8,6 +8,9 @@ import * as _ from 'lodash';
 import TWEEN from '@tweenjs/tween.js';
 import Easing from '@tweenjs/tween.js';
 import './js/EnableThreeExamples';
+// import 'three/examples/js/controls/OrbitControls';
+// import 'three/examples/js/controls/PointerLockControls';
+// import 'three/examples/js/loaders/ColladaLoader';
 import {ControlState, FocusState, StateModel, StateService} from '../services/state.service';
 import {Endpoint, MyUserData} from './endpoint';
 import {Flow} from './flow';
@@ -15,18 +18,69 @@ import {Model, ModelService, Vertex} from '../services/model.service';
 import {MeasurementService} from '../services/measurement.service';
 import {EndpointLink, HybridEndpointLink, LinkUsage, SimpleLineEndpointLink, TwisterPairEndpointLink} from './endpointlink';
 import {Observable} from 'rxjs/internal/Observable';
+import {ColladaModel} from 'three';
 import {Font} from 'three';
 import {WebVRService} from '../services/webvr.service';
 import {VRControllerService} from '../services/vrcontroller.service';
-import {of} from 'rxjs/internal/observable/of';
+import { trigger, transition, state, animate, style } from '@angular/animations';
 
 @Component({
     selector: 'app-scene',
     templateUrl: './scene.component.html',
-    styleUrls: ['./scene.component.scss']
+    styleUrls: ['./scene.component.scss'],
+    animations: [
+      trigger('openClose', [
+        state('enlarged', style({
+          // height: '85%',
+          width: '98%',
+          left: '5%',
+          top: '70px'
+          // height: '100%',
+          // width: '1400px'
+        })),
+  
+        state('ensized', style({
+          // height: '75%',
+          // width: '90%',
+          // height: '248px',
+          // width: '1300px'
+        })),
+        // FOR GRAPH CONTAINER:
+  
+        transition('ensized => enlarged', [
+          // animate('7s')
+          // style({transform: 'translateY(-100%)'}),
+          animate('200s ease-in')
+        ]),
+        transition('enlarged => ensized', [
+          animate('200s ease-in')
+          // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+        ]),
+        transition('* => enlarged', [
+          animate('2s ease-in')
+          // style({transform: 'translateY(-100%)'}),
+          // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
+        ]),
+        transition('* => ensized', [
+          animate('2s ease-in')
+          // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
+        ]),
+        transition('ensized <=> enlarged', [
+          animate('2s ease-in')
+        ]),
+        transition ('* => ensized', [
+          animate ('2s ease-in',
+            style ({ opacity: '*' }),
+          ),
+        ]),
+        transition('* => *', [
+          animate('2s ease-in')
+        ]),
+      ]),
+    ],
 })
 export class SceneComponent implements AfterViewInit {
-
+  
     private spinning: boolean;
     private spin_angle: number;
 
@@ -58,6 +112,7 @@ export class SceneComponent implements AfterViewInit {
     public farClippingPane = 10000;
 
     public controls: OrbitControls;
+   // public pointerLockControls: THREE.PointerLockControls;
 
     @ViewChild('canvas', {static: false})
     private canvasRef: ElementRef;
@@ -468,6 +523,7 @@ export class SceneComponent implements AfterViewInit {
         });
         this.renderer.setPixelRatio(devicePixelRatio);
         this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+        console.log('client height: ', this.canvas.clientHeight, " client Width: ", this.canvas.clientHeight);
 
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -570,7 +626,7 @@ export class SceneComponent implements AfterViewInit {
         x: target.x,
         y: target.y - 50,
         z: target.z + 40} )
-        .easing(Easing.Quadratic.In)
+        .easing(TWEEN.Easing.Quadratic.In)
         .onUpdate(function() {
           self.controls.update();
         })
@@ -667,10 +723,28 @@ export class SceneComponent implements AfterViewInit {
         }));
     }
 
+    isOpen = true;
+
+    toggle() {
+      this.isOpen = !this.isOpen;
+      // this.resetView();
+      console.log('open value: ', this.isOpen)
+      if(this.isOpen){
+        // this.onResize(new Event(''), {
+        //   height: '80%',
+        //   width: '90%'});
+      }
+      else{
+        // this.onResize(new Event(''), {
+        //   height: '900',
+        //   width: '1300'});
+      }
+    }
+
     @HostListener('window:resize', ['$event'])
     public onResize(event: Event) {
         this.canvas.style.width = '100%';
-        this.canvas.style.height = '98%';
+        this.canvas.style.height = '80%';
 
         console.log('onResize: ' + this.canvas.clientWidth + ', ' + this.canvas.clientHeight);
 
@@ -679,6 +753,26 @@ export class SceneComponent implements AfterViewInit {
         this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
         this.render();
     }
+
+    // @HostListener('window:resize', ['$event'])
+    // public onResize(event: Event, sizeObj) {
+    //     this.canvas.style.width = '80%';
+    //     this.canvas.style.height = '70%';
+
+    //     console.log('onResize: ' + this.canvas.clientWidth + ', ' + this.canvas.clientHeight);
+
+    //     this.camera.aspect = this.getAspectRatio();
+    //     this.camera.updateProjectionMatrix();
+    //     this.renderer.setSize(this.canvas.clientWidth*1.3, this.canvas.clientHeight*1.3); //window.innerWidth*0.8, window.innerHeight*0.8
+    //     console.log('client height: ', this.canvas.clientHeight, " client Width: ",this.canvas.clientHeight);
+    //     console.log('window.innerWIdth: ', window.innerWidth)
+    //     console.log('window.innerHeight: ', window.innerHeight)
+    //     this.render();
+
+    //     // this.renderer.setPixelRatio(devicePixelRatio);
+    //     // this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    //     // console.log('client height: ', this.canvas.clientHeight, " client Width: ", this.canvas.clientHeight);
+    // }
 
     @HostListener('document:keypress', ['$event'])
     public onKeyPress(event: KeyboardEvent) {

@@ -34,7 +34,7 @@ export class Flow {
       x: this.endpointZ.group.position.x,
       y: this.endpointZ.group.position.y,
       z: this.endpointZ.group.position.z}, 1000 )
-      .easing(Easing.Quadratic.In)
+      .easing(TWEEN.Easing.Quadratic.In)
       .onUpdate(() => {
         // Adjust the angle of the object to "look at" the target
         this.group.lookAt(this.endpointZ.group.position);

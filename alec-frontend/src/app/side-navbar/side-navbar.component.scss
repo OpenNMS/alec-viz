@@ -1,18 +1,5 @@
-// @media (min-width: 992px) {
-// .sidebar-fixed .app-header+.app-body .sidebar {
-//     height: calc(100vh - 55px);
-// }
-// }
-
-// @media (min-width: 768px) {
-// .sidebar-md-show .sidebar {
-//     margin-left: 0;
-// }
-// }
-
-
 .sidebar{
     margin-left : 0 !important; /* overrwrite in node_module */
-    height: 66em;
+    height: 93.5%;
     position: absolute;
 }

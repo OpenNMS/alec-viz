@@ -15,8 +15,8 @@
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon cui-3d"></i> Inventory
-                  <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                    <input type="checkbox" class="switch-input" checked>
+                  <label id="showInventory" name="showInventory" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="stateModel.showInventory" (change)="onStateModelUpdated()" >
                     <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
                   </label>
                 </a>
@@ -24,18 +24,45 @@
               <li class="nav-item">
                 <a class="nav-link">
                   <i class="nav-icon cui-bell"></i> Alarms
-                  <label class="switch switch-label switch-pill switch-success switch-sm float-right">
-                    <input type="checkbox" class="switch-input" checked>
+                  <label id="showAlarms" name="showAlarms" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="stateModel.showAlarms" (change)="onStateModelUpdated()" >
                     <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
                   </label>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  <i class="nav-icon icon-star"></i> Alarms Per Vertex
+                  <i class="nav-icon cui-3d"></i> Situations
+                  <label id="showSituations" name="showSituations" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="stateModel.showSituations" (change)="onStateModelUpdated()" >
+                    <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                  </label>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon cui-bell"></i> Labels
+                  <label id="showLabels" name="showLabels" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="stateModel.showLabels" (change)="onStateModelUpdated()" >
+                    <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                  </label>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fa fa-share-alt"></i> Flow
+                  <label id="flowSimulation" name="flowSimulation" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="stateModel.flowSimulation" (change)="onStateModelUpdated()">
+                    <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                  </label>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon cui-bell"></i> Alarms Per Vertex
                     <div id="select-situation">
-                        <select id="select1" name="select1" class="form-control">
-                            <option value="0">Please select</option>
+                        <select [(ngModel)]="stateModel.alarmsPerVertex" (change)="onStateModelUpdated()" id="alarmsPerVertexSelect" name="alarmsPerVertexSelect" class="form-control">
+                            <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -45,10 +72,10 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  <i class="nav-icon icon-star"></i> Situations
+                  <i class="nav-icon cui-3d"></i> Situations
                     <div id="select-situation">
-                        <select id="select1" name="select1" class="form-control">
-                            <option value="0">Please select</option>
+                        <select [(ngModel)]="stateModel.situations" (change)="onStateModelUpdated()" class="form-control" id="situationsSelect" name="situationsSelect">
+                            <option value="0">0</option>
                             <option value="1">Situation #1</option>
                             <option value="2">Situation #2</option>
                             <option value="3">Situation #3</option>
@@ -58,12 +85,43 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link nav-dropdown-toggle" href="#">
+              <i class="nav-icon fa fa-object-group "></i>Context</a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon cui-3d"></i> Focal
+                    <div class="select-context">
+                      <input [(ngModel)]="contextModel.focalPoint" (ngModelChange)="onContextChanged()" type="text" class="form-control select-context" id="postal-code" placeholder="Focal">
+                    </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon cui-3d"></i> SZL
+                  <div class="select-context">
+                    <input [(ngModel)]="contextModel.szl" (ngModelChange)="onContextChanged()" type="text" class="form-control select-context" id="postal-code" placeholder="SZL">
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <i class="nav-icon fa fa-share-alt"></i> Prune
+                  <label id="showInventory" name="showInventory" class="switch switch-label switch-pill switch-success switch-sm float-right">
+                    <input type="checkbox" class="switch-input" [(ngModel)]="contextModel.prune" (ngModelChange)="onContextChanged()" >
+                    <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                  </label>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item mt-auto">
             <a class="nav-link nav-link-danger" target="_top" (click)="resetGraph()">
               <i class="nav-icon fa fa-undo"></i> Reset</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-success" target="_top">
+            <a class="nav-link nav-link-success" target="_top" (click)="onClickSpin()">
               <i class="nav-icon icon-layers"></i>Spin
             </a>
           </li>

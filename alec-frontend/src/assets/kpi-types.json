@@ -1,0 +1,80 @@
+[
+  {
+    "name": "memoryUsageFromMinionJmx",
+    "attribute": "percentfree",
+    "query": {
+      "source": [{
+        "aggregation": "AVERAGE",
+        "attribute": "FreeMemory",
+        "label": "freemem",
+        "transient": true
+      }, {
+        "aggregation": "AVERAGE",
+        "attribute": "TotalMemory",
+        "label": "totalmem",
+        "transient": true
+      }],
+      "expression": [{
+        "value": "((freemem / totalmem) * 100)",
+        "label": "percentfree",
+        "transient": false
+      }]
+    }
+  },
+  {
+    "name": "ifInUsage",
+    "attribute": "percentIn",
+    "query": {
+      "source": [{
+        "aggregation": "AVERAGE",
+        "attribute": "ifHCInOctets",
+        "label": "octIn",
+        "transient": true
+      }],
+      "expression": [{
+        "value": "((((octIn * 8) / 1000000) / octOut.ifHighSpeed) * 100)",
+        "label": "percentIn",
+        "transient": false
+      }]
+    }
+  },
+  {
+    "name": "storageUtilization",
+    "attribute": "dpercent",
+    "query": {
+      "source": [{
+        "aggregation": "AVERAGE",
+        "attribute": "hrStorageSize",
+        "label": "total",
+        "transient": true
+      }, {
+        "aggregation": "AVERAGE",
+        "attribute": "hrStorageUsed",
+        "label": "used",
+        "transient": true
+      }, {
+        "aggregation": "AVERAGE",
+        "attribute": "hrStorageAllocUnits",
+        "label": "units",
+        "transient": true
+      }],
+      "expression": [{
+        "value": "(total * units)",
+        "label": "totalBytes",
+        "transient": false
+      }, {
+        "value": "(used * units)",
+        "label": "usedBytes",
+        "transient": false
+      }, {
+        "value": "(usedBytes / totalBytes)",
+        "label": "usedPart",
+        "transient": true
+      }, {
+        "value": "(usedPart * 100)",
+        "label": "dpercent",
+        "transient": false
+      }]
+    }
+  }
+]

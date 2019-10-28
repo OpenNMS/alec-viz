@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import {ControlState, StateModel, StateService} from '../services/state.service';
+import {ControlState, StateModel, StateService, ContextModel} from '../services/state.service';
 import {WebVRService} from '../services/webvr.service';
 
 @Component({
@@ -8,6 +8,10 @@ import {WebVRService} from '../services/webvr.service';
   styleUrls: ['./side-navbar.component.scss']
 })
 export class SideNavbarComponent implements OnInit {
+
+  /* COntext */
+  contextModel = new ContextModel();
+  /* Context Ends */
 
   @Output() sideBarMinimzed = new EventEmitter<boolean>();
   minimized = true;
@@ -23,7 +27,20 @@ export class SideNavbarComponent implements OnInit {
      this.webVrService.vrAvailable$.subscribe(vrAvailable => {
        this.vrAvailable = vrAvailable;
      });
+
+      /* COntext */
+    this.stateService.addToFocus$.subscribe(el => {
+      this.contextModel.focalPoint = el.label;
+      this.onContextChanged();
+    });
+    /* Context - End */
    }
+
+      /* COntext */
+   onContextChanged() {
+      this.stateService.updateContextModel(this.contextModel);
+    }
+/* Context - End */
 
    onStateModelUpdated() {
     console.log('onStateModelUpdated', this.stateModel);

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-// import {ColladaModel, Font} from 'three';
+import {Font} from 'three';
 import {Vertex} from '../services/model.service';
 import TWEEN from '@tweenjs/tween.js';
 import Easing from '@tweenjs/tween.js';
@@ -253,11 +253,11 @@ export class Endpoint {
       this.focusObject = line;
       this.group.add(line);
 
-      this.focusTween = new TWEEN.tween( this.focusObject.rotation ).to( {
+      this.focusTween = new TWEEN.Tween( this.focusObject.rotation ).to( {
         x: Math.PI * 2,
         y: Math.PI * 2}, 5000 )
         .repeat( Infinity )
-        .easing(Easing.Quadratic.In)
+        .easing(TWEEN.Easing.Quadratic.In)
         .start();
     }
   }

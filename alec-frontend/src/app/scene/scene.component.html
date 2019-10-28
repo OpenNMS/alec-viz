@@ -1,2 +1,7 @@
-<canvas #canvas (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (dblclick)="onDoubleClick($event)" style="height: 100%;">
-</canvas>
+<div id="canvasDiv" [@openClose]="isOpen ? 'ensized' : 'enlarged'"> 
+  	<canvas #canvas (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (dblclick)="onDoubleClick($event)"
+    [@openClose]="isOpen ? 'ensized' : 'enlarged'"
+    >
+    </canvas>
+</div>
+

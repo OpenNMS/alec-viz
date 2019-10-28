@@ -1,6 +1,5 @@
 import { Component, OnInit, HostBinding, HostListener  } from '@angular/core';
-import { Subject, Subscription, timer, pipe, } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 import {Observable} from 'rxjs/Rx';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -36,16 +35,20 @@ import {Edge, Model, ModelService, Vertex, ModelMetadata} from '../services/mode
         width: '93%',
         left: '5%',
         top: '70px'
+        // height: '100%',
+        // width: '1400px'
       })),
 
       state('ensized', style({
         height: '75%',
         width: '90%',
+        // height: '248px',
+        // width: '1300px'
       })),
-      // transition(':enter', [
-      //   style({transform: 'translateY(-100%)'}),
-      //   animate('200ms ease-in', style({transform: 'translateY(0%)'}))
-      // ]),
+      transition(':enter', [
+        // animate('1s', style({opacity: '0'}))
+        animate('200ms ease-in') //, style({transform: 'translateY(0%)'})
+      ]),
       // transition(':leave', [
       //   animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       // ]),
@@ -55,22 +58,22 @@ import {Edge, Model, ModelService, Vertex, ModelMetadata} from '../services/mode
       ]),
       transition('closed => open', [
         // animate('2s', style({opacity: '0'}))
-        animate('1s ease-in', style({opacity: '0'}))
+        animate('200ms ease-in', style({opacity: '0'}))
       ]),
       transition('* => closed', [
-        animate('200ms')
+        animate('200ms ease-in')
         // style({transform: 'translateY(-100%)'}),
         // animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('* => open', [
-        animate('0.5s')
+        animate('200ms ease-in')
         // animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
       ]),
       transition('open <=> closed', [
-        animate('2s')
+        animate('2s ease-in')
       ]),
       transition ('* => open', [
-        animate ('2s',
+        animate ('2s ease-in',
           style ({ opacity: '*' }),
         ),
       ]),
