@@ -24,7 +24,7 @@
           :shadow-map-size="{ width: 512, height: 512 }"
         />
         <DirectionalLight
-          :position="{ x: -80, y: 150, z: 80 }"
+          :position="{ x: -80, y: 180, z: 400 }"
           :color="'#F8F8F8'"
           :intensity="0.1"
           cast-shadow
@@ -37,10 +37,10 @@
         >
         <Group>
           <Box
-            v-for="boxItem in invMock"
+            v-for="(boxItem, index) in inventoryList"
             :key="boxItem.id"
-            :size="boxItem.size"
-            :position="boxItem.position"
+            :size="3"
+            :position="getPosition(index)"
             v-on:click="clickedBox"
             cast-shadow
           >
@@ -50,6 +50,7 @@
       </Scene>
     </Renderer>
     </div>
+   
 </template>
 
 
@@ -61,9 +62,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {  PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
 import { Builders } from '@/helpers/threesjs/builders'
 import { Config } from '@/helpers/threesjs/config'
+import { useDatasetStore } from '@/store/useDatasetStore'
 
 const renderer = ref()
 const scene = ref()
+const inventoryList = ref()
 
 let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
@@ -71,31 +74,30 @@ let orbitCtrl: OrbitControls
 
 
 const clickedBox = (event: PointerIntersectEventInterface) => {
-  orbitCtrl.target =  event?.intersect ? event?.intersect?.point : orbitCtrl.position0
+	orbitCtrl.target =  event?.intersect ? event?.intersect?.point : orbitCtrl.position0
 }
 
+const getPosition = (index: number) => {
+	return {x: 0, y: 1.7, z: index*8}
+} 
 
-const invMock = [
-  {
-    id: 123,
-    size: 2,
-    position: { x: 0, y: 1.1, z: 0 } as THREE.Vector3
-  },
-  {
-    id: 456,
-    size: 3,
-    position: { x: 10, y: 6, z: 3 } as THREE.Vector3
-  },
-]
+const datasetStore = useDatasetStore()
+datasetStore.getDataset(1565433427447)
+datasetStore.$subscribe((mutation , state) => {
+	inventoryList.value = state.vertices['inventory']
+})
+
 
 onMounted(() => {
-  sceneRef = scene.value?.scene
-  rendererRef = renderer.value?.three
-  orbitCtrl = renderer.value?.three.cameraCtrl
-  
-  Builders.createConnection(invMock[0].position, invMock[1].position, sceneRef)
-  Config.configureRenderer(rendererRef)
-
+	sceneRef = scene.value?.scene
+	rendererRef = renderer.value?.three
+	orbitCtrl = renderer.value?.three.cameraCtrl
+	//Builders.createConnection(invMock[0].position, invMock[1].position, sceneRef)
+	Config.configureRenderer(rendererRef)
+	//store.getDataset(1565433427447)
+	//console.log(store.vertices[0].label)
 })
 
 </script>
+
+
