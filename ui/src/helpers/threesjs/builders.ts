@@ -82,6 +82,5 @@ const addEdge = (
 }
 
 export const Builders = {
-	createConnection,
 	createParentConnections
 }

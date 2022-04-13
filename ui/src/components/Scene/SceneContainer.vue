@@ -100,6 +100,7 @@ datasetStore.$subscribe((mutation, state) => {
 		state.parentConnections,
 		sceneRef,
 		inventoryGroupRef
+	)
 })
 
 onMounted(() => {
