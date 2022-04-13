@@ -33,3 +33,5 @@ export type TLayer = {
 	description: string
 	order: string
 }
+
+export type TConnections = Record<string, TEdge[]>
