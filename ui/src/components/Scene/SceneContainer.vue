@@ -29,10 +29,10 @@
 					ref="dirLight"
 				/>
 				<Box :width="1000" :height="0.1" :depth="1000" receive-shadow>
-					<PhongMaterial :color="'#DBE6EC'" />
+					<PhongMaterial :color="'#F0F0FF'" />
 				</Box>
 				<Group ref="inventoryGroup">
-					<Box
+					<!--<Box
 						v-for="(boxItem, index) in inventoryList"
 						:key="boxItem.id"
 						:size="3"
@@ -41,7 +41,7 @@
 						cast-shadow
 						:userData="Object.create({ id: boxItem.id })"
 						><LambertMaterial :color="'#7EBA84'" />
-					</Box>
+					</Box> -->
 				</Group>
 			</Scene>
 		</Renderer>
@@ -68,8 +68,6 @@ import { Config } from '@/helpers/threesjs/config'
 import { useDatasetStore } from '@/store/useDatasetStore'
 import CONST from '@/helpers/constants'
 import { BoxGeometry } from 'three'
-import { anyTypeAnnotation } from '@babel/types'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 
 const renderer = ref()
 const scene = ref()
@@ -93,55 +91,22 @@ const getPosition = (index: number) => {
 }
 
 const datasetStore = useDatasetStore()
-//datasetStore.getDataset(CONST.TIME_SLIDER_MIN)
 
 const inventoryList = computed(() => datasetStore.vertices['inventory'] || [])
-const edges2 = computed(() => datasetStore.connections['parent'] || {})
-console.log(edges2.value)
-datasetStore.$subscribe((mutation, state) => {
-	console.log(mutation)
-	/*if (mutation.payload && mutation.payload['connections']) {
-		console.log(mutation.payload['connections'])
-	}*/
-	/*if (mutation.events.key == 'connections') {
-		edges.value = state.connections['parent']
-		console.log('edges', edges.value)
-		const boxes: BoxGeometry[] = []
-		inventoryGroupRef.children.forEach((item) => {
-			boxes.push(item['geometry'])
-		})
-		console.log('boxes', boxes)
-	}
-  */
-	/*if (edges.value && edges.value.length > 0 && sceneRef != null) {
-		Builders.createConnectionsInventory(
-			inventoryList.value,
-			edges.value,
-			sceneRef,
-			boxes
-		)
-	}*/
-})
 
-/*const connectionList = computed(() => datasetStore.connections)
-console.log('connection', connectionList.value)
-console.log(computed(() => datasetStore.currentTime).value)*/
+datasetStore.$subscribe((mutation, state) => {
+	inventoryGroupRef.children = []
+	Builders.createParentConnections(
+		state.parentConnections,
+		sceneRef,
+		inventoryGroupRef
+})
 
 onMounted(() => {
 	sceneRef = scene.value?.scene
 	rendererRef = renderer.value?.three
 	orbitCtrl = renderer.value?.three.cameraCtrl
 	inventoryGroupRef = inventoryGroup.value?.group
-	//Builders.createConnection(invMock[0].position, invMock[1].position, sceneRef)
-	/*if (connectionList.length > 0) {
-		Builders.createConnectionsInventory(
-			inventoryList.value,
-			connectionList,
-			sceneRef,
-			inventoryGroupRef
-		)
-	}*/
-
 	Config.configureRenderer(rendererRef)
 })
 </script>

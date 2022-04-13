@@ -32,7 +32,6 @@ const height = CONST.CANVAS_HEIGHT + 'px'
 
 const datasetStore = useDatasetStore()
 const vertices = computed(() => datasetStore.vertices || [])
-const edges = computed(() => datasetStore.connections || [])
 
 const bySeverity = (values: TVertice[]) => {
 	return chain(values)

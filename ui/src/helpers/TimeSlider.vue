@@ -38,18 +38,21 @@ import CONST from '@/helpers/constants'
 const datasetStore = useDatasetStore()
 
 const timeChanged = (newValue: number) => {
+	datasetStore.$state.parentConnections = []
 	datasetStore.getDataset(newValue)
 }
 
 const getPrevious = () => {
-	datasetStore.$state.connections = {}
-	datasetStore.$state.vertices = {}
+	datasetStore.$state.parentConnections = []
+	//datasetStore.$state.vertices = {}
 	datasetStore.getPrevTime(currentValue.value - 1000 * 60)
 }
 
 const getNext = () => {
-	datasetStore.$state.connections = {}
-	datasetStore.$state.vertices = {}
+	//datasetStore.$patch({ parentConnections: [] })
+	datasetStore.$state.parentConnections = []
+	//datasetStore.$state.vertices = {}
+
 	datasetStore.getNextTime(currentValue.value + 1000 * 60)
 }
 

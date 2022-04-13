@@ -3,16 +3,19 @@ import { TConnections, TEdge, TVertice } from '@/types/TDataset'
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
+import { EdgesGeometry } from 'three'
+import { sortBy } from 'lodash'
+
 type TState = {
 	vertices: Record<string, TVertice[]>
-	connections: Record<string, TEdge[]>
+	parentConnections: any[]
 	currentTime: number
 }
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
 		currentTime: CONST.TIME_SLIDER_MIN,
 		vertices: {},
-		connections: {}
+		parentConnections: []
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
@@ -24,13 +27,19 @@ export const useDatasetStore = defineStore('dataset', {
 				const verticesGrouped = groupBy(vertices, 'layer_id')
 				this.vertices = verticesGrouped
 				const edges = resp ? (resp['edges'] as TEdge[]) : []
-				if (edges.length > 0) {
-					const connections = groupBy(edges, 'type')
-					this.connections = connections
-					this.$patch({
-						connections: connections
-					})
-				}
+
+				const edgesGrouped = groupBy(edges, 'type')
+
+				const parentConnections = buildRelantionship(
+					verticesGrouped['inventory'],
+					edgesGrouped['parent']
+				)
+				/*this.$patch({
+					parentConnections: parentConnections
+				})*/
+				this.parentConnections = parentConnections
+
+				//build parent relationship
 				this.currentTime = timestamp
 				return timestamp
 			} else {
@@ -62,3 +71,26 @@ export const useDatasetStore = defineStore('dataset', {
 		}
 	}
 })
+
+const buildRelantionship = (inventory: TVertice[], edges: TEdge[]) => {
+	const targets = groupBy(edges, 'target_id')
+	const connections = <any>[]
+
+	for (const edgeId in targets) {
+		const target_id = targets[edgeId][0].target_id
+		const target = inventory.find((i) => i.id == target_id)
+		const vertices: TVertice[] = []
+
+		targets[edgeId].forEach((edge: TEdge) => {
+			const source = inventory.find((i) => i.id == edge.source_id)
+			if (source) {
+				vertices.push(source)
+			}
+		})
+		connections.push({
+			parent: target,
+			sources: vertices
+		})
+	}
+	return connections
+}

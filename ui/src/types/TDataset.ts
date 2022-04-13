@@ -25,6 +25,7 @@ export type TEdge = {
 	type: string
 	source_id: string
 	target_id: string
+	vertices?: TVertice[]
 }
 
 export type TLayer = {
