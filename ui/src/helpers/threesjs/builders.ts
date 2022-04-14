@@ -4,7 +4,7 @@ import { Vector3 } from 'three'
 
 const BASE_HEIGHT = 0.2
 const DIST_CHILDREN = 16
-const DIST_PARENT = 50
+const DIST_PARENT = 80
 
 const createDeviceNode = (size: number, color: string) => {
 	const geometry = new THREE.BoxGeometry(size, size, size)
@@ -18,6 +18,7 @@ const createParentConnections = (
 	parentConnections: any[],
 	groupRef: THREE.Group
 ): void => {
+	const visibleNodes = parentConnections.filter((item) => item.show).length
 	const rows = Math.floor(Math.sqrt(parentConnections.length))
 	let column = 0
 	const PARENT_HEIGHT = 6
@@ -26,30 +27,33 @@ const createParentConnections = (
 	parentConnections.forEach((groupNodes, index) => {
 		const children = groupNodes.sources.length
 		const size = children > 10 ? PARENT_HEIGHT * 2 : PARENT_HEIGHT
-		const cube = createDeviceNode(size, '#36576B')
-		cube.userData = { id: groupNodes.parent.id }
-		const row = Math.floor(index / rows)
-		cube.position.set(
-			column * DIST_PARENT,
-			PARENT_HEIGHT / 2,
-			row * DIST_PARENT
-		)
+		if (groupNodes.show) {
+			const cube = createDeviceNode(size, '#36576B')
+			cube.userData = { id: groupNodes.parent.id }
+			const row = Math.floor(index / rows)
+			cube.position.set(
+				column * DIST_PARENT,
+				PARENT_HEIGHT / 2,
+				row * DIST_PARENT
+			)
+
+			const angleBetweenChildren = 360 / children
+			groupNodes.sources.forEach((node: TVertice, subIndex: number) => {
+				const subCube = createDeviceNode(CHILDREN_HEIGHT, '#5082A0')
+				subCube.userData = { id: node.id }
+				const angInRad = (Math.PI / 180) * (angleBetweenChildren * subIndex)
+				const x = cube.position.x + DIST_CHILDREN * Math.cos(angInRad)
+				const z = cube.position.z + DIST_CHILDREN * Math.sin(angInRad)
+				subCube.position.set(x, CHILDREN_HEIGHT / 2, z)
+				addEdge(cube.position, subCube.position, groupRef)
+				groupRef.add(subCube)
+			})
+			groupRef.add(cube)
+		}
 		column++
 		if (column >= rows) {
 			column = 0
 		}
-		const angleBetweenChildren = 360 / children
-		groupNodes.sources.forEach((node: TVertice, subIndex: number) => {
-			const subCube = createDeviceNode(CHILDREN_HEIGHT, '#5082A0')
-			subCube.userData = { id: node.id }
-			const angInRad = (Math.PI / 180) * (angleBetweenChildren * subIndex)
-			const x = cube.position.x + DIST_CHILDREN * Math.cos(angInRad)
-			const z = cube.position.z + DIST_CHILDREN * Math.sin(angInRad)
-			subCube.position.set(x, CHILDREN_HEIGHT / 2, z)
-			addEdge(cube.position, subCube.position, groupRef)
-			groupRef.add(subCube)
-		})
-		groupRef.add(cube)
 	})
 }
 

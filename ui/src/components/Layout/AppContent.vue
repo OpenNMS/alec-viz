@@ -3,7 +3,7 @@
 		<TimeSlider />
 	</div>
 	<div class="container">
-		<div class="tree"></div>
+		<TreeView class="tree" />
 		<div class="content">
 			<SceneContainer />
 		</div>
@@ -24,10 +24,10 @@
 import { useDatasetStore } from '@/store/useDatasetStore'
 import SceneContainer from '@/components/Scene/SceneContainer.vue'
 import CONST from '@/helpers/constants'
-
 import { filter, groupBy, chain } from 'lodash'
 import { TVertice } from '@/types/TDataset'
 import TimeSlider from '../../helpers/TimeSlider.vue'
+import TreeView from '../TreeView.vue'
 const height = CONST.CANVAS_HEIGHT + 'px'
 
 const datasetStore = useDatasetStore()
@@ -51,7 +51,7 @@ const bySeverity = (values: TVertice[]) => {
 	margin-bottom: 40px;
 }
 .tree {
-	min-width: 20%;
+	width: 20%;
 }
 .container {
 	display: flex;

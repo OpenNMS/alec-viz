@@ -4,7 +4,7 @@ import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
 import { EdgesGeometry } from 'three'
-import { sortBy } from 'lodash'
+import { cloneDeep, sortBy } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
@@ -68,6 +68,16 @@ export const useDatasetStore = defineStore('dataset', {
 		},
 		setCurrentTime(timestamp: number) {
 			this.currentTime = timestamp
+		},
+		changeVisibility(id: string) {
+			const connections = cloneDeep(this.parentConnections)
+
+			connections.forEach((item) => {
+				if (item.parent.id == id) {
+					item.show = !item.show
+				}
+			})
+			this.parentConnections = connections
 		}
 	}
 })
@@ -88,7 +98,9 @@ const buildRelantionship = (inventory: TVertice[], edges: TEdge[]) => {
 			}
 		})
 		connections.push({
+			parentId: target?.id,
 			parent: target,
+			show: true,
 			sources: vertices
 		})
 	}

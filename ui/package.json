@@ -11,6 +11,7 @@
     "@featherds/app-bar": "^0.10.2",
     "@featherds/app-layout": "^0.10.2",
     "@featherds/button": "^0.10.2",
+    "@featherds/checkbox": "^0.10.2",
     "@featherds/styles": "^0.10.2",
     "@vueform/slider": "^2.0.9",
     "@vueuse/core": "^8.1.2",
