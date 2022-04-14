@@ -44,15 +44,11 @@ const timeChanged = (newValue: number) => {
 
 const getPrevious = () => {
 	datasetStore.$state.parentConnections = []
-	//datasetStore.$state.vertices = {}
 	datasetStore.getPrevTime(currentValue.value - 1000 * 60)
 }
 
 const getNext = () => {
-	//datasetStore.$patch({ parentConnections: [] })
 	datasetStore.$state.parentConnections = []
-	//datasetStore.$state.vertices = {}
-
 	datasetStore.getNextTime(currentValue.value + 1000 * 60)
 }
 
@@ -84,7 +80,7 @@ currentValue = computed(() => datasetStore.currentTime)
 }
 
 .btn-nav {
-	background-color: #54955c;
+	background-color: #10b981;
 	color: white;
 	&:hover {
 		color: black;

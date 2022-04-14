@@ -9,40 +9,36 @@
 			width="500"
 			height="500"
 			shadow
+			:pointer="{ intersectMode: 'frame' }"
 		>
-			<Camera :position="{ x: -15, y: 30, z: -10 }" />
-			<Scene :background="'#FCFCFC'" ref="scene">
+			<Camera :position="{ x: -70, y: 30, z: -75 }" />
+			<Raycaster
+				@click="onPointerEvent"
+				intersect-mode="frame"
+				intersect-recursive
+			/>
+			<Scene :background="'#F8F9F9'" ref="scene">
 				<HemisphereLight
 					:position="{ x: -50, y: 50, z: 50 }"
 					:color="'#EFFAFF'"
 					:ground-color="'#E2F3FE'"
 					:intensity="1"
 					cast-shadow
-					:shadow-map-size="{ width: 512, height: 512 }"
+					:shadow-map-size="{ width: 1024, height: 1024 }"
 				/>
 				<DirectionalLight
-					:position="{ x: -80, y: 180, z: 400 }"
-					:color="'#F8F8F8'"
-					:intensity="0.1"
+					:position="{ x: -80, y: 120, z: 100 }"
+					:color="'#F1F1B9'"
+					:intensity="0.2"
 					cast-shadow
-					:shadow-map-size="{ width: 512, height: 512 }"
+					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight"
 				/>
 				<Box :width="1000" :height="0.1" :depth="1000" receive-shadow>
-					<PhongMaterial :color="'#F0F0FF'" />
+					<PhongMaterial :color="'#BFC9CA'" />
 				</Box>
-				<Group ref="inventoryGroup">
-					<!--<Box
-						v-for="(boxItem, index) in inventoryList"
-						:key="boxItem.id"
-						:size="3"
-						:position="getPosition(index)"
-						v-on:click="clickedBox"
-						cast-shadow
-						:userData="Object.create({ id: boxItem.id })"
-						><LambertMaterial :color="'#7EBA84'" />
-					</Box> -->
-				</Group>
+
+				<Group ref="inventoryGroup"> </Group>
 			</Scene>
 		</Renderer>
 	</div>
@@ -58,8 +54,8 @@ import {
 	Scene,
 	PhongMaterial,
 	Group,
-	LambertMaterial,
-	HemisphereLight
+	HemisphereLight,
+	Raycaster
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
@@ -67,40 +63,32 @@ import { Builders } from '@/helpers/threesjs/builders'
 import { Config } from '@/helpers/threesjs/config'
 import { useDatasetStore } from '@/store/useDatasetStore'
 import CONST from '@/helpers/constants'
-import { BoxGeometry } from 'three'
 
 const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref<THREE.Group>()
-let edges = ref()
+const dirLight = ref()
 
 let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
-let boxes = ref<BoxGeometry[]>([])
 
-const clickedBox = (event: PointerIntersectEventInterface) => {
-	orbitCtrl.target = event?.intersect
-		? event?.intersect?.point
-		: orbitCtrl.position0
-}
-
-const getPosition = (index: number) => {
-	return { x: 0, y: 1.7, z: index * 8 }
+const onPointerEvent = (event: PointerIntersectEventInterface) => {
+	/*if (event.intersect?.object.geometry.type == 'BoxGeometry') {
+		console.log('click')
+		orbitCtrl.target =
+			event && event?.intersect?.point
+				? event?.intersect?.point
+				: orbitCtrl.position0
+	}*/
 }
 
 const datasetStore = useDatasetStore()
 
-const inventoryList = computed(() => datasetStore.vertices['inventory'] || [])
-
 datasetStore.$subscribe((mutation, state) => {
 	inventoryGroupRef.children = []
-	Builders.createParentConnections(
-		state.parentConnections,
-		sceneRef,
-		inventoryGroupRef
-	)
+	Builders.createParentConnections(state.parentConnections, inventoryGroupRef)
 })
 
 onMounted(() => {
@@ -109,5 +97,7 @@ onMounted(() => {
 	orbitCtrl = renderer.value?.three.cameraCtrl
 	inventoryGroupRef = inventoryGroup.value?.group
 	Config.configureRenderer(rendererRef)
+	const light = dirLight.value.light
+	Config.setShadowHelper(light, sceneRef)
 })
 </script>
