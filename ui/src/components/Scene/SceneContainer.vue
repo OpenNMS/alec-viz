@@ -11,7 +11,7 @@
 			shadow
 			:pointer="{ intersectMode: 'frame' }"
 		>
-			<Camera :position="{ x: -70, y: 30, z: -75 }" />
+			<Camera :position="{ x: -30, y: 30, z: -30 }" :far="2500" />
 			<Raycaster
 				@click="onPointerEvent"
 				intersect-mode="frame"
@@ -34,8 +34,16 @@
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight"
 				/>
-				<Box :width="1000" :height="0.1" :depth="1000" receive-shadow>
-					<PhongMaterial :color="'#BFC9CA'" />
+				<Box
+					:width="2000"
+					:height="0.1"
+					:depth="2000"
+					:position="{ x: 300, y: 0, z: 300 }"
+					receive-shadow
+				>
+					<PhongMaterial :color="'#BFC9CA'">
+						<!--<Texture :src="'/src/assets/test2.png'" /> -->
+					</PhongMaterial>
 				</Box>
 
 				<Group ref="inventoryGroup"> </Group>
@@ -55,7 +63,8 @@ import {
 	PhongMaterial,
 	Group,
 	HemisphereLight,
-	Raycaster
+	Raycaster,
+	Texture
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
@@ -63,7 +72,6 @@ import { Builders } from '@/helpers/threesjs/builders'
 import { Config } from '@/helpers/threesjs/config'
 import { useDatasetStore } from '@/store/useDatasetStore'
 import CONST from '@/helpers/constants'
-
 const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref<THREE.Group>()
@@ -73,7 +81,6 @@ let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
-
 const onPointerEvent = (event: PointerIntersectEventInterface) => {
 	/*if (event.intersect?.object.geometry.type == 'BoxGeometry') {
 		console.log('click')
@@ -95,7 +102,7 @@ onMounted(() => {
 	sceneRef = scene.value?.scene
 	rendererRef = renderer.value?.three
 	orbitCtrl = renderer.value?.three.cameraCtrl
-	inventoryGroupRef = inventoryGroup.value?.group
+	inventoryGroupRef = inventoryGroup.value as THREE.Group
 	Config.configureRenderer(rendererRef)
 	const light = dirLight.value.light
 	Config.setShadowHelper(light, sceneRef)

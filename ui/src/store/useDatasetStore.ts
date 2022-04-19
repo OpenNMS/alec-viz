@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia'
-import { TConnections, TEdge, TVertice } from '@/types/TDataset'
+import { TEdge, TVertice } from '@/types/TDataset'
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
-import { EdgesGeometry } from 'three'
-import { cloneDeep, sortBy } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
@@ -38,8 +37,6 @@ export const useDatasetStore = defineStore('dataset', {
 					parentConnections: parentConnections
 				})*/
 				this.parentConnections = parentConnections
-
-				//build parent relationship
 				this.currentTime = timestamp
 				return timestamp
 			} else {
