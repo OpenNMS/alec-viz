@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
-import { TEdge, TVertice } from '@/types/TDataset'
+import {
+	TAlarmConnection,
+	TConnection,
+	TEdge,
+	TVertice
+} from '@/types/TDataset'
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
@@ -7,14 +12,16 @@ import { cloneDeep } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
-	parentConnections: any[]
+	parentConnections: TConnection[]
+	alarmConnections: TAlarmConnection[]
 	currentTime: number
 }
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
 		currentTime: CONST.TIME_SLIDER_MIN,
 		vertices: {},
-		parentConnections: []
+		parentConnections: [],
+		alarmConnections: []
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
@@ -29,14 +36,20 @@ export const useDatasetStore = defineStore('dataset', {
 
 				const edgesGrouped = groupBy(edges, 'type')
 
-				const parentConnections = buildRelantionship(
+				const parentConnections = buildDeviceRelantionships(
 					verticesGrouped['inventory'],
 					edgesGrouped['parent']
+				)
+
+				const alarmConnections = buildAlarmRelantionships(
+					verticesGrouped['alarms'],
+					edgesGrouped['alarm-to-io']
 				)
 				/*this.$patch({
 					parentConnections: parentConnections
 				})*/
 				this.parentConnections = parentConnections
+				this.alarmConnections = alarmConnections
 				this.currentTime = timestamp
 				return timestamp
 			} else {
@@ -70,7 +83,7 @@ export const useDatasetStore = defineStore('dataset', {
 			const connections = cloneDeep(this.parentConnections)
 
 			connections.forEach((item) => {
-				if (item.parent.id == id) {
+				if (item.parentId == id) {
 					item.show = !item.show
 				}
 			})
@@ -79,9 +92,9 @@ export const useDatasetStore = defineStore('dataset', {
 	}
 })
 
-const buildRelantionship = (inventory: TVertice[], edges: TEdge[]) => {
+const buildDeviceRelantionships = (inventory: TVertice[], edges: TEdge[]) => {
 	const targets = groupBy(edges, 'target_id')
-	const connections = <any>[]
+	const connections: TConnection[] = []
 
 	for (const edgeId in targets) {
 		const target_id = targets[edgeId][0].target_id
@@ -94,11 +107,36 @@ const buildRelantionship = (inventory: TVertice[], edges: TEdge[]) => {
 				vertices.push(source)
 			}
 		})
+		if (target) {
+			connections.push({
+				parentId: target.id,
+				parent: target,
+				show: true,
+				sources: vertices
+			})
+		}
+	}
+	return connections
+}
+
+const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
+	const targets = groupBy(edges, 'target_id')
+	const connections: TAlarmConnection[] = []
+
+	for (const edgeId in targets) {
+		const vertices: TVertice[] = []
+
+		targets[edgeId].forEach((edge: TEdge) => {
+			const source = alarms.find((i) => i.id == edge.source_id)
+			if (source) {
+				vertices.push(source)
+			}
+		})
+
 		connections.push({
-			parentId: target?.id,
-			parent: target,
+			parentId: edgeId,
 			show: true,
-			sources: vertices
+			alarms: vertices
 		})
 	}
 	return connections

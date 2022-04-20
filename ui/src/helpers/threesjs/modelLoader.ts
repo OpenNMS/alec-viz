@@ -6,7 +6,7 @@ import CONST from '@/helpers/constants'
 
 const loadModelDevice = async () => {
 	const size = CONST.DEVICE_SCALE
-	const glb = await loader.loadAsync('/src/assets/device_v07.glb')
+	const glb = await loader.loadAsync('/src/assets/device_v09.glb')
 	glb.scene.traverse((obj) => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore

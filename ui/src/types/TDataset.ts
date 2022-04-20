@@ -7,7 +7,7 @@ export type TVertice = {
 	id: string
 	label: string
 	type: string
-	attributes: TAttribute
+	attributes?: TAttribute
 	layer_id: string
 }
 
@@ -35,4 +35,15 @@ export type TLayer = {
 	order: string
 }
 
-export type TConnections = Record<string, TEdge[]>
+export type TConnection = {
+	parentId: string
+	parent: TVertice
+	show: boolean
+	sources: TVertice[]
+}
+
+export type TAlarmConnection = {
+	parentId: string
+	show: boolean
+	alarms: TVertice[]
+}

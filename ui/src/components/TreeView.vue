@@ -3,13 +3,13 @@
 		<h4>Topology Hierarchy</h4>
 		<div
 			v-for="parent in datasetStore.$state.parentConnections"
-			:key="parent.id"
+			:key="parent.parentId"
 		>
 			<FeatherCheckbox
 				:modelValue="parent.show"
-				@update:modelValue="displayHandler(parent.parent.id)"
+				@update:modelValue="displayHandler(parent.parentId)"
 				class="raw-checkbox"
-				>{{ parent.parent.id }}</FeatherCheckbox
+				>{{ parent.parentId }}</FeatherCheckbox
 			>
 		</div>
 	</div>
