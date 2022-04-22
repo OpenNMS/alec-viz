@@ -1,0 +1,52 @@
+@mixin severityColor($applyTo: '') {
+	&.cleared #{$applyTo} {
+		.box {
+			background-color: #71b1f1;
+			border-color: #71b1f1;
+			&:hover {
+				> div {
+					background-color: #71b1f1;
+				}
+			}
+			&:hover {
+				background-color: red;
+			}
+		}
+	}
+	&.minor #{$applyTo} {
+		.box {
+			background-color: #ffbd00;
+			border-color: #ffbd00;
+		}
+	}
+	&.major #{$applyTo} {
+		.box {
+			background-color: #de582a;
+			border-color: #de582a;
+		}
+	}
+	&.critical #{$applyTo} {
+		.box {
+			background-color: #fc1717;
+			border-color: #fc1717;
+		}
+	}
+	&.warning #{$applyTo} {
+		.box {
+			background-color: #fff000;
+			border-color: #fff000;
+		}
+	}
+	&.normal #{$applyTo} {
+		.box {
+			background-color: #7dd18b;
+			border-color: #7dd18b;
+		}
+	}
+	&.indeterminate #{$applyTo} {
+		.box {
+			background-color: #e6e6e6;
+			border-color: #e6e6e6;
+		}
+	}
+}

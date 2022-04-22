@@ -8,23 +8,26 @@ import {
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
-import { cloneDeep } from 'lodash'
+import { chain, cloneDeep, mapValues } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
 	parentConnections: TConnection[]
 	alarmConnections: TAlarmConnection[]
 	currentTime: number
+	alarmFilters: Record<string, boolean>
 }
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
 		currentTime: CONST.TIME_SLIDER_MIN,
 		vertices: {},
 		parentConnections: [],
-		alarmConnections: []
+		alarmConnections: [],
+		alarmFilters: {}
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
+			this.alarmFilters = {}
 			const resp: null | Record<string, any> = await API.getAxiosRequest(
 				`/0?time=${timestamp}&szl=3&removeInventoryWithNoAlarms=true`
 			)
@@ -45,6 +48,19 @@ export const useDatasetStore = defineStore('dataset', {
 					verticesGrouped['alarms'],
 					edgesGrouped['alarm-to-io']
 				)
+
+				const severityAlarms = chain(verticesGrouped['alarms'])
+					.groupBy('attributes.severity')
+					.keys()
+					.value()
+
+				const alarmFilters = {}
+				mapValues(
+					severityAlarms,
+					(severity: string) => (alarmFilters[severity] = true)
+				)
+
+				this.alarmFilters = alarmFilters
 				/*this.$patch({
 					parentConnections: parentConnections
 				})*/
@@ -88,6 +104,9 @@ export const useDatasetStore = defineStore('dataset', {
 				}
 			})
 			this.parentConnections = connections
+		},
+		handleAlarmFilters(severity: string) {
+			this.alarmFilters[severity] = !this.alarmFilters[severity]
 		}
 	}
 })
@@ -129,7 +148,9 @@ const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 		targets[edgeId].forEach((edge: TEdge) => {
 			const source = alarms.find((i) => i.id == edge.source_id)
 			if (source) {
+				//for (let i = 0; i < 10; i++) {
 				vertices.push(source)
+				//}
 			}
 		})
 
@@ -139,5 +160,6 @@ const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 			alarms: vertices
 		})
 	}
+
 	return connections
 }

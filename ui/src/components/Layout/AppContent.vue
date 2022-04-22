@@ -7,7 +7,8 @@
 		<div class="content">
 			<SceneContainer />
 		</div>
-		<div class="vertices">
+		<AlarmFilters class="tree" :title="'Alarms'" />
+		<!--<div class="vertices">
 			<div :key="key" v-for="(value, key) in vertices">
 				<div>
 					<strong>{{ key }}:</strong> {{ value.length }} ->
@@ -15,8 +16,8 @@
 						{{ severity }}: {{ items.length }}
 					</div>
 				</div>
-			</div>
-		</div>
+			</div> 
+		</div>-->
 	</div>
 </template>
 
@@ -28,6 +29,7 @@ import { filter, groupBy, chain } from 'lodash'
 import { TVertice } from '@/types/TDataset'
 import TimeSlider from '../../helpers/TimeSlider.vue'
 import TreeView from '../TreeView.vue'
+import AlarmFilters from '../AlarmFilters.vue'
 const height = CONST.CANVAS_HEIGHT + 'px'
 
 const datasetStore = useDatasetStore()

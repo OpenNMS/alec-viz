@@ -3,10 +3,12 @@ import { defineStore } from 'pinia'
 
 type TState = {
 	nodes: TGraphNodes
+	severityAlarmsFilters: string[]
 }
 export const useGraphStore = defineStore('graphStore', {
 	state: (): TState => ({
-		nodes: {}
+		nodes: {},
+		severityAlarmsFilters: []
 	}),
 	actions: {
 		setNodes(newNodes: TGraphNodes) {

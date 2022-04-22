@@ -42,7 +42,7 @@
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight2"
 				/>
-				<Box
+				<!--<Box
 					:width="2000"
 					:height="0.1"
 					:depth="2000"
@@ -50,9 +50,9 @@
 					receive-shadow
 				>
 					<PhongMaterial :color="'#BFC9CA'">
-						<!--<Texture :src="'/src/assets/floor_texture_v14.png'" /> -->
+						<Texture :src="'/src/assets/floor_texture_v14.png'" /> 
 					</PhongMaterial>
-				</Box>
+				</Box> -->
 
 				<Group ref="inventoryGroup"> </Group>
 			</Scene>
@@ -81,6 +81,15 @@ import { Config } from '@/helpers/threesjs/config'
 import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
 import CONST from '@/helpers/constants'
+import {
+	chain,
+	filter,
+	mapKeys,
+	mapValues,
+	omitBy,
+	pickBy,
+	reduce
+} from 'lodash'
 const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref()
@@ -106,20 +115,24 @@ const graphStore = useGraphStore()
 
 datasetStore.$subscribe((mutation, state) => {
 	inventoryGroupRef.children = []
-	Builders.createParentConnections(
-		state.parentConnections,
-		inventoryGroupRef,
-		graphStore
-	).then((nodes) => {
-		graphStore.setNodes(nodes)
-
-		Builders.createAlarmConnections(
-			state.alarmConnections,
-			nodes,
+	if (Object.keys(state.parentConnections).length) {
+		Builders.createParentConnections(
+			state.parentConnections,
 			inventoryGroupRef,
 			graphStore
-		)
-	})
+		).then((nodes) => {
+			graphStore.setNodes(nodes)
+			const showSeverities = chain(state.alarmFilters).pickBy().keys().value()
+
+			Builders.createAlarmConnections(
+				state.alarmConnections,
+				nodes,
+				showSeverities,
+				inventoryGroupRef,
+				graphStore
+			)
+		})
+	}
 })
 
 onMounted(() => {
