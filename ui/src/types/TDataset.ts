@@ -47,3 +47,11 @@ export type TAlarmConnection = {
 	show: boolean
 	alarms: TVertice[]
 }
+
+export type TSituationConnection = {
+	situationId: string
+	situation: TVertice
+	show: boolean
+	alarms: TVertice[]
+	deviceIds: string[]
+}

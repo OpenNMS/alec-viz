@@ -42,7 +42,7 @@
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight2"
 				/>
-				<!--<Box
+				<Box
 					:width="2000"
 					:height="0.1"
 					:depth="2000"
@@ -50,9 +50,9 @@
 					receive-shadow
 				>
 					<PhongMaterial :color="'#BFC9CA'">
-						<Texture :src="'/src/assets/floor_texture_v14.png'" /> 
+						<!--<Texture :src="'/src/assets/floor_texture_v14.png'" /> -->
 					</PhongMaterial>
-				</Box> -->
+				</Box>
 
 				<Group ref="inventoryGroup"> </Group>
 			</Scene>
@@ -116,21 +116,28 @@ const graphStore = useGraphStore()
 datasetStore.$subscribe((mutation, state) => {
 	inventoryGroupRef.children = []
 	if (Object.keys(state.parentConnections).length) {
+		//add inventory level
 		Builders.createParentConnections(
 			state.parentConnections,
-			inventoryGroupRef,
-			graphStore
+			inventoryGroupRef
 		).then((nodes) => {
 			graphStore.setNodes(nodes)
 			const showSeverities = chain(state.alarmFilters).pickBy().keys().value()
-
+			//add alarms level
 			Builders.createAlarmConnections(
 				state.alarmConnections,
 				nodes,
 				showSeverities,
-				inventoryGroupRef,
-				graphStore
-			)
+				inventoryGroupRef
+			).then((alarmNodes) => {
+				graphStore.setNodes(alarmNodes)
+				//add situations level
+				Builders.createSituationConnections(
+					state.situationConnections,
+					graphStore.nodes,
+					inventoryGroupRef
+				)
+			})
 		})
 	}
 })

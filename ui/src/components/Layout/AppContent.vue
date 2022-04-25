@@ -29,18 +29,10 @@ import { filter, groupBy, chain } from 'lodash'
 import { TVertice } from '@/types/TDataset'
 import TimeSlider from '../../helpers/TimeSlider.vue'
 import TreeView from '../TreeView.vue'
-import AlarmFilters from '../AlarmFilters.vue'
+import AlarmFilters from '@/components/AlarmFilters.vue'
 const height = CONST.CANVAS_HEIGHT + 'px'
 
 const datasetStore = useDatasetStore()
-const vertices = computed(() => datasetStore.vertices || [])
-
-const bySeverity = (values: TVertice[]) => {
-	return chain(values)
-		.filter((item) => Object.keys(item.attributes).length > 0)
-		.groupBy('attributes.severity')
-		.value()
-}
 </script>
 
 <style lang="scss" scoped>

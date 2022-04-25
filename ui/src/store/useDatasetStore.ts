@@ -3,12 +3,14 @@ import {
 	TAlarmConnection,
 	TConnection,
 	TEdge,
+	TSituationConnection,
 	TVertice
 } from '@/types/TDataset'
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
 import { chain, cloneDeep, mapValues } from 'lodash'
+import { isTemplateNode } from '@vue/compiler-core'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
@@ -16,6 +18,7 @@ type TState = {
 	alarmConnections: TAlarmConnection[]
 	currentTime: number
 	alarmFilters: Record<string, boolean>
+	situationConnections: TSituationConnection[]
 }
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
@@ -23,11 +26,13 @@ export const useDatasetStore = defineStore('dataset', {
 		vertices: {},
 		parentConnections: [],
 		alarmConnections: [],
-		alarmFilters: {}
+		alarmFilters: {},
+		situationConnections: []
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
 			this.alarmFilters = {}
+
 			const resp: null | Record<string, any> = await API.getAxiosRequest(
 				`/0?time=${timestamp}&szl=3&removeInventoryWithNoAlarms=true`
 			)
@@ -36,7 +41,6 @@ export const useDatasetStore = defineStore('dataset', {
 				const verticesGrouped = groupBy(vertices, 'layer_id')
 				this.vertices = verticesGrouped
 				const edges = resp ? (resp['edges'] as TEdge[]) : []
-
 				const edgesGrouped = groupBy(edges, 'type')
 
 				const parentConnections = buildDeviceRelantionships(
@@ -49,23 +53,17 @@ export const useDatasetStore = defineStore('dataset', {
 					edgesGrouped['alarm-to-io']
 				)
 
-				const severityAlarms = chain(verticesGrouped['alarms'])
-					.groupBy('attributes.severity')
-					.keys()
-					.value()
-
-				const alarmFilters = {}
-				mapValues(
-					severityAlarms,
-					(severity: string) => (alarmFilters[severity] = true)
+				const situationConnections = buildSituationRelantionships(
+					verticesGrouped['situations'],
+					verticesGrouped['alarms'],
+					edgesGrouped['situation-to-alarm'],
+					alarmConnections
 				)
 
-				this.alarmFilters = alarmFilters
-				/*this.$patch({
-					parentConnections: parentConnections
-				})*/
+				this.alarmFilters = buildAlarmFilters(verticesGrouped['alarms'])
 				this.parentConnections = parentConnections
 				this.alarmConnections = alarmConnections
+				this.situationConnections = situationConnections
 				this.currentTime = timestamp
 				return timestamp
 			} else {
@@ -97,13 +95,30 @@ export const useDatasetStore = defineStore('dataset', {
 		},
 		changeVisibility(id: string) {
 			const connections = cloneDeep(this.parentConnections)
+			const situationConnections = cloneDeep(this.situationConnections)
 
 			connections.forEach((item) => {
 				if (item.parentId == id) {
 					item.show = !item.show
+
+					situationConnections.forEach((situation) => {
+						if (situation.deviceIds.includes(id)) {
+							situation.show = !situation.show
+						}
+					})
+
+					item.sources.forEach((sourceChild) => {
+						situationConnections.forEach((situation) => {
+							if (situation.deviceIds.includes(sourceChild.id)) {
+								situation.show = !situation.show
+							}
+						})
+					})
 				}
 			})
+
 			this.parentConnections = connections
+			this.situationConnections = situationConnections
 		},
 		handleAlarmFilters(severity: string) {
 			this.alarmFilters[severity] = !this.alarmFilters[severity]
@@ -111,7 +126,10 @@ export const useDatasetStore = defineStore('dataset', {
 	}
 })
 
-const buildDeviceRelantionships = (inventory: TVertice[], edges: TEdge[]) => {
+const buildDeviceRelantionships = (
+	inventory: TVertice[],
+	edges: TEdge[]
+): TConnection[] => {
 	const targets = groupBy(edges, 'target_id')
 	const connections: TConnection[] = []
 
@@ -162,4 +180,62 @@ const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 	}
 
 	return connections
+}
+
+const buildSituationRelantionships = (
+	situations: TVertice[],
+	alarms: TVertice[],
+	edges: TEdge[],
+	alarmConnections: TAlarmConnection[]
+): TSituationConnection[] => {
+	const sources = groupBy(edges, 'source_id')
+	const connections: TSituationConnection[] = []
+
+	for (const edgeId in sources) {
+		const vertices: TVertice[] = []
+		const situation_id = sources[edgeId][0].source_id
+		const situation = situations.find((i) => i.id == situation_id)
+
+		sources[edgeId].forEach((edge: TEdge) => {
+			const alarm = alarms.find((i) => i.id == edge.target_id)
+			if (alarm) {
+				vertices.push(alarm)
+			}
+		})
+
+		const deviceIds: string[] = []
+		vertices.forEach((vertice) => {
+			alarmConnections.forEach((item: TAlarmConnection) => {
+				const alarm = item.alarms.find((alarm) => alarm.id == vertice.id)
+				if (alarm) {
+					deviceIds.push(item.parentId)
+				}
+			})
+		})
+
+		if (situation) {
+			connections.push({
+				situation: situation,
+				situationId: edgeId,
+				show: true,
+				alarms: vertices,
+				deviceIds: deviceIds
+			})
+		}
+	}
+	return connections
+}
+
+const buildAlarmFilters = (alarms: TVertice[]) => {
+	const alarmFilters: Record<string, boolean> = {}
+	const severityAlarms = chain(alarms)
+		.groupBy('attributes.severity')
+		.keys()
+		.value()
+
+	mapValues(
+		severityAlarms,
+		(severity: string) => (alarmFilters[severity] = true)
+	)
+	return alarmFilters
 }
