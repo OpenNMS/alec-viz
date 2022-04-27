@@ -42,6 +42,7 @@
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight2"
 				/>
+
 				<Box
 					:width="2000"
 					:height="0.1"
@@ -50,7 +51,7 @@
 					receive-shadow
 				>
 					<PhongMaterial :color="'#BFC9CA'">
-						<!--<Texture :src="'/src/assets/floor_texture_v14.png'" /> -->
+						<!--<Texture :src="'/src/assets/floor_texture_v01.png'" />-->
 					</PhongMaterial>
 				</Box>
 
@@ -71,8 +72,7 @@ import {
 	PhongMaterial,
 	Group,
 	HemisphereLight,
-	Raycaster,
-	Texture
+	Raycaster
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
@@ -117,28 +117,27 @@ datasetStore.$subscribe((mutation, state) => {
 	inventoryGroupRef.children = []
 	if (Object.keys(state.parentConnections).length) {
 		//add inventory level
-		Builders.createParentConnections(
+		const nodes = Builders.createParentConnections(
 			state.parentConnections,
 			inventoryGroupRef
-		).then((nodes) => {
-			graphStore.setNodes(nodes)
-			const showSeverities = chain(state.alarmFilters).pickBy().keys().value()
-			//add alarms level
-			Builders.createAlarmConnections(
-				state.alarmConnections,
-				nodes,
-				showSeverities,
-				inventoryGroupRef
-			).then((alarmNodes) => {
-				graphStore.setNodes(alarmNodes)
-				//add situations level
-				Builders.createSituationConnections(
-					state.situationConnections,
-					graphStore.nodes,
-					inventoryGroupRef
-				)
-			})
-		})
+		)
+		graphStore.setNodes(nodes)
+		//add alarms level
+		const showSeverities = chain(state.alarmFilters).pickBy().keys().value()
+		const graphAlarmNodes = Builders.createAlarmConnections(
+			state.alarmConnections,
+			nodes,
+			showSeverities,
+			inventoryGroupRef
+		)
+		graphStore.setNodes(graphAlarmNodes)
+		//add situations level
+		const graphSituationNodes = Builders.createSituationConnections(
+			state.situationConnections,
+			graphStore.nodes,
+			inventoryGroupRef
+		)
+		graphStore.setNodes(graphSituationNodes)
 	}
 })
 

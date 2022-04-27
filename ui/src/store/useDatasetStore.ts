@@ -10,7 +10,6 @@ import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
 import { chain, cloneDeep, mapValues } from 'lodash'
-import { isTemplateNode } from '@vue/compiler-core'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
@@ -166,7 +165,7 @@ const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 		targets[edgeId].forEach((edge: TEdge) => {
 			const source = alarms.find((i) => i.id == edge.source_id)
 			if (source) {
-				//for (let i = 0; i < 10; i++) {
+				//for (let i = 0; i < 5; i++) {  //for tests
 				vertices.push(source)
 				//}
 			}

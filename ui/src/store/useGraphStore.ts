@@ -1,14 +1,16 @@
 import { TGraphNodes } from '@/types/TGraph'
 import { defineStore } from 'pinia'
 
+/**
+ * Meshes with its coordinate positions
+ */
+
 type TState = {
 	nodes: TGraphNodes
-	severityAlarmsFilters: string[]
 }
 export const useGraphStore = defineStore('graphStore', {
 	state: (): TState => ({
-		nodes: {},
-		severityAlarmsFilters: []
+		nodes: {}
 	}),
 	actions: {
 		setNodes(newNodes: TGraphNodes) {

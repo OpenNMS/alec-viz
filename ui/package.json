@@ -23,6 +23,7 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@featherds/expansion": "^0.10.8",
     "@types/lodash": "^4.14.181",
     "@types/three": "^0.139.0",
     "@typescript-eslint/eslint-plugin": "^5.17.0",

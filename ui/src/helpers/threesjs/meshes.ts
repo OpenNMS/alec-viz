@@ -9,10 +9,9 @@ const createSituationMesh = (color: string) => {
 	return mesh
 }
 
-const createDeviceNode = async () => {
+const createDeviceNode = () => {
 	try {
-		const model = await Loaders.getModelDevice()
-		return model
+		return Loaders.getModelDevice()
 	} catch (e) {
 		return createDeviceNodeMesh(16, '#36576B')
 	}
@@ -33,8 +32,17 @@ const createAlarmMesh = (size: number, color: string) => {
 	return cube
 }
 
+const createAlarmeNode = () => {
+	try {
+		return Loaders.getModelAlarm()
+	} catch (e) {
+		return createAlarmMesh(8, '#36576B')
+	}
+}
+
 export const Meshes = {
 	createSituationMesh,
 	createDeviceNode,
-	createAlarmMesh
+	createAlarmMesh,
+	createAlarmeNode
 }

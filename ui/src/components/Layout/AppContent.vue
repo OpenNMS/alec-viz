@@ -3,36 +3,23 @@
 		<TimeSlider />
 	</div>
 	<div class="container">
-		<TreeView class="tree" />
+		<div class="panels">
+			<Filters />
+		</div>
+
 		<div class="content">
 			<SceneContainer />
 		</div>
-		<AlarmFilters class="tree" :title="'Alarms'" />
-		<!--<div class="vertices">
-			<div :key="key" v-for="(value, key) in vertices">
-				<div>
-					<strong>{{ key }}:</strong> {{ value.length }} ->
-					<div :key="severity" v-for="(items, severity) in bySeverity(value)">
-						{{ severity }}: {{ items.length }}
-					</div>
-				</div>
-			</div> 
-		</div>-->
 	</div>
 </template>
 
 <script setup lang="ts">
-import { useDatasetStore } from '@/store/useDatasetStore'
 import SceneContainer from '@/components/Scene/SceneContainer.vue'
 import CONST from '@/helpers/constants'
-import { filter, groupBy, chain } from 'lodash'
-import { TVertice } from '@/types/TDataset'
 import TimeSlider from '../../helpers/TimeSlider.vue'
-import TreeView from '../TreeView.vue'
-import AlarmFilters from '@/components/AlarmFilters.vue'
-const height = CONST.CANVAS_HEIGHT + 'px'
 
-const datasetStore = useDatasetStore()
+import Filters from './Filters.vue'
+const height = CONST.CANVAS_HEIGHT + 'px'
 </script>
 
 <style lang="scss" scoped>
@@ -44,19 +31,13 @@ const datasetStore = useDatasetStore()
 	margin: 15px 20%;
 	margin-bottom: 40px;
 }
-.tree {
-	width: 20%;
+.panels {
+	width: 19%;
+	padding-right: 20px;
 }
 .container {
 	display: flex;
 	flex-direction: row;
-}
-.vertices {
-	display: flex;
-	flex-direction: column;
-	text-align: start;
-	width: 20%;
-	padding-left: 30px;
 }
 .content {
 	border: 1px solid gray;
