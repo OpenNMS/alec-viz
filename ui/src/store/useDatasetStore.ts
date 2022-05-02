@@ -17,7 +17,9 @@ type TState = {
 	alarmConnections: TAlarmConnection[]
 	currentTime: number
 	alarmFilters: Record<string, boolean>
+	situationFilters: Record<string, boolean>
 	situationConnections: TSituationConnection[]
+	selectedNode: any
 }
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
@@ -26,11 +28,14 @@ export const useDatasetStore = defineStore('dataset', {
 		parentConnections: [],
 		alarmConnections: [],
 		alarmFilters: {},
-		situationConnections: []
+		situationFilters: {},
+		situationConnections: [],
+		selectedNode: {}
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
 			this.alarmFilters = {}
+			this.situationFilters = {}
 
 			const resp: null | Record<string, any> = await API.getAxiosRequest(
 				`/0?time=${timestamp}&szl=3&removeInventoryWithNoAlarms=true`
@@ -59,7 +64,10 @@ export const useDatasetStore = defineStore('dataset', {
 					alarmConnections
 				)
 
-				this.alarmFilters = buildAlarmFilters(verticesGrouped['alarms'])
+				this.alarmFilters = buildVerticesFilters(verticesGrouped['alarms'])
+				this.situationFilters = buildVerticesFilters(
+					verticesGrouped['situations']
+				)
 				this.parentConnections = parentConnections
 				this.alarmConnections = alarmConnections
 				this.situationConnections = situationConnections
@@ -121,6 +129,16 @@ export const useDatasetStore = defineStore('dataset', {
 		},
 		handleAlarmFilters(severity: string) {
 			this.alarmFilters[severity] = !this.alarmFilters[severity]
+		},
+		handleSituationFilters(severity: string) {
+			this.situationFilters[severity] = !this.situationFilters[severity]
+		},
+		setSelectedNode(userData: any) {
+			this.selectedNode = {
+				id: userData.id,
+				type: userData.type,
+				parentId: userData.parentId
+			}
 		}
 	}
 })
@@ -165,7 +183,8 @@ const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 		targets[edgeId].forEach((edge: TEdge) => {
 			const source = alarms.find((i) => i.id == edge.source_id)
 			if (source) {
-				//for (let i = 0; i < 5; i++) {  //for tests
+				//for (let i = 0; i < 10; i++) {
+				//for tests
 				vertices.push(source)
 				//}
 			}
@@ -225,16 +244,13 @@ const buildSituationRelantionships = (
 	return connections
 }
 
-const buildAlarmFilters = (alarms: TVertice[]) => {
-	const alarmFilters: Record<string, boolean> = {}
-	const severityAlarms = chain(alarms)
+const buildVerticesFilters = (vertices: TVertice[]) => {
+	const filters: Record<string, boolean> = {}
+	const severities = chain(vertices)
 		.groupBy('attributes.severity')
 		.keys()
 		.value()
 
-	mapValues(
-		severityAlarms,
-		(severity: string) => (alarmFilters[severity] = true)
-	)
-	return alarmFilters
+	mapValues(severities, (severity: string) => (filters[severity] = true))
+	return filters
 }

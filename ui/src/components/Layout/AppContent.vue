@@ -10,13 +10,15 @@
 		<div class="content">
 			<SceneContainer />
 		</div>
+		<SelectedNodeInfo />
 	</div>
 </template>
 
 <script setup lang="ts">
 import SceneContainer from '@/components/Scene/SceneContainer.vue'
 import CONST from '@/helpers/constants'
-import TimeSlider from '../../helpers/TimeSlider.vue'
+import TimeSlider from '@/helpers/TimeSlider.vue'
+import SelectedNodeInfo from '@/components/Layout/SelectedNodeInfo.vue'
 
 import Filters from './Filters.vue'
 const height = CONST.CANVAS_HEIGHT + 'px'

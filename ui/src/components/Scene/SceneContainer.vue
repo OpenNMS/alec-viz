@@ -29,7 +29,7 @@
 				<DirectionalLight
 					:position="{ x: -80, y: 120, z: 100 }"
 					:color="'#F1F1B9'"
-					:intensity="0.2"
+					:intensity="0.4"
 					cast-shadow
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight"
@@ -37,7 +37,7 @@
 				<DirectionalLight
 					:position="{ x: 220, y: 200, z: -100 }"
 					:color="'#F1F1B9'"
-					:intensity="0.1"
+					:intensity="0.4"
 					cast-shadow
 					:shadow-camera="{ near: 0.02, far: 1000, fov: 1000 }"
 					ref="dirLight2"
@@ -50,8 +50,8 @@
 					:position="{ x: 300, y: 0, z: 300 }"
 					receive-shadow
 				>
-					<PhongMaterial :color="'#BFC9CA'">
-						<!--<Texture :src="'/src/assets/floor_texture_v01.png'" />-->
+					<PhongMaterial :color="'#62838E'">
+						<!--<Texture :src="'/src/assets/floor_test2.png'" /> -->
 					</PhongMaterial>
 				</Box>
 
@@ -72,7 +72,8 @@ import {
 	PhongMaterial,
 	Group,
 	HemisphereLight,
-	Raycaster
+	Raycaster,
+	Texture
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
@@ -80,10 +81,10 @@ import { Builders } from '@/helpers/threesjs/builders'
 import { Config } from '@/helpers/threesjs/config'
 import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
-import CONST from '@/helpers/constants'
 import {
 	chain,
 	filter,
+	isEmpty,
 	mapKeys,
 	mapValues,
 	omitBy,
@@ -101,13 +102,14 @@ let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
 
 const onPointerEvent = (event: PointerIntersectEventInterface) => {
-	/*if (event.intersect?.object.geometry.type == 'BoxGeometry') {
-		console.log('click')
+	const userData = event.intersect?.object.userData
+	if (userData && !isEmpty(userData) && userData.id) {
 		orbitCtrl.target =
 			event && event?.intersect?.point
 				? event?.intersect?.point
 				: orbitCtrl.position0
-	}*/
+		datasetStore.setSelectedNode(userData)
+	}
 }
 
 const datasetStore = useDatasetStore()
@@ -123,21 +125,37 @@ datasetStore.$subscribe((mutation, state) => {
 		)
 		graphStore.setNodes(nodes)
 		//add alarms level
-		const showSeverities = chain(state.alarmFilters).pickBy().keys().value()
+		const showAlarmSeverities = chain(state.alarmFilters)
+			.pickBy()
+			.keys()
+			.value()
 		const graphAlarmNodes = Builders.createAlarmConnections(
 			state.alarmConnections,
 			nodes,
-			showSeverities,
+			showAlarmSeverities,
 			inventoryGroupRef
 		)
 		graphStore.setNodes(graphAlarmNodes)
 		//add situations level
+		const showSituationSeverities = chain(state.situationFilters)
+			.pickBy()
+			.keys()
+			.value()
 		const graphSituationNodes = Builders.createSituationConnections(
 			state.situationConnections,
 			graphStore.nodes,
+			showSituationSeverities,
 			inventoryGroupRef
 		)
 		graphStore.setNodes(graphSituationNodes)
+	}
+})
+
+graphStore.$subscribe((mutation, state) => {
+	if (state.target) {
+		orbitCtrl.target = state.target
+		orbitCtrl.zoomO = 3
+		graphStore.setTarget(null)
 	}
 })
 

@@ -9,7 +9,7 @@ import {
 import CONST from '@/helpers/constants'
 import { TGraphNodes, TNodeInfo } from '@/types/TGraph'
 import { Meshes } from '@/helpers/threesjs/meshes'
-import { first, get, last, maxBy } from 'lodash'
+import { get, last } from 'lodash'
 import { Edges } from './edges'
 
 const DIST_CHILDREN = 40 * CONST.DEVICE_SCALE
@@ -27,7 +27,14 @@ const createParentConnections = (
 		if (groupNodes.show) {
 			const cube = deviceModel.clone()
 			const id = groupNodes.parent.id
-			cube.userData = { id: id, parentId: null }
+			const userData = {
+				id: id,
+				parentId: null,
+				type: 'parent'
+			}
+			cube.traverse((m) => {
+				m.userData = userData
+			})
 
 			const row = Math.floor(index / rows)
 			cube.position.set(column * DIST_PARENT, 0, row * DIST_PARENT)
@@ -44,6 +51,9 @@ const createParentConnections = (
 			)
 			graphNodes = Object.assign({}, graphNodes, childGraphNodes)
 			groupRef.add(cube)
+			//id of device
+			/*const textMesh = Utils.buildText(id, cube.position)
+			groupRef.add(textMesh)*/
 		}
 		column++
 		if (column >= rows) {
@@ -66,7 +76,10 @@ const createDevicesSources = (
 	const deviceModel = Meshes.createDeviceNode()
 	sources.forEach((node: TVertice, subIndex: number) => {
 		const subCube = deviceModel.clone()
-		subCube.userData = { id: node.id, parentId: parentId }
+		const userData = { id: node.id, parentId: parentId, type: node.layer_id }
+		subCube.traverse((m) => {
+			m.userData = userData
+		})
 		const [x, z] = getPosition(
 			parentPosition,
 			angleBetweenChildren * subIndex,
@@ -104,7 +117,14 @@ const createAlarmConnections = (
 				if (severity && showSeverities.includes(severity)) {
 					const color = getSeverityColor(severity)
 					const cube = get(alarmModel, severity).clone()
-					cube.userData = { id: alarm.id, parentId: alarmNodes.parentId }
+					const userData = {
+						id: alarm.id,
+						parentId: alarmNodes.parentId,
+						type: alarm.layer_id
+					}
+					cube.traverse((m: THREE.Mesh) => {
+						m.userData = userData
+					})
 					//inventory position
 					const parentPosition = nodes[alarmNodes.parentId]?.position
 					if (parentPosition) {
@@ -148,6 +168,7 @@ const createAlarmConnections = (
 const createSituationConnections = (
 	situationConnections: TSituationConnection[],
 	nodes: TGraphNodes,
+	showSeverities: string[],
 	groupRef: THREE.Group
 ): TGraphNodes => {
 	const graphNodes: TGraphNodes = {}
@@ -160,29 +181,38 @@ const createSituationConnections = (
 			const parentId = lastNode?.parentId
 			if (lastNode && parentId) {
 				const severity = situation.situation?.attributes?.severity
-				const color = getSeverityColor(severity)
-				const situationMesh = Meshes.createSituationMesh(color)
-
-				const [x, y, z] = getSituationPostion(lastNode, parentId, nodes)
-				situationMesh.position.set(x, y, z)
-
-				situation.alarms.forEach((alarm) => {
-					const alarmInGraph = nodes[alarm.id]
-					if (alarmInGraph) {
-						Edges.addSituationEdge(
-							alarmInGraph?.position,
-							situationMesh.position,
-							color,
-							groupRef
-						)
+				if (severity && showSeverities.includes(severity)) {
+					const color = getSeverityColor(severity)
+					const situationMesh = Meshes.createSituationMesh(color)
+					const userData = {
+						id: situation.situation.id,
+						parentId: parentId,
+						type: situation.situation.layer_id
 					}
-				})
-				graphNodes[situation.situation.id] = {
-					position: situationMesh.position,
-					layer_id: situation.situation.layer_id,
-					parentId: parentId
+					situationMesh.traverse((m) => {
+						m.userData = userData
+					})
+					const [x, y, z] = getSituationPostion(lastNode, parentId, nodes)
+					situationMesh.position.set(x, y, z)
+
+					situation.alarms.forEach((alarm) => {
+						const alarmInGraph = nodes[alarm.id]
+						if (alarmInGraph) {
+							Edges.addSituationEdge(
+								alarmInGraph?.position,
+								situationMesh.position,
+								color,
+								groupRef
+							)
+						}
+					})
+					graphNodes[situation.situation.id] = {
+						position: situationMesh.position,
+						layer_id: situation.situation.layer_id,
+						parentId: parentId
+					}
+					groupRef.add(situationMesh)
 				}
-				groupRef.add(situationMesh)
 			}
 		}
 	})
@@ -250,7 +280,7 @@ const calculateAlarmPosition = (
 	parentPosition: THREE.Vector3,
 	angleBetweenChildren: number
 ) => {
-	const alarmSize = CONST.ALARM_SIZE
+	const alarmSize = CONST.ALARM_SIZE * 2
 	const minCountByRow = 9
 	const countByRow = minCountByRow + Math.floor(index / minCountByRow)
 	const distance = alarmSize * ((index + 1) / countByRow) + alarmSize * 2
@@ -260,9 +290,9 @@ const calculateAlarmPosition = (
 		angleBetweenChildren * index,
 		distance
 	)
-	const offsetFromParent = alarmSize * 4
+	const offsetYFromParent = alarmSize * 4
 	const heightBetweenEachNode = 5 * index
-	const y = heightBetweenEachNode + offsetFromParent
+	const y = heightBetweenEachNode + offsetYFromParent
 	return [x, y, z]
 }
 

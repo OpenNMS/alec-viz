@@ -1,4 +1,4 @@
-import { MeshStandardMaterial, Mesh, MeshPhysicalMaterial, Color } from 'three'
+import { MeshStandardMaterial, Mesh, MeshPhysicalMaterial } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 const loader = new GLTFLoader()
 const models: Record<string, THREE.Group> = {}
@@ -9,12 +9,12 @@ import { forEach } from 'lodash'
 
 const alarmSeverityPaths: Record<string, string> = {
 	critical: 'alarm_red',
-	major: 'alarm_red_low',
+	major: 'alarm_orange',
 	minor: 'alarm_yellow',
 	warning: 'alarm_yellow',
 	normal: 'alarm_green',
-	cleared: 'alarm_blue',
-	indeterminate: 'alarm_yellow'
+	cleared: 'alarm_blue2',
+	indeterminate: 'alarm_white'
 }
 
 const loadModelDevice = async () => {
@@ -35,19 +35,19 @@ const loadModelDevice = async () => {
 			})
 		}
 	})
+
 	models.device = glb.scene
 }
 
 const loadModelAlarm = async (severity: string) => {
-	const size = 5
+	const size = CONST.ALARM_SIZE
 
 	const glb = await loader.loadAsync(
-		`/src/assets/${alarmSeverityPaths[severity]}.glb`
+		`/src/assets/alarm3/${alarmSeverityPaths[severity]}.glb`
 	)
 	glb.scene.traverse((obj) => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		//@ts-ignore
-
 		if (obj.isMesh) {
 			const mesh = obj as Mesh
 			mesh.castShadow = true
@@ -56,11 +56,9 @@ const loadModelAlarm = async (severity: string) => {
 			const materials = (
 				Array.isArray(mesh.material) ? mesh.material : [mesh.material]
 			) as MeshStandardMaterial[] | MeshPhysicalMaterial[]
-
 			materials.forEach(
 				(mat: THREE.MeshStandardMaterial | THREE.MeshPhysicalMaterial) => {
 					mat.metalness = 0
-					mat.emissive = new Color('#373333')
 					mat.roughness = 0
 					mat.emissiveIntensity = 1
 				}
