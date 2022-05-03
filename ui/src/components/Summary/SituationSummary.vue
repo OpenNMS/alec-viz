@@ -1,15 +1,16 @@
 <template>
-	<div class="summary">
-		<div class="title">
-			Situation - &nbsp;
-
+	<VerticeSummary>
+		<template v-slot:title
+			>Situation - &nbsp;
 			<span class="status">{{
 				info.situation.attributes.severity.toUpperCase()
 			}}</span>
-		</div>
-		<div class="details">
+		</template>
+		<template v-slot:description>
 			<div><strong>ID:</strong> {{ props.selectedInfo?.id }}</div>
 			<div><strong>Label:</strong> {{ situation?.label }}</div>
+		</template>
+		<template v-slot:connections>
 			<hr />
 			<p><strong>From inventory: </strong>{{ parentId }}</p>
 			<div v-for="id in info.deviceIds" :key="id">
@@ -18,11 +19,13 @@
 					><FeatherIcon :icon="View" /> View Device</FeatherButton
 				>
 			</div>
-		</div>
-	</div>
+		</template>
+	</VerticeSummary>
 </template>
 
 <script setup lang="ts">
+import VerticeSummary from './VerticeSummary.vue'
+
 import { FeatherButton } from '@featherds/button'
 import { FeatherIcon } from '@featherds/icon'
 import View from '@featherds/icon/action/View'
@@ -76,39 +79,8 @@ if (props.selectedInfo.id) {
 </script>
 
 <style lang="scss" scoped>
-$border: 1px solid rgba(0, 0, 0, 0.125);
-.summary {
-	display: flex;
-	flex-direction: column;
-	border: $border;
-	border-radius: 0.25rem;
-	padding-bottom: 20px;
-}
-
-.title {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	font-weight: 600;
-	justify-content: center;
-	border-bottom: $border;
-	padding: 15px 0;
-}
-
 .status {
 	color: v-bind('colorSeverity');
-}
-
-hr {
-	margin: 20px 0;
-	color: $border;
-}
-
-.details {
-	padding-top: 20px;
-	padding-left: 20px;
-	padding-right: 20px;
-	text-align: start;
 }
 
 .btn {

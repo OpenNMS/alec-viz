@@ -5,7 +5,6 @@ import {
 	TSituationConnection,
 	TVertice
 } from '@/types/TDataset'
-
 import CONST from '@/helpers/constants'
 import { TGraphNodes, TNodeInfo } from '@/types/TGraph'
 import { Meshes } from '@/helpers/threesjs/meshes'

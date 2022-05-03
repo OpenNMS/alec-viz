@@ -11,7 +11,7 @@
 			shadow
 			:pointer="{ intersectMode: 'frame' }"
 		>
-			<Camera :position="{ x: -90, y: 50, z: -90 }" :far="2500" />
+			<Camera :position="{ x: -90, y: 50, z: -90 }" :far="2500" ref="camera" />
 			<Raycaster
 				@click="onPointerEvent"
 				intersect-mode="frame"
@@ -76,6 +76,7 @@ import {
 	Texture
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+
 import { PointerIntersectEventInterface } from 'troisjs/src/core/usePointer'
 import { Builders } from '@/helpers/threesjs/builders'
 import { Config } from '@/helpers/threesjs/config'
@@ -95,6 +96,7 @@ const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref()
 const dirLight = ref()
+const camera = ref()
 
 let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
@@ -123,6 +125,7 @@ datasetStore.$subscribe((mutation, state) => {
 			state.parentConnections,
 			inventoryGroupRef
 		)
+
 		graphStore.setNodes(nodes)
 		//add alarms level
 		const showAlarmSeverities = chain(state.alarmFilters)
@@ -135,6 +138,7 @@ datasetStore.$subscribe((mutation, state) => {
 			showAlarmSeverities,
 			inventoryGroupRef
 		)
+
 		graphStore.setNodes(graphAlarmNodes)
 		//add situations level
 		const showSituationSeverities = chain(state.situationFilters)

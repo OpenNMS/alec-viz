@@ -1,18 +1,18 @@
 <template>
 	<div class="summaryTypes">
-		<AlarmResume
+		<AlarmSummary
 			v-if="datasetStore.$state.selectedNode.type === 'alarms'"
 			:selected-info="datasetStore.$state.selectedNode"
 		/>
-		<SituationResume
+		<SituationSummary
 			v-if="datasetStore.$state.selectedNode.type === 'situations'"
 			:selected-info="datasetStore.$state.selectedNode"
 		/>
-		<InventoryResume
+		<InventorySummary
 			v-if="datasetStore.$state.selectedNode.type === 'inventory'"
 			:selected-info="datasetStore.$state.selectedNode"
 		/>
-		<ParentInventoryResume
+		<ParentSummary
 			v-if="datasetStore.$state.selectedNode.type === 'parent'"
 			:selected-info="datasetStore.$state.selectedNode"
 		/>
@@ -21,10 +21,10 @@
 
 <script setup lang="ts">
 import { useDatasetStore } from '@/store/useDatasetStore'
-import AlarmResume from '@/components/Summary/AlarmSummary.vue'
-import SituationResume from '@/components/Summary/SituationSummary.vue'
-import InventoryResume from '@/components/Summary/InventorySummary.vue'
-import ParentInventoryResume from '@/components/Summary/ParentSummary.vue'
+import AlarmSummary from '@/components/Summary/AlarmSummary.vue'
+import ParentSummary from '@/components/Summary/ParentSummary.vue'
+import SituationSummary from '@/components/Summary/SituationSummary.vue'
+import InventorySummary from '@/components/Summary/InventorySummary.vue'
 
 const datasetStore = useDatasetStore()
 </script>
