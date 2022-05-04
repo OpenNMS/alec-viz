@@ -17,8 +17,7 @@ const alarmSeverityPaths: Record<string, string> = {
 	indeterminate: 'alarm_white'
 }
 
-const loadModelDevice = async () => {
-	const size = CONST.DEVICE_SCALE
+const loadModelDevice = async (size = CONST.DEVICE_SCALE) => {
 	const glb = await loader.loadAsync('/src/assets/device_v09.glb')
 	glb.scene.traverse((obj) => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -36,7 +35,7 @@ const loadModelDevice = async () => {
 		}
 	})
 
-	models.device = glb.scene
+	return glb.scene
 }
 
 const loadModelAlarm = async (severity: string) => {
@@ -72,12 +71,17 @@ const getModelDevice = () => {
 	return models.device
 }
 
+const getModelParentDevice = () => {
+	return models.parentDevice
+}
+
 const getModelAlarm = (): Record<string, THREE.Group> => {
 	return alarms
 }
 
 const initPreLoad = async () => {
-	await loadModelDevice()
+	models.device = await loadModelDevice()
+	models.parentDevice = await loadModelDevice(2.8)
 	forEach(alarmSeverityPaths, async (path, severity) => {
 		await loadModelAlarm(severity)
 	})
@@ -86,6 +90,7 @@ const initPreLoad = async () => {
 await initPreLoad()
 
 export const Loaders = {
+	getModelParentDevice,
 	getModelDevice,
 	getModelAlarm
 }

@@ -1,4 +1,4 @@
-import { TGraphNodes } from '@/types/TGraph'
+import { TGraphNodes, TUserData } from '@/types/TGraph'
 import { defineStore } from 'pinia'
 import { Vector3 } from 'three'
 
@@ -6,13 +6,15 @@ import { Vector3 } from 'three'
  * Meshes with its coordinate positions
  */
 
-type TState = {
+type TGraphState = {
 	nodes: TGraphNodes
 	target: Vector3 | null
+	selectedNode: TUserData | null
 }
 export const useGraphStore = defineStore('graphStore', {
-	state: (): TState => ({
+	state: (): TGraphState => ({
 		nodes: {},
+		selectedNode: null,
 		target: null
 	}),
 	actions: {
@@ -22,6 +24,13 @@ export const useGraphStore = defineStore('graphStore', {
 		},
 		setTarget(position: THREE.Vector3 | null) {
 			this.target = position
+		},
+		setSelectedNode(userData: TUserData) {
+			this.selectedNode = {
+				id: userData.id,
+				layerId: userData.layerId,
+				parentId: userData.parentId
+			}
 		}
 	}
 })

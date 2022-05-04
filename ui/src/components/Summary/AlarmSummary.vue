@@ -49,9 +49,9 @@ const showDevice = () => {
 		const userData = {
 			id: parentId,
 			parentId: parent.parentId,
-			type: parent.layer_id
+			layerId: parent.layer_id
 		}
-		datasetStore.setSelectedNode(userData)
+		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
 }

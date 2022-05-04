@@ -13,7 +13,15 @@ const createDeviceNode = () => {
 	try {
 		return Loaders.getModelDevice()
 	} catch (e) {
-		return createDeviceNodeMesh(16, '#36576B')
+		return createDeviceNodeMesh(14, '#36576B')
+	}
+}
+
+const createParentDeviceNode = () => {
+	try {
+		return Loaders.getModelParentDevice()
+	} catch (e) {
+		return createDeviceNodeMesh(22, '#36576B')
 	}
 }
 
@@ -42,6 +50,7 @@ const createAlarmeNode = () => {
 
 export const Meshes = {
 	createSituationMesh,
+	createParentDeviceNode,
 	createDeviceNode,
 	createAlarmMesh,
 	createAlarmeNode

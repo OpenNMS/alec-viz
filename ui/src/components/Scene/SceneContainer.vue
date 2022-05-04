@@ -73,7 +73,8 @@ import {
 	Group,
 	HemisphereLight,
 	Raycaster,
-	Texture
+	Texture,
+	Mesh
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -85,13 +86,20 @@ import { useGraphStore } from '@/store/useGraphStore'
 import {
 	chain,
 	filter,
+	forEach,
 	isEmpty,
+	isEqual,
 	mapKeys,
 	mapValues,
 	omitBy,
 	pickBy,
-	reduce
+	reduce,
+	startsWith
 } from 'lodash'
+import { Controls } from '@/helpers/threesjs/controls'
+import { TUserData } from '@/types/TGraph'
+
+let cameraRef: THREE.Camera
 const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref()
@@ -103,63 +111,81 @@ let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
 
-const onPointerEvent = (event: PointerIntersectEventInterface) => {
-	const userData = event.intersect?.object.userData
-	if (userData && !isEmpty(userData) && userData.id) {
-		orbitCtrl.target =
-			event && event?.intersect?.point
-				? event?.intersect?.point
-				: orbitCtrl.position0
-		datasetStore.setSelectedNode(userData)
-	}
-}
-
 const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
 
+const onPointerEvent = (event: PointerIntersectEventInterface) => {
+	const userData = event.intersect?.object.userData
+	if (userData && !isEmpty(userData) && userData.id) {
+		/*orbitCtrl.target =
+			event && event?.intersect?.point
+				? event?.intersect?.point
+				: orbitCtrl.position0*/
+		const info: TUserData = {
+			id: userData.id,
+			parentId: userData.parentId,
+			layerId: userData.layerId
+		}
+		graphStore.setSelectedNode(info)
+	}
+}
+
 datasetStore.$subscribe((mutation, state) => {
-	inventoryGroupRef.children = []
-	if (Object.keys(state.parentConnections).length) {
-		//add inventory level
-		const nodes = Builders.createParentConnections(
-			state.parentConnections,
-			inventoryGroupRef
-		)
+	const events: any = mutation.events
+	if (events.newValue && !isEqual(events.oldValue, events.newValue)) {
+		inventoryGroupRef.clear()
+		graphStore.$reset
+		if (Object.keys(state.parentConnections).length) {
+			//add inventory level
+			const nodes = Builders.createParentConnections(
+				state.parentConnections,
+				inventoryGroupRef
+			)
 
-		graphStore.setNodes(nodes)
-		//add alarms level
-		const showAlarmSeverities = chain(state.alarmFilters)
-			.pickBy()
-			.keys()
-			.value()
-		const graphAlarmNodes = Builders.createAlarmConnections(
-			state.alarmConnections,
-			nodes,
-			showAlarmSeverities,
-			inventoryGroupRef
-		)
+			graphStore.setNodes(nodes)
+			//add alarms level
+			const showAlarmSeverities = chain(state.alarmFilters)
+				.pickBy()
+				.keys()
+				.value()
+			const graphAlarmNodes = Builders.createAlarmConnections(
+				state.alarmConnections,
+				nodes,
+				showAlarmSeverities,
+				inventoryGroupRef
+			)
 
-		graphStore.setNodes(graphAlarmNodes)
-		//add situations level
-		const showSituationSeverities = chain(state.situationFilters)
-			.pickBy()
-			.keys()
-			.value()
-		const graphSituationNodes = Builders.createSituationConnections(
-			state.situationConnections,
-			graphStore.nodes,
-			showSituationSeverities,
-			inventoryGroupRef
-		)
-		graphStore.setNodes(graphSituationNodes)
+			graphStore.setNodes(graphAlarmNodes)
+			//add situations level
+			const showSituationSeverities = chain(state.situationFilters)
+				.pickBy()
+				.keys()
+				.value()
+			const graphSituationNodes = Builders.createSituationConnections(
+				state.situationConnections,
+				graphStore.nodes,
+				showSituationSeverities,
+				inventoryGroupRef
+			)
+			graphStore.setNodes(graphSituationNodes)
+
+			Controls.createDraggablesObjects(
+				inventoryGroupRef,
+				cameraRef,
+				rendererRef,
+				orbitCtrl
+			)
+		}
 	}
 })
 
 graphStore.$subscribe((mutation, state) => {
-	if (state.target) {
-		orbitCtrl.target = state.target
-		orbitCtrl.zoomO = 3
-		graphStore.setTarget(null)
+	const events: any = mutation.events
+	if (!isEqual(events.oldValue, events.newValue)) {
+		if (state.target) {
+			orbitCtrl.target = state.target
+			graphStore.setTarget(null)
+		}
 	}
 })
 
@@ -168,6 +194,7 @@ onMounted(() => {
 	rendererRef = renderer.value?.three
 	orbitCtrl = renderer.value?.three.cameraCtrl
 	inventoryGroupRef = inventoryGroup.value?.group as THREE.Group
+	cameraRef = camera.value.camera
 	Config.configureRenderer(rendererRef)
 	const light = dirLight.value.light
 	Config.setShadowHelper(light, sceneRef)

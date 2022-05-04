@@ -132,13 +132,6 @@ export const useDatasetStore = defineStore('dataset', {
 		},
 		handleSituationFilters(severity: string) {
 			this.situationFilters[severity] = !this.situationFilters[severity]
-		},
-		setSelectedNode(userData: any) {
-			this.selectedNode = {
-				id: userData.id,
-				type: userData.type,
-				parentId: userData.parentId
-			}
 		}
 	}
 })
@@ -226,7 +219,9 @@ const buildSituationRelantionships = (
 			alarmConnections.forEach((item: TAlarmConnection) => {
 				const alarm = item.alarms.find((alarm) => alarm.id == vertice.id)
 				if (alarm) {
-					deviceIds.push(item.parentId)
+					if (!deviceIds.includes(item.parentId)) {
+						deviceIds.push(item.parentId)
+					}
 				}
 			})
 		})

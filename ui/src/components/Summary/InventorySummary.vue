@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
+import { TUserData } from '@/types/TGraph'
 import { FeatherButton } from '@featherds/button'
 import { FeatherIcon } from '@featherds/icon'
 import View from '@featherds/icon/action/View'
@@ -33,12 +34,12 @@ const props = defineProps({
 const showDevice = () => {
 	if (parentId) {
 		const parent = graphStore.nodes[parentId]
-		const userData = {
+		const userData: TUserData = {
 			id: parentId,
 			parentId: parent.parentId,
-			type: 'parent'
+			layerId: 'parent'
 		}
-		datasetStore.setSelectedNode(userData)
+		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
 }

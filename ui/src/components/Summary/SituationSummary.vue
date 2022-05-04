@@ -12,8 +12,8 @@
 		</template>
 		<template v-slot:connections>
 			<hr />
-			<p><strong>From inventory: </strong>{{ parentId }}</p>
 			<div v-for="id in info.deviceIds" :key="id">
+				<p><strong>From inventory: </strong>{{ id }}</p>
 				<FeatherIcon :icon="Instances" /> {{ id }}
 				<FeatherButton class="btn" secondary @click="showDevice(id)"
 					><FeatherIcon :icon="View" /> View Device</FeatherButton
@@ -35,6 +35,7 @@ import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
 import CONST from '@/helpers/constants'
 import { TVertice } from '@/types/TDataset'
+import { TUserData } from '@/types/TGraph'
 
 const props = defineProps({
 	selectedInfo: {
@@ -50,19 +51,18 @@ const situations = datasetStore.$state.situationConnections
 const showDevice = (id: string) => {
 	if (id) {
 		const parent = graphStore.nodes[id]
-		const userData = {
-			id: parentId,
+		const userData: TUserData = {
+			id: id,
 			parentId: parent.parentId,
-			type: parent.layer_id
+			layerId: parent.layer_id
 		}
-		datasetStore.setSelectedNode(userData)
+		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
 }
 
 let info = ref().value
 let colorSeverity = ref<string | undefined>().value
-let parentId = ref<string>().value
 let situation = ref<TVertice>().value
 
 if (props.selectedInfo.id) {

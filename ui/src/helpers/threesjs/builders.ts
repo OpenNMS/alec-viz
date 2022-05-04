@@ -20,16 +20,17 @@ const createParentConnections = (
 ) => {
 	const rows = Math.floor(Math.sqrt(parentConnections.length))
 	let column = 0
-	const deviceModel = Meshes.createDeviceNode()
+	const deviceModel = Meshes.createParentDeviceNode()
 	let graphNodes: TGraphNodes = {}
 	parentConnections.forEach((groupNodes, index) => {
 		if (groupNodes.show) {
-			const cube = deviceModel.clone()
 			const id = groupNodes.parent.id
+			const cube = deviceModel.clone()
+
 			const userData = {
 				id: id,
 				parentId: null,
-				type: 'parent'
+				layerId: 'parent'
 			}
 			cube.traverse((m) => {
 				m.userData = userData
@@ -51,6 +52,7 @@ const createParentConnections = (
 			graphNodes = Object.assign({}, graphNodes, childGraphNodes)
 			groupRef.add(cube)
 			//id of device
+			// add text
 			/*const textMesh = Utils.buildText(id, cube.position)
 			groupRef.add(textMesh)*/
 		}
@@ -75,7 +77,7 @@ const createDevicesSources = (
 	const deviceModel = Meshes.createDeviceNode()
 	sources.forEach((node: TVertice, subIndex: number) => {
 		const subCube = deviceModel.clone()
-		const userData = { id: node.id, parentId: parentId, type: node.layer_id }
+		const userData = { id: node.id, parentId: parentId, layerId: node.layer_id }
 		subCube.traverse((m) => {
 			m.userData = userData
 		})
@@ -119,7 +121,7 @@ const createAlarmConnections = (
 					const userData = {
 						id: alarm.id,
 						parentId: alarmNodes.parentId,
-						type: alarm.layer_id
+						layerId: alarm.layer_id
 					}
 					cube.traverse((m: THREE.Mesh) => {
 						m.userData = userData
@@ -183,10 +185,11 @@ const createSituationConnections = (
 				if (severity && showSeverities.includes(severity)) {
 					const color = getSeverityColor(severity)
 					const situationMesh = Meshes.createSituationMesh(color)
+					situationMesh.name = situation.situation.id
 					const userData = {
 						id: situation.situation.id,
 						parentId: parentId,
-						type: situation.situation.layer_id
+						layerId: situation.situation.layer_id
 					}
 					situationMesh.traverse((m) => {
 						m.userData = userData
@@ -198,9 +201,9 @@ const createSituationConnections = (
 						const alarmInGraph = nodes[alarm.id]
 						if (alarmInGraph) {
 							Edges.addSituationEdge(
-								alarmInGraph?.position,
-								situationMesh.position,
-								color,
+								alarmInGraph.position,
+								alarm.id,
+								situationMesh,
 								groupRef
 							)
 						}

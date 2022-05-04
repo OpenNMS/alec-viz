@@ -43,18 +43,27 @@ const addAlarmEdge = (
 
 const addSituationEdge = (
 	origin: THREE.Vector3,
-	destination: THREE.Vector3,
-	color: string,
+	originId: string,
+	destination: THREE.Mesh,
 	groupRef: THREE.Group
 ) => {
 	const p1 = new THREE.Vector3()
 		.copy(origin)
 		.setY(origin.y + OFFSET_ALARM_SHAPE)
-	const p2 = new THREE.Vector3().copy(destination)
+	const p2 = new THREE.Vector3().copy(destination.position)
 	const curve = new THREE.LineCurve3(p1, p2)
 	const geometry = new THREE.TubeGeometry(curve, 10, 0.3, 10, false)
-	const material = new THREE.MeshLambertMaterial({ color })
+	const material = new THREE.MeshLambertMaterial({
+		color: INVENTORY_EDGE_COLOR
+	})
 	const mesh = new THREE.Mesh(geometry, material)
+	mesh.name = 'edge-situation-' + destination.userData.id + '-' + originId
+	mesh.userData = {
+		id: mesh.name,
+		originId: originId,
+		originPosition: origin,
+		destination: destination.userData.id
+	}
 	groupRef.add(mesh)
 }
 

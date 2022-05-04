@@ -5,3 +5,9 @@ export type TNodeInfo = {
 	layer_id: string
 	parentId?: string | null
 }
+
+export type TUserData = {
+	id: string
+	layerId: string
+	parentId?: string | null
+}
