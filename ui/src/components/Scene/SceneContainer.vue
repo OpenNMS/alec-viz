@@ -11,7 +11,7 @@
 			shadow
 			:pointer="{ intersectMode: 'frame' }"
 		>
-			<Camera :position="{ x: -90, y: 50, z: -90 }" :far="2500" ref="camera" />
+			<Camera :position="{ x: -90, y: 50, z: -90 }" :far="5000" ref="camera" />
 			<Raycaster
 				@click="onPointerEvent"
 				intersect-mode="frame"
@@ -44,10 +44,10 @@
 				/>
 
 				<Box
-					:width="2000"
+					:width="4000"
 					:height="0.1"
-					:depth="2000"
-					:position="{ x: 300, y: 0, z: 300 }"
+					:depth="4000"
+					:position="{ x: 1500, y: 0, z: 1500 }"
 					receive-shadow
 				>
 					<PhongMaterial :color="'#62838E'">
@@ -110,29 +110,44 @@ let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
-
+let eventsClick: Record<string, TUserData> = {}
 const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
 
 const onPointerEvent = (event: PointerIntersectEventInterface) => {
 	const userData = event.intersect?.object.userData
 	if (userData && !isEmpty(userData) && userData.id) {
+		const id = userData.id
 		/*orbitCtrl.target =
 			event && event?.intersect?.point
 				? event?.intersect?.point
 				: orbitCtrl.position0*/
 		const info: TUserData = {
-			id: userData.id,
+			id: id,
 			parentId: userData.parentId,
 			layerId: userData.layerId
 		}
-		graphStore.setSelectedNode(info)
+		if (!eventsClick[id]) {
+			//to reduce the amount of events
+			eventsClick[id] = info
+			setTimeout(() => {
+				if (eventsClick[id]) {
+					graphStore.setSelectedNode(eventsClick[id])
+					delete eventsClick[id]
+				}
+			}, 2000)
+		}
+		//
 	}
 }
 
 datasetStore.$subscribe((mutation, state) => {
 	const events: any = mutation.events
-	if (events.newValue && !isEqual(events.oldValue, events.newValue)) {
+	if (
+		events.newValue &&
+		!isEqual(events.oldValue, events.newValue) &&
+		events.key != 'id'
+	) {
 		inventoryGroupRef.clear()
 		graphStore.$reset
 		if (Object.keys(state.parentConnections).length) {

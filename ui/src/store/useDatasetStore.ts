@@ -9,11 +9,12 @@ import {
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
-import { chain, cloneDeep, mapValues } from 'lodash'
+import { chain, clone, cloneDeep, mapValues, merge } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice[]>
 	parentConnections: TConnection[]
+	peerConnections: TConnection[]
 	alarmConnections: TAlarmConnection[]
 	currentTime: number
 	alarmFilters: Record<string, boolean>
@@ -26,6 +27,7 @@ export const useDatasetStore = defineStore('dataset', {
 		currentTime: CONST.TIME_SLIDER_MIN,
 		vertices: {},
 		parentConnections: [],
+		peerConnections: [],
 		alarmConnections: [],
 		alarmFilters: {},
 		situationFilters: {},
@@ -47,8 +49,9 @@ export const useDatasetStore = defineStore('dataset', {
 				const edges = resp ? (resp['edges'] as TEdge[]) : []
 				const edgesGrouped = groupBy(edges, 'type')
 
-				const parentConnections = buildDeviceRelantionships(
+				const connections = buildDeviceRelantionships(
 					verticesGrouped['inventory'],
+					edgesGrouped['peer'],
 					edgesGrouped['parent']
 				)
 
@@ -68,7 +71,8 @@ export const useDatasetStore = defineStore('dataset', {
 				this.situationFilters = buildVerticesFilters(
 					verticesGrouped['situations']
 				)
-				this.parentConnections = parentConnections
+				this.parentConnections = connections.parent
+				this.peerConnections = connections.peer
 				this.alarmConnections = alarmConnections
 				this.situationConnections = situationConnections
 				this.currentTime = timestamp
@@ -138,23 +142,55 @@ export const useDatasetStore = defineStore('dataset', {
 
 const buildDeviceRelantionships = (
 	inventory: TVertice[],
-	edges: TEdge[]
-): TConnection[] => {
-	const targets = groupBy(edges, 'target_id')
+	peerEdges: TEdge[],
+	parentEdges: TEdge[]
+) => {
 	const connections: TConnection[] = []
+	const peerConnections: TConnection[] = []
+	const listIdInventory: string[] = []
 
+	//peer connections
+	if (peerEdges && peerEdges.length > 0) {
+		const peerParents = groupBy(peerEdges, 'source_id')
+
+		for (const edgeId in peerParents) {
+			const source_id = peerParents[edgeId][0].source_id
+			const target = inventory.find((i) => i.id == source_id)
+			const vertices: TVertice[] = []
+			peerParents[edgeId].forEach((edge: TEdge) => {
+				const source = inventory.find((i) => i.id == edge.target_id)
+				if (source) {
+					listIdInventory.push(source.id)
+					vertices.push(source)
+				}
+			})
+			if (target) {
+				listIdInventory.push(target.id)
+				peerConnections.push({
+					parentId: target.id,
+					parent: target,
+					show: true,
+					sources: vertices
+				})
+			}
+		}
+	}
+
+	//parent connections
+	const targets = groupBy(parentEdges, 'target_id')
 	for (const edgeId in targets) {
 		const target_id = targets[edgeId][0].target_id
 		const target = inventory.find((i) => i.id == target_id)
 		const vertices: TVertice[] = []
-
 		targets[edgeId].forEach((edge: TEdge) => {
 			const source = inventory.find((i) => i.id == edge.source_id)
 			if (source) {
+				listIdInventory.push(source.id)
 				vertices.push(source)
 			}
 		})
 		if (target) {
+			listIdInventory.push(target.id)
 			connections.push({
 				parentId: target.id,
 				parent: target,
@@ -163,7 +199,24 @@ const buildDeviceRelantionships = (
 			})
 		}
 	}
-	return connections
+
+	//aislated, not connected nodes
+	const idsNotConnected = inventory.filter(
+		(i) => !listIdInventory.includes(i.id)
+	)
+	idsNotConnected.forEach((inv) => {
+		connections.push({
+			parentId: inv.id,
+			parent: inv,
+			show: true,
+			sources: []
+		})
+	})
+
+	return {
+		peer: peerConnections,
+		parent: connections
+	}
 }
 
 const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {

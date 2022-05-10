@@ -3,7 +3,7 @@
 		<template v-slot:title>Inventory</template>
 		<template v-slot:description>
 			<div><strong>ID:</strong> {{ props.selectedInfo?.id }}</div>
-			<div><strong>Label:</strong> {{ info.label }}</div>
+			<div v-if="info"><strong>Label:</strong> {{ info.label }}</div>
 		</template>
 		<template v-slot:connections>
 			<hr />
@@ -30,8 +30,10 @@ const props = defineProps({
 		required: true
 	}
 })
+console.log(props.selectedInfo)
 
 const showDevice = () => {
+	console.log(parentId)
 	if (parentId) {
 		const parent = graphStore.nodes[parentId]
 		const userData: TUserData = {
@@ -50,10 +52,9 @@ const graphStore = useGraphStore()
 const parentInventory = datasetStore.$state.parentConnections
 let info = ref().value
 let parentId = ref<string>().value
-
 parentInventory.forEach((item, key) => {
 	info = item.sources.find((i) => (i.id = props.selectedInfo.id))
-	if (info != null) {
+	if (info) {
 		parentId = parentInventory[key].parentId
 	}
 })

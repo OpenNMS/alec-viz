@@ -8,7 +8,18 @@ import {
 import CONST from '@/helpers/constants'
 import { TGraphNodes, TNodeInfo } from '@/types/TGraph'
 import { Meshes } from '@/helpers/threesjs/meshes'
-import { get, last } from 'lodash'
+import {
+	get,
+	groupBy,
+	last,
+	map,
+	max,
+	maxBy,
+	mean,
+	meanBy,
+	minBy,
+	size
+} from 'lodash'
 import { Edges } from './edges'
 
 const DIST_CHILDREN = 40 * CONST.DEVICE_SCALE
@@ -47,6 +58,7 @@ const createParentConnections = (
 				id,
 				groupNodes.sources,
 				cube.position,
+				parentConnections,
 				groupRef
 			)
 			graphNodes = Object.assign({}, graphNodes, childGraphNodes)
@@ -69,6 +81,7 @@ const createDevicesSources = (
 	parentId: string,
 	sources: TVertice[],
 	parentPosition: THREE.Vector3,
+	parentConnections: TConnection[],
 	groupRef: THREE.Group
 ) => {
 	const children = sources.length
@@ -97,6 +110,7 @@ const createDevicesSources = (
 
 		Edges.addInventoryEdge(parentPosition, subCube.position, groupRef)
 	})
+
 	return graphNodes
 }
 
@@ -127,7 +141,9 @@ const createAlarmConnections = (
 						m.userData = userData
 					})
 					//inventory position
+
 					const parentPosition = nodes[alarmNodes.parentId]?.position
+
 					if (parentPosition) {
 						if (children == 1) {
 							cube.position.set(parentPosition.x, HEIGHT, parentPosition.z)
@@ -158,11 +174,16 @@ const createAlarmConnections = (
 						}
 						Edges.addAlarmEdge(parentPosition, cube.position, color, groupRef)
 						groupRef.add(cube)
+					} else {
+						console.log('ELSE ELSE')
+						console.log(alarmNodes)
+						console.log('ELSE ELSE')
 					}
 				}
 			})
 		}
 	})
+
 	return graphNodes
 }
 
@@ -176,7 +197,6 @@ const createSituationConnections = (
 	situationConnections.forEach((situation) => {
 		if (situation.show) {
 			const alarmIds = situation.alarms.map((s) => s.id)
-
 			const alarmMeshes = alarmIds.map((id) => nodes[id])
 			const lastNode = last(alarmMeshes)
 			const parentId = lastNode?.parentId
@@ -194,7 +214,13 @@ const createSituationConnections = (
 					situationMesh.traverse((m) => {
 						m.userData = userData
 					})
-					const [x, y, z] = getSituationPostion(lastNode, parentId, nodes)
+
+					//const [x, y, z] = getSituationPostion(lastNode, parentId, nodes)
+					const [x, y, z] = getMeanSituationPostion(
+						alarmMeshes,
+						parentId,
+						nodes
+					)
 					situationMesh.position.set(x, y, z)
 
 					situation.alarms.forEach((alarm) => {
@@ -260,12 +286,43 @@ const getSituationPostion = (
 		? getDirection(parentDevice.position, device.position, 'z')
 		: 1
 	const offsetDirX = 30 * dirX
-	const offsetHeight = 40
+	const offsetHeight = 60
 	const offsetDirZ = 30 * dirZ
 	const x = lastNode.position.x + offsetDirX
 	const y = lastNode.position.y + offsetHeight
 	const z = lastNode.position.z + offsetDirZ
 	return [x, y, z]
+}
+
+/**
+ * Calculates Vector3 position based on direction of parent devices and farest nodes
+ * @param alarmMeshes
+ * @param parentId
+ * @param nodes
+ * @returns
+ */
+const getMeanSituationPostion = (
+	alarmMeshes: TNodeInfo[],
+	id: string,
+	nodes: TGraphNodes
+): number[] => {
+	const alarmsByDevice = groupBy(alarmMeshes, 'parentId')
+	const lastNode = last(alarmMeshes)
+	if (size(alarmsByDevice) == 1) {
+		const parentId = lastNode?.parentId
+		//console.log('lastNode', lastNode)
+		return getSituationPostion(lastNode, parentId, nodes)
+	} else {
+		const lastItems = map(alarmsByDevice, (item) => last(item))
+		const maxY = maxBy(lastItems, 'position.y')
+		const meanX = meanBy(lastItems, 'position.x')
+		const meanZ = meanBy(lastItems, 'position.z')
+
+		const x = meanX
+		const y = Math.abs(lastNode.position.x - meanX) / 1.5 + maxY?.position.y
+		const z = meanZ
+		return [x, y, z]
+	}
 }
 
 /**
@@ -320,6 +377,10 @@ const getSeverityColor = (severity: string | undefined): string => {
 const getDirection = (p1: THREE.Vector3, p2: THREE.Vector3, axe: 'x' | 'z') => {
 	const result = p2[axe] - p1[axe]
 	return result != 0 ? result / Math.abs(result) : 1
+}
+
+const angleToRad = (angle: number) => {
+	return (Math.PI / 180) * angle
 }
 
 export const Builders = {

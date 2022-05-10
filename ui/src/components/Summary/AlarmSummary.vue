@@ -31,6 +31,7 @@ import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
 import CONST from '@/helpers/constants'
 import VerticeSummary from './VerticeSummary.vue'
+import { TUserData } from '@/types/TGraph'
 
 const props = defineProps({
 	selectedInfo: {
@@ -46,7 +47,7 @@ const parentAlarms = datasetStore.$state.alarmConnections
 const showDevice = () => {
 	if (parentId) {
 		const parent = graphStore.nodes[parentId]
-		const userData = {
+		const userData: TUserData = {
 			id: parentId,
 			parentId: parent.parentId,
 			layerId: parent.layer_id
