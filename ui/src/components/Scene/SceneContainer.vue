@@ -110,7 +110,6 @@ let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
-let eventsClick: Record<string, TUserData> = {}
 const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
 
@@ -127,70 +126,68 @@ const onPointerEvent = (event: PointerIntersectEventInterface) => {
 			parentId: userData.parentId,
 			layerId: userData.layerId
 		}
-		if (!eventsClick[id]) {
-			//to reduce the amount of events
-			eventsClick[id] = info
-			setTimeout(() => {
-				if (eventsClick[id]) {
-					graphStore.setSelectedNode(eventsClick[id])
-					delete eventsClick[id]
-				}
-			}, 2000)
-		}
+		graphStore.setSelectedNode(info)
+
 		//
 	}
 }
+/*
+datasetStore.$onAction((context) => {
+	if (context.name === 'getDataset') {
+		context.after(() => {
+			Builders.buildScene(datasetStore.relationships, inventoryGroupRef)
+		})
+	}
+})*/
 
 datasetStore.$subscribe((mutation, state) => {
 	const events: any = mutation.events
-	if (
-		events.newValue &&
-		!isEqual(events.oldValue, events.newValue) &&
-		events.key != 'id'
-	) {
-		inventoryGroupRef.clear()
-		graphStore.$reset
-		if (Object.keys(state.parentConnections).length) {
-			//add inventory level
-			const nodes = Builders.createParentConnections(
-				state.parentConnections,
-				inventoryGroupRef
-			)
 
-			graphStore.setNodes(nodes)
-			//add alarms level
-			const showAlarmSeverities = chain(state.alarmFilters)
-				.pickBy()
-				.keys()
-				.value()
-			const graphAlarmNodes = Builders.createAlarmConnections(
-				state.alarmConnections,
-				nodes,
-				showAlarmSeverities,
-				inventoryGroupRef
-			)
+	console.log('BUILDER')
+	console.log(mutation)
+	inventoryGroupRef.clear()
+	graphStore.$reset
+	if (Object.keys(state.parentConnections).length) {
+		//add inventory level
+		const nodes = Builders.createParentConnections(
+			state.parentConnections,
+			state.peerConnections,
+			inventoryGroupRef
+		)
 
-			graphStore.setNodes(graphAlarmNodes)
-			//add situations level
-			const showSituationSeverities = chain(state.situationFilters)
-				.pickBy()
-				.keys()
-				.value()
-			const graphSituationNodes = Builders.createSituationConnections(
-				state.situationConnections,
-				graphStore.nodes,
-				showSituationSeverities,
-				inventoryGroupRef
-			)
-			graphStore.setNodes(graphSituationNodes)
+		graphStore.setNodes(nodes)
+		//add alarms level
+		const showAlarmSeverities = chain(state.alarmFilters)
+			.pickBy()
+			.keys()
+			.value()
+		const graphAlarmNodes = Builders.createAlarmConnections(
+			state.alarmConnections,
+			nodes,
+			showAlarmSeverities,
+			inventoryGroupRef
+		)
 
-			Controls.createDraggablesObjects(
-				inventoryGroupRef,
-				cameraRef,
-				rendererRef,
-				orbitCtrl
-			)
-		}
+		graphStore.setNodes(graphAlarmNodes)
+		//add situations level
+		const showSituationSeverities = chain(state.situationFilters)
+			.pickBy()
+			.keys()
+			.value()
+		const graphSituationNodes = Builders.createSituationConnections(
+			state.situationConnections,
+			graphStore.nodes,
+			showSituationSeverities,
+			inventoryGroupRef
+		)
+		graphStore.setNodes(graphSituationNodes)
+
+		Controls.createDraggablesObjects(
+			inventoryGroupRef,
+			cameraRef,
+			rendererRef,
+			orbitCtrl
+		)
 	}
 })
 

@@ -2,36 +2,35 @@
 	<VerticeSummary>
 		<template v-slot:title>Inventory</template>
 		<template v-slot:description>
-			<div><strong>ID:</strong> {{ props.selectedInfo?.id }}</div>
-			<div v-if="info"><strong>Label:</strong> {{ info.label }}</div>
+			<div>
+				<strong>ID:</strong> {{ graphStore.$state.selectedInventoryNode?.id }}
+			</div>
+			<div v-if="info">
+				<strong>Label:</strong>
+				{{ graphStore.$state.selectedInventoryNode?.label }}
+			</div>
 		</template>
 		<template v-slot:connections>
-			<hr />
-			<div><strong>Connected to: </strong>{{ parentId }}</div>
+			<!--<hr />
+			<div>
+				<strong>Connected to: </strong
+				>{{ graphStore.$state.selectedInventoryNode?.id }}
+			</div>
 			<FeatherButton secondary @click="showDevice"
 				><FeatherIcon :icon="View" /> View Device</FeatherButton
-			>
+			>-->
 		</template>
 	</VerticeSummary>
 </template>
 
 <script setup lang="ts">
-import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
-import { TUserData } from '@/types/TGraph'
 import { FeatherButton } from '@featherds/button'
 import { FeatherIcon } from '@featherds/icon'
 import View from '@featherds/icon/action/View'
 import VerticeSummary from './VerticeSummary.vue'
 
-const props = defineProps({
-	selectedInfo: {
-		type: Object,
-		required: true
-	}
-})
-console.log(props.selectedInfo)
-
+/*
 const showDevice = () => {
 	console.log(parentId)
 	if (parentId) {
@@ -44,18 +43,9 @@ const showDevice = () => {
 		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
-}
+}*/
 
-const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
 
-const parentInventory = datasetStore.$state.parentConnections
 let info = ref().value
-let parentId = ref<string>().value
-parentInventory.forEach((item, key) => {
-	info = item.sources.find((i) => (i.id = props.selectedInfo.id))
-	if (info) {
-		parentId = parentInventory[key].parentId
-	}
-})
 </script>

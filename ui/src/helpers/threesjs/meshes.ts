@@ -48,10 +48,19 @@ const createAlarmeNode = () => {
 	}
 }
 
+const createSituationNode = () => {
+	try {
+		return Loaders.getModelSituation()
+	} catch (e) {
+		return createSituationMesh('#36576B')
+	}
+}
+
 export const Meshes = {
 	createSituationMesh,
 	createParentDeviceNode,
 	createDeviceNode,
 	createAlarmMesh,
-	createAlarmeNode
+	createAlarmeNode,
+	createSituationNode
 }

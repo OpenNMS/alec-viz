@@ -9,10 +9,18 @@ import {
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
-import { chain, clone, cloneDeep, mapValues, merge } from 'lodash'
+import {
+	chain,
+	clone,
+	cloneDeep,
+	flatMap,
+	keyBy,
+	mapValues,
+	uniq
+} from 'lodash'
 
 type TState = {
-	vertices: Record<string, TVertice[]>
+	vertices: Record<string, TVertice>
 	parentConnections: TConnection[]
 	peerConnections: TConnection[]
 	alarmConnections: TAlarmConnection[]
@@ -21,7 +29,9 @@ type TState = {
 	situationFilters: Record<string, boolean>
 	situationConnections: TSituationConnection[]
 	selectedNode: any
+	relationships: Record<string, Record<string, string[]>>
 }
+
 export const useDatasetStore = defineStore('dataset', {
 	state: (): TState => ({
 		currentTime: CONST.TIME_SLIDER_MIN,
@@ -32,7 +42,8 @@ export const useDatasetStore = defineStore('dataset', {
 		alarmFilters: {},
 		situationFilters: {},
 		situationConnections: [],
-		selectedNode: {}
+		selectedNode: {},
+		relationships: {}
 	}),
 	actions: {
 		async getDataset(timestamp: number) {
@@ -45,7 +56,8 @@ export const useDatasetStore = defineStore('dataset', {
 			const vertices = resp ? (resp['vertices'] as TVertice[]) : []
 			if (vertices.length > 0) {
 				const verticesGrouped = groupBy(vertices, 'layer_id')
-				this.vertices = verticesGrouped
+
+				this.vertices = keyBy(vertices, 'id')
 				const edges = resp ? (resp['edges'] as TEdge[]) : []
 				const edgesGrouped = groupBy(edges, 'type')
 
@@ -71,6 +83,8 @@ export const useDatasetStore = defineStore('dataset', {
 				this.situationFilters = buildVerticesFilters(
 					verticesGrouped['situations']
 				)
+				this.relationships = buildRelationships(verticesGrouped, edgesGrouped)
+				console.log(this.relationships)
 				this.parentConnections = connections.parent
 				this.peerConnections = connections.peer
 				this.alarmConnections = alarmConnections
@@ -301,4 +315,78 @@ const buildVerticesFilters = (vertices: TVertice[]) => {
 
 	mapValues(severities, (severity: string) => (filters[severity] = true))
 	return filters
+}
+
+const buildRelationships = (
+	vertices: Record<string, TVertice[]>,
+	edges: Record<string, TEdge[]>
+) => {
+	const inventory = vertices['inventory']
+	const alarms = vertices['alarms']
+	const situations = vertices['situations']
+	const edgesPeer = edges['peer']
+	const edgesParent = edges['parent']
+	const alarmEdges = edges['alarm-to-io']
+	const situationEdges = edges['situation-to-alarm']
+
+	const inventoryParentRelationships: Record<string, string[]> = {}
+	inventory.forEach((i) => {
+		const id = i.id
+		const sources = edgesParent.filter((e) => e.source_id == id)
+		const targets = edgesParent.filter((e) => e.target_id == id)
+		if (sources.length > 0 || targets.length > 0) {
+			inventoryParentRelationships[id] = {
+				sources: sources.map((s) => s.source_id),
+				targets: targets.map((s) => s.target_id)
+			}
+		}
+	})
+
+	const inventoryPeerRelationships = {}
+	inventory.forEach((i) => {
+		const id = i.id
+		const sources = edgesPeer.filter((e) => e.source_id == id)
+		const targets = edgesPeer.filter((e) => e.target_id == id)
+		if (sources.length > 0 || targets.length > 0) {
+			inventoryPeerRelationships[id] = {
+				sources: sources.map((s) => s.source_id),
+				targets: targets.map((s) => s.target_id)
+			}
+		}
+	})
+
+	const alarmRelationships: Record<string, string[]> = {}
+	alarms.forEach((a) => {
+		const id = a.id
+		const edgesDevicesByAlarm = alarmEdges.filter((e) => e.source_id == id)
+		const edgesSituationsByAlarm = situationEdges.filter(
+			(e) => e.target_id == id
+		)
+		alarmRelationships[id] = {
+			devices: edgesDevicesByAlarm.map((e) => e.target_id),
+			situations: edgesSituationsByAlarm.map((e) => e.source_id)
+		}
+	})
+
+	const situationRelationships = {}
+	situations.forEach((s) => {
+		const id = s.id
+		const edgesSituationsByAlarm = situationEdges.filter(
+			(s) => s.source_id == id
+		)
+		const alarms = edgesSituationsByAlarm.map((e) => e.target_id)
+		const devices = uniq(
+			flatMap(alarms.map((aId) => alarmRelationships[aId].devices))
+		)
+		situationRelationships[id] = {
+			alarms: alarms,
+			devices: devices
+		}
+	})
+	return {
+		parent: inventoryParentRelationships,
+		peer: inventoryPeerRelationships,
+		alarm: alarmRelationships,
+		situation: situationRelationships
+	}
 }

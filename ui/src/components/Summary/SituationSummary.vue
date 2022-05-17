@@ -3,52 +3,47 @@
 		<template v-slot:title
 			>Situation - &nbsp;
 			<span class="status">{{
-				info.situation.attributes.severity.toUpperCase()
+				graphStore.$state.selectedSituationNode?.attributes?.severity.toUpperCase()
 			}}</span>
 		</template>
 		<template v-slot:description>
-			<div><strong>ID:</strong> {{ props.selectedInfo?.id }}</div>
-			<div><strong>Label:</strong> {{ situation?.label }}</div>
+			<div>
+				<strong>ID:</strong> {{ graphStore.$state.selectedSituationNode?.id }}
+			</div>
+			<div>
+				<strong>Label:</strong>
+				{{ graphStore.$state.selectedSituationNode?.label }}
+			</div>
 		</template>
 		<template v-slot:connections>
-			<hr />
+			<!--<hr />
 			<div v-for="id in info.deviceIds" :key="id">
 				<p><strong>From inventory: </strong>{{ id }}</p>
 				<FeatherIcon :icon="Instances" /> {{ id }}
 				<FeatherButton class="btn" secondary @click="showDevice(id)"
 					><FeatherIcon :icon="View" /> View Device</FeatherButton
 				>
-			</div>
+			</div>-->
 		</template>
 	</VerticeSummary>
 </template>
 
 <script setup lang="ts">
 import VerticeSummary from './VerticeSummary.vue'
-
 import { FeatherButton } from '@featherds/button'
 import { FeatherIcon } from '@featherds/icon'
 import View from '@featherds/icon/action/View'
 import Instances from '@featherds/icon/hardware/Instances'
 
-import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
 import CONST from '@/helpers/constants'
 import { TVertice } from '@/types/TDataset'
-import { TUserData } from '@/types/TGraph'
 
-const props = defineProps({
-	selectedInfo: {
-		type: Object,
-		required: true
-	}
-})
-
-const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
-const situations = datasetStore.$state.situationConnections
 
+/*
 const showDevice = (id: string) => {
+	graphStore.setSelectedNode(null)
 	if (id) {
 		const parent = graphStore.nodes[id]
 		const userData: TUserData = {
@@ -60,22 +55,26 @@ const showDevice = (id: string) => {
 		graphStore.setTarget(parent.position)
 	}
 }
-
-let info = ref().value
-let colorSeverity = ref<string | undefined>().value
-let situation = ref<TVertice>().value
-
-if (props.selectedInfo.id) {
-	info = situations.find((i) => (i.situationId = props.selectedInfo.id))
-	if (info && info.situation) {
-		situation = info.situation
-		const severity: string = situation?.attributes
-			? situation?.attributes.severity
-			: 'indeterminate'
-		const objectColors = CONST.SEVERITY_COLORS as Record<string, string>
-		colorSeverity = objectColors[severity]
+*/
+let colorSeverity = ref<string | undefined>()
+let situation = ref<TVertice | null>().value
+const objectColors = CONST.SEVERITY_COLORS as Record<string, string>
+const initSituation = () => {
+	situation = graphStore.selectedSituationNode
+	if (situation && situation.attributes) {
+		colorSeverity.value = objectColors[situation?.attributes?.severity]
 	}
 }
+
+graphStore.$onAction((context) => {
+	if (context.name === 'setSelectedSituation') {
+		context.after(() => {
+			initSituation()
+		})
+	}
+})
+
+initSituation()
 </script>
 
 <style lang="scss" scoped>

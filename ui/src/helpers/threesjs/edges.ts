@@ -17,6 +17,7 @@ const addInventoryEdge = (
 		color: INVENTORY_EDGE_COLOR
 	})
 	const mesh = new THREE.Mesh(geometry, material)
+	mesh.name = 'edge-inventory'
 	groupRef.add(mesh)
 }
 
@@ -38,6 +39,11 @@ const addAlarmEdge = (
 		color: INVENTORY_EDGE_COLOR
 	})
 	const mesh = new THREE.Mesh(geometry, material)
+	mesh.name = 'edge-alarm'
+	mesh.userData = {
+		originPosition: origin,
+		destinationPosition: destination
+	}
 	groupRef.add(mesh)
 }
 
@@ -50,7 +56,9 @@ const addSituationEdge = (
 	const p1 = new THREE.Vector3()
 		.copy(origin)
 		.setY(origin.y + OFFSET_ALARM_SHAPE)
-	const p2 = new THREE.Vector3().copy(destination.position)
+	const p2 = new THREE.Vector3()
+		.copy(destination.position)
+		.setY(destination.position.y - 3.5)
 	const curve = new THREE.LineCurve3(p1, p2)
 	const geometry = new THREE.TubeGeometry(curve, 10, 0.3, 10, false)
 	const material = new THREE.MeshLambertMaterial({

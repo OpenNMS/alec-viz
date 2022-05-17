@@ -8,18 +8,7 @@ import {
 import CONST from '@/helpers/constants'
 import { TGraphNodes, TNodeInfo } from '@/types/TGraph'
 import { Meshes } from '@/helpers/threesjs/meshes'
-import {
-	get,
-	groupBy,
-	last,
-	map,
-	max,
-	maxBy,
-	mean,
-	meanBy,
-	minBy,
-	size
-} from 'lodash'
+import { get, groupBy, last, map, maxBy, meanBy, size } from 'lodash'
 import { Edges } from './edges'
 
 const DIST_CHILDREN = 40 * CONST.DEVICE_SCALE
@@ -27,12 +16,14 @@ const DIST_PARENT = DIST_CHILDREN * 4
 
 const createParentConnections = (
 	parentConnections: TConnection[],
+	peerConnections: TConnection[],
 	groupRef: THREE.Group
 ) => {
 	const rows = Math.floor(Math.sqrt(parentConnections.length))
 	let column = 0
 	const deviceModel = Meshes.createParentDeviceNode()
 	let graphNodes: TGraphNodes = {}
+
 	parentConnections.forEach((groupNodes, index) => {
 		if (groupNodes.show) {
 			const id = groupNodes.parent.id
@@ -112,6 +103,30 @@ const createDevicesSources = (
 	})
 
 	return graphNodes
+}
+
+const buildScene = (relationships: any, group: THREE.Group) => {
+	//build parents
+	const inventory = relationships.parent
+	const parents = inventory.filter((i) => i.targets.length == 0)
+	console.log(parents)
+	const rows = Math.floor(Math.sqrt(parents.length))
+	let column = 0
+	const deviceModel = Meshes.createParentDeviceNode()
+	//const graphNodes: TGraphNodes = {}
+	inventory.forEach((inv, index) => {
+		const cube = deviceModel.clone()
+
+		const row = Math.floor(index / rows)
+		cube.position.set(column * DIST_PARENT, 0, row * DIST_PARENT)
+
+		group.add(cube)
+
+		column++
+		if (column >= rows) {
+			column = 0
+		}
+	})
 }
 
 const createAlarmConnections = (
@@ -194,6 +209,9 @@ const createSituationConnections = (
 	groupRef: THREE.Group
 ): TGraphNodes => {
 	const graphNodes: TGraphNodes = {}
+	const situationModel = Meshes.createSituationNode()
+	const situationsByDevice = groupSituationsByDevice(situationConnections)
+	console.log(situationsByDevice)
 	situationConnections.forEach((situation) => {
 		if (situation.show) {
 			const alarmIds = situation.alarms.map((s) => s.id)
@@ -203,22 +221,27 @@ const createSituationConnections = (
 			if (lastNode && parentId) {
 				const severity = situation.situation?.attributes?.severity
 				if (severity && showSeverities.includes(severity)) {
-					const color = getSeverityColor(severity)
-					const situationMesh = Meshes.createSituationMesh(color)
+					const situationMesh = get(situationModel, severity).clone()
 					situationMesh.name = situation.situation.id
 					const userData = {
 						id: situation.situation.id,
 						parentId: parentId,
 						layerId: situation.situation.layer_id
 					}
-					situationMesh.traverse((m) => {
+					situationMesh.traverse((m: THREE.Mesh) => {
 						m.userData = userData
 					})
+					situationMesh.name = situation.situation.id
+					situationMesh.userData = {
+						id: situation.situation.id
+					}
 
 					//const [x, y, z] = getSituationPostion(lastNode, parentId, nodes)
 					const [x, y, z] = getMeanSituationPostion(
 						alarmMeshes,
 						parentId,
+						situation.deviceIds,
+						situationsByDevice,
 						nodes
 					)
 					situationMesh.position.set(x, y, z)
@@ -304,23 +327,38 @@ const getSituationPostion = (
 const getMeanSituationPostion = (
 	alarmMeshes: TNodeInfo[],
 	id: string,
+	deviceIds: string[],
+	situationsByDevice: any,
 	nodes: TGraphNodes
 ): number[] => {
 	const alarmsByDevice = groupBy(alarmMeshes, 'parentId')
 	const lastNode = last(alarmMeshes)
-	if (size(alarmsByDevice) == 1) {
-		const parentId = lastNode?.parentId
-		//console.log('lastNode', lastNode)
-		return getSituationPostion(lastNode, parentId, nodes)
+	const parentId = lastNode?.parentId
+	if (size(alarmsByDevice) == 1 && parentId) {
+		if (situationsByDevice[parentId].length == 1) {
+			return getSituationPostion(lastNode, parentId, nodes)
+		} else {
+			const index = situationsByDevice[parentId].indexOf(parentId) + 1
+			const angle = angleToRad(360 / situationsByDevice[parentId].length)
+			const [x, y, z] = calculateAlarmPosition(
+				index,
+				lastNode?.position,
+				angle,
+				30
+			)
+			const posY = y + lastNode?.position.y
+			return [x, posY, z]
+		}
 	} else {
 		const lastItems = map(alarmsByDevice, (item) => last(item))
-		const maxY = maxBy(lastItems, 'position.y')
 		const meanX = meanBy(lastItems, 'position.x')
+		const maxY = maxBy(lastItems, 'position.y')
 		const meanZ = meanBy(lastItems, 'position.z')
-
-		const x = meanX
-		const y = Math.abs(lastNode.position.x - meanX) / 1.5 + maxY?.position.y
-		const z = meanZ
+		const offset = 50
+		const x = meanX + offset
+		const y =
+			Math.abs(lastNode.position.x - meanX) / 1.5 + maxY?.position.y + 100
+		const z = meanZ + offset
 		return [x, y, z]
 	}
 }
@@ -337,9 +375,10 @@ const getMeanSituationPostion = (
 const calculateAlarmPosition = (
 	index: number,
 	parentPosition: THREE.Vector3,
-	angleBetweenChildren: number
+	angleBetweenChildren: number,
+	size?: number
 ) => {
-	const alarmSize = CONST.ALARM_SIZE * 2
+	const alarmSize = size ? size : CONST.ALARM_SIZE * 2.5
 	const minCountByRow = 9
 	const countByRow = minCountByRow + Math.floor(index / minCountByRow)
 	const distance = alarmSize * ((index + 1) / countByRow) + alarmSize * 2
@@ -383,8 +422,32 @@ const angleToRad = (angle: number) => {
 	return (Math.PI / 180) * angle
 }
 
+const groupSituationsByDevice = (
+	situationConnections: TSituationConnection[]
+) => {
+	/*const situationsByDevice = flatMap(
+		situationConnections.map((s) => {
+			return s.deviceIds.map((id) => {
+				return { deviceId: id, situation: s.situationId }
+			})
+		})
+	)
+	const grouped = groupBy(situationsByDevice, 'deviceId'))*/
+	const situationsByDevice: Record<string, string[]> = {}
+	situationConnections.map((s) => {
+		return s.deviceIds.map((id) => {
+			if (!situationsByDevice[id]) {
+				situationsByDevice[id] = []
+			}
+			situationsByDevice[id].push(s.situationId)
+		})
+	})
+	return situationsByDevice
+}
+
 export const Builders = {
 	createParentConnections,
 	createAlarmConnections,
-	createSituationConnections
+	createSituationConnections,
+	buildScene
 }

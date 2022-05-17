@@ -1,21 +1,13 @@
 <template>
 	<div v-if="graphStore.$state.selectedNode" class="summaryTypes">
-		<AlarmSummary
-			v-if="graphStore.$state.selectedNode.layerId === 'alarms'"
-			:selected-info="graphStore.$state.selectedNode"
-		/>
+		<AlarmSummary v-if="graphStore.$state.selectedNode.layerId === 'alarms'" />
 		<SituationSummary
 			v-if="graphStore.$state.selectedNode.layerId === 'situations'"
-			:selected-info="graphStore.$state.selectedNode"
 		/>
 		<InventorySummary
 			v-if="graphStore.$state.selectedNode.layerId === 'inventory'"
-			:selected-info="graphStore.$state.selectedNode"
 		/>
-		<ParentSummary
-			v-if="graphStore.$state.selectedNode.layerId === 'parent'"
-			:selected-info="graphStore.$state.selectedNode"
-		/>
+		<ParentSummary v-if="graphStore.$state.selectedNode.layerId === 'parent'" />
 	</div>
 </template>
 

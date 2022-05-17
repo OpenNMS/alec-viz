@@ -2,26 +2,33 @@ import { DragControls } from 'three/examples/jsm/controls/DragControls'
 import { Edges } from '@/helpers/threesjs/edges'
 import { startsWith } from 'lodash'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-
+import * as THREE from 'three'
 const createDraggablesObjects = (
 	groupRef: THREE.Group,
 	cameraRef: THREE.Camera,
 	rendererRef: THREE.Renderer,
 	orbitCtrl: OrbitControls
 ) => {
-	//draggable control has bugs sometimes,
-	// parent becomes null, after event dragstart
-	// use directly scene, instead of group
 	const groups = groupRef.children
 	const situationMeshs = groups.filter((item) =>
 		startsWith(item.name, '[situation')
 	)
-	const controls = new DragControls(
-		situationMeshs,
-		cameraRef,
-		rendererRef.renderer.domElement
-	)
-	//controls.transformGroup = true
+	const domElement = rendererRef.renderer.domElement
+
+	situationMeshs.forEach((sitGroup) => {
+		setDraggable(sitGroup.children, cameraRef, domElement, orbitCtrl, groupRef)
+	})
+}
+
+const setDraggable = (
+	groupMesh: THREE.Object3D[],
+	cameraRef: THREE.Camera,
+	domElement: HTMLElement,
+	orbitCtrl: OrbitControls,
+	groupRef: THREE.Group
+) => {
+	const controls = new DragControls(groupMesh, cameraRef, domElement)
+	controls.transformGroup = true
 	controls.addEventListener('dragstart', function (event) {
 		orbitCtrl.enabled = false
 	})
@@ -29,24 +36,36 @@ const createDraggablesObjects = (
 	controls.addEventListener('dragend', (event) => {
 		orbitCtrl.enabled = true
 		if (event && event.object) {
+			console.log('dragend')
 			updateEdge(groupRef, event.object)
 		}
 	})
 }
 
-const updateEdge = (inventoryGroupRef: THREE.Group, mesh: THREE.Mesh) => {
-	const edges = inventoryGroupRef.children.filter((item) =>
-		item.name.startsWith('edge-situation-' + mesh.name)
+const updateEdge = (groupMeshes: THREE.Group, mesh: THREE.Mesh) => {
+	const pos = new THREE.Vector3()
+	const globalPosition = mesh.getWorldPosition(pos)
+
+	const edges = groupMeshes.children.filter((item) =>
+		item.name.startsWith('edge-situation-' + mesh.userData.id)
+	)
+
+	const meshInfo = new THREE.Mesh()
+	meshInfo.userData = mesh.userData
+	meshInfo.position.set(
+		globalPosition.x,
+		globalPosition.y - 7,
+		globalPosition.z
 	)
 
 	edges.forEach((edge) => {
 		Edges.addSituationEdge(
 			edge.userData.originPosition,
 			edge.userData.originId,
-			mesh,
-			inventoryGroupRef
+			meshInfo,
+			groupMeshes
 		)
-		inventoryGroupRef.remove(edge)
+		groupMeshes.remove(edge)
 	})
 }
 

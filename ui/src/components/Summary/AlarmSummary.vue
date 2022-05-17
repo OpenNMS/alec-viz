@@ -3,22 +3,33 @@
 		<template v-slot:title>
 			Alarm - &nbsp;
 			<span class="status">{{
-				infoAlarm.attributes.severity.toUpperCase()
+				graphStore.$state.selectedAlarmNode?.attributes?.severity.toUpperCase()
 			}}</span>
 		</template>
 		<template v-slot:description>
-			<div><strong>ID:</strong> {{ props.selectedInfo?.id }}</div>
-			<div><strong>Label:</strong> {{ infoAlarm.label }}</div>
+			<div>
+				<strong>ID:</strong> {{ graphStore.$state.selectedAlarmNode?.id }}
+			</div>
+			<div>
+				<strong>Label:</strong>
+				{{ graphStore.$state.selectedAlarmNode?.label }}
+			</div>
 			<hr />
-			<div><strong>IO Type: </strong>{{ infoAlarm?.attributes.iotype }}</div>
-			<div><strong>IO ID: </strong>{{ infoAlarm?.attributes.ioid }}</div>
+			<div>
+				<strong>IO Type: </strong
+				>{{ graphStore.$state.selectedAlarmNode?.attributes?.iotype }}
+			</div>
+			<div>
+				<strong>IO ID: </strong
+				>{{ graphStore.$state.selectedAlarmNode?.attributes?.ioid }}
+			</div>
 		</template>
 		<template v-slot:connections>
-			<hr />
+			<!--<hr />
 			<div><strong>Connected to: </strong>{{ parentId }}</div>
 			<FeatherButton secondary @click="showDevice"
 				><FeatherIcon :icon="View" /> View Device</FeatherButton
-			>
+			> -->
 		</template>
 	</VerticeSummary>
 </template>
@@ -27,24 +38,14 @@
 import { FeatherButton } from '@featherds/button'
 import { FeatherIcon } from '@featherds/icon'
 import View from '@featherds/icon/action/View'
-import { useDatasetStore } from '@/store/useDatasetStore'
 import { useGraphStore } from '@/store/useGraphStore'
 import CONST from '@/helpers/constants'
 import VerticeSummary from './VerticeSummary.vue'
-import { TUserData } from '@/types/TGraph'
+import { TVertice } from '@/types/TDataset'
 
-const props = defineProps({
-	selectedInfo: {
-		type: Object,
-		required: true
-	}
-})
-
-const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
-const parentAlarms = datasetStore.$state.alarmConnections
 
-const showDevice = () => {
+/*const showDevice = () => {
 	if (parentId) {
 		const parent = graphStore.nodes[parentId]
 		const userData: TUserData = {
@@ -55,28 +56,33 @@ const showDevice = () => {
 		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
+}*/
+
+let colorSeverity = ref<string | undefined>()
+let infoAlarm = ref<TVertice | null>().value
+const objectColors = CONST.SEVERITY_COLORS as Record<string, string>
+const initAlarm = () => {
+	infoAlarm = graphStore.selectedAlarmNode
+	if (infoAlarm && infoAlarm.attributes) {
+		colorSeverity.value = objectColors[infoAlarm?.attributes?.severity]
+	}
 }
 
-let infoAlarm = ref()
-let colorAlarm = ref<string | undefined>().value
-let parentId = ref<string>().value
-parentAlarms.forEach((item, key) => {
-	infoAlarm.value = item.alarms.find((i) => (i.id = props.selectedInfo.id))
-	if (infoAlarm.value != null) {
-		parentId = parentAlarms[key].parentId
+graphStore.$onAction((context) => {
+	if (context.name === 'setSelectedAlarm') {
+		context.after(() => {
+			initAlarm()
+		})
 	}
 })
-if (infoAlarm.value) {
-	const severity: string = infoAlarm.value.attributes.severity
-	const objectColors = CONST.SEVERITY_COLORS as Record<string, string>
-	colorAlarm = objectColors[severity]
-}
+
+initAlarm()
 </script>
 
 <style lang="scss" scoped>
 $border: 1px solid rgba(0, 0, 0, 0.125);
 
 .status {
-	color: v-bind('colorAlarm');
+	color: v-bind('colorSeverity');
 }
 </style>
