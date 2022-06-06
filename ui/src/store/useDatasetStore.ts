@@ -9,15 +9,7 @@ import {
 import API from '@/services'
 import groupBy from 'lodash/groupBy'
 import CONST from '@/helpers/constants'
-import {
-	chain,
-	clone,
-	cloneDeep,
-	flatMap,
-	keyBy,
-	mapValues,
-	uniq
-} from 'lodash'
+import { chain, cloneDeep, flatMap, keyBy, mapValues, uniq } from 'lodash'
 
 type TState = {
 	vertices: Record<string, TVertice>
@@ -29,7 +21,7 @@ type TState = {
 	situationFilters: Record<string, boolean>
 	situationConnections: TSituationConnection[]
 	selectedNode: any
-	relationships: Record<string, Record<string, string[]>>
+	relationships: Record<string, Record<string, Record<string, string[]>>>
 }
 
 export const useDatasetStore = defineStore('dataset', {
@@ -61,11 +53,11 @@ export const useDatasetStore = defineStore('dataset', {
 				const edges = resp ? (resp['edges'] as TEdge[]) : []
 				const edgesGrouped = groupBy(edges, 'type')
 
-				const connections = buildDeviceRelantionships(
+				/*const connections = buildDeviceRelantionships(
 					verticesGrouped['inventory'],
 					edgesGrouped['peer'],
 					edgesGrouped['parent']
-				)
+				)*/
 
 				const alarmConnections = buildAlarmRelantionships(
 					verticesGrouped['alarms'],
@@ -84,9 +76,8 @@ export const useDatasetStore = defineStore('dataset', {
 					verticesGrouped['situations']
 				)
 				this.relationships = buildRelationships(verticesGrouped, edgesGrouped)
-				console.log(this.relationships)
-				this.parentConnections = connections.parent
-				this.peerConnections = connections.peer
+				//this.parentConnections = connections.parent
+				//this.peerConnections = connections.peer
 				this.alarmConnections = alarmConnections
 				this.situationConnections = situationConnections
 				this.currentTime = timestamp
@@ -154,6 +145,7 @@ export const useDatasetStore = defineStore('dataset', {
 	}
 })
 
+/*
 const buildDeviceRelantionships = (
 	inventory: TVertice[],
 	peerEdges: TEdge[],
@@ -231,7 +223,7 @@ const buildDeviceRelantionships = (
 		peer: peerConnections,
 		parent: connections
 	}
-}
+}*/
 
 const buildAlarmRelantionships = (alarms: TVertice[], edges: TEdge[]) => {
 	const targets = groupBy(edges, 'target_id')
@@ -329,33 +321,71 @@ const buildRelationships = (
 	const alarmEdges = edges['alarm-to-io']
 	const situationEdges = edges['situation-to-alarm']
 
-	const inventoryParentRelationships: Record<string, string[]> = {}
+	const inventoryParentRelationships: Record<
+		string,
+		Record<string, string[]>
+	> = {}
+
 	inventory.forEach((i) => {
 		const id = i.id
-		const sources = edgesParent.filter((e) => e.source_id == id)
-		const targets = edgesParent.filter((e) => e.target_id == id)
-		if (sources.length > 0 || targets.length > 0) {
+		let fromList = edgesParent.filter((e) => e.source_id == id)
+		let toList = edgesParent.filter((e) => e.target_id == id)
+		if (edgesPeer) {
+			const peerFrom = edgesPeer.filter((e) => e.source_id == id)
+			const peerTo = edgesPeer.filter((e) => e.target_id == id)
+			fromList = fromList.concat(peerFrom)
+			toList = toList.concat(peerTo)
+		}
+
+		if (fromList.length > 0 || toList.length > 0) {
 			inventoryParentRelationships[id] = {
-				sources: sources.map((s) => s.source_id),
-				targets: targets.map((s) => s.target_id)
+				targets: fromList.map((s) => s.target_id),
+				sources: toList.map((s) => s.source_id)
+			}
+		}
+		if (fromList.length === 0 && toList.length === 0) {
+			inventoryParentRelationships[id] = {
+				sources: [],
+				targets: []
 			}
 		}
 	})
+	/*
+	const inventoryPeerRelationships: Record<
+		string,
+		Record<string, string[]>
+	> = {}
+	if (edgesPeer && edgesPeer.length > 0) {
+		inventory.forEach((i) => {
+			const id = i.id
+			const sources = edgesPeer.filter((e) => e.source_id == id)
+			const targets = edgesPeer.filter((e) => e.target_id == id)
+			if (sources.length > 0 || targets.length > 0) {
+				inventoryPeerRelationships[id] = {
+					sources: sources.map((s) => s.source_id),
+					targets: targets.map((s) => s.target_id)
+				}
+			}
+		})
+	}*/
 
-	const inventoryPeerRelationships = {}
+	/*const inventoryWithoutRelationships: Record<
+		string,
+		Record<string, string[]>
+	> = {}
 	inventory.forEach((i) => {
-		const id = i.id
-		const sources = edgesPeer.filter((e) => e.source_id == id)
-		const targets = edgesPeer.filter((e) => e.target_id == id)
-		if (sources.length > 0 || targets.length > 0) {
-			inventoryPeerRelationships[id] = {
-				sources: sources.map((s) => s.source_id),
-				targets: targets.map((s) => s.target_id)
+		if (
+			!inventoryParentRelationships[i.id] &&
+			!inventoryPeerRelationships[i.id]
+		) {
+			inventoryWithoutRelationships[i.id] = {
+				sources: [],
+				targets: []
 			}
 		}
-	})
+	})*/
 
-	const alarmRelationships: Record<string, string[]> = {}
+	const alarmRelationships: Record<string, Record<string, string[]>> = {}
 	alarms.forEach((a) => {
 		const id = a.id
 		const edgesDevicesByAlarm = alarmEdges.filter((e) => e.source_id == id)
@@ -368,7 +398,7 @@ const buildRelationships = (
 		}
 	})
 
-	const situationRelationships = {}
+	const situationRelationships: Record<string, Record<string, string[]>> = {}
 	situations.forEach((s) => {
 		const id = s.id
 		const edgesSituationsByAlarm = situationEdges.filter(
@@ -385,7 +415,6 @@ const buildRelationships = (
 	})
 	return {
 		parent: inventoryParentRelationships,
-		peer: inventoryPeerRelationships,
 		alarm: alarmRelationships,
 		situation: situationRelationships
 	}

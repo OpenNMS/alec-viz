@@ -8,12 +8,31 @@ import {
 import CONST from '@/helpers/constants'
 import { TGraphNodes, TNodeInfo } from '@/types/TGraph'
 import { Meshes } from '@/helpers/threesjs/meshes'
-import { get, groupBy, last, map, maxBy, meanBy, size } from 'lodash'
+import {
+	cloneDeep,
+	difference,
+	each,
+	filter,
+	forEach,
+	get,
+	groupBy,
+	join,
+	keys,
+	last,
+	map,
+	maxBy,
+	meanBy,
+	merge,
+	orderBy,
+	size,
+	union,
+	values
+} from 'lodash'
 import { Edges } from './edges'
 
 const DIST_CHILDREN = 40 * CONST.DEVICE_SCALE
 const DIST_PARENT = DIST_CHILDREN * 4
-
+/*
 const createParentConnections = (
 	parentConnections: TConnection[],
 	peerConnections: TConnection[],
@@ -49,15 +68,12 @@ const createParentConnections = (
 				id,
 				groupNodes.sources,
 				cube.position,
-				parentConnections,
 				groupRef
 			)
 			graphNodes = Object.assign({}, graphNodes, childGraphNodes)
 			groupRef.add(cube)
 			//id of device
-			// add text
-			/*const textMesh = Utils.buildText(id, cube.position)
-			groupRef.add(textMesh)*/
+			
 		}
 		column++
 		if (column >= rows) {
@@ -103,30 +119,155 @@ const createDevicesSources = (
 	})
 
 	return graphNodes
-}
+}*/
 
-const buildScene = (relationships: any, group: THREE.Group) => {
-	//build parents
-	const inventory = relationships.parent
-	const parents = inventory.filter((i) => i.targets.length == 0)
-	console.log(parents)
-	const rows = Math.floor(Math.sqrt(parents.length))
-	let column = 0
-	const deviceModel = Meshes.createParentDeviceNode()
-	//const graphNodes: TGraphNodes = {}
-	inventory.forEach((inv, index) => {
-		const cube = deviceModel.clone()
-
-		const row = Math.floor(index / rows)
-		cube.position.set(column * DIST_PARENT, 0, row * DIST_PARENT)
-
-		group.add(cube)
-
-		column++
-		if (column >= rows) {
-			column = 0
+const buildInventory = (relationships: any, group: THREE.Group) => {
+	const inventoryList = cloneDeep(relationships.parent)
+	let parentIds: string[] = keys(groupBy(inventoryList, 'targets')).filter(
+		(id) => id != ''
+	)
+	const aislatedNodesIds: string[] = []
+	forEach(inventoryList, (value, key) => {
+		if (value.sources.length === 0 && value.targets.length === 0) {
+			aislatedNodesIds.push(key)
 		}
 	})
+	if (aislatedNodesIds.length > 0) {
+		parentIds = parentIds.concat(aislatedNodesIds)
+	}
+	const parentsCount = parentIds.length
+	const rows = Math.floor(Math.sqrt(parentsCount))
+	let column = 0
+	const deviceParentModel = Meshes.createParentDeviceNode()
+	const graphNodes: TGraphNodes = {}
+	let index = 0
+	let maxLastX = 0
+	let maxLastZ = 0
+	forEach(parentIds, (id) => {
+		const nodeInfo = inventoryList[id]
+
+		if (!graphNodes[id] && nodeInfo) {
+			const cube = deviceParentModel.clone()
+			const row = Math.floor(index / rows)
+			let posX = column * DIST_PARENT
+			if (posX < maxLastX) {
+				posX = maxLastX + DIST_PARENT
+			}
+
+			let posZ = row * DIST_PARENT
+			if (posZ < maxLastZ + DIST_PARENT) {
+				posZ = maxLastZ + DIST_PARENT
+			}
+
+			cube.position.set(posX, 0, posZ)
+			const userData = { id: id, layerId: 'parent' }
+			cube.userData = userData
+			cube.traverse((m) => {
+				m.userData = userData
+			})
+			graphNodes[id] = {
+				position: cube.position
+			}
+
+			if (nodeInfo.sources.length > 0) {
+				const childGraphNodes = addChildrenInventory(
+					id,
+					nodeInfo.sources,
+					cube.position,
+					1,
+					group,
+					inventoryList,
+					graphNodes
+				)
+				if (keys(childGraphNodes).length > 0) {
+					maxLastX =
+						maxBy(values(childGraphNodes), 'position.x')?.position.x || 0
+					merge(graphNodes, childGraphNodes)
+				}
+			}
+
+			group.add(cube)
+
+			column++
+			index++
+			if (column >= rows) {
+				column = 0
+				maxLastZ = maxBy(values(graphNodes), 'position.z')?.position.z || 0
+				maxLastX = 0
+			}
+		}
+	})
+
+	return graphNodes
+}
+
+const addChildrenInventory = (
+	parentId: string,
+	sources: string[],
+	parentPosition: THREE.Vector3,
+	level: number,
+	groupRef: THREE.Group,
+	inventoryList: any,
+	graphNodes: any
+) => {
+	const children = sources.length
+	const angleBetweenChildren = 360 / children
+	const deviceModel = Meshes.createDeviceNode()
+	const childrenGroupNodes: TGraphNodes = {}
+	sources.forEach((id: string, subIndex: number) => {
+		if (!graphNodes[id] && !childrenGroupNodes[id]) {
+			const subCube = deviceModel.clone()
+			const userData = { id: id, layerId: 'inventory' }
+			subCube.traverse((m) => {
+				m.userData = userData
+			})
+			const subNodes = inventoryList[id].sources.concat(
+				inventoryList[id].targets
+			)
+			let distance = DIST_CHILDREN
+			if (children > 13 && subIndex > 13) {
+				distance = DIST_CHILDREN * 1.8
+			}
+			if (subNodes.length > 1) {
+				distance = distance * 2.5
+			}
+			const [x, z] = getPosition(
+				parentPosition,
+				angleBetweenChildren * (subIndex + level),
+				distance
+			)
+			subCube.position.set(x, 0, z)
+			groupRef.add(subCube)
+
+			childrenGroupNodes[id] = {
+				position: subCube.position
+			}
+			graphNodes[id] = {
+				position: subCube.position
+			}
+			Edges.addInventoryEdge(parentPosition, subCube.position, groupRef)
+
+			if (inventoryList[id]) {
+				if (subNodes.length > 0) {
+					const subGraphNodes = addChildrenInventory(
+						id,
+						subNodes,
+						subCube.position,
+						level++,
+						groupRef,
+						inventoryList,
+						graphNodes
+					)
+					if (keys(subGraphNodes).length > 0) {
+						merge(childrenGroupNodes, subGraphNodes)
+						merge(graphNodes, subGraphNodes)
+					}
+				}
+			}
+		}
+	})
+
+	return childrenGroupNodes
 }
 
 const createAlarmConnections = (
@@ -211,7 +352,6 @@ const createSituationConnections = (
 	const graphNodes: TGraphNodes = {}
 	const situationModel = Meshes.createSituationNode()
 	const situationsByDevice = groupSituationsByDevice(situationConnections)
-	console.log(situationsByDevice)
 	situationConnections.forEach((situation) => {
 		if (situation.show) {
 			const alarmIds = situation.alarms.map((s) => s.id)
@@ -333,34 +473,36 @@ const getMeanSituationPostion = (
 ): number[] => {
 	const alarmsByDevice = groupBy(alarmMeshes, 'parentId')
 	const lastNode = last(alarmMeshes)
-	const parentId = lastNode?.parentId
-	if (size(alarmsByDevice) == 1 && parentId) {
-		if (situationsByDevice[parentId].length == 1) {
-			return getSituationPostion(lastNode, parentId, nodes)
+	if (lastNode) {
+		const parentId = lastNode?.parentId
+		if (size(alarmsByDevice) == 1 && parentId) {
+			if (situationsByDevice[parentId].length == 1) {
+				return getSituationPostion(lastNode, parentId, nodes)
+			} else {
+				const index = situationsByDevice[parentId].indexOf(parentId) + 1
+				const angle = angleToRad(360 / situationsByDevice[parentId].length)
+				const [x, y, z] = calculateAlarmPosition(
+					index,
+					lastNode?.position,
+					angle,
+					30
+				)
+				const posY = y + lastNode?.position.y
+				return [x, posY, z]
+			}
 		} else {
-			const index = situationsByDevice[parentId].indexOf(parentId) + 1
-			const angle = angleToRad(360 / situationsByDevice[parentId].length)
-			const [x, y, z] = calculateAlarmPosition(
-				index,
-				lastNode?.position,
-				angle,
-				30
-			)
-			const posY = y + lastNode?.position.y
-			return [x, posY, z]
+			const lastItems = map(alarmsByDevice, (item) => last(item))
+			const meanX = meanBy(lastItems, 'position.x')
+			const maxY = maxBy(lastItems, 'position.y')?.position.y || 0
+			const meanZ = meanBy(lastItems, 'position.z')
+			const offset = 50
+			const x = meanX + offset
+			const y = Math.abs(lastNode.position.x - meanX) / 1.5 + maxY + 100
+			const z = meanZ + offset
+			return [x, y, z]
 		}
-	} else {
-		const lastItems = map(alarmsByDevice, (item) => last(item))
-		const meanX = meanBy(lastItems, 'position.x')
-		const maxY = maxBy(lastItems, 'position.y')
-		const meanZ = meanBy(lastItems, 'position.z')
-		const offset = 50
-		const x = meanX + offset
-		const y =
-			Math.abs(lastNode.position.x - meanX) / 1.5 + maxY?.position.y + 100
-		const z = meanZ + offset
-		return [x, y, z]
 	}
+	return []
 }
 
 /**
@@ -446,8 +588,7 @@ const groupSituationsByDevice = (
 }
 
 export const Builders = {
-	createParentConnections,
 	createAlarmConnections,
 	createSituationConnections,
-	buildScene
+	buildInventory
 }

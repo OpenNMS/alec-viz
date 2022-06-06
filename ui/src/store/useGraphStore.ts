@@ -1,6 +1,5 @@
 import { TVertice } from '@/types/TDataset'
 import { TGraphNodes, TUserData } from '@/types/TGraph'
-import { first } from 'lodash'
 import { defineStore } from 'pinia'
 import { Vector3 } from 'three'
 import { useDatasetStore } from './useDatasetStore'
@@ -40,30 +39,31 @@ export const useGraphStore = defineStore('graphStore', {
 			if (userData) {
 				this.selectedNode = {
 					id: userData.id,
-					layerId: userData.layerId,
-					parentId: userData.parentId
+					layerId: userData.layerId
 				}
 				const datasetStore = useDatasetStore()
 				const vertices = datasetStore.vertices
+				console.log(userData.id)
 				const vertice = vertices[userData.id] as TVertice
-				switch (userData.layerId) {
-					case 'situations':
-						this.setSelectedSituation(vertice)
-						break
-					case 'alarms':
-						this.setSelectedAlarm(vertice)
-						break
-					case 'inventory':
-						this.setSelectedInventory(vertice)
-						break
-					case 'parent':
-						this.setSelectedParentInventory(vertice)
-						break
+				if (vertice) {
+					const layerId = userData.layerId || vertice.layer_id
+					switch (layerId) {
+						case 'situations':
+							this.setSelectedSituation(vertice)
+							break
+						case 'alarms':
+							this.setSelectedAlarm(vertice)
+							break
+						case 'inventory':
+							this.setSelectedInventory(vertice)
+							break
+						case 'parent':
+							this.setSelectedParentInventory(vertice)
+							break
+					}
 				}
 			} else {
 				this.selectedNode = null
-				this.selectedSituationNode = null
-				this.selectedAlarmNode = null
 			}
 		},
 		setSelectedSituation(vertice: TVertice) {

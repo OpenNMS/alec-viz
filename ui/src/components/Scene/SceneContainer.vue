@@ -115,32 +115,75 @@ const graphStore = useGraphStore()
 
 const onPointerEvent = (event: PointerIntersectEventInterface) => {
 	const userData = event.intersect?.object.userData
+
 	if (userData && !isEmpty(userData) && userData.id) {
 		const id = userData.id
-		/*orbitCtrl.target =
+		orbitCtrl.target =
 			event && event?.intersect?.point
 				? event?.intersect?.point
-				: orbitCtrl.position0*/
+				: orbitCtrl.position0
+		orbitCtrl.enableZoom = true
 		const info: TUserData = {
 			id: id,
-			parentId: userData.parentId,
 			layerId: userData.layerId
 		}
+		//cameraRef.zoom = 10
+		//cameraRef.updateProjectionMatrix()
+		orbitCtrl.update()
 		graphStore.setSelectedNode(info)
-
-		//
 	}
 }
-/*
+
 datasetStore.$onAction((context) => {
 	if (context.name === 'getDataset') {
+		graphStore.$reset
 		context.after(() => {
-			Builders.buildScene(datasetStore.relationships, inventoryGroupRef)
+			inventoryGroupRef.clear()
+			const nodes = Builders.buildInventory(
+				datasetStore.relationships,
+				inventoryGroupRef
+			)
+			graphStore.setNodes(nodes)
+
+			//add alarms level
+			const showAlarmSeverities = chain(datasetStore.alarmFilters)
+				.pickBy()
+				.keys()
+				.value()
+			const graphAlarmNodes = Builders.createAlarmConnections(
+				datasetStore.alarmConnections,
+				nodes,
+				showAlarmSeverities,
+				inventoryGroupRef
+			)
+
+			graphStore.setNodes(graphAlarmNodes)
+
+			graphStore.setNodes(graphAlarmNodes)
+			//add situations level
+			const showSituationSeverities = chain(datasetStore.situationFilters)
+				.pickBy()
+				.keys()
+				.value()
+			const graphSituationNodes = Builders.createSituationConnections(
+				datasetStore.situationConnections,
+				graphStore.nodes,
+				showSituationSeverities,
+				inventoryGroupRef
+			)
+			graphStore.setNodes(graphSituationNodes)
+
+			Controls.createDraggablesObjects(
+				inventoryGroupRef,
+				cameraRef,
+				rendererRef,
+				orbitCtrl
+			)
 		})
 	}
-})*/
+})
 
-datasetStore.$subscribe((mutation, state) => {
+/*datasetStore.$subscribe((mutation, state) => {
 	const events: any = mutation.events
 
 	console.log('BUILDER')
@@ -189,7 +232,7 @@ datasetStore.$subscribe((mutation, state) => {
 			orbitCtrl
 		)
 	}
-})
+})*/
 
 graphStore.$subscribe((mutation, state) => {
 	const events: any = mutation.events

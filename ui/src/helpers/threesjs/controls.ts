@@ -13,6 +13,9 @@ const createDraggablesObjects = (
 	const situationMeshs = groups.filter((item) =>
 		startsWith(item.name, '[situation')
 	)
+	//can't see the renderer, only "render" property which not working for this case
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	//@ts-ignore
 	const domElement = rendererRef.renderer.domElement
 
 	situationMeshs.forEach((sitGroup) => {

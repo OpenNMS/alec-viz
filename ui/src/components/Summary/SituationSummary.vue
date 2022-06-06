@@ -16,14 +16,20 @@
 			</div>
 		</template>
 		<template v-slot:connections>
-			<!--<hr />
-			<div v-for="id in info.deviceIds" :key="id">
-				<p><strong>From inventory: </strong>{{ id }}</p>
+			<hr />
+			<p><strong>Alarms: </strong></p>
+			<div
+				v-for="id in datasetStore.relationships.situation[
+					graphStore.$state.selectedSituationNode?.id
+				].alarms"
+				:key="id"
+				class="alarm"
+			>
 				<FeatherIcon :icon="Instances" /> {{ id }}
-				<FeatherButton class="btn" secondary @click="showDevice(id)"
-					><FeatherIcon :icon="View" /> View Device</FeatherButton
+				<FeatherButton class="btn" secondary @click="showAlarm(id, 'alarm')"
+					><FeatherIcon :icon="View" /> View</FeatherButton
 				>
-			</div>-->
+			</div>
 		</template>
 	</VerticeSummary>
 </template>
@@ -36,26 +42,25 @@ import View from '@featherds/icon/action/View'
 import Instances from '@featherds/icon/hardware/Instances'
 
 import { useGraphStore } from '@/store/useGraphStore'
+import { useDatasetStore } from '@/store/useDatasetStore'
 import CONST from '@/helpers/constants'
 import { TVertice } from '@/types/TDataset'
 
 const graphStore = useGraphStore()
+const datasetStore = useDatasetStore()
 
-/*
-const showDevice = (id: string) => {
+const showAlarm = (id: string) => {
 	graphStore.setSelectedNode(null)
 	if (id) {
 		const parent = graphStore.nodes[id]
 		const userData: TUserData = {
-			id: id,
-			parentId: parent.parentId,
-			layerId: parent.layer_id
+			id: id
 		}
 		graphStore.setSelectedNode(userData)
 		graphStore.setTarget(parent.position)
 	}
 }
-*/
+
 let colorSeverity = ref<string | undefined>()
 let situation = ref<TVertice | null>().value
 const objectColors = CONST.SEVERITY_COLORS as Record<string, string>
@@ -82,7 +87,9 @@ initSituation()
 	color: v-bind('colorSeverity');
 }
 
-.btn {
-	margin-top: 10px;
+.alarm {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 </style>

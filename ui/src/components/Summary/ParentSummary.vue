@@ -11,6 +11,13 @@
 				{{ graphStore.$state.selectedParentInventoryNode?.label }}
 			</div>
 		</template>
+		<template v-slot:connections>
+			<!--<hr />
+			<div><strong>Connected to: </strong>{{ parentId }}</div>
+			<FeatherButton secondary @click="showDevice"
+				><FeatherIcon :icon="View" /> View Device</FeatherButton
+			> -->
+		</template>
 	</VerticeSummary>
 </template>
 
