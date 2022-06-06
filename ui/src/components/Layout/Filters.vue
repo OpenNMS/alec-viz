@@ -1,8 +1,8 @@
 <template>
 	<section>
-		<FeatherExpansionPanel :title="'Topology'">
+		<!--<FeatherExpansionPanel :title="'Topology'">
 			<TreeView />
-		</FeatherExpansionPanel>
+		</FeatherExpansionPanel> -->
 		<FeatherExpansionPanel :title="'Alarms'">
 			<FilterByType :type="'alarm'" :list="datasetStore.$state.alarmFilters" />
 		</FeatherExpansionPanel>

@@ -135,7 +135,11 @@ const onPointerEvent = (event: PointerIntersectEventInterface) => {
 }
 
 datasetStore.$onAction((context) => {
-	if (context.name === 'getDataset') {
+	if (
+		context.name === 'getDataset' ||
+		context.name === 'handleAlarmFilters' ||
+		context.name === 'handleSituationFilters'
+	) {
 		graphStore.$reset
 		context.after(() => {
 			inventoryGroupRef.clear()
