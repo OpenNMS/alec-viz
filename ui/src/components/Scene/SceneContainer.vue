@@ -11,7 +11,12 @@
 			shadow
 			:pointer="{ intersectMode: 'frame' }"
 		>
-			<Camera :position="{ x: -90, y: 50, z: -90 }" :far="5000" ref="camera" />
+			<!--<Camera :position="{ x: -90, y: 50, z: -90 }" :far="5000" ref="camera" /> -->
+			<Camera
+				:position="{ x: -1090, y: 1000, z: -1090 }"
+				:far="5000"
+				ref="camera"
+			/>
 			<Raycaster
 				@click="onPointerEvent"
 				intersect-mode="frame"
@@ -23,7 +28,6 @@
 					:color="'#EFFAFF'"
 					:ground-color="'#E2F3FE'"
 					:intensity="1"
-					cast-shadow
 					:shadow-map-size="{ width: 1024, height: 1024 }"
 				/>
 				<DirectionalLight
@@ -56,6 +60,7 @@
 				</Box>
 
 				<Group ref="inventoryGroup"> </Group>
+				<Group ref="bigBlockGroup"></Group>
 			</Scene>
 		</Renderer>
 	</div>
@@ -74,7 +79,8 @@ import {
 	HemisphereLight,
 	Raycaster,
 	Texture,
-	Mesh
+	Mesh,
+	AmbientLight
 } from 'troisjs'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -94,7 +100,10 @@ import {
 	omitBy,
 	pickBy,
 	reduce,
-	startsWith
+	startsWith,
+	random,
+	fill,
+	shuffle
 } from 'lodash'
 import { Controls } from '@/helpers/threesjs/controls'
 import { TUserData } from '@/types/TGraph'
@@ -103,6 +112,8 @@ let cameraRef: THREE.Camera
 const renderer = ref()
 const scene = ref()
 const inventoryGroup = ref()
+const bigBlockGroup = ref()
+
 const dirLight = ref()
 const camera = ref()
 
@@ -110,19 +121,64 @@ let rendererRef: THREE.Renderer
 let sceneRef: THREE.Scene
 let orbitCtrl: OrbitControls
 let inventoryGroupRef: THREE.Group
+let bigBlockGroupRef: THREE.Group
+
 const datasetStore = useDatasetStore()
 const graphStore = useGraphStore()
 
 const onPointerEvent = (event: PointerIntersectEventInterface) => {
 	const userData = event.intersect?.object.userData
+	if (userData && userData.count) {
+		bigBlockGroupRef.clear()
+		if (userData.count <= 500) {
+			inventoryGroupRef.visible = true
+		} else {
+			/*const randomData = Array.from({ length: 20 }, () =>
+				random()
+			)
+			const dataCount = []
+			let sum = 0
+			randomData.forEach((num) => {
+				if (sum < userData.count) {
+					sum += num
+					dataCount.push(num)
+				}
+			})
+			Builders.buildBigDataStructure(
+				dataCount,
+				userData.color,
+				bigBlockGroupRef
+			)*/
+			const randomLength = random(20, 40)
+			if (userData.count > 500 && userData.count <= 1000) {
+				const randomData = Array.from({ length: randomLength }, () =>
+					random(10, 499)
+				)
+				Builders.buildServerStructure(
+					randomData,
+					userData.color,
+					bigBlockGroupRef
+				)
+			} else {
+				const randomData = Array.from({ length: randomLength }, () =>
+					random(500, 1000)
+				)
+				Builders.buildRacksStructure(
+					randomData,
+					userData.color,
+					bigBlockGroupRef
+				)
+			}
+		}
+	}
 
 	if (userData && !isEmpty(userData) && userData.id) {
 		const id = userData.id
-		orbitCtrl.target =
+		/*orbitCtrl.target =
 			event && event?.intersect?.point
 				? event?.intersect?.point
 				: orbitCtrl.position0
-		orbitCtrl.enableZoom = true
+		orbitCtrl.enableZoom = true*/
 		const info: TUserData = {
 			id: id,
 			layerId: userData.layerId
@@ -141,6 +197,7 @@ datasetStore.$onAction((context) => {
 		context.name === 'handleSituationFilters'
 	) {
 		graphStore.$reset
+		bigBlockGroupRef.clear()
 		context.after(() => {
 			inventoryGroupRef.clear()
 			const nodes = Builders.buildInventory(
@@ -184,6 +241,11 @@ datasetStore.$onAction((context) => {
 				orbitCtrl
 			)
 		})
+		inventoryGroupRef.visible = false
+		const bigData = [
+			5000, 6000, 7000, 6000, 9000, 7000, 3000, 6000, 4000, 5000, 2000, 8000
+		]
+		Builders.buildBigDataStructure(shuffle(bigData), 'red', bigBlockGroupRef)
 	}
 })
 
@@ -253,7 +315,25 @@ onMounted(() => {
 	rendererRef = renderer.value?.three
 	orbitCtrl = renderer.value?.three.cameraCtrl
 	inventoryGroupRef = inventoryGroup.value?.group as THREE.Group
+	bigBlockGroupRef = bigBlockGroup.value?.group as THREE.Group
 	cameraRef = camera.value.camera
+	/*renderer.gammaFactor = 2.2
+	renderer.gammaOutput = true
+	renderer.value.outputEncoding = THREE.sRGBEncoding
+
+	const pmremGenerator = new THREE.PMREMGenerator(rendererRef)
+	pmremGenerator.compileEquirectangularShader()
+
+	const rgbeLoader = new THREE.RGBELoader()
+	rgbeLoader.load(
+		'https://threejs.org/examples/textures/equirectangular/venice_sunset_1k.hdr',
+		function (texture) {
+			const envMap = pmremGenerator.fromEquirectangular(texture).texture
+
+			sceneRef.background = envMap
+			sceneRef.environment = envMap
+		}
+	)*/
 	Config.configureRenderer(rendererRef)
 	const light = dirLight.value.light
 	Config.setShadowHelper(light, sceneRef)

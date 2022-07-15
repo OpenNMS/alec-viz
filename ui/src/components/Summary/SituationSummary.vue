@@ -52,12 +52,13 @@ const datasetStore = useDatasetStore()
 const showAlarm = (id: string) => {
 	graphStore.setSelectedNode(null)
 	if (id) {
-		const parent = graphStore.nodes[id]
+		const pos = graphStore.nodes[id].position
 		const userData: TUserData = {
-			id: id
+			id: id,
+			layerId: 'alarms'
 		}
 		graphStore.setSelectedNode(userData)
-		graphStore.setTarget(parent.position)
+		graphStore.setTarget(pos)
 	}
 }
 
@@ -91,5 +92,6 @@ initSituation()
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 5px;
 }
 </style>

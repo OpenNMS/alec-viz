@@ -29,6 +29,8 @@ import {
 	values
 } from 'lodash'
 import { Edges } from './edges'
+import { Utils } from './utils'
+import { Loaders } from './modelLoader'
 
 const DIST_CHILDREN = 40 * CONST.DEVICE_SCALE
 const DIST_PARENT = DIST_CHILDREN * 4
@@ -587,8 +589,252 @@ const groupSituationsByDevice = (
 	return situationsByDevice
 }
 
+const buildBigDataStructureOld = (
+	bigData: number[],
+	firstColor: string,
+	groupBigNodes: THREE.Group
+) => {
+	const rows = Math.floor(Math.sqrt(bigData.length))
+	let column = 0
+	const colors = ['red', 'orange', 'yellow', 'green']
+	const DIST = 400
+	bigData.forEach((number, index) => {
+		const geometry = new THREE.BoxGeometry(80, number / 20, 80)
+		const colorIndex = Math.floor(Math.random() * 4)
+		const color = index == 0 ? firstColor : colors[colorIndex]
+		const userData = { count: number, color: color }
+
+		const material = new THREE.MeshBasicMaterial({ color })
+		const cube = new THREE.Mesh(geometry, material)
+		cube.userData = userData
+
+		const row = Math.floor(index / rows)
+		cube.position.set(column * DIST, number / 40, row * DIST)
+
+		groupBigNodes.add(cube)
+		const textMesh = Utils.buildText(
+			number.toString(),
+			color,
+			cube.position,
+			number / 40
+		)
+		groupBigNodes.add(textMesh)
+
+		column++
+		if (column >= rows) {
+			column = 0
+		}
+	})
+}
+
+const buildBigDataStructure = (
+	bigData: number[],
+	firstColor: string,
+	groupBigNodes: THREE.Group
+) => {
+	const rows = Math.floor(Math.sqrt(bigData.length))
+	let column = 0
+	const colors = ['red', 'orange', 'yellow', 'green', 'blue']
+	const DIST = 400
+	const dataCenters = Loaders.getModelDataCenters()
+	const rack = Loaders.getModelRack()
+	const server = Loaders.getModelServer()
+
+	bigData.forEach((number, index) => {
+		const colorIndex = Math.floor(Math.random() * 5)
+		const color = index == 0 ? firstColor : colors[colorIndex]
+		const userData = { count: number, color: color }
+		let cube = null
+
+		if (number > 1600) {
+			let buildingScale = 1
+			cube = get(dataCenters, color).clone()
+			cube.traverse((m: THREE.Mesh) => {
+				m.userData = userData
+				if (m.name == 'Scene') {
+					m.scale.set(1.2, 1 + number / 1000, 1.2)
+					buildingScale = m.scale.y
+					//m.scale.set(80, number / 30, 80)
+				}
+			})
+
+			const row = Math.floor(index / rows)
+			cube.position.set(column * DIST, 0, row * DIST)
+
+			groupBigNodes.add(cube)
+			const textMesh = Utils.buildText(
+				number.toString(),
+				color,
+				cube.position,
+				buildingScale * 120
+			)
+			groupBigNodes.add(textMesh)
+		} else if (number > 500 && number < 1600) {
+			cube = rack.clone()
+			const buildingScale = 1
+
+			cube.traverse((m: THREE.Mesh) => {
+				m.userData = userData
+				/*if (m.name == 'Scene') {
+					
+					m.scale.set(1.8, 1 + number / 600, 1.8)
+					buildingScale = 1 + number / 600
+				}*/
+			})
+			const row = Math.floor(index / rows)
+			cube.position.set(column * DIST, 0, row * DIST)
+
+			groupBigNodes.add(cube)
+			const textMesh = Utils.buildText(
+				number.toString(),
+				color,
+				cube.position,
+				buildingScale * 120
+			)
+			groupBigNodes.add(textMesh)
+		} else {
+			cube = server.clone()
+			const buildingScale = 1
+
+			cube.traverse((m: THREE.Mesh) => {
+				m.userData = userData
+				/*if (m.name == 'Scene') {
+					//m.scale.setY(1 + number / 3500)
+					m.scale.set(3, 1 + number / 100, 3)
+					buildingScale = 1 + number / 100
+				}*/
+			})
+
+			const row = Math.floor(index / rows)
+			cube.position.set(column * DIST, 5, row * DIST)
+
+			groupBigNodes.add(cube)
+			const textMesh = Utils.buildText(
+				number.toString(),
+				color,
+				cube.position,
+				buildingScale * 42
+			)
+			groupBigNodes.add(textMesh)
+		}
+
+		column++
+		if (column >= rows) {
+			column = 0
+		}
+	})
+}
+
+const buildRacksStructure = (
+	bigData: number[],
+	firstColor: string,
+	groupBigNodes: THREE.Group
+) => {
+	const rows = Math.floor(Math.sqrt(bigData.length))
+	let column = 0
+	const colors = ['red', 'orange', 'yellow', 'green', 'blue']
+	const DIST = 350
+	const rack = Loaders.getModelRack()
+
+	bigData.forEach((number, index) => {
+		const colorIndex = Math.floor(Math.random() * 5)
+		const color = index == 0 ? firstColor : colors[colorIndex]
+		const userData = { count: number, color: color }
+		let cube = null
+
+		cube = rack.clone()
+		cube.scale.set(2, 2, 2)
+		cube.traverse((m: THREE.Mesh) => {
+			m.userData = userData
+		})
+		const row = Math.floor(index / rows)
+		cube.position.set(column * DIST, 0, row * DIST)
+
+		groupBigNodes.add(cube)
+		const p2 = new THREE.Vector3()
+			.copy(cube.position)
+			.setY(cube.position.y + 250 + number / 4)
+		const curve = new THREE.LineCurve3(cube.position, p2)
+		const geometry = new THREE.TubeGeometry(curve, 10, 3, 10, false)
+		const material = new THREE.MeshLambertMaterial({
+			color: color
+		})
+		const mesh = new THREE.Mesh(geometry, material)
+		groupBigNodes.add(mesh)
+
+		const textMesh = Utils.buildText(
+			number.toString(),
+			color,
+			cube.position,
+			p2.y + 10
+		)
+		groupBigNodes.add(textMesh)
+
+		column++
+		if (column >= rows) {
+			column = 0
+		}
+	})
+}
+
+const buildServerStructure = (
+	bigData: number[],
+	firstColor: string,
+	groupBigNodes: THREE.Group
+) => {
+	const rows = Math.floor(Math.sqrt(bigData.length))
+	let column = 0
+	const colors = ['red', 'orange', 'yellow', 'green', 'blue']
+	const DIST = 240
+	const server = Loaders.getModelServer()
+
+	bigData.forEach((number, index) => {
+		const colorIndex = Math.floor(Math.random() * 5)
+		const color = index == 0 ? firstColor : colors[colorIndex]
+		const userData = { count: number, color: color }
+		let cube = null
+
+		cube = server.clone()
+		cube.scale.set(3, 3, 3)
+		cube.rotation.y = Math.PI
+		cube.traverse((m: THREE.Mesh) => {
+			m.userData = userData
+		})
+		const row = Math.floor(index / rows)
+		cube.position.set(column * DIST, 0, row * DIST)
+
+		groupBigNodes.add(cube)
+		const p2 = new THREE.Vector3()
+			.copy(cube.position)
+			.setY(cube.position.y + 200 + number / 3)
+		const curve = new THREE.LineCurve3(cube.position, p2)
+		const geometry = new THREE.TubeGeometry(curve, 10, 2, 10, false)
+		const material = new THREE.MeshLambertMaterial({
+			color: color
+		})
+		const mesh = new THREE.Mesh(geometry, material)
+		groupBigNodes.add(mesh)
+
+		const textMesh = Utils.buildText(
+			number.toString(),
+			color,
+			cube.position,
+			p2.y + 10
+		)
+		groupBigNodes.add(textMesh)
+
+		column++
+		if (column >= rows) {
+			column = 0
+		}
+	})
+}
+
 export const Builders = {
 	createAlarmConnections,
 	createSituationConnections,
-	buildInventory
+	buildInventory,
+	buildBigDataStructure,
+	buildRacksStructure,
+	buildServerStructure
 }

@@ -43,7 +43,6 @@ export const useGraphStore = defineStore('graphStore', {
 				}
 				const datasetStore = useDatasetStore()
 				const vertices = datasetStore.vertices
-				console.log(userData.id)
 				const vertice = vertices[userData.id] as TVertice
 				if (vertice) {
 					const layerId = userData.layerId || vertice.layer_id

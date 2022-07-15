@@ -22,13 +22,14 @@ const setShadowHelper = (
 	light: THREE.DirectionalLight,
 	sceneRef: THREE.Scene
 ) => {
-	const side = 500
-	light.shadow.camera.top = side
+	const side = 600
+	light.shadow.camera.top = side * 2
 	light.shadow.camera.bottom = -side
 	light.shadow.camera.left = side
 	light.shadow.camera.right = -side
 	light.shadow.mapSize.set(4096, 4096)
 	const shadowHelper = new THREE.CameraHelper(light.shadow.camera)
+	shadowHelper.position.set(-3300, 100, 300)
 	shadowHelper.visible = false
 	sceneRef.add(shadowHelper)
 }
