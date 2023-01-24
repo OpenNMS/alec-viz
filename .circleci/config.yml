@@ -20,7 +20,7 @@ references:
     run:
       name: DockerHub Login
       command: |
-        docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+        docker login -u ${DOCKERHUB_LOGIN} -p ${DOCKERHUB_PASS}
 
 jobs:
 
@@ -154,6 +154,8 @@ workflows:
             - build_backend
             - build_frontend
       - publish_dockerhub:
+          context:
+            - "docker-publish-account"
           filters:
             branches:
               only:
